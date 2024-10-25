@@ -14,14 +14,14 @@
         <h1>Regisztráció</h1>
     </div>
     <div class="container">
-        <form method="post">
-            <label for="email" class="inline-text">Email</label>
-            <input type="email" name="email" id="email">
-            <label for="password" class="inline-text">Jelszó</label>
-            <input type="password" name="password" id="password">
-            <label for="password2" class="inline-text">Jelszó megerősítése</label>
-            <input type="password" name="password2" id="password2">
-            <button type="submit">Regisztráció</button>
+        <form>
+            <label class="inline-text" for="email" class="inline-text">Email</label><br>
+            <input class="inline-input" type="email" name="email" id="email"><br>
+            <label class="inline-text" for="password" class="inline-text">Jelszó</label><br>
+            <input class="inline-input" type="password" name="password" id="password"><br>
+            <label class="inline-text" for="password2" class="inline-text">Jelszó megerősítése</label><br>
+            <input class="inline-input" type="password" name="password2" id="password2"><br>
+            <button class="inline-button" type="submit">Regisztráció</button>
         </form>
     </div>
 </body>
