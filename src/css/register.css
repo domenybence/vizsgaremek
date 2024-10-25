@@ -1,3 +1,18 @@
 body {
     background-color: #f2f3f4;
+    font-family: "Montserrat";
+}
+
+.header {
+    text-align: center;
+    border: 5px solid black;
+}
+
+.container {
+    width: 100%;
+    height: auto;
+    text-align: left;
+    justify-content: center;
+    display: flex;
+    position: relative;
 }
