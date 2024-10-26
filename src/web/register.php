@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="container">
-        <form>
+        <form method="POST">
             <h1 class="title">Regisztráció</h1>
             <div class="inline-container">
                 <label class="inline-text" class="inline-text">Felhasználónév</label>
