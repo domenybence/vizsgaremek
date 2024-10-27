@@ -13,17 +13,48 @@
     <div class="container">
         <form method="POST">
             <h1 class="title">Regisztráció</h1>
-            <div class="inline-container">
+            <div class="inline-group">
                 <label class="inline-text" class="inline-text">Felhasználónév</label>
-                <input class="inline-input" type="text" name="username">
-                <label class="inline-text" class="inline-text">Email</label>
-                <input class="inline-input" type="email" name="email">
-                <label class="inline-text" class="inline-text">Jelszó</label>
-                <input class="inline-input" type="password" name="password">
-                <label class="inline-text" class="inline-text">Jelszó megerősítése</label>
-                <input class="inline-input" type="password" name="password2">
-                <button class="inline-button" type="submit">Regisztráció</button>
+                <input class="inline-input" type="text" name="username" required>
             </div>
+            <div class="inline-group">
+                <label class="inline-text" class="inline-text">Email</label>
+                <input class="inline-input" type="email" name="email" required>
+            </div>
+            <div class="inline-group">
+                <label class="inline-text" class="inline-text">Jelszó</label>
+                <input class="inline-input" type="password" name="password" required>
+            </div>
+            <div class="inline-group">
+                <label class="inline-text" class="inline-text">Jelszó megerősítése</label>
+                <input class="inline-input" type="password" name="password-confirm" required>
+            </div>
+            <div class="inline-group">
+                <button class="inline-button" type="submit" name="submit">Regisztráció</button>
+            </div>
+        <?php
+
+        if(isset($_POST["submit"])){
+            $username = $_POST["username"];
+            $email = $_POST["email"];
+            $password = $_POST["password"];
+            $passwordConfirm = $_POST["password-confirm"];
+            if(!empty($username) && !empty($email) && !empty($password) && !empty($passwordConfirm)) {
+                if($password === $passwordConfirm) {
+                    echo "Nyomod tesó";
+                }
+                else {
+                    echo "A jelszók nem egyeznek!";
+                }
+            }
+            else {
+            }
+        }
+        else {
+
+        }
+
+        ?>
         </form>
     </div>
 </body>
