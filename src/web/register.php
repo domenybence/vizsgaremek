@@ -32,7 +32,10 @@
             <div class="inline-group">
                 <button class="inline-button" type="submit" name="submit">Regisztráció</button>
             </div>
+
         <?php
+
+        require_once "../php functions/db_connect.php";
 
         if(isset($_POST["submit"])){
             $username = $_POST["username"];
@@ -41,20 +44,21 @@
             $passwordConfirm = $_POST["password-confirm"];
             if(!empty($username) && !empty($email) && !empty($password) && !empty($passwordConfirm)) {
                 if($password === $passwordConfirm) {
-                    echo "Nyomod tesó";
+                    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+                    echo "Sikeres regisztráció!";
                 }
                 else {
                     echo "A jelszók nem egyeznek!";
                 }
             }
-            else {
+            else
+            {
+                echo "Minden mező kitöltése kötelező!";
             }
-        }
-        else {
-
         }
 
         ?>
+        
         </form>
     </div>
 </body>
