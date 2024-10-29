@@ -10,56 +10,31 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <form method="POST">
-            <h1 class="title">Regisztráció</h1>
-            <div class="inline-group">
-                <label class="inline-text" class="inline-text">Felhasználónév</label>
-                <input class="inline-input" type="text" name="username" required>
-            </div>
-            <div class="inline-group">
-                <label class="inline-text" class="inline-text">Email</label>
-                <input class="inline-input" type="email" name="email" required>
-            </div>
-            <div class="inline-group">
-                <label class="inline-text" class="inline-text">Jelszó</label>
-                <input class="inline-input" type="password" name="password" required>
-            </div>
-            <div class="inline-group">
-                <label class="inline-text" class="inline-text">Jelszó megerősítése</label>
-                <input class="inline-input" type="password" name="password-confirm" required>
-            </div>
-            <div class="inline-group">
-                <button class="inline-button" type="submit" name="submit">Regisztráció</button>
-            </div>
-
-        <?php
-
-        require_once "../php functions/db_connect.php";
-
-        if(isset($_POST["submit"])){
-            $username = $_POST["username"];
-            $email = $_POST["email"];
-            $password = $_POST["password"];
-            $passwordConfirm = $_POST["password-confirm"];
-            if(!empty($username) && !empty($email) && !empty($password) && !empty($passwordConfirm)) {
-                if($password === $passwordConfirm) {
-                    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-                    echo "Sikeres regisztráció!";
-                }
-                else {
-                    echo "A jelszók nem egyeznek!";
-                }
-            }
-            else
-            {
-                echo "Minden mező kitöltése kötelező!";
-            }
-        }
-
-        ?>
-        
-        </form>
-    </div>
+<div class="container">
+    <form method="POST" id="registrationForm">
+        <h1 class="title">Regisztráció</h1>
+        <div class="inline-group">
+            <label class="inline-text" class="inline-text">Felhasználónév</label>
+            <input class="inline-input" type="text" name="username" id="username" required>
+        </div>
+        <div class="inline-group">
+            <label class="inline-text" class="inline-text">Email</label>
+            <input class="inline-input" type="text" name="email" id="email" required>
+        </div>
+        <div class="inline-group">
+            <label class="inline-text" class="inline-text">Jelszó</label>
+            <input class="inline-input" type="password" name="password" id="password" required>
+        </div>
+        <div class="inline-group">
+            <label class="inline-text" class="inline-text">Jelszó megerősítése</label>
+            <input class="inline-input" type="password" name="password_confirm" id="password_confirm" required>
+        </div>
+        <div class="inline-group">
+            <button class="inline-button" type="submit" name="submit_button" id="submit_button">Regisztráció</button>
+        </div>
+    </form>
+    
+</div>
+<script type="module" src="./js/register.js"></script>
 </body>
 </html>
