@@ -1,9 +1,9 @@
 let formValidated = false;
 
 function registrationValidate(event) {
-    if(formValidated === false) {
+    if(!formValidated) {
         event.preventDefault();
-        let formValidated = false;
+        formValidated = false;
         const username = document.getElementById("username");
         const email = document.getElementById("email");
         const password = document.getElementById("password");
@@ -13,86 +13,84 @@ function registrationValidate(event) {
         const passwordValue = document.getElementById("password").value;
         const confirmPasswordValue = document.getElementById("password_confirm").value;
 
-        const greenColor = "#90EE90";
-        const redColor = "#d0706b";
+        const greenColor = "#28a745";
+        const redColor = "#dc3545";
         const defaultColor = "#EEEEEE";
         const defaultBorderColor = "#cccccc";
         
         let usernameValidated = false;
         let emailValidated = false;
         let passwordValidated = false;
+        let confirmPasswordValidated = false;
         
         const usernameRegex = /^[a-zA-Z0-9]{4,15}$/;
         const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d\s@$!%*?&]{8,}$/;
         if(usernameValue != ""){
             if(usernameRegex.test(usernameValue)){
-                username.style.backgroundColor = greenColor;
-                username.style.borderColor = greenColor;
+                username.style.border = "4px solid" + greenColor;
                 usernameValidated = true;
             }
             else{
-                username.style.backgroundColor = redColor;
-                username.style.borderColor = redColor;
+                username.style.border = "4px solid" + redColor;
                 usernameValidated = false;
             }
         }
         else{
-            username.style.backgroundColor = defaultColor;
-            username.style.borderColor = defaultBorderColor;
+            username.style.border = "2px solid" + defaultBorderColor;
             usernameValidated = false;
         }
         if(emailValue != ""){
             if(emailRegex.test(emailValue)){
-                email.style.backgroundColor = greenColor;
-                email.style.borderColor = greenColor;
+                email.style.border = "4px solid" + greenColor;
                 emailValidated = true;
             }
             else{
-                email.style.backgroundColor = redColor;
-                email.style.borderColor = redColor;
+                email.style.border = "4px solid" + redColor;
                 emailValidated = false;
             }
         }
         else{
-            email.style.backgroundColor = defaultColor;
-            email.style.borderColor = defaultBorderColor;
+            email.style.border = "2px solid" + defaultBorderColor;
             emailValidated = false;
         }
         if(passwordValue != ""){
             if(passwordRegex.test(passwordValue)){
-                password.style.backgroundColor = greenColor;
-                password.style.borderColor = greenColor;
+                password.style.border = "4px solid" + greenColor;
                 passwordValidated = true;
             }
             else{
-                password.style.backgroundColor = redColor;
-                password.style.borderColor = redColor;
+                password.style.border = "4px solid" + redColor;
                 passwordValidated = false;
             }
         }
         else{
-            password.style.backgroundColor = defaultColor;
-            password.style.borderColor = defaultBorderColor;
+            password.style.border = "2px solid" + defaultBorderColor;
             passwordValidated = false;
         }
         if(confirmPasswordValue != ""){
-            if(confirmPasswordValue == passwordValue && passwordValidated){
-                confirmPassword.style.backgroundColor = greenColor;
-                confirmPassword.style.borderColor = greenColor;
+            if(passwordValue == confirmPasswordValue  && passwordValidated == true){
+                confirmPassword.style.border = "4px solid" + greenColor;
+                confirmPasswordValidated = true;
             }
             else{
-                confirmPassword.style.backgroundColor = redColor;
-                confirmPassword.style.borderColor = redColor;
+                confirmPassword.style.border = "4px solid" + redColor;
+                confirmPasswordValidated = false;
             }
         }
         else{
-            confirmPassword.style.backgroundColor = defaultColor;
-            confirmPassword.style.borderColor = defaultBorderColor;
+            confirmPassword.style.border = "2px solid" + defaultBorderColor;
+            confirmPasswordValidated = false;
         }
+        if (usernameValidated === true && emailValidated === true && passwordValidated === true && confirmPasswordValidated === true) {
+            formValidated = true;
+        }        
     }
 }
 
-document.getElementById("registrationForm").addEventListener("input", (event) => {
-    registrationValidate(event); 
+document.getElementById("registrationForm").addEventListener("input", registrationValidate);
+document.getElementById("registrationForm").addEventListener("submit", (event) => {
+    if (!formValidated) {
+        event.preventDefault();
+    }
 });

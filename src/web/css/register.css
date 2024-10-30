@@ -42,25 +42,18 @@ body {
     border-radius: 5px;
     border: 2px solid #cccccc;
     width: 70%;
-    transition: transform 0.3s ease-out, border-color 0.3s ease-out, background-color 0.3s ease-out;
+    transition: transform 0.3s ease-out, border 0.2s ease-out, border-color 0.3s ease-out, background-color 0.3s ease-out;
     outline: none;
 }
 
 .inline-input:focus {
     outline: none;
     border-color: black;
-    background-color: #d5d5d5;
     transform: scale(1.05);
 }
 
 .inline-input:hover {
     transform: scale(1.05);
-    background-color: #d5d5d5;
-}
-/* ---------------------------------- TODO(BG COLOR, BORDER, ETC.) ---------------------------------- */
-.inline-input:-webkit-autofill,
-.inline-input:-webkit-autofill:focus {
-
 }
 
 .inline-button {
