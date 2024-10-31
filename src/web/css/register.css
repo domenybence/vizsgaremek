@@ -56,6 +56,11 @@ body {
     transform: scale(1.05);
 }
 
+/* -------------------------- TODO ERROR(SEE IN JS) ------------------------- */
+.inline-error {
+
+}
+
 .inline-button {
     cursor: pointer;
     width: 30%;

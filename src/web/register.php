@@ -16,19 +16,19 @@
         <h1 class="title">Regisztráció</h1>
         <div class="inline-group">
             <label class="inline-text" class="inline-text">Felhasználónév</label>
-            <input class="inline-input" type="text" name="username" id="username" title="" required>
+            <input class="inline-input" type="text" name="username" id="username" title="">
         </div>
         <div class="inline-group">
             <label class="inline-text" class="inline-text">Email</label>
-            <input class="inline-input" type="text" name="email" id="email" title="" required>
+            <input class="inline-input" type="text" name="email" id="email" title="">
         </div>
         <div class="inline-group">
             <label class="inline-text" class="inline-text">Jelszó</label>
-            <input class="inline-input" type="password" name="password" id="password" title="" required>
+            <input class="inline-input" type="password" name="password" id="password" title="">
         </div>
         <div class="inline-group">
             <label class="inline-text" class="inline-text">Jelszó megerősítése</label>
-            <input class="inline-input" type="password" name="password_confirm" id="password_confirm" title="" required>
+            <input class="inline-input" type="password" name="password_confirm" id="password_confirm" title="">
         </div>
         <div class="inline-group">
             <button class="inline-button" type="submit" name="button_submit" title="" id="button_submit">Regisztráció</button>
