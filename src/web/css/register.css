@@ -2,6 +2,8 @@ body {
     background-color: #222831;
     font-family: "Montserrat";
     display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 50px;
     justify-content: center;
 }
@@ -23,7 +25,7 @@ body {
 }
 
 .inline-text {
-    padding-left: 15%;
+    padding-left: 7%;
     text-align: left;
     margin: 5px;
     font-size: 18px;
@@ -41,7 +43,7 @@ body {
     box-shadow: #292929 2px 2px;
     border-radius: 5px;
     border: 2px solid #cccccc;
-    width: 70%;
+    width: 85%;
     transition: transform 0.3s ease-out, border 0.2s ease-out, border-color 0.3s ease-out, background-color 0.3s ease-out;
     outline: none;
 }
@@ -56,9 +58,42 @@ body {
     transform: scale(1.05);
 }
 
-/* -------------------------- TODO ERROR(SEE IN JS) ------------------------- */
-.inline-error {
+#inline-link-group {
+    justify-content: center;
+    color: black;
+    text-align: center;
+    margin: 20px;
+    border: gray 1px solid;
+    border-radius: 4px;
+    background-color: #BCD4E6;
+    height: 15%;
+    min-height: 50px;
+    text-shadow: none;
+}
 
+#login-text {
+    text-shadow: none;
+    text-align: center;
+    padding-left: 0px;
+}
+
+.inline-link {
+    color: #4682B4;
+}
+
+.inline-link:hover {
+    color: #2e5575;
+}
+
+.inline-link:active {
+    color: #58b1fa;
+}
+
+.inline-error {
+    text-align: left;
+    color: #dc3545;
+    font-size: 14px;
+    margin-left: 7%;
 }
 
 .inline-button {
@@ -66,21 +101,26 @@ body {
     width: 30%;
     height: 44px;
     font-size: 16px;
-    color: #EEEEEE;
-    background-color: #00ADB5;
+    color: white;
+    background-color: #6c757d;
     align-self: center;
     margin: 10px;
     margin-top: 20px;
     padding: 5px;
-    border: 2px solid black;
+    border: 2px solid white;
     border-radius: 4px;
-    transition: color 0.2s ease, transform 0.3s ease-out;
+    transition: background-color 0.2s ease-out, border 0.2s ease-out;
     outline: none;
 }
 
 .inline-button:hover {
-    transform: scale(1.2);
-    color: black;
+    background-color: #222831;
+}
+
+.inline-button:active {
+    border: 2px solid white;
+    color: #222831;
+    background-color: white;
 }
 
 .title {
@@ -90,10 +130,29 @@ body {
     text-shadow: #292929 2px 2px;
 }
 
+.error-group {
+    background-color: rgb(145, 0, 0);
+    text-align: center;
+    padding: 5px;
+    margin: 10px;
+    color: white;
+    border: white 2px solid;
+    border-radius: 3px;
+    min-width: 50px;
+    min-height: 50px;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-family: monospace;
+}
+
 @media screen and (max-width: 600px) {
     .container {
         align-items: center;
         background-color: #222831;
+        width: 90%;
         padding-top: 0px;
         border: 0px;
     }
@@ -118,8 +177,20 @@ body {
     }
 
     .inline-button {
-        width: 40%;
         margin-top: 20px;
         padding: 5px;
+    }
+
+    .inline-error {
+        margin: 0px;
+        text-align: center;
+    }
+
+    .error-group {
+        width: 75%;
+    }
+
+    #inline-link-group {
+        min-height: 60px;
     }
 }

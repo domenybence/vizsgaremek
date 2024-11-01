@@ -11,12 +11,12 @@
     </head>
 <body>
 <script type="module" src="./js/register.js"></script>
-<div class="container">
+<div class="container" id="container">
     <form method="POST" id="registrationForm">
         <h1 class="title">Regisztráció</h1>
         <div class="inline-group">
             <label class="inline-text" class="inline-text">Felhasználónév</label>
-            <input class="inline-input" type="text" name="username" id="username" title="">
+            <input class="inline-input" type="text" name="username" id="username" title="A felhasználónév 4-15 karakter hosszú, valamint kizárólag kis- és nagybetűket tartalmaz.">
         </div>
         <div class="inline-group">
             <label class="inline-text" class="inline-text">Email</label>
@@ -24,7 +24,7 @@
         </div>
         <div class="inline-group">
             <label class="inline-text" class="inline-text">Jelszó</label>
-            <input class="inline-input" type="password" name="password" id="password" title="">
+            <input class="inline-input" type="password" name="password" id="password" title="A jelszó minimum 8 karakter hosszú, kötelező a kis- és nagybetű, valamint szám és speciális karakter tartalmazása is.">
         </div>
         <div class="inline-group">
             <label class="inline-text" class="inline-text">Jelszó megerősítése</label>
@@ -32,6 +32,9 @@
         </div>
         <div class="inline-group">
             <button class="inline-button" type="submit" name="button_submit" title="" id="button_submit">Regisztráció</button>
+        </div>
+        <div class="inline-group" id="inline-link-group">
+            <p class="inline-text" id="login-text">Van már fiókod? <a href="#" class="inline-link">Jelentkezz be.</a></p>
         </div>
     </form>
 </div>

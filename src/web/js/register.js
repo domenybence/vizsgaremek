@@ -1,8 +1,8 @@
-let formValidated = false;
-let usernameValidated = false;
-let emailValidated = false;
-let passwordValidated = false;
-let confirmPasswordValidated = false;
+let formValidated = "";
+let usernameValidated = "";
+let emailValidated = "";
+let passwordValidated = "";
+let confirmPasswordValidated = "";
 
 const username = document.getElementById("username");
 const email = document.getElementById("email");
@@ -23,10 +23,16 @@ let usernameValue = "";
 let emailValue = "";
 let passwordValue = "";
 let confirmPasswordValue = "";
-function registrationValidate(event) {
+
+function registrationValidate() {
+
+    let formValidated = false;
     if(!formValidated) {
-        event.preventDefault();
-        formValidated = false;
+
+        usernameValidated = false;
+        emailValidated = false;
+        passwordValidated = false;
+        confirmPasswordValidated = false;
         
         let usernameValue = document.getElementById("username").value;
         let emailValue = document.getElementById("email").value;
@@ -100,35 +106,94 @@ function registrationValidate(event) {
 
 document.getElementById("registrationForm").addEventListener("input", registrationValidate);
 document.getElementById("registrationForm").addEventListener("submit", (event) => {
-    const label = document.createElement("label");
-    let usernameValue = document.getElementById("username").value;
-    let emailValue = document.getElementById("email").value;
-    let passwordValue = document.getElementById("password").value;
-    let confirmPasswordValue = document.getElementById("password_confirm").value;
-    label.className = "inline-text";
-    label.style.color = redColor;
-    label.style.fontSize = "14px";
+
+    console.log(formValidated);
+
+    const usernameValue = document.getElementById("username").value;
+    const emailValue = document.getElementById("email").value;
+    const passwordValue = document.getElementById("password").value;
+    const confirmPasswordValue = document.getElementById("password_confirm").value;
+    
+    label.className = "inline-error";
     if (!formValidated) {
         event.preventDefault();
     }
 
-    /* ------------ TODO CLASS COLORS, ONCLICK VALIDATING, SEE IN CSS ----------- */
+    const inlinegroup = document.querySelectorAll("div.inline-group");
+    const labels = document.querySelectorAll("label.inline-error");
+
     if(!usernameValidated){
-        if(usernameValue == "" && usernameErrorVisible == false) {
+        if(usernameValue == "" && !usernameErrorVisible) {
+            let label = document.createElement("label");
+            label.className = "inline-error";
             usernameErrorVisible = true;
             label.innerText = "Kérem adja meg a felhasználónevet!";
-            document.querySelectorAll("div.inline-group")[0].appendChild(label);
+            inlinegroup[0].appendChild(label);
+            console.log("asd");
         }
-        else if(usernameErrorVisible === false) {
+        else if(!usernameErrorVisible) {
+            let label = document.createElement("label");
+            label.className = "inline-error";
             usernameErrorVisible = true;
             label.innerText = "Kérem a kritériáknak megfelelő felhasználónevet adjon meg!";
-            document.querySelectorAll("div.inline-group")[0].appendChild(label);
+            inlinegroup[0].appendChild(label);
+            console.log("asd1");
         }
     }
-    else{
+    else if(usernameValidated && usernameErrorVisible){
         usernameErrorVisible = false;
-        if(usernameErrorVisible == true) {
-            document.querySelectorAll("div.inline-group")[0].removeChild(label);
+        inlinegroup[0].removeChild(labels[0]);
+        console.log("asd2");
+    }
+    if(!emailValidated){
+        if(emailValue == "" && !emailErrorVisible) {
+            let label = document.createElement("label");
+            label.className = "inline-error";
+            emailErrorVisible = true;
+            label.innerText = "Kérem adja meg az email címét!";
+            inlinegroup[1].appendChild(label);
         }
+        else if(!emailErrorVisible) {
+            let label = document.createElement("label");
+            label.className = "inline-error";
+            emailErrorVisible = true;
+            label.innerText = "Kérem létező email-t adjon meg!";
+            inlinegroup[1].appendChild(label);
+        }
+    }
+    else if(emailValidated && emailErrorVisible){
+        emailErrorVisible = false;
+        inlinegroup[1].removeChild(labels[0]);
+    }
+    if(!passwordValidated){
+        if(passwordValue == "" && !passwordErrorVisible) {
+            let label = document.createElement("label");
+            passwordErrorVisible = true;
+            label.innerText = "Kérem adja meg a jelszavát!";
+            inlinegroup[2].appendChild(label);
+        }
+        else if(!passwordErrorVisible) {
+            let label = document.createElement("label");
+            passwordErrorVisible = true;
+            label.innerText = "Kérem a kritériáknak megfelelő jelszót adjon meg!";
+            inlinegroup[2].appendChild(label);
+        }
+    }
+    else if(passwordValidated && passwordErrorVisible){
+        passwordErrorVisible = false;
+        inlinegroup[2].removeChild(labels[0]);
+    }
+    if(!confirmPasswordValidated){
+        let label = document.createElement("label");
+        confirmPasswordErrorVisible = true;
+        label.innerText = "Kérem erősítse meg a jelszavát!";
+        inlinegroup[3].appendChild(label);
     }
 });
+
+window.onerror = function(message) {
+    const errordiv = document.createElement("div");
+    errordiv.className = "error-group";
+    errordiv.innerText = message;
+    document.body.appendChild(errordiv);
+};
