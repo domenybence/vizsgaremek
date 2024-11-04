@@ -148,9 +148,16 @@ body {
     font-family: monospace;
 }
 
-.registration-response {
+.registration-failed {
     text-align: center;
     color: #df3647;
+    margin: 0;
+    padding: 0;
+}
+
+.registration-successful {
+    text-align: center;
+    color: #28a745;
     margin: 0;
     padding: 0;
 }

@@ -17,16 +17,16 @@ let emailActivated = false;
 let passwordActivated = false;
 let confirmPasswordActivated = false;
 
-username.addEventListener("focus", () => {
+username.addEventListener("input", () => {
     usernameActivated = true;
 });
-email.addEventListener("focus", () => {
+email.addEventListener("input", () => {
     emailActivated = true;
 });
-password.addEventListener("focus", () => {
+password.addEventListener("input", () => {
     passwordActivated = true;
 });
-confirmPassword.addEventListener("focus", () => {
+confirmPassword.addEventListener("input", () => {
     confirmPasswordActivated = true;
 });
 
@@ -55,7 +55,7 @@ function registrationValidate() {
     }
 
     if (emailActivated) {
-        const emailRegex = /^[\w\.\-]+@([\w\-]+\.)+[a-zA-Z]{2,}$/;
+        const emailRegex = /^[\w\.\-]+@([\w\-]+\.)+[a-zA-Z]{2,20}$/;
         if (emailRegex.test(email.value)) {
             email.style.border = "4px solid" + greenColor;
             emailValidated = true;
@@ -78,7 +78,7 @@ function registrationValidate() {
     }
 
     if (passwordActivated) {
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d\s@$!%*?&]{8,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d\s@$!%*?&]{8,20}$/;
         if (passwordRegex.test(password.value)) {
             password.style.border = "4px solid" + greenColor;
             passwordValidated = true;
