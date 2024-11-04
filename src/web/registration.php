@@ -53,6 +53,7 @@
                     $getuser = "SELECT * FROM felhasznalo WHERE felhasznalo.nev LIKE '{$username}' OR felhasznalo.email LIKE '{$email}';";
                     if(!getUser($getuser)){
                         dataInsert($registrationQuery);
+                        echo "<div class='registration-response'>Sikeres regisztráció!</div>";
                     }
                     else {
                         echo "<div class='registration-response'>Már használt felhasználónév vagy email!</div>";
