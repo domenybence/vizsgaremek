@@ -32,7 +32,7 @@ confirmPassword.addEventListener("focus", () => {
 
 function registrationValidate() {
     if (usernameActivated) {
-        const usernameRegex = /^[a-zA-Z0-9]{4,15}$/;
+        const usernameRegex = /^[a-zA-Z0-9]{5,14}$/;
         if (usernameRegex.test(username.value)) {
             username.style.border = "4px solid" + greenColor;
             usernameValidated = true;
@@ -45,7 +45,7 @@ function registrationValidate() {
             username.style.border = "4px solid" + redColor;
             usernameValidated = false;
             let errorLabel = username.nextElementSibling;
-            if (!errorLabel || !errorLabel.classList.contains("inline-error")) {
+            if (!errorLabel || !errorLabel.classList.contains("inline-error") || usernameActivated && username.value == "") {
                 errorLabel = document.createElement("label");
                 errorLabel.className = "inline-error";
                 errorLabel.innerText = "A felhasználónévnek 5-14 karakter hosszúnek kell lennie.";
@@ -136,6 +136,7 @@ document.getElementById("registrationForm").addEventListener("submit", (event) =
     registrationValidate();
 });
 
+//TODO
 window.onerror = function(message) {
     const errordiv = document.createElement("div");
     errordiv.className = "error-group";

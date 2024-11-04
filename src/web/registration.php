@@ -11,13 +11,13 @@
         <link rel="icon" type="image/x-icon" href="./icon.png">
     </head>
 <body>
-<script type="module" src="./js/register.js"></script>
+<script type="module" src="./js/registration.js"></script>
 <div class="container" id="container">
     <form method="POST" id="registrationForm">
         <h1 class="title">Regisztráció</h1>
         <div class="inline-group">
             <label class="inline-text" class="inline-text">Felhasználónév</label>
-            <input class="inline-input" type="text" name="username" id="username" title="A felhasználónév 4-15 karakter hosszú, valamint kizárólag kis- és nagybetűket tartalmaz.">
+            <input class="inline-input" type="text" name="username" id="username" title="">
         </div>
         <div class="inline-group">
             <label class="inline-text" class="inline-text">Email</label>
@@ -25,7 +25,7 @@
         </div>
         <div class="inline-group">
             <label class="inline-text" class="inline-text">Jelszó</label>
-            <input class="inline-input" type="password" name="password" id="password" title="A jelszó minimum 8 karakter hosszú, kötelező a kis- és nagybetű, valamint szám és speciális karakter tartalmazása is.">
+            <input class="inline-input" type="password" name="password" id="password" title="">
         </div>
         <div class="inline-group">
             <label class="inline-text" class="inline-text">Jelszó megerősítése</label>
