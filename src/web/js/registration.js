@@ -48,14 +48,14 @@ function registrationValidate() {
             if (!errorLabel || !errorLabel.classList.contains("inline-error")) {
                 errorLabel = document.createElement("label");
                 errorLabel.className = "inline-error";
-                errorLabel.innerText = "Invalid username. Must be 4-15 alphanumeric characters.";
+                errorLabel.innerText = "A felhasználónévnek 5-14 karakter hosszúnek kell lennie.";
                 username.parentNode.appendChild(errorLabel);
             }
         }
     }
 
     if (emailActivated) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailRegex = /^[\w\.\-]+@([\w\-]+\.)+[a-zA-Z]{2,}$/;
         if (emailRegex.test(email.value)) {
             email.style.border = "4px solid" + greenColor;
             emailValidated = true;
@@ -71,7 +71,7 @@ function registrationValidate() {
             if (!errorLabel || !errorLabel.classList.contains("inline-error")) {
                 errorLabel = document.createElement("label");
                 errorLabel.className = "inline-error";
-                errorLabel.innerText = "Please enter a valid email.";
+                errorLabel.innerText = "Kérem valós email címet adjon meg.";
                 email.parentNode.appendChild(errorLabel);
             }
         }
@@ -94,7 +94,7 @@ function registrationValidate() {
             if (!errorLabel || !errorLabel.classList.contains("inline-error")) {
                 errorLabel = document.createElement("label");
                 errorLabel.className = "inline-error";
-                errorLabel.innerText = "Password must be at least 8 characters, with uppercase, lowercase, number, and special character.";
+                errorLabel.innerText = "A jelszónak legalább 8 karaker hosszúnak kell lennie, kis- és nagybetűk, valamint speciális karakterek tartalmazásával.";
                 password.parentNode.appendChild(errorLabel);
             }
         }
@@ -116,7 +116,7 @@ function registrationValidate() {
             if (!errorLabel || !errorLabel.classList.contains("inline-error")) {
                 errorLabel = document.createElement("label");
                 errorLabel.className = "inline-error";
-                errorLabel.innerText = "Passwords do not match.";
+                errorLabel.innerText = "A jelszavak nem egyeznek meg.";
                 confirmPassword.parentNode.appendChild(errorLabel);
             }
         }
@@ -136,4 +136,10 @@ document.getElementById("registrationForm").addEventListener("submit", (event) =
     registrationValidate();
 });
 
-
+/* ---------------------------------- TODO ---------------------------------- */
+window.onerror = function(message) {
+    const errordiv = document.createElement("div");
+    errordiv.className = "error-group";
+    errordiv.innerText = message;
+    document.body.appendChild(errordiv);
+};
