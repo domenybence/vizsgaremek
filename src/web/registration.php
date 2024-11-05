@@ -41,26 +41,18 @@
             include_once "../php_functions/db_getuser.php";
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $username = htmlspecialchars(trim($_POST["username"]), ENT_QUOTES, 'UTF-8');
-            $email = $_POST["email"];
+            $username = filter_var(trim($_POST["username"]), FILTER_SANITIZE_STRING);
+            $email = filter_var(trim($_POST["email"]), FILTER_VALIDATE_EMAIL);
             $password = $_POST["password"];
             $passwordConfirm = $_POST["password_confirm"];
-            if (!empty($username) && !empty($email) && !empty($password) && !empty($passwordConfirm)) {
-                $usernameRegex = "/^[a-zA-Z0-9]{4,15}$/";
-                $emailRegex = "/^[\w\.\-]+@([\w\-]+\.)+[a-zA-Z]{2,20}$/";
-                $passwordRegex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d\s@$!%*?&]{8,20}$/";
-                if(preg_match($usernameRegex, $username) && preg_match($emailRegex, $email) && preg_match($passwordRegex, $password) && $password === $passwordConfirm){
-                    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-                    $registrationQuery = "INSERT INTO `felhasznalo` (`nev`, `email`, `jelszo`) VALUES ('{$username}', '{$email}', '{$hashedPassword}');";
-                    $getuser = "SELECT * FROM felhasznalo WHERE felhasznalo.nev LIKE '{$username}' OR felhasznalo.email LIKE '{$email}';";
-                    if(!getUser($getuser)){
-                        dataInsert($registrationQuery);
-                        echo "<div class='registration-successful'>Sikeres regisztráció!</div>";
-                    }
-                    else {
-                        echo "<div class='registration-failed'>Már használt felhasználónév vagy email!</div>";
-                    }
-                }
+            $usernameRegex = "/^[a-zA-Z0-9]{4,15}$/";
+            $passwordRegex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d\s@$!%*?&]{8,20}$/";
+            if ($username && $email && preg_match($usernameRegex, $username) && preg_match($passwordRegex, $password) && $password === $passwordConfirm) {
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                $registrationQuery = "INSERT INTO `felhasznalo` (`nev`, `email`, `jelszo`) VALUES ('{$username}', '{$email}', '{$hashedPassword}');";
+                $getuser = "SELECT * FROM felhasznalo WHERE felhasznalo.nev LIKE '{$username}' OR felhasznalo.email LIKE '{$email}';";
+                $result = dataInsert($username, $email, $hashedPassword);
+                echo $result;
             }
         }
         ?>
