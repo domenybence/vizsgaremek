@@ -136,10 +136,18 @@ document.getElementById("registrationForm").addEventListener("submit", (event) =
     registrationValidate();
 });
 
-/* ---------------------------------- TODO ---------------------------------- */
+
+let errorVisible = false;
 window.onerror = function(message) {
-    const errordiv = document.createElement("div");
-    errordiv.className = "error-group";
-    errordiv.innerText = message;
-    document.body.appendChild(errordiv);
+    if(!errorVisible){
+        errorVisible = true;
+        let errordiv = document.createElement("div");
+        console.log(document.body.contains(errordiv));
+        errordiv.className = "error-group";
+        errordiv.innerText = message;
+        document.body.appendChild(errordiv);
+    }
+    else{
+        errordiv.innerText = message;
+    }
 };
