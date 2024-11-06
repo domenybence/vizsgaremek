@@ -129,12 +129,7 @@ function registrationValidate() {
 }
 
 document.getElementById("registrationForm").addEventListener("input", registrationValidate);
-document.getElementById("registrationForm").addEventListener("input", function(){
-    console.log(usernameValidated);
-    console.log(emailValidated);
-    console.log(passwordValidated);
-    console.log(confirmPasswordValidated);
-});
+
 document.getElementById("registrationForm").addEventListener("submit", (event) => {
     if (!formValidated){
         event.preventDefault();
