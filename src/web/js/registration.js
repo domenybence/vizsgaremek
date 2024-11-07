@@ -49,7 +49,7 @@ function registrationValidate() {
             if (!errorLabel || !errorLabel.classList.contains("inline-error")) {
                 errorLabel = document.createElement("label");
                 errorLabel.className = "inline-error";
-                errorLabel.innerText = "A felhasználónévnek 5-14 karakter hosszúnek kell lennie.";
+                errorLabel.innerText = "A felhasználónévnek 4-14 karakter hosszúnek kell lennie.";
                 username.parentNode.appendChild(errorLabel);
             }
         }
@@ -137,6 +137,14 @@ document.getElementById("registrationForm").addEventListener("submit", (event) =
     registrationValidate();
 });
 
+document.getElementById("registrationForm").addEventListener("input", function(){
+    if(document.body.contains(document.querySelector("div.registration-successful"))){
+        document.querySelector("div.registration-successful").style.opacity = 0;
+    }
+    if(document.body.contains(document.querySelector("div.registration-unsuccessful"))){
+        document.querySelector("div.registration-unsuccessful").style.opacity = 0;
+    }
+});
 
 let errorVisible = false;
 window.onerror = function(message) {

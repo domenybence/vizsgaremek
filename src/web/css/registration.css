@@ -148,11 +148,13 @@ body {
     font-family: monospace;
 }
 
-.registration-failed {
+.registration-unsuccessful {
     text-align: center;
     color: #df3647;
     margin: 0;
     padding: 0;
+    opacity: 1;
+    transition: 2s opacity ease-out;
 }
 
 .registration-successful {
@@ -160,6 +162,8 @@ body {
     color: #28a745;
     margin: 0;
     padding: 0;
+    opacity: 1;
+    transition: 2s opacity ease-out;
 }
 
 @media screen and (max-width: 850px) {

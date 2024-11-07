@@ -38,7 +38,6 @@
             </div>
             <?php
             include_once "../php_functions/db_insert.php";
-            include_once "../php_functions/db_getuser.php";
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $username = filter_var(trim($_POST["username"]), FILTER_SANITIZE_STRING);
@@ -49,8 +48,6 @@
             $passwordRegex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d\s@$!%*?&]{8,20}$/";
             if ($username && $email && preg_match($usernameRegex, $username) && preg_match($passwordRegex, $password) && $password === $passwordConfirm) {
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-                $registrationQuery = "INSERT INTO `felhasznalo` (`nev`, `email`, `jelszo`) VALUES ('{$username}', '{$email}', '{$hashedPassword}');";
-                $getuser = "SELECT * FROM felhasznalo WHERE felhasznalo.nev LIKE '{$username}' OR felhasznalo.email LIKE '{$email}';";
                 $result = dataInsert($username, $email, $hashedPassword);
                 echo $result;
             }
