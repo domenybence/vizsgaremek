@@ -148,39 +148,8 @@ body {
     font-family: monospace;
 }
 
-.registration-unsuccessful {
-    text-align: center;
-    color: #df3647;
-    margin: 0;
-    padding: 0;
-    opacity: 1;
-    transition: 2s opacity ease-out;
-}
-
-.registration-successful {
-    text-align: center;
-    color: #28a745;
-    margin: 0;
-    padding: 0;
-    opacity: 1;
-    transition: 2s opacity ease-out;
-}
-
-.captcha-container {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-}
-
-.captcha-error {
-    text-align: center;
-    color: #df3647;
-    margin: 0;
-    padding: 0;
-}
-
 @media screen and (max-width: 850px) {
-    
+
 }
 
 @media screen and (max-width: 600px) {

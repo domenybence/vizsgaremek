@@ -42,7 +42,6 @@
             </div>
             <?php
             include_once "../php_functions/db_insert.php";
-            include_once "../php_functions/db_getuser.php";
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $username = filter_var(trim($_POST["username"]), FILTER_SANITIZE_STRING);

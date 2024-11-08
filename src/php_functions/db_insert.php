@@ -5,7 +5,6 @@ function dataInsert($username, $email, $hashedPassword) {
     $db = getDb();
     
     if ($db->connect_errno) {
-        error_log($db->connect_error);
         return "<div class='error-group'>Az adatbázishoz nem sikerült hozzákapcsolódni!</div>";
     }
 
@@ -18,14 +17,14 @@ function dataInsert($username, $email, $hashedPassword) {
     catch (mysqli_sql_exception $e) {
         if ($e->getCode() === 1062) {
             if (strpos($e->getMessage(), 'nev') !== false) {
-                return "<div class='registration-failed'>Foglalt felhasználónév!</div>";
+                return "<div class='registration-unsuccessful'>Foglalt felhasználónév!</div>";
             }
             else if (strpos($e->getMessage(), 'email') !== false) {
-                return "<div class='registration-failed'>Az email cím már egy meglévő fiókhoz tartozik!</div>";
+                return "<div class='registration-unsuccessful'>Az email cím már egy meglévő fiókhoz tartozik!</div>";
             }
         }
         else {
-            return "<div class='registration-failed'>A regisztráció során hiba lépett fel! " . $query->error . "</div>";
+            return "<div class='registration-unsuccessful'>A regisztráció során hiba lépett fel! " . $query->error . "</div>";
         }
     }
     return "<div class='registration-successful'>Sikeres regisztráció!</div>";
