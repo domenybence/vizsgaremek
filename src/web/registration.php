@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="./icon.png">
+    <script src="https://www.google.com/recaptcha/api.js?hl=hu" async defer></script>
 </head>
 
 <body>
@@ -33,6 +34,9 @@
                 <label class="inline-text" class="inline-text">Jelszó megerősítése</label>
                 <input class="inline-input" type="password" name="password_confirm" id="password_confirm" title="" minlength="8" maxlength="20" value=""></input>
             </div>
+            <div class="captcha-container">
+                <div class="g-recaptcha" data-sitekey="6LdsP3kqAAAAAB_5T7GZTTTQfiWLUs68G_KTta2a"></div>
+            </div>
             <div class="inline-group">
                 <button class="inline-button" type="submit" name="button_submit" title="" id="button_submit">Regisztráció</button>
             </div>
@@ -48,11 +52,21 @@
             $usernameRegex = "/^[a-zA-Z0-9]{4,15}$/";
             $passwordRegex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d\s@$!%*?&]{8,20}$/";
             if ($username && $email && preg_match($usernameRegex, $username) && preg_match($passwordRegex, $password) && $password === $passwordConfirm) {
-                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-                $registrationQuery = "INSERT INTO `felhasznalo` (`nev`, `email`, `jelszo`) VALUES ('{$username}', '{$email}', '{$hashedPassword}');";
-                $getuser = "SELECT * FROM felhasznalo WHERE felhasznalo.nev LIKE '{$username}' OR felhasznalo.email LIKE '{$email}';";
-                $result = dataInsert($username, $email, $hashedPassword);
-                echo $result;
+                if(isset($_POST['g-recaptcha-response'])) {
+                    $captcha = $_POST['g-recaptcha-response'];
+                    $secretKey = "6LdsP3kqAAAAADt-AI6ixXN1XQG5OZ9eUkdzfKid";
+                    $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$secretKey}&response={$captcha}&remoteip=" . $_SERVER['REMOTE_ADDR']);
+                    $g_response = json_decode($response);
+                    if ($g_response->success === true) {
+                        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                        $registrationQuery = "INSERT INTO `felhasznalo` (`nev`, `email`, `jelszo`) VALUES ('{$username}', '{$email}', '{$hashedPassword}');";   
+                        $result = dataInsert($username, $email, $hashedPassword);
+                        echo $result;
+                    }
+                    else {
+                        echo "<div class='captcha-error'>A CAPTCHA ellenőrzés sikertelen volt!</div>";
+                    }
+                }
             }
         }
         ?>

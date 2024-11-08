@@ -162,8 +162,21 @@ body {
     padding: 0;
 }
 
-@media screen and (max-width: 850px) {
+.captcha-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
 
+.captcha-error {
+    text-align: center;
+    color: #df3647;
+    margin: 0;
+    padding: 0;
+}
+
+@media screen and (max-width: 850px) {
+    
 }
 
 @media screen and (max-width: 600px) {
