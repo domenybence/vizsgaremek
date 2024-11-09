@@ -179,6 +179,21 @@ body {
     padding: 0;
 }
 
+#inline-link-group {
+    margin-top: 10px;
+}
+
+#checkbox-group {
+    display: flex;
+    flex-direction: row;
+    margin-left: 7%;
+    margin-right: 7%;
+}
+
+.inline-checkbox-text {
+    font-size: 15px;
+}
+
 @media screen and (max-width: 850px) {
     
 }
@@ -226,6 +241,7 @@ body {
     }
 
     #inline-link-group {
+        margin-top: 10px;
         min-height: 60px;
     }
 }

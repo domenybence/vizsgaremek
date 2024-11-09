@@ -3,11 +3,13 @@ let usernameValidated = false;
 let emailValidated = false;
 let passwordValidated = false;
 let confirmPasswordValidated = false;
+let checkboxValidated = false;
 
 const username = document.getElementById("username");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("password_confirm");
+const checkbox = document.getElementById("aszf-checkbox");
 
 const greenColor = "#28a745";
 const redColor = "#dc3545";
@@ -131,9 +133,30 @@ function registrationValidate() {
 document.getElementById("registrationForm").addEventListener("input", registrationValidate);
 
 document.getElementById("registrationForm").addEventListener("submit", (event) => {
+    /* ---------------------------------- TODO ---------------------------------- */
+    if(checkbox.checked){
+        checkboxValidated = true;
+        let errorLabel = checkbox.nextElementSibling;
+        if (errorLabel && errorLabel.classList.contains("inline-error")) {
+            errorLabel.remove();
+        }
+    }
+    else{
+        checkboxValidated = false;
+        let errorLabel = checkbox.nextElementSibling;
+        if (!errorLabel || !errorLabel.classList.contains("inline-error")) {
+            errorLabel = document.createElement("label");
+            errorLabel.className = "inline-error";
+            errorLabel.innerText = "Kérjük fogadja el az adatvédelmi nyilatkozatot!";
+            checkbox.parentNode.appendChild(errorLabel);
+            formValidated = false;
+        }
+        /* ------------------------------------ ! ----------------------------------- */
+    }
     if (!formValidated){
         event.preventDefault();
     }
+    
     registrationValidate();
 });
 
