@@ -82,7 +82,7 @@ body {
 }
 
 .inline-link:hover {
-    color: #2e5575;
+    color: #3f7099;
 }
 
 .inline-link:active {
@@ -105,7 +105,6 @@ body {
     background-color: #6c757d;
     align-self: center;
     margin: 10px;
-    margin-top: 20px;
     padding: 5px;
     border: 2px solid white;
     border-radius: 4px;
@@ -167,28 +166,40 @@ body {
 }
 
 .captcha-container {
-    margin-top: 10px;
+    margin: 10px;
     display: flex;
     justify-content: center;
-}
-
-.captcha-error {
-    text-align: center;
-    color: #df3647;
-    margin: 0;
-    padding: 0;
 }
 
 #inline-link-group {
     margin-top: 10px;
 }
 
-#checkbox-group {
+.inline-group:nth-of-type(5) {
     display: flex;
     flex-direction: row;
     margin-left: 7%;
     margin-right: 7%;
 }
+
+.checkbox-group,
+.captcha-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox-group > .inline-error,
+.captcha-container > .inline-error{
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .inline-checkbox-text {
     font-size: 15px;

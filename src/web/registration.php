@@ -34,12 +34,13 @@
                 <label class="inline-text">Jelszó megerősítése</label>
                 <input class="inline-input" type="password" name="password_confirm" id="password_confirm" title="" minlength="8" maxlength="20" value="">
             </div>
-            <div class="inline-group" id="checkbox-group">
+            <div class="inline-group">
                 <input type="checkbox" name="aszf-checkbox" id="aszf-checkbox">
-                <label class="inline-text inline-checkbox-text">A regisztrációmmal elfogadom a weboldal <a href="#" class="inline-link">adatvédelmi nyilatkozatát.</a></label>
+                <label class="inline-text inline-checkbox-text" id="aszf-label">A regisztrációmmal elfogadom a weboldal <a href="#" class="inline-link">adatvédelmi nyilatkozatát.</a></label>
             </div>
+            <div class="checkbox-group"></div>
             <div class="captcha-container">
-                <div class="g-recaptcha" data-sitekey="6LdsP3kqAAAAAB_5T7GZTTTQfiWLUs68G_KTta2a"></div>
+                <div class="g-recaptcha" id="captcha" data-sitekey="6LdsP3kqAAAAAB_5T7GZTTTQfiWLUs68G_KTta2a"></div>
             </div>
             <div class="inline-group">
                 <button class="inline-button" type="submit" name="button_submit" title="" id="button_submit">Regisztráció</button>
@@ -52,7 +53,6 @@
             $password = $_POST["password"];
             $passwordConfirm = $_POST["password_confirm"];
             $aszfCheckbox = $_POST["aszf-checkbox"];
-            var_dump($aszfCheckbox);
             $usernameRegex = "/^[a-zA-Z0-9]{4,15}$/";
             $passwordRegex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d\s@$!%*?&]{8,20}$/";
             if ($username && $email && preg_match($usernameRegex, $username) && preg_match($passwordRegex, $password) && $password === $passwordConfirm && isset($aszfCheckbox)) {
@@ -68,11 +68,11 @@
                         echo $result;
                     }
                     else {
-                        echo "<div class='captcha-error'>A reCAPTCHA ellenőrzés sikertelen volt!</div>";
+                        echo "<div class='inline-error'>A reCAPTCHA ellenőrzés sikertelen volt!</div>";
                     }
                 }
                 else {
-                    echo "<div class='captcha-error'>Kérjük végezze el a reCAPTCHA ellenőrzést!</div>";
+                    echo "<div class='inline-error'>Kérjük végezze el a reCAPTCHA ellenőrzést!</div>";
                 }
             }
         }
