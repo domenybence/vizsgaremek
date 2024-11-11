@@ -190,12 +190,6 @@ function registrationValidate(){
         else if (!confirmPasswordValidated){
             confirmPassword.focus();
         }
-        else if (!checkboxValidated){
-            checkbox.focus();
-        }
-        else if (!captchaValidated){
-            captcha.focus();
-        }
     }
 }
 
