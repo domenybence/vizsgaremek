@@ -1,7 +1,8 @@
 .my-sidebar {
     -ms-flex: 0 0 230px;
     flex: 0 0 230px; 
-} 
+    
+    }
 
 @media (max-width: 690px) {
     .my-sidebar {
