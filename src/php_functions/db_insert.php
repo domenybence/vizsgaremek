@@ -9,7 +9,6 @@ function dataInsert($username, $email, $hashedPassword) {
     }
 
     $query = $db->prepare("INSERT INTO felhasznalo (`nev`, `email`, `jelszo`, `pontok`, `letrehozasi_ido`, `utolso_valt_ido`, `moderator`, `admin`) VALUES (?, ?, ?, NULL, current_timestamp(), current_timestamp(), NULL, NULL)");
-    
     $query->bind_param("sss", $username, $email, $hashedPassword);
     try {
         $query->execute();

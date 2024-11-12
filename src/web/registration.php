@@ -11,10 +11,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="./icon.png">
     <script src="https://www.google.com/recaptcha/api.js?hl=hu" async defer></script>
+    <script type="module" src="./js/registration.js" async defer></script>
 </head>
 
 <body>
-    <script type="module" src="./js/registration.js"></script>
     <div class="container" id="container">
         <form method="POST" id="registrationForm">
             <h1 class="title">Regisztráció</h1>
@@ -63,7 +63,6 @@
                     $g_response = json_decode($response);
                     if ($g_response->success === true) {
                         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-                        $registrationQuery = "INSERT INTO `felhasznalo` (`nev`, `email`, `jelszo`) VALUES ('{$username}', '{$email}', '{$hashedPassword}');";   
                         $result = dataInsert($username, $email, $hashedPassword);
                         echo $result;
                     }

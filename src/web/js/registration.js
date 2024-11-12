@@ -26,7 +26,7 @@ const redColor = "#dc3545";
 
 function showError(element, message){
     if (!inputErrorVisible) {
-        element.style.border = "4px solid" + redColor;
+        element.style.border = "4px solid " + redColor;
         let errorLabel = element.nextElementSibling;
         if (!errorLabel || !errorLabel.classList.contains("inline-error")) {
             errorLabel = document.createElement("label");
@@ -39,7 +39,7 @@ function showError(element, message){
 }
 
 function clearError(element){
-    element.style.border = "4px solid" + greenColor;
+    element.style.border = "4px solid " + greenColor;
     let errorLabel = element.nextElementSibling;
     if (errorLabel && errorLabel.classList.contains("inline-error")) {
         errorLabel.remove();
@@ -165,7 +165,6 @@ function validateCaptcha(){
         }
     }
 }
-
 
 function registrationValidate(){
     validateUsername();
