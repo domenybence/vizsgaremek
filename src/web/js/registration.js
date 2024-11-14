@@ -201,12 +201,19 @@ window.onerror = function(message){
 };
 function registrationResponse(){
     let registrationPopup = `<div class="registration-wrapper">
-                            <div class="registration-popup">
-                            <h3>Sikeres regisztráció</h3>
-                            <p>Jó kódolást kívánunk!</p>
-                            </div>
-                            </div>`;
+    <div class="registration-popup">
+    <h3>Sikeres regisztráció</h3>
+    <p>Jó kódolást kívánunk!</p>
+    </div>
+    </div>`;
     document.body.appendChild(registrationPopup);
+}
+function closePopup(){
+    document.querySelector("div.registration-wrapper").style.opacity = 0;
+    document.querySelector("div.registration-wrapper").style.transition = "opacity, 0.3s";
+    setTimeout(() => {
+        document.querySelector("div.registration-wrapper").remove();
+    }, 1000);
 }
 username.addEventListener("input", () => {
     usernameChanged = true;
@@ -239,6 +246,16 @@ confirmPassword.addEventListener("input", () => {
 checkbox.addEventListener("click", () => {
     validateCheckbox();
 });
+
+document.addEventListener("click", (event) => {
+    if (event.target.closest("svg")) {
+        closePopup();
+    }
+    if (event.target.closest("div.button-container > button")) {
+        closePopup();
+    }
+});
+
 document.getElementById("registrationForm").addEventListener("submit", (event) => {
     registrationValidate();
     if (!formValidated) {
