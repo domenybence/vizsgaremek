@@ -1,6 +1,6 @@
 <?php
 
-function dataInsert($username, $email, $hashedPassword) {
+function registration($username, $email, $hashedPassword) {
     include_once "db_connect.php";
     $db = getDb();
     
@@ -75,7 +75,7 @@ function dataInsert($username, $email, $hashedPassword) {
             }
         }
         else {
-            return "<div class='registration-unsuccessful'>A regisztráció során hiba lépett fel! " . $query->error . "</div>";
+            return "<div class='registration-unsuccessful'>A regisztráció során hiba lépett fel!</div>";
         }
     }
 }

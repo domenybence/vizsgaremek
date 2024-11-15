@@ -62,15 +62,15 @@
                     $g_response = json_decode($response);
                     if ($g_response->success === true) {
                         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-                        $result = dataInsert($username, $email, $hashedPassword);
+                        $result = registration($username, $email, $hashedPassword);
                         echo $result;
                     }
                     else {
-                        echo "<div class='inline-error'>A reCAPTCHA ellenőrzés sikertelen volt!</div>";
+                        echo "<div class='inline-error captcha-error'>A reCAPTCHA ellenőrzés sikertelen volt!</div>";
                     }
                 }
                 else {
-                    echo "<div class='inline-error'>Kérjük végezze el a reCAPTCHA ellenőrzést!</div>";
+                    echo "<div class='inline-error captcha-error'>Kérjük végezze el a reCAPTCHA ellenőrzést!</div>";
                 }
             }
         }

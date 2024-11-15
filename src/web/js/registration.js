@@ -215,12 +215,19 @@ function closePopup(){
         document.querySelector("div.registration-wrapper").remove();
     }, 1000);
 }
+function removeCaptchaError(){
+    let captchaerror = document.body.querySelector("div.captcha-error");
+    if(captchaerror){
+        captchaerror.remove();
+    }
+}
 username.addEventListener("input", () => {
     usernameChanged = true;
     if (inputErrorVisible) {
         clearError(username);
     }
     validateUsername();
+    removeCaptchaError();
 });
 email.addEventListener("input", () => {
     emailChanged = true;
@@ -228,6 +235,7 @@ email.addEventListener("input", () => {
         clearError(email);
     }
     validateEmail();
+    removeCaptchaError();
 });
 password.addEventListener("input", () => {
     passwordChanged = true;
@@ -235,6 +243,7 @@ password.addEventListener("input", () => {
         clearError(password);
     }
     validatePassword();
+    removeCaptchaError();
 });
 confirmPassword.addEventListener("input", () => {
     confirmPasswordChanged = true;
@@ -242,16 +251,18 @@ confirmPassword.addEventListener("input", () => {
         clearError(confirmPassword);
     }
     validateConfirmPassword();
+    removeCaptchaError();
 });
 checkbox.addEventListener("click", () => {
     validateCheckbox();
+    removeCaptchaError();
 });
 
 document.addEventListener("click", (event) => {
-    if (event.target.closest("svg")) {
+    if(event.target.closest("svg")) {
         closePopup();
     }
-    if (event.target.closest("div.button-container > button")) {
+    if(event.target.closest("div.button-container > button")) {
         closePopup();
     }
 });
