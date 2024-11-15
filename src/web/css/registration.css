@@ -303,11 +303,15 @@ hr {
 
 #button_login {
     border: 2px solid black;
+    text-align: center;
+    text-decoration: none;
+    align-content: center;
     border-radius: 4px;
     cursor: pointer;
     height: 40px;
     width: 150px;
     transition: all 0.2s ease-out;
+    text-decoration: none;
 }
 
 #button_login:hover {
@@ -346,7 +350,7 @@ hr {
     color: white;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .container {
         background-color: #222831;
         width: 90%;
@@ -384,6 +388,10 @@ hr {
         text-align: center;
     }
 
+    .inline-group:nth-of-type(5) {
+        align-items: center;
+    }
+
     .error-group {
         width: 75%;
     }
@@ -393,13 +401,26 @@ hr {
         min-height: 60px;
     }
 
-    
     #aszf-checkbox {
         vertical-align: auto;
+        height: 30px;
+        width: 30px;
     }
 }
 
 @media screen and (max-width: 435px) {
+    .inline-text {
+        font-size: 18px;
+    }
+
+    .inline-input {
+        padding: 5px;
+    }
+
+    .inline-checkbox-text {
+        font-size: 14px;
+    }
+    
     #login-text {
         font-size: 18px;
     }

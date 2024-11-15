@@ -26,8 +26,7 @@ function dataInsert($username, $email, $hashedPassword) {
                         </div>
                         <hr>
                         <div class="button-container">
-                        /* ------------------------- TODO LINK NEEDS FIXING ------------------------- */
-                            <a href="./login.php"><button id="button_login">Bejelentkezés</button></a>
+                            <a id="button_login" href="./login.php">Bejelentkezés</a>
                         </div>
                     </div>
                 </div>';
