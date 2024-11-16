@@ -1,3 +1,8 @@
+<?php
+include_once "../php_functions/db_functions.php";
+session_destroy();
+?>
+
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -45,7 +50,6 @@
                 <button class="inline-button" type="submit" name="button_submit" title="" id="button_submit">Regisztráció</button>
             </div>
             <?php
-            include_once "../php_functions/db_functions.php";
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $username= filter_input(INPUT_POST,'username',FILTER_SANITIZE_SPECIAL_CHARS);
             $email = filter_var(trim($_POST["email"]), FILTER_VALIDATE_EMAIL);
