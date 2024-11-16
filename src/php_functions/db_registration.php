@@ -1,14 +1,14 @@
 <?php
 
+include_once "db_connect.php";
 function registration($username, $email, $hashedPassword) {
-    include_once "db_connect.php";
     $db = getDb();
     
     if ($db->connect_errno) {
         return "<div class='error-group'>Az adatbázishoz nem sikerült hozzákapcsolódni!</div>";
     }
 
-    $query = $db->prepare("INSERT INTO felhasznalo (`nev`, `email`, `jelszo`, `pontok`, `letrehozasi_ido`, `utolso_valt_ido`, `moderator`, `admin`) VALUES (?, ?, ?, NULL, current_timestamp(), current_timestamp(), NULL, NULL)");
+    $query = $db->prepare("INSERT INTO felhasznalo (`nev`, `email`, `jelszo`, `pontok`, `letrehozasi_ido`, `utolso_valt_ido`) VALUES (?, ?, ?, NULL, current_timestamp(), current_timestamp())");
     $query->bind_param("sss", $username, $email, $hashedPassword);
     try {
         $query->execute();

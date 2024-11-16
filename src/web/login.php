@@ -17,22 +17,34 @@
         <form method="POST" id="loginForm">
             <h1 class="title">Bejelentkezés</h1>
             <div class="inline-group">
-                <label class="inline-text" class="inline-text">Felhasználónév</label>
-                <input class="inline-input" type="text" name="username" id="username" title="" minlength="4" maxlength="15">
+                <label class="inline-text">Felhasználónév</label>
+                <input class="inline-input" type="text" name="username" id="username" minlength="4" maxlength="15">
             </div>
             <div class="inline-group">
-                <label class="inline-text" class="inline-text">Jelszó</label>
-                <input class="inline-input" type="password" name="password" id="password" title="">
+                <label class="inline-text">Jelszó</label>
+                <input class="inline-input" type="password" name="password" id="password">
             </div>
             <div class="inline-group">
-                <button class="inline-button" type="submit" name="button_submit" title="" id="button_submit">Bejelentkezés</button>
+                <button class="inline-button" type="submit" name="button_submit" id="button_submit">Bejelentkezés</button>
             </div>
+            
             <?php
-            $username = $_POST["username"];
-            $password = $_POST["password"];
-            if($_SERVER["REQUEST_METHOD"] === "POST"){
-                if(!empty($username && !empty($password))){
-                    
+            include "../php_functions/db_functions.php";
+            if ($_SERVER["REQUEST_METHOD"] === "POST") {
+                $username = $_POST["username"];
+                $password = $_POST["password"];
+                if (!empty($username) && !empty($password)) {
+                    $loginResult = login($username, $password);
+                    if ($loginResult === true) {
+                        header("Location: dashboard.php");
+                        exit();
+                    }
+                    else {
+                        echo $loginResult;
+                    }
+                } 
+                else {
+                    echo "<div class='inline-error'>Kérjük töltse ki mindkét mezőt!</div>";
                 }
             }
             ?>

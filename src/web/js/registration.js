@@ -6,6 +6,7 @@ let confirmPasswordValidated = false;
 let checkboxValidated = false;
 let captchaValidated = false;
 let inputErrorVisible = false;
+let confirmPasswordErrorVisible = false;
 let usernameChanged = false;
 let emailChanged = false;
 let passwordChanged = false;
@@ -32,6 +33,19 @@ function showError(element, message){
         inputErrorVisible = true;
     }
 }
+function confirmPasswordShowError(element, message){
+    if (!confirmPasswordErrorVisible) {
+        element.style.border = "4px solid " + redColor;
+        let errorLabel2 = element.nextElementSibling;
+        if (!errorLabel2 || !errorLabel2.classList.contains("inline-error")) {
+            errorLabel2 = document.createElement("label");
+            errorLabel2.className = "inline-error";
+            errorLabel2.innerText = message;
+            element.parentNode.appendChild(errorLabel2);
+        }
+        confirmPasswordErrorVisible = true;
+    }
+}
 function clearError(element){
     element.style.border = "4px solid " + greenColor;
     let errorLabel = element.nextElementSibling;
@@ -39,6 +53,14 @@ function clearError(element){
         errorLabel.remove();
     }
     inputErrorVisible = false;
+}
+function confirmPasswordClearError(element){
+    element.style.border = "4px solid " + greenColor;
+    let errorLabel2 = element.nextElementSibling;
+    if (errorLabel2 && errorLabel2.classList.contains("inline-error")) {
+        errorLabel2.remove();
+    }
+    confirmPasswordErrorVisible = false;
 }
 function validateUsername(){
     const usernameRegex = /^[a-zA-Z0-9]{4,15}$/;
@@ -90,21 +112,20 @@ function validatePassword(){
             passwordValidated = false;
         }
     }
+    validateConfirmPassword();
 }
+
 function validateConfirmPassword(){
-    if(!confirmPasswordChanged){
-        showError(confirmPassword, "Kérjük erősítse meg a jelszavát.");
-    }
-    else{
-        if (password.value === confirmPassword.value && passwordValidated) {
-            clearError(confirmPassword);
-            confirmPasswordValidated = true;
-        }
-        else {
-            showError(confirmPassword, "A jelszavak nem egyeznek meg.");
+    if(confirmPasswordChanged){
+        if(password.value !== confirmPassword.value || !passwordValidated){
+            confirmPasswordShowError(confirmPassword, "A jelszavak nem egyeznek meg.");
             confirmPasswordValidated = false;
         }
-    }    
+        else {
+            confirmPasswordClearError(confirmPassword);
+            confirmPasswordValidated = true;
+        }   
+    }
 }
 function validateCheckbox(){
     if (checkbox.checked){
