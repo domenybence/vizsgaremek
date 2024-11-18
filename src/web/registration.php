@@ -39,8 +39,8 @@ session_destroy();
                 <input class="inline-input" type="password" name="password_confirm" id="password_confirm" title="" minlength="8" maxlength="20" value="">
             </div>
             <div class="inline-group">
-                <input type="checkbox" name="aszf-checkbox" id="aszf-checkbox">
-                <label class="inline-text inline-checkbox-text" id="aszf-label">A regisztrációmmal elfogadom a weboldal <a href="#" class="inline-link">adatvédelmi nyilatkozatát.</a></label>
+                <input type="checkbox" name="policy-checkbox" id="policy-checkbox">
+                <label class="inline-text inline-checkbox-text" id="policy-label">A regisztrációmmal elfogadom a weboldal <a href="#" class="inline-link">adatvédelmi nyilatkozatát.</a></label>
             </div>
             <div class="checkbox-group"></div>
             <div class="captcha-container">
@@ -55,10 +55,10 @@ session_destroy();
             $email = filter_var(trim($_POST["email"]), FILTER_VALIDATE_EMAIL);
             $password = $_POST["password"];
             $passwordConfirm = $_POST["password_confirm"];
-            $aszfCheckbox = $_POST["aszf-checkbox"];
+            $policyCheckbox = $_POST["policy-checkbox"];
             $usernameRegex = "/^[a-zA-Z0-9]{4,15}$/";
             $passwordRegex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d\s@$!%*?&]{8,20}$/";
-            if ($username && $email && preg_match($usernameRegex, $username) && preg_match($passwordRegex, $password) && $password === $passwordConfirm && isset($aszfCheckbox)) {
+            if ($username && $email && preg_match($usernameRegex, $username) && preg_match($passwordRegex, $password) && $password === $passwordConfirm && isset($policyCheckbox)) {
                 if(isset($_POST['g-recaptcha-response'])) {
                     $captcha = $_POST['g-recaptcha-response'];
                     $secretKey = "6LdsP3kqAAAAADt-AI6ixXN1XQG5OZ9eUkdzfKid";

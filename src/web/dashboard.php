@@ -28,6 +28,18 @@ if (!isset($_SESSION['username'])) {
     )!</h1>
     <a href="./registration.php">Regisztráció</a>
     <a href="./login.php">Bejelentkezés</a>
-    <a href="./logout.php">Kijelentkezés</a>
+    <form method="POST">
+        <button type="submit" name="logout">Kijelentkezés</button>
+    </form>
 </body>
 </html>
+
+<?php
+
+if(isset($_POST["logout"])){
+    session_destroy();
+    header("Location: dashboard.php");
+    exit();
+}
+
+?>
