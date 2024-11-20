@@ -14,6 +14,7 @@
 </head>
 <body>
     <div class="container" id="container">
+        //TODO CONTAINER SPLIT INTO 2, LEFT HAS A CODING BEING WRITTEN(video), RIGHT HAS THE LOGIN
         <form method="POST" id="loginForm">
             <h1 class="title">Bejelentkezés</h1>
             <div class="inline-group">
