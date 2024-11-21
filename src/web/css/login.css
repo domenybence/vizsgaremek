@@ -28,11 +28,6 @@ body {
     height: 700px;
 }
 
-video {
-    pointer-events: none;
-    user-select: none;
-}
-
 .column1,
 .column2 {
     height: 100%;
@@ -44,11 +39,12 @@ video {
     background-size: cover;
     opacity: 0.65;
     border-radius: 36px 0px 0px 36px;
-    width: 55%;
+    width: 50%;
 }
 
 .column2 {
-    width: 45%;
+    width: 50%;
+    display: grid;
     align-items: center;
 }
 
@@ -95,31 +91,10 @@ video {
     transform: scale(1.05);
 }
 
-#inline-link-group {
-    height: 15%;
-    min-height: 50px;
-
-    margin: 20px;
-    justify-content: center;
-    text-align: center;
-    color: black;
-    border: gray 1px solid;
-    border-radius: 4px;
-    background-color: #BCD4E6;
-    text-shadow: none;
-}
-
-#login-text {
-    padding-left: 0px;
-    text-align: center;
-    text-shadow: none;
-}
-
 .inline-error {
-    text-align: left;
+    text-align: center;
     color: #dc3545;
     font-size: 14px;
-    margin-left: 7%;
 }
 
 .inline-button {
@@ -176,199 +151,6 @@ video {
     font-family: monospace;
 }
 
-.registration-unsuccessful {
-    text-align: center;
-    color: #df3647;
-    margin: 0;
-    padding: 0;
-    opacity: 1;
-    transition: 2s opacity ease-out;
-}
-
-.registration-successful {
-    text-align: center;
-    color: #28a745;
-    margin: 0;
-    padding: 0;
-    opacity: 1;
-    transition: 2s opacity ease-out;
-}
-
-.captcha-container {
-    margin: 10px;
-    display: flex;
-    justify-content: center;
-}
-
-#inline-link-group {
-    margin-top: 10px;
-}
-
-.inline-group:nth-of-type(5) {
-    display: flex;
-    flex-direction: row;
-    margin-left: 7%;
-}
-
-.checkbox-group,
-.captcha-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-}
-
-.checkbox-group > .inline-error,
-.captcha-container > .inline-error{
-    margin: 0;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.inline-checkbox-text {
-    font-size: 15px;
-}
-
-#policy-checkbox {
-    margin-top: 10px;
-    height: 20px;
-    width: 20px;
-}
-
-.registration-wrapper {
-    display: flex;
-    position: fixed;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    overflow: auto;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(35, 35, 35, 0.9);
-}
-
-.registration-popup {
-    display: flex;
-    flex-direction: column; 
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 500px;
-    min-height: 150px; 
-    margin: 10px;
-    padding: 10px;
-    border: 4px solid rgb(5, 107, 17);
-    background-color: white;
-    color: black;
-    border-radius: 4px;
-    position: relative;
-}
-
-.failed-registration-popup {
-    display: flex;
-    flex-direction: column; 
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 500px;
-    min-height: 150px; 
-    margin: 10px;
-    padding: 10px;
-    border: 4px solid rgb(182, 19, 19);
-    background-color: white;
-    color: black;
-    border-radius: 4px;
-    position: relative;
-}
-
-.failed-title-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.title-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-}
-
-#svg_x {
-    cursor: pointer;
-}
-
-hr {
-    width: 100%;
-    opacity: 0.6;
-}
-
-.content {
-    text-align: justify;
-    margin-right: 50px;
-    width: 100%;
-}
-
-.button-container {
-    display: flex;
-    justify-content: flex-end; 
-    width: 100%;
-    margin-top: 10px;
-}
-
-#button_login {
-    border: 2px solid black;
-    text-align: center;
-    color: black;
-    align-content: center;
-    border-radius: 4px;
-    cursor: pointer;
-    height: 40px;
-    width: 150px;
-    transition: all 0.2s ease-out;
-    text-decoration: none;
-}
-
-#button_login:hover {
-    background-color: rgb(5, 107, 17);
-    color: white;
-}
-
-#button_login_2 {
-    border: 2px solid black;
-    border-radius: 4px;
-    margin-right: 6px;
-    cursor: pointer;
-    height: 40px;
-    width: 150px;
-    transition: all 0.2s ease-out;
-}
-
-#button_login_2:hover {
-    background-color: rgb(22, 121, 34);
-    color: white;
-}
-
-#button_okay {
-    border: 2px solid black;
-    border-radius: 4px;
-    cursor: pointer;
-    height: 40px;
-    width: 120px;
-    transition: all 0.2s ease-out;
-    background-color: rgb(83, 83, 83);
-    color: white;
-}
-
-#button_okay:hover {
-    background-color: rgb(181, 46, 46);
-    color: white;
-}
 @media screen and (max-width: 1300px) {
     .column1 {
         background-image: url(../login_vertical_image.jpg);
@@ -390,6 +172,7 @@ hr {
     }
 }
 
+/* --- GLASS EFFECT WITH SMALLER SIZE IMAGE BACKGROUND WITH THE LOGIN INPUTS ETC ON IT -- */
 @media screen and (max-width: 800px) {
     .container {
         width: 100%;
@@ -443,25 +226,6 @@ hr {
         margin: 0px;
         text-align: center;
     }
-
-    .inline-group:nth-of-type(5) {
-        align-items: center;
-    }
-
-    .error-group {
-        width: 75%;
-    }
-
-    #inline-link-group {
-        margin-top: 10px;
-        min-height: 60px;
-    }
-
-    #policy-checkbox {
-        vertical-align: auto;
-        height: 30px;
-        width: 30px;
-    }
 }
 
 @media screen and (max-width: 435px) {
@@ -471,14 +235,6 @@ hr {
 
     .inline-input {
         padding: 5px;
-    }
-
-    .inline-checkbox-text {
-        font-size: 14px;
-    }
-    
-    #login-text {
-        font-size: 18px;
     }
 }
 
@@ -492,10 +248,6 @@ hr {
     #login-text {
         font-size: 19px;
     }
-
-    #policy-label {
-        font-size: 16px;
-    }
 }
 
 @media screen and (max-width: 290px) {
@@ -504,19 +256,5 @@ hr {
     }
     .inline-text {
         font-size: 18px;
-    }
-}
-
-@media screen and (max-width: 290px) {
-    #aszf-label {
-        font-size: 14px;
-    }
-}
-
-@media screen and (max-width: 190px) {
-    #inline-link-group {
-        margin: 0px;
-        margin-top: 20px;
-        padding: 0px;
     }
 }
