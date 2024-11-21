@@ -41,6 +41,7 @@ video {
 
 .column1 {
     background-image: url(../login_photo.jpeg);
+    background-size: cover;
     opacity: 0.65;
     border-radius: 36px 0px 0px 36px;
     width: 55%;
@@ -379,10 +380,13 @@ hr {
         width: 65%;
     }
     .inline-input {
-        width: 50%;
+        width: 70%;
     }
     .inline-text {
-        padding-left: 25%;
+        padding-left: 15%;
+    }
+    .inline-button {
+        width: 40%;
     }
 }
 
