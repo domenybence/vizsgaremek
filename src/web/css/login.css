@@ -160,6 +160,7 @@ body {
     }
     .column2 {
         width: 65%;
+        height: 100%;
     }
     .inline-input {
         width: 70%;
