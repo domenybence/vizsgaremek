@@ -33,7 +33,7 @@ function registration($username, $email, $hashedPassword) {
     }
     catch (mysqli_sql_exception $e) {
         if ($e->getCode() === 1062) {
-            if (strpos($e->getMessage(), 'nev') !== false) {
+            if (strpos($e->getMessage(), "nev") === true) {
                 return '<div class="registration-wrapper">
                             <div class="failed-registration-popup">
                                 <div class="failed-title-container">
@@ -53,7 +53,7 @@ function registration($username, $email, $hashedPassword) {
                             </div>
                         </div>';
             }
-            else if (strpos($e->getMessage(), 'email') !== false) {
+            else if (strpos($e->getMessage(), "email") === true) {
                 return '<div class="registration-wrapper">
                             <div class="failed-registration-popup">
                                 <div class="failed-title-container">

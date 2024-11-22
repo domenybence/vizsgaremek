@@ -172,14 +172,22 @@ body {
     }
 }
 
-/* --- GLASS EFFECT WITH SMALLER SIZE IMAGE BACKGROUND WITH THE LOGIN INPUTS ETC ON IT -- */
 @media screen and (max-width: 800px) {
-    .container {
-        width: 100%;
+
+    body {
         height: 100%;
-        background-color: #222831;
+        height: 100dvb;
+        background-image: url(../login_vertical_image.jpg);
+        backdrop-filter: blur(6.1px);
+        -webkit-backdrop-filter: blur(6.1px);
+        margin: 0;
+    }
+    .container {
+        width: max-content;
+        height: 100%;
         border: none;
         align-items: center;
+        background: none;
     }
 
     .wrapper {
@@ -193,7 +201,6 @@ body {
 
     .column2 {
         width: 100%;
-        height: 100%;
     }
     
     .title {

@@ -3,25 +3,54 @@ body {
     flex-direction: column;
     
     align-items: center;
+    margin: calc(100% - 100px);
     margin-top: 50px;
     justify-content: center;
+    overflow: hidden;
     
     background-color: #222831;
     font-family: "Montserrat";
 }
 
 .container {
+    width: 100%;
+    height: 100%;
+    height: calc(100% - 200px);
     align-items: center;
-
-    width: 500px;
     text-align: left;
-    padding: 30px;
-    
     color: #EEEEEE;
-    background-color: #393E46;
+    background-color: #404348;
     
     border: 3px solid darkgrey;
-    border-radius: 10px;
+    border-radius: 36px;
+}
+
+#registrationForm {
+    min-height: 550px;
+    max-height: 800px;
+}
+
+.column1,
+.column2 {
+    height: 100%;
+    height: calc(100dvh - 200px);
+    float: left;
+}
+
+.column1 {
+    height: fit-content;
+    min-height: 550px;
+    width: 50%;
+    display: grid;
+    align-items: center;
+}
+
+.column2 {
+    background-image: url(../login_photo.jpeg);
+    background-size: cover;
+    opacity: 0.65;
+    border-radius: 0 36px 36px 0;
+    width: 50%;
 }
 
 .inline-group {
@@ -186,8 +215,10 @@ body {
 
 .inline-group:nth-of-type(5) {
     display: flex;
+    justify-content: center;
     flex-direction: row;
-    margin-left: 7%;
+    margin-left: 8%;
+    margin-right: 5%;
 }
 
 .checkbox-group,
@@ -210,7 +241,8 @@ body {
 }
 
 .inline-checkbox-text {
-    font-size: 15px;
+    font-size: 13px;
+    margin-left: -40px;
 }
 
 #policy-checkbox {
@@ -350,12 +382,50 @@ hr {
     color: white;
 }
 
+@media screen and (max-width: 1300px) {
+    .column1 {
+        width: 65%;
+    }
+    .column2 {
+        background-image: url(../login_vertical_image.jpg);
+        background-size: cover;
+        opacity: 0.6;
+        width: 35%;
+    }
+    .inline-input {
+        width: 70%;
+    }
+    .inline-text {
+        padding-left: 15%;
+    }
+    .inline-button {
+        width: 40%;
+    }
+}
+
 @media screen and (max-width: 800px) {
+    body {
+        height: 100%;
+        height: 100dvb;
+        background-image: url(../login_vertical_image.jpg);
+        backdrop-filter: blur(6.1px);
+        -webkit-backdrop-filter: blur(6.1px);
+        margin: 0;
+    }
     .container {
-        background-color: #222831;
-        width: 90%;
-        padding-top: 0px;
-        border: 0px;
+        width: max-content;
+        height: 100%;
+        border: none;
+        align-items: center;
+        background: none;
+    }
+
+    .column1 {
+        display: none;
+    }
+
+    .column2 {
+        width: 100%;
     }
     
     .title {
@@ -438,6 +508,7 @@ hr {
     }
 
     #policy-label {
+        vertical-align: middle;
         font-size: 16px;
     }
 }

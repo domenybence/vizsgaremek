@@ -20,6 +20,7 @@ session_destroy();
 </head>
 <body>
     <div class="container" id="container">
+    <div class="column1">
         <form method="POST" id="registrationForm">
             <h1 class="title">Regisztráció</h1>
             <div class="inline-group">
@@ -83,6 +84,8 @@ session_destroy();
                 <p class="inline-text" id="login-text">Van már fiókod? <a href="./login.php" class="inline-link">Jelentkezz be.</a></p>
             </div>
         </form>
+    </div>
+    <div class="column2"></div>
     </div>
 </body>
 
