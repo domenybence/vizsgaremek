@@ -13,7 +13,8 @@
     <script type="module" src="./js/login.js" defer></script>
 </head>
 <body>
-    <div class="container">
+    <div class="background"></div>
+    <div class="container" id="container">
         <div class="wrapper">
         <div class="column1"></div>
             <div class="column2">
@@ -51,9 +52,10 @@
                     }
                 }
                 ?>
+                <p class="inline-text register-text">Még nincs fiókja? <a href="./registration.php" class="inline-link">Regisztráljon itt.</a></p>
             </form>
             </div>
-            </div>
+        </div>
         </div>
     </div>
 </body>
