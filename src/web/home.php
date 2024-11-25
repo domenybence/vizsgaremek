@@ -94,11 +94,11 @@
 
     <div class="col bg-light m-1">
       <div class="row m-2">
-        <div id="carouselExampleIndicators" class="carousel slide">
+        <div id="carousel-fokepek" class="carousel slide">
         <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#carousel-fokepek" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carousel-fokepek" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carousel-fokepek" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
@@ -111,25 +111,25 @@
             <img src="https://placehold.co/200x50" class="d-block w-100" alt="...">
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-fokepek" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carousel-fokepek" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
       </div>
       </div>
       <div class="row">
-        <div class="card">
+        <div class="card bg-dark text-light pb-3">
           <div class="card-header">
             PHP
           </div>
-          <div class="card-body">
+          <div class="card-body bg-light text-dark">
             <h5 class="card-title">Példa Szoftver</h5>
             <p class="card-text">Példa szoftver</p>
-            <a href="#" class="btn btn-primary">Megtekintés</a>
+            <a href="#" class="btn btn-dark text-light">Megtekintés</a>
           </div>
         </div>
       </div>
