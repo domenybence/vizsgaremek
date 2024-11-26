@@ -29,7 +29,7 @@ function getUser($username) {
     }
 }
 
-function login($username, $password) {
+function login($username, $password, $rememberme) {
     $user = getUser($username);
     if (!$user) {
         return "<div class='inline-error'>Hibás felhasználónév vagy jelszó!</div>";
@@ -51,4 +51,8 @@ function login($username, $password) {
     else {
         return "<div class='inline-error'>Helytelen felhasználónév vagy jelszó!</div>";
     }
+}
+
+function rememberMe(){
+
 }

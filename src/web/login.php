@@ -29,6 +29,9 @@
                     <input class="inline-input" type="password" name="password" id="password">
                 </div>
                 <div class="inline-group">
+                    <input type="checkbox" name="rememberme">
+                </div>
+                <div class="inline-group">
                     <button class="inline-button" type="submit" name="button_submit" id="button_submit">Bejelentkezés</button>
                 </div>
                 
@@ -37,8 +40,9 @@
                 if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $username = $_POST["username"];
                     $password = $_POST["password"];
+                    $remember = $_POST["rememberme"];
                     if (!empty($username) && !empty($password)) {
-                        $loginResult = login($username, $password);
+                        $loginResult = login($username, $password, $remember);
                         if ($loginResult === true) {
                             header("Location: dashboard.php");
                             exit();
