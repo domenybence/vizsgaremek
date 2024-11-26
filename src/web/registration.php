@@ -1,6 +1,8 @@
 <?php
 include_once "../php_functions/db_functions.php";
-session_destroy();
+if(isset($_SESSION)){
+    session_destroy();
+}
 ?>
 
 <!DOCTYPE html>

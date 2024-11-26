@@ -40,9 +40,8 @@
                 if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $username = $_POST["username"];
                     $password = $_POST["password"];
-                    $remember = $_POST["rememberme"];
                     if (!empty($username) && !empty($password)) {
-                        $loginResult = login($username, $password, $remember);
+                        $loginResult = login($username, $password);
                         if ($loginResult === true) {
                             header("Location: dashboard.php");
                             exit();

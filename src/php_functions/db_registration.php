@@ -1,17 +1,12 @@
 <?php
 
 include_once "db_connect.php";
-function registration($username, $email, $hashedPassword) {
-    $db = getDb();
-    
-    if ($db->connect_errno) {
-        return "<div class='error-group'>Az adatbázishoz nem sikerült hozzákapcsolódni!</div>";
-    }
+include_once "db_insert.php";
 
-    $query = $db->prepare("INSERT INTO felhasznalo (`nev`, `email`, `jelszo`, `pontok`, `letrehozasi_ido`, `utolso_valt_ido`) VALUES (?, ?, ?, NULL, current_timestamp(), current_timestamp())");
-    $query->bind_param("sss", $username, $email, $hashedPassword);
+function registration($username, $email, $hashedPassword) {
+
     try {
-        $query->execute();
+        insertData("INSERT INTO felhasznalo (`nev`, `email`, `jelszo`, `pontok`, `letrehozasi_ido`, `utolso_valt_ido`) VALUES (?, ?, ?, NULL, current_timestamp(), current_timestamp());", "sss", [$username, $email, $hashedPassword]);
         return '<div class="registration-wrapper">
                     <div class="registration-popup">
                         <div class="title-container">
@@ -31,9 +26,9 @@ function registration($username, $email, $hashedPassword) {
                     </div>
                 </div>';
     }
-    catch (mysqli_sql_exception $e) {
-        if ($e->getCode() === 1062) {
-            if (strpos($e->getMessage(), "nev") == true) {
+    catch (Exception $e) {
+        $errorMessage = $e->getMessage();
+        if (strpos($errorMessage, "nev") !== false) {
                 return '<div class="registration-wrapper">
                             <div class="failed-registration-popup">
                                 <div class="failed-title-container">
@@ -53,7 +48,7 @@ function registration($username, $email, $hashedPassword) {
                             </div>
                         </div>';
             }
-            else if (strpos($e->getMessage(), "email") == true) {
+            else if (strpos($errorMessage, "email") !== false) {
                 return '<div class="registration-wrapper">
                             <div class="failed-registration-popup">
                                 <div class="failed-title-container">
@@ -73,6 +68,5 @@ function registration($username, $email, $hashedPassword) {
                             </div>
                         </div>';
             }
-        }
     }
 }

@@ -31,12 +31,15 @@ body {
 
 .wrapper {
     height: 700px;
+    height: auto;
 }
 
 .registration-wrapper {
     height: inherit;
     display: grid;
     align-items: center;
+    height: 100%;
+    min-height: 750px;
 }
 
 .column1,
@@ -50,16 +53,15 @@ body {
 .column1 {
     min-height: 550px;
 }
-
+/* --------------------------- KEPMAGASSAG RESZP. --------------------------- */
 .column2 {
     min-height: 550px;
-    height: 100%;
     border-radius: 0 36px 36px 0;
 }
 
 .registration-page-wrapper {
     min-height: 550px;
-    height: inherit;
+    height: 100%;
 }
 
 .image-container {
@@ -69,13 +71,17 @@ body {
 }
 
 .image-wrapper {
-    min-height: 550px;
-    width: 100%;
     height: 100%;
+    width: 100%;
+    min-height: 700px;
+    background-size: cover;
     background-image: url('../login_photo.jpeg');
     opacity: 0.6;
-    background-size: cover;
     border-radius: 0 36px 36px 0;
+}
+
+.image-wrapper::after {
+    height: auto;
 }
 
 .inline-group {
