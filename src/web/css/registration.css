@@ -50,18 +50,22 @@ body {
     height: 100%;
 }
 
-.column1 {
-    min-height: 550px;
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
 }
-/* --------------------------- KEPMAGASSAG RESZP. --------------------------- */
-.column2 {
-    min-height: 550px;
-    border-radius: 0 36px 36px 0;
+
+.column1, .column2 {
+    width: 50%;
+    height: auto;
 }
+
 
 .registration-page-wrapper {
     min-height: 550px;
     height: 100%;
+    padding: 10px;
 }
 
 .image-container {
