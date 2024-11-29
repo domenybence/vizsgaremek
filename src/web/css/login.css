@@ -105,7 +105,7 @@ body {
     background-color: #6c757d;
     align-self: center;
     margin: 10px;
-    margin-top: 30px;
+    margin-top: 10px;
     padding: 5px;
     border: 2px solid white;
     border-radius: 4px;
@@ -130,6 +130,13 @@ body {
     text-align: center;
     text-shadow: #292929 2px 2px;
     cursor: default;
+}
+
+.inline-group:nth-of-type(3) {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
 }
 
 .error-group {

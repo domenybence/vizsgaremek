@@ -29,7 +29,8 @@
                     <input class="inline-input" type="password" name="password" id="password">
                 </div>
                 <div class="inline-group">
-                    <input type="checkbox" name="rememberme">
+                    <label for="rememberme">Bejelentkezve maradok</label>
+                    <input type="checkbox" id="rememberme" name="rememberme">
                 </div>
                 <div class="inline-group">
                     <button class="inline-button" type="submit" name="button_submit" id="button_submit">Bejelentkezés</button>
@@ -37,11 +38,12 @@
                 
                 <?php
                 include "../php_functions/db_functions.php";
-                if ($_SERVER["REQUEST_METHOD"] === "POST") {
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $username = $_POST["username"];
                     $password = $_POST["password"];
+                    $rememberme = isset($_POST["rememberme"]);
                     if (!empty($username) && !empty($password)) {
-                        $loginResult = login($username, $password);
+                        $loginResult = login($username, $password, $rememberme);
                         if ($loginResult === true) {
                             header("Location: dashboard.php");
                             exit();

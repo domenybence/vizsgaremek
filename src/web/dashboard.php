@@ -19,7 +19,7 @@ if (!isset($_SESSION["username"])) {
     
     <h1>Üdvözlet,
     <?php
-    echo $_SESSION["username"];
+        echo $_SESSION["username"];
     ?>
     (
     <?php
