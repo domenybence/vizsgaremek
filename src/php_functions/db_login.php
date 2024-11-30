@@ -36,22 +36,14 @@ function login($username, $password, $rememberme) {
         }
         $user = $user[0];
         if (password_verify($password, $user["password"])) {
-            $_SESSION["username"] = $user["username"];
-            $_SESSION["userid"] = $user["id"];
-            if($user["role"] == 0){
-                $_SESSION["role"] = "guest";
-            }
-            else if($user["role"] == 1){
-                $_SESSION["role"] = "moderator";
-            }
-            else if($user["role"] == 2){
-                $_SESSION["role"] = "admin";
-            }
-            $token = bin2hex(random_bytes(32));
-            $expiry = date("Y-m-d H:i:s", strtotime("+30 days"));
             /* ---------------------------------- todo ---------------------------------- */
-            $uploadToken = insertData("INSERT INTO felhasznalo_token (felhasznalo_token.felhasznalo_id, felhasznalo_token.token, felhasznalo_token.lejarat) VALUES (?, ?, ?);", "iss");
-            return true;
+            if(startSession($userid["id"]) == false) {
+                echo "<div class='inline-error'>Hiba lépett fel a felhasználó beléptetése során, kérjük próbálja újra később.</div>";
+                return false;
+            }
+            else {
+                return true;
+            }
         }
     }
 }
