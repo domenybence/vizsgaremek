@@ -39,5 +39,8 @@ function login($username, $password, $rememberme) {
                 return false;
             }
         }
+        else {
+            return "<div class='inline-error'>Hibás felhasználónév vagy jelszó!</div>";
+        }
     }
 }
