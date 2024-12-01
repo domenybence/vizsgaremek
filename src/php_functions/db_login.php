@@ -27,11 +27,8 @@ function login($username, $password, $rememberme) {
         }
         $user = $user[0];
         if (password_verify($password, $user["password"])) {
-            $token = generateToken($user["id"]);
-            if($token != false) {
-                $role = setRole($user["role"]);
-                setSession($user["username"], $user["id"], $role);
-                startSession();
+            $role = setRole($user["role"]);
+            if(setFirstSession($user["username"], $user["id"], $role)) {
                 return true;
             }
             else {

@@ -3,6 +3,7 @@
 include_once "../php_functions/db_functions.php";
 
 startSession();
+
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -41,7 +42,6 @@ if(isset($_POST["logout"])){
     unsetCookie();
     session_unset();
     session_destroy();
-    header("Location: login.php");
     exit();
 }
 
