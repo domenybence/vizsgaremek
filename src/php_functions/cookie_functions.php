@@ -6,6 +6,7 @@ function generateToken($userid) {
     try {
         $uploadToken = insertData("INSERT INTO felhasznalo_token (felhasznalo_token.felhasznalo_id, felhasznalo_token.token, felhasznalo_token.lejarat) VALUES (?, ?, ?);", "iss", [$userid, $token, $expiry]);
         if($uploadToken) {
+            setcookie("rememberme", $token, time() + (30 * 24 * 60 * 60), "/", "", false, true);
             return $token;
         }
         else {

@@ -23,7 +23,7 @@ function getData($queryText, $parameterTypes, $bindParameters = []) {
             return $result->fetch_all(MYSQLI_ASSOC);
         }
         else {
-            return null;
+            return false;
         }
     }
     catch (Exception $e) {

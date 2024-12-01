@@ -2,11 +2,7 @@
 
 include_once "../php_functions/db_functions.php";
 
-if (!isset($_SESSION["username"])) {
-    header("Location: login.php");
-    exit();
-}
-
+startSession();
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -26,6 +22,11 @@ if (!isset($_SESSION["username"])) {
         echo $_SESSION["role"];
     ?>
     )!</h1>
+    <hr>
+    <?php
+        if(isset($_COOKIE["rememberme"])) { echo $_COOKIE["rememberme"]; }
+    ?>
+    <br>
     <a href="./registration.php">Regisztráció</a>
     <a href="./login.php">Bejelentkezés</a>
     <form method="POST">
@@ -37,8 +38,10 @@ if (!isset($_SESSION["username"])) {
 <?php
 
 if(isset($_POST["logout"])){
+    unsetCookie();
+    session_unset();
     session_destroy();
-    header("Location: dashboard.php");
+    header("Location: login.php");
     exit();
 }
 
