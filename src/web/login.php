@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bejelentkezés</title>
-<<<<<<< HEAD
-</head>
-<body>
-    
-=======
     <link rel="stylesheet" href="./css/login.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,6 +28,5 @@
             </div>
         </form>
     </div>
->>>>>>> origin/backend
 </body>
 </html>
