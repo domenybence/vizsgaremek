@@ -26,9 +26,14 @@ switch (mb_strtolower($url[0])) {
         }
         break;
     
-    case 'html':
-        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+    case 'katkereses':
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $kategoria = $bodyAdatok['kategoria'];
+            $kat_sql = "SELECT * FROM `kod` WHERE kategoria_id = {$kategoria}";
+            $kat = adatokLekerese($kat_sql);
             
+            echo json_encode($kat, JSON_UNESCAPED_UNICODE);
+
         }      
         else
         {
