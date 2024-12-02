@@ -4,8 +4,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px;
     justify-content: center;
+    margin-top: 50px;
 }
 
 .container {
@@ -82,7 +82,7 @@ body {
 }
 
 .inline-link:hover {
-    color: #2e5575;
+    color: #3f7099;
 }
 
 .inline-link:active {
@@ -105,7 +105,6 @@ body {
     background-color: #6c757d;
     align-self: center;
     margin: 10px;
-    margin-top: 20px;
     padding: 5px;
     border: 2px solid white;
     border-radius: 4px;
@@ -148,16 +147,70 @@ body {
     font-family: monospace;
 }
 
-.registration-response {
+.registration-unsuccessful {
     text-align: center;
     color: #df3647;
     margin: 0;
     padding: 0;
+    opacity: 1;
+    transition: 2s opacity ease-out;
+}
+
+.registration-successful {
+    text-align: center;
+    color: #28a745;
+    margin: 0;
+    padding: 0;
+    opacity: 1;
+    transition: 2s opacity ease-out;
+}
+
+.captcha-container {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+#inline-link-group {
+    margin-top: 10px;
+}
+
+.inline-group:nth-of-type(5) {
+    display: flex;
+    flex-direction: row;
+    margin-left: 7%;
+    margin-right: 7%;
+}
+
+.checkbox-group,
+.captcha-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox-group > .inline-error,
+.captcha-container > .inline-error{
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.inline-checkbox-text {
+    font-size: 15px;
+}
+
+@media screen and (max-width: 850px) {
+    
 }
 
 @media screen and (max-width: 600px) {
     .container {
-        align-items: center;
         background-color: #222831;
         width: 90%;
         padding-top: 0px;
@@ -186,6 +239,7 @@ body {
     .inline-button {
         margin-top: 20px;
         padding: 5px;
+        width: 150px;
     }
 
     .inline-error {
@@ -198,6 +252,42 @@ body {
     }
 
     #inline-link-group {
+        margin-top: 10px;
         min-height: 60px;
+    }
+}
+
+@media screen and (max-width: 435px) {
+    #login-text {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 405px) {
+    #login-text {
+        font-size: 21px;
+    }
+}
+
+@media screen and (max-width: 365px) {
+    #login-text {
+        font-size: 19px;
+    }
+}
+
+@media screen and (max-width: 290px) {
+    .title {
+        font-size: 36px;
+    }
+    .inline-text {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 190px) {
+    #inline-link-group {
+        margin: 0px;
+        margin-top: 20px;
+        padding: 0px;
     }
 }
