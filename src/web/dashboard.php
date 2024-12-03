@@ -10,7 +10,7 @@ startSession();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>főoldal</title>
+    <title>Főoldal</title>
 </head>
 <body>
     
@@ -30,6 +30,7 @@ startSession();
     <br>
     <a href="./registration.php">Regisztráció</a>
     <a href="./login.php">Bejelentkezés</a>
+    <a href="./code.php">Kód</a>
     <form method="POST">
         <button type="submit" name="logout">Kijelentkezés</button>
     </form>
