@@ -1,9 +1,21 @@
-@media (min-width: 768px) {
-    .title-wrapper {
-        background-color: black;
-        color: white;
-        border-radius: 10px;
-        height: 10dvh;
-        font-size: 50px;
-    }
+body {
+    background-color: darkgray;
+    font-family: "Montserrat";
+}
+
+.title-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    min-height: max-content;
+    font-size: 30px;
+}
+
+.title-group {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
 }

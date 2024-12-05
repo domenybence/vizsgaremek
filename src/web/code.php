@@ -3,7 +3,6 @@
 include_once "../php_functions/db_functions.php";
 
 startSession();
-
 ?>
 
 <!DOCTYPE html>
@@ -20,11 +19,29 @@ startSession();
     <link rel="stylesheet" href="./css/code.css">
 </head>
 <body>
-    <div class="container">
-        <div class="wrapper">
-            <div class="title-wrapper">
-                <div class="title-first-line-wrapper">készítő - név - típus</div>
-                <div class="title-second-line-wrapper">dátum</div>
+    <div class="main">
+        <div class="title-wrapper">
+            <div class="title-item-wrapper">
+                <div class="title-group">
+                    <div class="title-item">Készítő</div>
+                    <div class="title-divider">-</div>
+                    <div class="title-item">domebence</div>
+                </div>
+                <div class="title-group">
+                    <div class="title-item">Kód neve</div>
+                    <div class="title-divider">-</div>
+                    <div class="title-item">Teszt kód</div>
+                </div>
+                <div class="title-group">
+                    <div class="title-item">Kategóriák</div>
+                    <div class="title-divider">-</div>
+                    <div class="title-item">HTML, JavaScript, PHP</div>
+                </div>
+            </div>
+            <div class="title-group">
+                <div class="title-date-item">Feltöltés ideje</div>
+                <div class="title-date-divider">-</div>
+                <div class="title-date-item">2024.12.05.</div>
             </div>
         </div>
     </div>
