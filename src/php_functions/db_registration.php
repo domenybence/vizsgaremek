@@ -11,10 +11,10 @@ function registration($username, $email, $hashedPassword) {
     }
     catch (Exception $e) {
         $errorMessage = $e->getMessage();
-        if (strpos($errorMessage, "nev") !== false) {
+        if (strpos($errorMessage, "nev") != false) {
                 return "taken-username";
             }
-            else if (strpos($errorMessage, "email") !== false) {
+            else if (strpos($errorMessage, "email") != false) {
                 return "taken-email";
             }
     }

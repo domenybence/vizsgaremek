@@ -6,7 +6,7 @@ include_once "db_functions.php";
 
 function login($username, $password, $rememberme) {
     if(!$rememberme) {
-        $user = getData("SELECT felhasznalo.id AS id, felhasznalo.nev AS username, felhasznalo.jelszo AS password, felhasznalo.tipus AS role FROM felhasznalo WHERE felhasznalo.nev = ?;", "s", $username);
+        $user = preparedGetData("SELECT felhasznalo.id AS id, felhasznalo.nev AS username, felhasznalo.jelszo AS password, felhasznalo.tipus AS role FROM felhasznalo WHERE felhasznalo.nev = ?;", "s", $username);
         if (!$user) {
             return "<div class='inline-error'>Hibás felhasználónév vagy jelszó!</div>";
         }
@@ -21,7 +21,7 @@ function login($username, $password, $rememberme) {
         }
     }
     else {
-        $user = getData("SELECT felhasznalo.id AS id, felhasznalo.nev AS username, felhasznalo.jelszo AS password, felhasznalo.tipus AS role FROM felhasznalo WHERE felhasznalo.nev = ?;", "s", $username);
+        $user = preparedGetData("SELECT felhasznalo.id AS id, felhasznalo.nev AS username, felhasznalo.jelszo AS password, felhasznalo.tipus AS role FROM felhasznalo WHERE felhasznalo.nev = ?;", "s", $username);
         if (!$user) {
             return "<div class='inline-error'>Hibás felhasználónév vagy jelszó!</div>";
         }

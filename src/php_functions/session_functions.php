@@ -7,14 +7,19 @@ function startSession() {
     }
     else if(isset($_COOKIE["rememberme"])) {
         $token = $_COOKIE["rememberme"];
-        $user = getData("SELECT felhasznalo.id AS id, felhasznalo.nev AS username, felhasznalo.tipus AS role FROM felhasznalo INNER JOIN felhasznalo_token ON felhasznalo_token.felhasznalo_id = felhasznalo.id WHERE felhasznalo_token.token = ? AND felhasznalo_token.lejarat > NOW();", "s", $token);
-        $user = $user[0];
-        if($user !== false) {
-            generateToken($user["id"]);
-            $role = setRole($user["role"]);
-            setSession($user["username"], $user["id"], $role);
+        $user = simpleGetData("SELECT felhasznalo.id AS id, felhasznalo.nev AS username, felhasznalo.tipus AS role, felhasznalo_token.token FROM felhasznalo INNER JOIN felhasznalo_token ON felhasznalo_token.felhasznalo_id = felhasznalo.id WHERE felhasznalo_token.lejarat > NOW()");
+        $tokenExists = false;
+        if($user != false) {
+        foreach ($user as $u) {
+            if(password_verify($token, $u["token"])){
+                    generateToken($u["id"]);
+                    $role = setRole($u["role"]);
+                    setSession($u["username"], $u["id"], $role);
+                    $tokenExists = true;
+                }
+            }
         }
-        else {
+        if(!$tokenExists) {
             unsetCookie();
         }
     }
@@ -24,13 +29,13 @@ function startSession() {
 }
 
 function setRole($role) {
-    if($role === 0) {
+    if($role == 0) {
         return "guest";
     }
-    else if($role === 1){
+    else if($role == 1){
         return "moderator";
     }
-    else if($role === 2){
+    else if($role == 2){
         return "admin";
     }
 }
