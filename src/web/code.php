@@ -21,7 +21,7 @@ startSession();
         <div class="title-wrapper">
             <div class="title-item-wrapper">
                 <div class="title-group">
-                    <div class="title-item">Készítő</div>
+                    <div class="title-item">Feltöltő</div>
                     <div class="title-item">domebence</div>
                 </div>
                 <hr>
@@ -42,22 +42,10 @@ startSession();
             </div>
         </div>
         <!-- editor import -->
-        <div id="container" style="height: 200px"></div>
+        <div id="container"></div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs/loader.js"></script>
-        <script>
-            require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs' }}); 
-            require(['vs/editor/editor.main'], function () {
-                monaco.editor.setTheme('vs-dark');
-                let editor = monaco.editor.create(document.getElementById('container'), {
-                    value: `console.log("Hello world!");`,
-                    language: 'javascript'
-                });
-                function adjustEditorSize() {
-                    editor.layout();
-                }
-                window.addEventListener('resize', adjustEditorSize);
-            });
-        </script>
+        <script src="./js/createCompiler.js"></script>
+        <script>createCompiler("container");</script>
     </div>
 </body>
 </html>

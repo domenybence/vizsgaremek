@@ -1,0 +1,29 @@
+Language Name	Language Identifier
+JavaScript	javascript
+TypeScript	typescript
+HTML	html
+CSS	css
+JSON	json
+XML	xml
+Markdown	markdown
+Python	python
+Java	java
+C	c
+C++	cpp
+C#	csharp
+PHP	php
+Ruby	ruby
+R	r
+Swift	swift
+Objective-C	objective-c
+SQL	sql
+Shell Script (Bash)	shell or bash
+Go	go
+Kotlin	kotlin
+Perl	perl
+PowerShell	powershell
+YAML	yaml
+Dockerfile	dockerfile
+Less	less
+SCSS	scss
+Lua	lua

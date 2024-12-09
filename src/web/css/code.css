@@ -1,44 +1,397 @@
 body {
-    background: linear-gradient(to right, #222831, #2e3239);
+    background-color: #1E1E1E;
     font-family: "Montserrat";
 }
-
 .main {
-    width: 100%;
+    margin: 3% 10% 3% 10%;
 }
-
-.title-wrapper {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    min-height: max-content;
-}
-
 .title-item-wrapper {
-    border-radius: 10px;
-    background-color: black;
-    color: rgb(255, 255, 255);
-    width: fit-content;
-    font-size: 20px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-    padding: 15px;
-    width: 100%;
-}
-
-.title-group {
-    justify-content: space-between;
+    color: white;
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    justify-content: space-between;
+    margin: 20px;
+    padding: 20px;
+    font-size: 20px;
+    background-color: rgb(36, 36, 36);
+    border-radius: 16px;
+}
+.title-item {
+    display: flex;
+    align-items: center;
     padding: 5px;
+    gap: 5px;
 }
-
+.title-group > .title-item:first-child {
+    font-weight: 700;
+    text-decoration: underline;
+}
 hr {
-    background: linear-gradient(to right, rgb(83, 83, 83), rgb(60, 60, 60));
-    border: none;
-    height: 3px;
+    display: none;
+}
+#container {
+    height: 60dvh;
 }
 
-.container {
-    width: auto;
+/* For iPhone 5 Portrait or Landscape View */
+@media (device-height: 568px) and (device-width: 320px) and (-webkit-min-device-pixel-ratio: 2) {
+    body {
+        background-color: #1E1E1E;
+        font-family: "Montserrat";
+    }
+    
+    .main {
+        width: 100%;
+        height: 95dvh;
+    }
+    
+    .title-wrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        min-height: max-content;
+    }
+    
+    .title-item-wrapper {
+        color: rgb(255, 255, 255);
+        width: fit-content;
+        font-size: 16px;
+        padding: 10px;
+        width: 100%;
+    }
+    
+    .title-group {
+        justify-content: space-between;
+        display: flex;
+        flex-direction: row;;
+    }
+    
+    .title-item {
+        display: flex;
+        align-items: center;
+    }
+    
+    hr {
+        background: linear-gradient(to right, rgb(83, 83, 83), rgb(60, 60, 60));
+        border: none;
+        height: 3px;
+    }
+
+    #container {
+        height: 70dvh;
+    }
+}
+
+/* For iPhone 6 and 6 plus Portrait or Landscape View */
+@media (min-device-height: 667px) and (min-device-width: 375px) and (-webkit-min-device-pixel-ratio: 3) {
+    body {
+        background-color: #1E1E1E;
+        font-family: "Montserrat";
+    }
+    
+    .main {
+        width: 100%;
+        height: 95dvh;
+    }
+    
+    .title-wrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        min-height: max-content;
+    }
+    
+    .title-item-wrapper {
+        color: rgb(255, 255, 255);
+        width: fit-content;
+        font-size: 16px;
+        padding: 10px;
+        width: 100%;
+    }
+    
+    .title-group {
+        justify-content: space-between;
+        display: flex;
+        flex-direction: row;;
+    }
+    
+    .title-item {
+        display: flex;
+        align-items: center;
+    }
+    
+    hr {
+        background: linear-gradient(to right, rgb(83, 83, 83), rgb(60, 60, 60));
+        border: none;
+        height: 3px;
+    }
+
+    #container {
+        height: 70dvh;
+    }
+}
+
+/* For Mobile Portrait View */
+@media screen and (max-device-width: 480px) and (orientation: portrait) {
+    body {
+        background-color: #1E1E1E;
+        font-family: "Montserrat";
+    }
+    
+    .main {
+        width: 100%;
+        height: 95dvh;
+    }
+    
+    .title-wrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        min-height: max-content;
+    }
+    
+    .title-item-wrapper {
+        color: white;
+        width: fit-content;
+        font-size: 20px;
+        padding: 15px;
+        width: 100%;
+    }
+    
+    .title-group {
+        justify-content: space-between;
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        padding: 5px;
+    }
+    
+    .title-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    hr {
+        background: linear-gradient(to right, rgb(83, 83, 83), rgb(60, 60, 60));
+        border: none;
+        height: 3px;
+    }
+
+    #container {
+        height: 70dvh;
+    }
+}
+
+/* For Mobile Landscape View */
+@media screen and (max-device-width: 640px) and (orientation: landscape) {
+    .title-item-wrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        min-height: max-content;
+    }
+
+    hr {
+        background: linear-gradient(to right, rgb(83, 83, 83), rgb(60, 60, 60));
+        border: none;
+        height: 3px;
+    }
+
+    #container {
+        height: 80dvh;
+    }
+}
+
+/* For Mobile Phones Portrait or Landscape View */
+@media screen and (max-device-width: 640px) {
+    body {
+        background-color: #1E1E1E;
+        font-family: "Montserrat";
+    }
+    
+    .main {
+        width: 100%;
+        height: 95dvh;
+    }
+    
+    .title-wrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        min-height: max-content;
+    }
+    
+    .title-item-wrapper {
+        color: white;
+        width: fit-content;
+        font-size: 14px;
+        padding: 10px;
+        width: 100%;
+    }
+    
+    .title-group {
+        justify-content: space-between;
+        display: flex;
+        flex-direction: row;;
+    }
+    
+    .title-item {
+        display: flex;
+        align-items: center;
+    }
+    
+    hr {
+        background: linear-gradient(to right, rgb(83, 83, 83), rgb(60, 60, 60));
+        border: none;
+        height: 3px;
+    }
+
+    #container {
+        height: 70dvh;
+    }
+}
+
+/* For iPhone 4 Portrait or Landscape View */
+@media screen and (min-device-width: 320px) and (-webkit-min-device-pixel-ratio: 2) {
+    body {
+        background-color: #1E1E1E;
+        font-family: "Montserrat";
+    }
+    
+    .main {
+        width: 100%;
+        height: 95dvh;
+    }
+    
+    .title-wrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        min-height: max-content;
+    }
+    
+    .title-item-wrapper {
+        color: white;
+        width: fit-content;
+        font-size: 14px;
+        padding: 10px;
+        width: 100%;
+    }
+    
+    .title-group {
+        justify-content: space-between;
+        display: flex;
+        flex-direction: row;;
+    }
+    
+    .title-item {
+        display: flex;
+        align-items: center;
+    }
+    
+    hr {
+        background: linear-gradient(to right, rgb(83, 83, 83), rgb(60, 60, 60));
+        border: none;
+        height: 3px;
+    }
+
+    #container {
+        height: 70dvh;
+    }
+}
+
+/* For Tablet View */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    body {
+        background-color: #1E1E1E;
+        font-family: "Montserrat";
+    }
+    
+    .main {
+        width: 100%;
+        height: 95dvh;
+    }
+    
+    .title-wrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        min-height: max-content;
+    }
+    
+    .title-item-wrapper {
+        color: white;
+        width: fit-content;
+        font-size: 14px;
+        padding: 10px;
+        width: 100%;
+    }
+    
+    .title-group {
+        justify-content: space-between;
+        display: flex;
+        flex-direction: row;;
+    }
+    
+    .title-item {
+        display: flex;
+        align-items: center;
+    }
+    
+    hr {
+        background: linear-gradient(to right, rgb(83, 83, 83), rgb(60, 60, 60));
+        border: none;
+        height: 3px;
+    }
+
+    #container {
+        height: 70dvh;
+    }
+}
+
+/* For Desktop View */
+@media screen and (min-width: 1024px) {
+    body {
+        font-family: "Montserrat";
+        background-color: #1E1E1E;
+    }
+    
+    .main {
+        z-index: 2;
+        height: 95dvh;
+        margin: 3% 10% 0 10%;
+    }
+
+    .title-item-wrapper {
+        background-color: rgb(36, 36, 36);
+        color: white;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 20px;
+        padding: 20px;
+        font-size: 20px;
+        border-radius: 16px;
+    }
+
+    .title-item {
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .title-group > .title-item:first-child {
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    hr {
+        display: none;
+    }
+
+    #container {
+        height: 60dvh;
+    }
 }
