@@ -5,28 +5,24 @@ let passwordValidated = false;
 let confirmPasswordValidated = false;
 let checkboxValidated = false;
 let captchaValidated = false;
-
 let inputErrorVisible = false;
-
+let confirmPasswordErrorVisible = false;
 let usernameChanged = false;
 let emailChanged = false;
 let passwordChanged = false;
 let confirmPasswordChanged = false;
-
 const username = document.getElementById("username");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("password_confirm");
-const checkbox = document.getElementById("aszf-checkbox");
+const checkbox = document.getElementById("policy-checkbox");
 const checkboxLabel = document.getElementsByClassName("checkbox-group");
 const captcha = document.getElementById("captcha");
-
 const greenColor = "#28a745";
 const redColor = "#dc3545";
-
 function showError(element, message){
     if (!inputErrorVisible) {
-        element.style.border = "4px solid" + redColor;
+        element.style.border = "4px solid " + redColor;
         let errorLabel = element.nextElementSibling;
         if (!errorLabel || !errorLabel.classList.contains("inline-error")) {
             errorLabel = document.createElement("label");
@@ -37,16 +33,35 @@ function showError(element, message){
         inputErrorVisible = true;
     }
 }
-
+function confirmPasswordShowError(element, message){
+    if (!confirmPasswordErrorVisible) {
+        element.style.border = "4px solid " + redColor;
+        let errorLabel2 = element.nextElementSibling;
+        if (!errorLabel2 || !errorLabel2.classList.contains("inline-error")) {
+            errorLabel2 = document.createElement("label");
+            errorLabel2.className = "inline-error";
+            errorLabel2.innerText = message;
+            element.parentNode.appendChild(errorLabel2);
+        }
+        confirmPasswordErrorVisible = true;
+    }
+}
 function clearError(element){
-    element.style.border = "4px solid" + greenColor;
+    element.style.border = "4px solid " + greenColor;
     let errorLabel = element.nextElementSibling;
     if (errorLabel && errorLabel.classList.contains("inline-error")) {
         errorLabel.remove();
     }
     inputErrorVisible = false;
 }
-
+function confirmPasswordClearError(element){
+    element.style.border = "4px solid " + greenColor;
+    let errorLabel2 = element.nextElementSibling;
+    if (errorLabel2 && errorLabel2.classList.contains("inline-error")) {
+        errorLabel2.remove();
+    }
+    confirmPasswordErrorVisible = false;
+}
 function validateUsername(){
     const usernameRegex = /^[a-zA-Z0-9]{4,15}$/;
     if(!usernameChanged){
@@ -64,7 +79,6 @@ function validateUsername(){
         }
     }
 }
-
 function validateEmail(){
     if(!emailChanged){
         showError(email, "Kérjük adja meg az email címét.");
@@ -82,7 +96,6 @@ function validateEmail(){
         }
     }
 }
-
 function validatePassword(){
     if(!passwordChanged){
         showError(password, "Kérjük adja meg a jelszavát.");
@@ -99,24 +112,21 @@ function validatePassword(){
             passwordValidated = false;
         }
     }
+    validateConfirmPassword();
 }
 
 function validateConfirmPassword(){
-    if(!confirmPasswordChanged){
-        showError(confirmPassword, "Kérjük erősítse meg a jelszavát.");
-    }
-    else{
-        if (password.value === confirmPassword.value && passwordValidated) {
-            clearError(confirmPassword);
-            confirmPasswordValidated = true;
-        }
-        else {
-            showError(confirmPassword, "A jelszavak nem egyeznek meg.");
+    if(confirmPasswordChanged){
+        if(password.value !== confirmPassword.value || !passwordValidated){
+            confirmPasswordShowError(confirmPassword, "A jelszavak nem egyeznek meg.");
             confirmPasswordValidated = false;
         }
-    }    
+        else {
+            confirmPasswordClearError(confirmPassword);
+            confirmPasswordValidated = true;
+        }   
+    }
 }
-
 function validateCheckbox(){
     if (checkbox.checked){
         let errorLabel = checkboxLabel[0].querySelector(".inline-error");
@@ -138,7 +148,6 @@ function validateCheckbox(){
         }
     }
 }
-
 function validateCaptcha(){
     if(checkboxValidated){
         var captchaResponse = grecaptcha.getResponse();
@@ -165,18 +174,14 @@ function validateCaptcha(){
         }
     }
 }
-
-
 function registrationValidate(){
     validateUsername();
     validateEmail();
     validatePassword();
     validateConfirmPassword();
     validateCheckbox();
-    validateCaptcha();
-    
+    validateCaptcha(); 
     formValidated = usernameValidated && emailValidated && passwordValidated && confirmPasswordValidated && checkboxValidated && captchaValidated;
-
     if (!formValidated){
         if (!usernameValidated){
             username.focus();
@@ -190,54 +195,8 @@ function registrationValidate(){
         else if (!confirmPasswordValidated){
             confirmPassword.focus();
         }
-        else if (!checkboxValidated){
-            checkbox.focus();
-        }
-        else if (!captchaValidated){
-            captcha.focus();
-        }
     }
 }
-
-username.addEventListener("input", () => {
-    usernameChanged = true;
-    if (inputErrorVisible) {
-        clearError(username);
-    }
-    validateUsername();
-});
-email.addEventListener("input", () => {
-    emailChanged = true;
-    if (inputErrorVisible) {
-        clearError(email);
-    }
-    validateEmail();
-});
-password.addEventListener("input", () => {
-    passwordChanged = true;
-    if (inputErrorVisible) {
-        clearError(password);
-    }
-    validatePassword();
-});
-confirmPassword.addEventListener("input", () => {
-    confirmPasswordChanged = true;
-    if (inputErrorVisible) {
-        clearError(confirmPassword);
-    }
-    validateConfirmPassword();
-});
-checkbox.addEventListener("click", () => {
-    validateCheckbox();
-});
-
-document.getElementById("registrationForm").addEventListener("submit", (event) => {
-    registrationValidate();
-    if (!formValidated) {
-        event.preventDefault();
-    }
-});
-
 document.getElementById("registrationForm").addEventListener("input", function(){
     if (!inputErrorVisible) {
         if(document.body.contains(document.querySelector(".registration-successful"))){
@@ -248,7 +207,6 @@ document.getElementById("registrationForm").addEventListener("input", function()
         }
     }
 });
-
 let errorVisible = false;
 window.onerror = function(message){
     if (!errorVisible) {
@@ -262,3 +220,77 @@ window.onerror = function(message){
         document.querySelector(".error-group").innerText = message;
     }
 };
+function registrationResponse(){
+    let registrationPopup = `<div class="registration-wrapper">
+    <div class="registration-popup">
+    <h3>Sikeres regisztráció</h3>
+    <p>Jó kódolást kívánunk!</p>
+    </div>
+    </div>`;
+    document.body.appendChild(registrationPopup);
+}
+function closePopup(){
+    document.querySelector("div.registration-wrapper").style.opacity = 0;
+    document.querySelector("div.registration-wrapper").style.transition = "opacity, 0.3s";
+    setTimeout(() => {
+        document.querySelector("div.registration-wrapper").remove();
+    }, 1000);
+}
+function removeCaptchaError(){
+    let captchaerror = document.body.querySelector("div.captcha-error");
+    if(captchaerror){
+        captchaerror.remove();
+    }
+}
+username.addEventListener("input", () => {
+    usernameChanged = true;
+    if (inputErrorVisible) {
+        clearError(username);
+    }
+    validateUsername();
+    removeCaptchaError();
+});
+email.addEventListener("input", () => {
+    emailChanged = true;
+    if (inputErrorVisible) {
+        clearError(email);
+    }
+    validateEmail();
+    removeCaptchaError();
+});
+password.addEventListener("input", () => {
+    passwordChanged = true;
+    if (inputErrorVisible) {
+        clearError(password);
+    }
+    validatePassword();
+    removeCaptchaError();
+});
+confirmPassword.addEventListener("input", () => {
+    confirmPasswordChanged = true;
+    if (inputErrorVisible) {
+        clearError(confirmPassword);
+    }
+    validateConfirmPassword();
+    removeCaptchaError();
+});
+checkbox.addEventListener("click", () => {
+    validateCheckbox();
+    removeCaptchaError();
+});
+
+document.addEventListener("click", (event) => {
+    if(event.target.closest("svg")) {
+        closePopup();
+    }
+    if(event.target.closest("div.button-container > button")) {
+        closePopup();
+    }
+});
+
+document.getElementById("registrationForm").addEventListener("submit", (event) => {
+    registrationValidate();
+    if (!formValidated) {
+        event.preventDefault();
+    }
+});

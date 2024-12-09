@@ -1,32 +1,31 @@
 <?php
 
-function dataInsert($username, $email, $hashedPassword) {
-    include_once "db_connect.php";
+include_once "db_connect.php";
+
+function insertData($queryText, $parameterTypes, $bindParameters = []) {
     $db = getDb();
     
     if ($db->connect_errno) {
         return "<div class='error-group'>Az adatbázishoz nem sikerült hozzákapcsolódni!</div>";
     }
 
-    $query = $db->prepare("INSERT INTO felhasznalo (`nev`, `email`, `jelszo`, `pontok`, `letrehozasi_ido`, `utolso_valt_ido`, `moderator`, `admin`) VALUES (?, ?, ?, NULL, current_timestamp(), current_timestamp(), NULL, NULL)");
-    
-    $query->bind_param("sss", $username, $email, $hashedPassword);
+    $query = $db->prepare($queryText);
+    if(is_array($bindParameters)) {
+        $query->bind_param($parameterTypes, ...$bindParameters);
+    }
+    else {
+        $query->bind_param($parameterTypes, $bindParameters);
+    }
     try {
         $query->execute();
     }
-    catch (mysqli_sql_exception $e) {
-        if ($e->getCode() === 1062) {
-            if (strpos($e->getMessage(), 'nev') !== false) {
-                return "<div class='registration-unsuccessful'>Foglalt felhasználónév!</div>";
-            }
-            else if (strpos($e->getMessage(), 'email') !== false) {
-                return "<div class='registration-unsuccessful'>Az email cím már egy meglévő fiókhoz tartozik!</div>";
-            }
-        }
-        else {
-            return "<div class='registration-unsuccessful'>A regisztráció során hiba lépett fel! " . $query->error . "</div>";
-        }
+    catch (Exception $e) {
+        throw new Exception($e->getMessage());
     }
-    return "<div class='registration-successful'>Sikeres regisztráció!</div>";
+    finally {
+        $query->close();
+        $db->close();
+    }
+
+    return true;
 }
-?>
