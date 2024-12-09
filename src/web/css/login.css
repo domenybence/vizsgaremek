@@ -148,16 +148,8 @@ body {
     font-family: monospace;
 }
 
-<<<<<<< HEAD:src/web/css/register.css
-.registration-response {
-    text-align: center;
-    color: #df3647;
-    margin: 0;
-    padding: 0;
-=======
 @media screen and (max-width: 850px) {
 
->>>>>>> origin/backend:src/web/css/login.css
 }
 
 @media screen and (max-width: 600px) {
