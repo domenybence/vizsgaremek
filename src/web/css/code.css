@@ -1,34 +1,9 @@
 body {
     background-color: #1E1E1E;
     font-family: "Montserrat";
-}
-.main {
-    margin: 3% 10% 3% 10%;
-}
-.title-item-wrapper {
     color: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 20px;
-    padding: 20px;
-    font-size: 20px;
-    background-color: rgb(36, 36, 36);
-    border-radius: 16px;
 }
-.title-item {
-    display: flex;
-    align-items: center;
-    padding: 5px;
-    gap: 5px;
-}
-.title-group > .title-item:first-child {
-    font-weight: 700;
-    text-decoration: underline;
-}
-hr {
-    display: none;
-}
+
 #container {
     height: 60dvh;
 }
@@ -392,6 +367,6 @@ hr {
     }
 
     #container {
-        height: 60dvh;
+        height: 70dvh;
     }
 }

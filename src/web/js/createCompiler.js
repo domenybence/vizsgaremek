@@ -3,8 +3,30 @@ function createCompiler(container) {
     require(["vs/editor/editor.main"], function () {
         monaco.editor.setTheme("vs-dark");
         let editor = monaco.editor.create(document.getElementById(container), {
-            value: `Console.WriteLine("asd");`,
-            language: "csharp",
+            value: `<div class="title-wrapper">
+            <div class="title-item-wrapper">
+                <div class="title-group">
+                    <div class="title-item">Feltöltő</div>
+                    <div class="title-item">domebence</div>
+                </div>
+                <hr>
+                <div class="title-group">
+                    <div class="title-item">Kód neve</div>
+                    <div class="title-item">Teszt kódnév</div>
+                </div>
+                <hr>
+                <div class="title-group">
+                    <div class="title-item">Kategóriák</div>
+                    <div class="title-item">HTML, JavaScript, PHP</div>
+                </div>
+                <hr>
+                <div class="title-group">
+                    <div class="title-item">Feltöltés ideje</div>
+                    <div class="title-item">2024.12.05.</div>
+                </div>
+            </div>
+        </div>`,
+            language: "html",
             fontSize: 20,
             readOnly: true
         });
