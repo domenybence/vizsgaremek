@@ -1,12 +1,127 @@
 body {
     background-color: #1E1E1E;
-    font-family: "Montserrat";
+    font-family: "Montserrat", sans-serif;
+}
+
+.main {
+    width: 100%;
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.title-wrapper {
+    width: 100%;
+}
+
+.title-item-wrapper {
+    display: flex;
+    padding: 10px;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    margin-inline: 20px;
+}
+
+.col:first-of-type {
+    margin: auto 0;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.col:nth-of-type(2) {
+    width: 100%;
+}
+
+.like-svg {
+    transition: opacity 0.3s ease;
+}
+
+.like-svg-empty {
+    display: block;
+}
+
+.like-svg-full {
+    display: none;
+}
+
+.svg-like-wrapper:hover .like-svg-empty {
+    display: none;
+    cursor: pointer;
+}
+
+.svg-like-wrapper:hover .like-svg-full {
+    display: block;
+    cursor: pointer;
+}
+
+.ldisike-svg {
+    transition: opacity 0.3s ease;
+}
+
+.dislike-svg-empty {
+    display: block;
+}
+
+.dislike-svg-full {
+    display: none;
+}
+
+.svg-dislike-wrapper:hover .dislike-svg-empty {
+    display: none;
+    cursor: pointer;
+}
+
+.svg-dislike-wrapper:hover .dislike-svg-full {
+    display: block;
+    cursor: pointer;
+}
+
+.upvote-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title-group > .title-item:first-child {
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.title-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+hr {
+    background: linear-gradient(to right, rgb(83, 83, 83), rgb(60, 60, 60));
+    border: none;
+    height: 2px;
+    margin: 15px 0;
+}
+
+.title-item {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
     color: white;
 }
 
 #container {
+    margin-top: 20px;
     height: 60dvh;
+    width: 100%;
 }
+
 
 /* For iPhone 5 Portrait or Landscape View */
 @media (device-height: 568px) and (device-width: 320px) and (-webkit-min-device-pixel-ratio: 2) {
@@ -333,13 +448,22 @@ body {
     }
     
     .main {
+        width: 100%;
         z-index: 2;
         height: 95dvh;
-        margin: 3% 10% 0 10%;
+        margin-top: 30px;
+        padding: 0;
+    }
+
+    .title-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 
     .title-item-wrapper {
         background-color: rgb(36, 36, 36);
+        width: 80%;
         color: white;
         display: flex;
         flex-direction: row;
@@ -362,11 +486,18 @@ body {
         text-decoration: underline;
     }
 
+    .col:nth-of-type(2) {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
     hr {
         display: none;
     }
 
     #container {
         height: 70dvh;
+        width: 90%;
     }
 }

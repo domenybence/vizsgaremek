@@ -1,5 +1,5 @@
 <?php
-$file_path = "../test.uqw";
+$file_path = "./codes/test.uqw";
 
 if (file_exists($file_path)) {
     $file_content = file_get_contents($file_path);
