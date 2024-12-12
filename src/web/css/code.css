@@ -61,10 +61,6 @@ body {
     cursor: pointer;
 }
 
-.ldisike-svg {
-    transition: opacity 0.3s ease;
-}
-
 .dislike-svg-empty {
     display: block;
 }
