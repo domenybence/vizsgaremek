@@ -1,42 +1,39 @@
 let likechecked = false;
 let dislikechecked = false;
 
-const likeempty = document.querySelector(".like-svg-empty");
-const likefull = document.querySelector(".like-svg-full");
-const dislikeempty = document.querySelector(".dislike-svg-empty");
-const dislikefull = document.querySelector(".dislike-svg-full");
+const likeWrapper = document.querySelector(".svg-like-wrapper");
+const dislikeWrapper = document.querySelector(".svg-dislike-wrapper");
 
 function likeChecked() {
+    likechecked = !likechecked;
     if (likechecked) {
-        likechecked = false;
-        likeempty.style.display = "block";
-        likefull.style.display = "none";
-    }
-    else {
-        likechecked = true;
         dislikechecked = false;
-        likeempty.style.display = "none";
-        likefull.style.display = "block";
-        dislikeempty.style.display = "block";
-        dislikefull.style.display = "none";
     }
+    updateLikeDislikeState();
 }
 
 function dislikeChecked() {
+    dislikechecked = !dislikechecked;
     if (dislikechecked) {
-        dislikechecked = false;
-        dislikeempty.style.display = "block";
-        dislikefull.style.display = "none";
+        likechecked = false;
+    }
+    updateLikeDislikeState();
+}
+
+function updateLikeDislikeState() {
+    if (likechecked){
+        likeWrapper.classList.add("checked");
     }
     else {
-        dislikechecked = true;
-        likechecked = false;
-        dislikeempty.style.display = "none";
-        dislikefull.style.display = "block";
-        likeempty.style.display = "block";
-        likefull.style.display = "none";
+        likeWrapper.classList.remove("checked");
+    }
+    if(dislikechecked){
+        dislikeWrapper.classList.add("checked");
+    }
+    else {
+        dislikeWrapper.classList.remove("checked");
     }
 }
 
-document.querySelector(".svg-like-wrapper").addEventListener("click", likeChecked);
-document.querySelector(".svg-dislike-wrapper").addEventListener("click", dislikeChecked);
+likeWrapper.addEventListener("click", likeChecked);
+dislikeWrapper.addEventListener("click", dislikeChecked);

@@ -39,15 +39,18 @@ body {
     width: 100%;
 }
 
-.like-svg {
-    transition: opacity 0.3s ease;
+.svg-like-wrapper,
+.svg-dislike-wrapper {
+    border-radius: 50%;
 }
 
-.like-svg-empty {
+.like-svg-empty,
+.dislike-svg-empty {
     display: block;
 }
 
-.like-svg-full {
+.like-svg-full,
+.dislike-svg-full {
     display: none;
 }
 
@@ -61,14 +64,6 @@ body {
     cursor: pointer;
 }
 
-.dislike-svg-empty {
-    display: block;
-}
-
-.dislike-svg-full {
-    display: none;
-}
-
 .svg-dislike-wrapper:hover .dislike-svg-empty {
     display: none;
     cursor: pointer;
@@ -78,6 +73,23 @@ body {
     display: block;
     cursor: pointer;
 }
+
+.svg-like-wrapper.checked .like-svg-empty {
+    display: none;
+}
+
+.svg-like-wrapper.checked .like-svg-full {
+    display: block;
+}
+
+.svg-dislike-wrapper.checked .dislike-svg-empty {
+    display: none;
+}
+
+.svg-dislike-wrapper.checked .dislike-svg-full {
+    display: block;
+}
+
 
 .upvote-wrapper {
     display: flex;
