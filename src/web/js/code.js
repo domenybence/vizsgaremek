@@ -1,27 +1,63 @@
-let likechecked = false;
-let dislikechecked = false;
-
 const likeWrapper = document.querySelector(".svg-like-wrapper");
 const dislikeWrapper = document.querySelector(".svg-dislike-wrapper");
 
-function likeChecked() {
+let likechecked = false;
+let dislikechecked = false;
+
+async function fetchLikeValue(value){
+    const userId = 8; //todo
+    const codeId = 3; //todo
+    try{
+        const response = await fetch("http://localhost/code/vizsgaremek/src/php_functions/db_uploadlikes.php",{
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userid: userId,
+                codeid: codeId,
+                value: value
+            })
+        });
+        if(!response.ok){
+            console.error(response.status, response.statusText);
+        }
+        else{
+            let data = await response.json();
+            document.querySelector(".likes").innerHTML = data["likeCount"];
+        }
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+async function likeChecked(){
     likechecked = !likechecked;
-    if (likechecked) {
+    if(likechecked){
         dislikechecked = false;
+        await fetchLikeValue(1);
     }
-    updateLikeDislikeState();
+    else{
+        await fetchLikeValue(null);
+    }
+    updateState();
 }
 
-function dislikeChecked() {
+async function dislikeChecked(){
     dislikechecked = !dislikechecked;
-    if (dislikechecked) {
+    if(dislikechecked){
         likechecked = false;
+        await fetchLikeValue(0);
     }
-    updateLikeDislikeState();
+    else{
+        await fetchLikeValue(null);
+    }
+    updateState();
 }
 
-function updateLikeDislikeState() {
-    if (likechecked){
+function updateState(){
+    if(likechecked) {
         likeWrapper.classList.add("checked");
     }
     else {
@@ -37,3 +73,4 @@ function updateLikeDislikeState() {
 
 likeWrapper.addEventListener("click", likeChecked);
 dislikeWrapper.addEventListener("click", dislikeChecked);
+window.addEventListener("load", getLikeValue);
