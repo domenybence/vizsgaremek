@@ -1,0 +1,44 @@
+body {
+    background: linear-gradient(to right, #222831, #2e3239);
+    font-family: "Montserrat";
+}
+
+.main {
+    width: 100%;
+}
+
+.title-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-height: max-content;
+}
+
+.title-item-wrapper {
+    border-radius: 10px;
+    background-color: black;
+    color: rgb(255, 255, 255);
+    width: fit-content;
+    font-size: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    width: 100%;
+}
+
+.title-group {
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 5px;
+}
+
+hr {
+    background: linear-gradient(to right, rgb(83, 83, 83), rgb(60, 60, 60));
+    border: none;
+    height: 3px;
+}
+
+.container {
+    width: auto;
+}

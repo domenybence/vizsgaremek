@@ -1,5 +1,4 @@
 <?php
-function getDb(){
+function getDb() {
     return new mysqli("localhost", "root", "", "vizsgaremek");
 }
-?>

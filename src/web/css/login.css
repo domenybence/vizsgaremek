@@ -1,21 +1,49 @@
 body {
-    background-color: #222831;
-    font-family: "Montserrat";
     display: flex;
     flex-direction: column;
+    
     align-items: center;
-    justify-content: center;
+    margin: 10%;
     margin-top: 50px;
+    justify-content: center;
+    
+    background-color: #222831;
+    font-family: "Montserrat";
 }
 
 .container {
-    background-color: #393E46;
-    color: #EEEEEE;
-    padding: 30px;
+    width: 100%;
+    height: 100%;
+    align-items: center;
     text-align: left;
+    color: #EEEEEE;
+    background-color: #404348;
+    
     border: 3px solid darkgrey;
-    border-radius: 10px;
-    width: 500px;
+    border-radius: 36px;
+}
+
+.wrapper {
+    height: 700px;
+}
+
+.column1,
+.column2 {
+    height: 100%;
+    float: left;
+}
+
+.column1 {
+    background-image: url(../login_photo.jpeg);
+    background-size: cover;
+    opacity: 0.65;
+    border-radius: 36px 0px 0px 36px;
+    width: 50%;
+}
+
+.column2 {
+    width: 50%;
+    display: grid;
     align-items: center;
 }
 
@@ -25,32 +53,36 @@ body {
 }
 
 .inline-text {
-    padding-left: 7%;
     text-align: left;
     margin: 5px;
+    margin-right: 5%;
+    padding-left: 20%;
+    
     font-size: 18px;
     text-shadow: #292929 1px 1px;
     font-weight: 600;
 }
 
 .inline-input {
-    margin: 5px;
-    padding: 5px;
-    font-size: 16px;
-    font-weight: 500;
+    width: 60%;
     height: 26px;
     align-self: center;
-    box-shadow: #292929 2px 2px;
-    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+
+    font-size: 16px;
+    font-weight: 500;
+
     border: 2px solid #cccccc;
-    width: 85%;
+    border-radius: 5px;
+    box-shadow: #292929 2px 2px;
     transition: transform 0.3s ease-out, border 0.2s ease-out, border-color 0.3s ease-out, background-color 0.3s ease-out;
     outline: none;
 }
 
 .inline-input:focus {
-    outline: none;
     border-color: black;
+    outline: none;
     transform: scale(1.05);
 }
 
@@ -58,42 +90,10 @@ body {
     transform: scale(1.05);
 }
 
-#inline-link-group {
-    justify-content: center;
-    color: black;
-    text-align: center;
-    margin: 20px;
-    border: gray 1px solid;
-    border-radius: 4px;
-    background-color: #BCD4E6;
-    height: 15%;
-    min-height: 50px;
-    text-shadow: none;
-}
-
-#login-text {
-    text-shadow: none;
-    text-align: center;
-    padding-left: 0px;
-}
-
-.inline-link {
-    color: #4682B4;
-}
-
-.inline-link:hover {
-    color: #2e5575;
-}
-
-.inline-link:active {
-    color: #58b1fa;
-}
-
 .inline-error {
-    text-align: left;
+    text-align: center;
     color: #dc3545;
     font-size: 14px;
-    margin-left: 7%;
 }
 
 .inline-button {
@@ -105,12 +105,13 @@ body {
     background-color: #6c757d;
     align-self: center;
     margin: 10px;
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 5px;
     border: 2px solid white;
     border-radius: 4px;
     transition: background-color 0.2s ease-out, border 0.2s ease-out;
     outline: none;
+    font-family: "Montserrat";
 }
 
 .inline-button:hover {
@@ -128,6 +129,14 @@ body {
     font-weight: bold;
     text-align: center;
     text-shadow: #292929 2px 2px;
+    cursor: default;
+}
+
+.inline-group:nth-of-type(3) {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
 }
 
 .error-group {
@@ -148,16 +157,112 @@ body {
     font-family: monospace;
 }
 
-@media screen and (max-width: 850px) {
+.inline-link-group {
+    height: 5%;
+    min-height: 50px;
 
+    margin: 20px;
+    color: black;
+    border: gray 1px solid;
+    border-radius: 4px;
+    background-color: #BCD4E6;
+    justify-content: center;
 }
 
-@media screen and (max-width: 600px) {
+.inline-link {
+    color: #7ab4e3;
+}
+
+.inline-link:hover {
+    color: #3f7099;
+}
+
+.inline-link:active {
+    color: #58b1fa;
+}
+
+.register-text {
+    padding: 0;
+    width: 100%;
+    text-align: center;
+    text-shadow: none;
+}
+
+@media screen and (max-width: 1300px) {
+    body {
+        overflow: auto;
+    }
+    .column1 {
+        background-image: url(../login_vertical_image.jpg);
+        background-size: cover;
+        opacity: 0.6;
+        width: 35%;
+    }
+    .register-text {
+        padding: 0px !important;
+    }
+    .column2 {
+        width: 65%;
+        height: 100%;
+    }
+    .inline-input {
+        width: 70%;
+    }
+    .inline-text {
+        padding-left: 15%;
+    }
+    .inline-button {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        user-select: none;
+        background: none;
+    }
+    .background {
+        position: fixed;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100vw !important;
+        height: 100vh !important;
+        background-image: url("../login_vertical_image.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+        background-size: 100vw 100vh;
+    }
     .container {
-        background-color: #222831;
-        width: 90%;
-        padding-top: 0px;
-        border: 0px;
+        border-radius: 0px;
+        backdrop-filter: blur(8.4px);
+        -webkit-backdrop-filter: blur(8.4px);
+        width: 100vw !important;
+        height: 100vh !important;
+        margin: 0;
+        padding: 0;
+        background: none;
+        border: none;
+        position: relative;
+        z-index: 9999;
+    }
+
+    .wrapper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .column1 {
+        display: none;
+    }
+
+    .column2 {
+        width: 100%;
     }
     
     .title {
@@ -174,7 +279,7 @@ body {
     }
     
     .inline-input {
-        width: 100%;
+        width: 85%;
         height: 20px;
         padding: 10px;
     }
@@ -182,26 +287,23 @@ body {
     .inline-button {
         margin-top: 20px;
         padding: 5px;
-        width: 150px;
+        width: 50%;
+        height: 50px;
     }
 
     .inline-error {
         margin: 0px;
         text-align: center;
     }
-
-    .error-group {
-        width: 75%;
-    }
-
-    #inline-link-group {
-        min-height: 60px;
-    }
 }
 
 @media screen and (max-width: 435px) {
-    #login-text {
+    .inline-text {
         font-size: 18px;
+    }
+
+    .inline-input {
+        padding: 5px;
     }
 }
 
@@ -223,13 +325,5 @@ body {
     }
     .inline-text {
         font-size: 18px;
-    }
-}
-
-@media screen and (max-width: 190px) {
-    #inline-link-group {
-        margin: 0px;
-        margin-top: 20px;
-        padding: 0px;
     }
 }
