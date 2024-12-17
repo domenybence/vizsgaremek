@@ -25,18 +25,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         else {
             insertData("INSERT INTO kod_like(felhasznalo_id, kod_id, ertek) VALUES (?,?,?)", "iii", [$userid, $codeid, $value]);
         }
-        echo json_encode(["likeCount" => getCodeLikes($codeid)], JSON_UNESCAPED_UNICODE);
+        echo json_encode(getCodeLikes($codeid)[0], JSON_UNESCAPED_UNICODE);
     }
 }
 
 function returnLikeState($userid, $codeid){
     $getUserLike = getUserLike($userid, $codeid);
-    if($getUserLike != false) {
-        return getCodeLikes($codeid);
+    if (!empty($getUserLike)) {
+        return $getUserLike[0]["ertek"];
     }
-    else {
-        return -1;
-    }
+    return -1;
 }
 
 function getCodeLikes($codeid) {
@@ -44,5 +42,5 @@ function getCodeLikes($codeid) {
 }
 
 function getUserLike($userid, $codeid) {
-    return preparedGetData("SELECT * FROM kod_like WHERE felhasznalo_id = ? AND kod_id = ?;", "ii", [$userid, $codeid]);
+    return preparedGetData("SELECT ertek FROM kod_like WHERE felhasznalo_id = ? AND kod_id = ?;", "ii", [$userid, $codeid]);
 }

@@ -1,14 +1,25 @@
 const likeWrapper = document.querySelector(".svg-like-wrapper");
 const dislikeWrapper = document.querySelector(".svg-dislike-wrapper");
-
-let likechecked = false;
-let dislikechecked = false;
+let likechecked;
+let dislikechecked;
+if(likeWrapper.classList.contains("checked")){
+    likechecked = true;
+}
+else{
+    likechecked = false;
+}
+if(dislikeWrapper.classList.contains("checked")){
+    dislikechecked = true;
+}
+else{
+    dislikechecked = false;
+}
 
 async function fetchLikeValue(value){
     const userId = 8; //todo
     const codeId = 3; //todo
     try{
-        const response = await fetch("http://localhost/code/vizsgaremek/src/php_functions/db_uploadlikes.php",{
+        const response = await fetch("http://localhost/vizsgaremek/src/php_functions/db_uploadlikes.php",{
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json'
@@ -73,4 +84,3 @@ function updateState(){
 
 likeWrapper.addEventListener("click", likeChecked);
 dislikeWrapper.addEventListener("click", dislikeChecked);
-window.addEventListener("load", getLikeValue);
