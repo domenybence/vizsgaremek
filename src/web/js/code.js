@@ -19,7 +19,7 @@ async function fetchLikeValue(value){
     const userId = 8; //todo
     const codeId = 3; //todo
     try{
-        const response = await fetch("http://localhost/vizsgaremek/src/php_functions/db_uploadlikes.php",{
+        const response = await fetch("http://localhost/code/vizsgaremek/src/php_functions/db_uploadlikes.php",{
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json'
