@@ -37,7 +37,7 @@
                 </div>
                 
                 <?php
-                include "../php_functions/db_functions.php";
+                include "../php_functions/php_functions.php";
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $username = $_POST["username"];
                     $password = $_POST["password"];

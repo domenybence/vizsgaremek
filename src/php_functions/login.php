@@ -1,8 +1,6 @@
 <?php
 
-include_once "db_connect.php";
-include_once "db_get.php";
-include_once "db_functions.php";
+include_once "php_functions.php";
 
 function login($username, $password, $rememberme) {
     if(!$rememberme) {

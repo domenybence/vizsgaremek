@@ -1,5 +1,5 @@
 <?php
-include_once "../php_functions/db_functions.php";
+include_once "../php_functions/php_functions.php";
 startSession();
 $userid = 8;
 $codeid = 3;

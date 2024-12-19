@@ -1,7 +1,6 @@
 <?php
 
-include_once "db_connect.php";
-include_once "db_functions.php";
+include_once "php_functions.php";
 $db = getDb();
 
 // $fullURL = explode("/", $_SERVER["REQUEST_URI"]);

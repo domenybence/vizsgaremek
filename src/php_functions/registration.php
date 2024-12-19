@@ -1,7 +1,6 @@
 <?php
 
-include_once "db_connect.php";
-include_once "db_insert.php";
+include_once "php_functions.php";
 
 function registration($username, $email, $hashedPassword) {
 
