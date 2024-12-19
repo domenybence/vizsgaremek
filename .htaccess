@@ -1,0 +1,8 @@
+<Directory /vizsgaremek/>
+    AllowOverride All
+</Directory>
+
+RewriteEngine On
+
+RewriteRule ^codes/(.*)$ /src/web/router.php?codename=$1 [L,QSA]
+#delete htaccess if cant fix(try to, tho)
