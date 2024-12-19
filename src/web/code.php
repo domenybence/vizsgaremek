@@ -1,5 +1,6 @@
 <?php
 include_once "../php_functions/php_functions.php";
+include_once "./upload_likes.php";
 startSession();
 $userid = 8;
 $codeid = 3;
