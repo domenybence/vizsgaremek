@@ -1,21 +1,77 @@
 <?php
 include_once "../php_functions/php_functions.php";
 
-// Get codename from URL
-$codename = isset($_GET['codename']) ? $_GET['codename'] : null;
-$codeCategory = isset($_GET['codecategory']) ? $_GET['codecategory'] : null;
-if (!$codename) {
-    http_response_code(404);
-    echo "Code not found.";
-    exit;
+if(isset($_GET["codeid"])) {
+    startSession();
+    $codeid = $_GET["codeid"];
+    if(preparedGetData("SELECT * FROM kod WHERE kod.id = ? AND kod.jovahagyott = true;", "i", [$codeid]) != false) {
+        $currentUrl = $_SERVER["REQUEST_URI"];
+        $redirectUrl = "/vizsgaremek/kod/$codeid";
+        if ($currentUrl != $redirectUrl) {
+            header("Location: /vizsgaremek/kod/$codeid");
+            exit;
+        }
+        else {
+            include "./code.php";
+        }
+    }
+    else {
+        include "./404.html";
+    }
 }
-
-$codeData = preparedGetData("SELECT * FROM kod INNER JOIN kategoria ON kod.kategoria_id = kategoria.id WHERE kod.nev = ? AND kategoria.nev = ?;", "ss", [$codename, $codeCategory]);
-
-if (!$codeData) {
-    http_response_code(404);
-    echo "Code not found.";
-    exit;
+else if(isset($_GET["codeid"]) && isset($_GET["codecategory"])) {
+    startSession();
+    $codeId = $_GET["codeid"];
+    $codeCategory = $_GET["codecategory"];
+    if(preparedGetData("SELECT * FROM kod INNER JOIN kategoria ON kod.kategoria_id = kategoria.id WHERE kod.id = ? AND kategoria.nev = ? AND kod.jovahagyott = true;", "is", [$codeId, $codeCategory]) != false) {
+        $codeCategory = $_GET["codecategory"];
+        $currentUrl = $_SERVER["REQUEST_URI"];
+        $redirectUrl = "/vizsgaremek/kategoria/$codeCategory/$codeId";
+        if ($currentUrl != $redirectUrl) {
+            header("Location: /vizsgaremek/kategoria/$codeCategory/$codeId");
+            exit;
+        }
+        echo "Kategoria: " . $codeCategory;
+        echo "<br>Kodid: " . $codeId;
+    }
+    else {
+        include "./404.html";
+    }
 }
-
-var_dump($codeData);
+else if(isset($_GET["codecategory"]) ) {
+    startSession();
+    if(preparedGetData("SELECT * FROM kategoria WHERE kategoria.nev = ?;", "s", [$_GET["codecategory"]]) != false) {
+        $codeCategory = $_GET["codecategory"];
+        $currentUrl = $_SERVER["REQUEST_URI"];
+        $redirectUrl = "/vizsgaremek/kategoria/$codeCategory";
+        if ($currentUrl != $redirectUrl) {
+            header("Location: /vizsgaremek/kategoria/$codeCategory");
+            exit;
+        }
+        echo $codeCategory;
+        echo "\nkategoria";
+    }
+    else {
+        include "./404.html";
+    }
+}
+else if(isset($_GET["username"])) {
+    startSession();
+    if(preparedGetData("SELECT * FROM felhasznalo WHERE felhasznalo.nev = ?", "s", [$_GET["username"]]) != false) {
+    $username = $_GET["username"];
+    $currentUrl = $_SERVER["REQUEST_URI"];
+    $redirectUrl = "/vizsgaremek/felhasznalo/$username";
+    echo "Felhasznalónév:" . $username;
+    if ($currentUrl != $redirectUrl) {
+        header("Location: /vizsgaremek/felhasznalo/$username");
+        exit;
+    }
+    }
+    else {
+        include "./404.html";
+    }
+}
+else {
+    startSession();
+    include "./404.html";
+}

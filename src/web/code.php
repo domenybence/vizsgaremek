@@ -1,9 +1,13 @@
 <?php
 include_once "../php_functions/php_functions.php";
 include_once "./upload_likes.php";
-startSession();
-$userid = 8;
-$codeid = 3;
+$data = preparedGetData("SELECT felhasznalo.nev AS username, felhasznalo.id AS userid, kategoria.nev AS category, kod.feltoltesi_ido AS uploadtime, kod.nev AS codename FROM felhasznalo INNER JOIN kod ON kod.felhasznalo_id = felhasznalo.id INNER JOIN kategoria ON kod.kategoria_id = kategoria.id WHERE kod.id = ?;", "i", [$codeid]);
+    $userid = $data[0]["userid"];
+    $username = $data[0]["username"];
+    $category = $data[0]["category"];
+    $uploadtime = $data[0]["uploadtime"];
+    $codename = $data[0]["codename"];
+
 $likeState = returnLikeState($userid, $codeid);
 ?>
 
@@ -18,10 +22,22 @@ $likeState = returnLikeState($userid, $codeid);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="./icon.png">
-    <link rel="stylesheet" href="./css/code.css">
-    <script src="./js/code.js" defer></script>
+    <link rel="stylesheet" href="/vizsgaremek/src/web/css/code.css">
+    <script src="/vizsgaremek/src/web/js/code.js" defer></script>
 </head>
 <body>
+    <input type="hidden" value="
+        <?php
+            echo $userid;
+        ?>
+    "
+    id="userid">
+    <input type="hidden" value="
+        <?php
+            echo $codeid;
+        ?>
+    "
+    id="codeid">
     <div class="main">
         <div class="title-wrapper">
             <div class="title-item-wrapper">
@@ -63,27 +79,42 @@ $likeState = returnLikeState($userid, $codeid);
                         </svg>
                     </div>
                     </div>
-
                 </div>
                 <div class="col">
                     <div class="title-group">
                         <div class="title-item" style="user-select: none;">Feltöltő</div>
-                        <div class="title-item" style="user-select: none;">domebence</div>
+                        <div class="title-item" style="user-select: none;">  
+                            <?php
+                                echo "<a href='http://localhost/vizsgaremek/felhasznalo/".$username."'>".$username."</a>";
+                            ?>
+                        </div>
                     </div>
                     <hr>
                     <div class="title-group">
                         <div class="title-item" style="user-select: none;">Kód neve</div>
-                        <div class="title-item" style="user-select: none;">Teszt kódnév</div>
+                        <div class="title-item" style="user-select: none;">
+                            <?php
+                                echo $codename;
+                            ?>
+                        </div>
                     </div>
                     <hr>
                     <div class="title-group">
                         <div class="title-item" style="user-select: none;">Kategóriák</div>
-                        <div class="title-item" style="user-select: none;">HTML, JavaScript, PHP</div>
+                        <div class="title-item" style="user-select: none;">
+                            <?php
+                                echo $category;
+                            ?>
+                        </div>
                     </div>
                     <hr>
                     <div class="title-group">
                         <div class="title-item" style="user-select: none;">Feltöltés ideje</div>
-                        <div class="title-item" style="user-select: none;">2024.12.05.</div>
+                        <div class="title-item" style="user-select: none;">
+                            <?php
+                                echo $uploadtime ? $uploadtime : "Nincs megadva.";
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -91,7 +122,7 @@ $likeState = returnLikeState($userid, $codeid);
         <!-- editor import -->
         <div id="container"></div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs/loader.js"></script>
-        <script src="./js/createCompiler.js"></script>
+        <script src="/vizsgaremek/src/web/js/createCompiler.js"></script>
         <script>createCompiler("container");</script>
     </div>
 </body>

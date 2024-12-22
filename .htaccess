@@ -1,6 +1,23 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    
+    RewriteBase /vizsgaremek/
+
     RewriteRule ^src/php_functions(/|$) - [F,L]
     RewriteRule ^src/web/codes(/|$) - [F,L]
+
+    RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/home\.html$
+    RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/dashboard\.php$
+    RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/login\.php$
+    RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/registration\.php$
+
+    RewriteRule ^kategoria/([^/]+)/([^/]+)/?$ /vizsgaremek/src/web/router.php?codecategory=$1&codeid=$2 [QSA,L]
+    
+    RewriteRule ^kategoria/([^/]+)$ /vizsgaremek/src/web/router.php?codecategory=$1 [QSA,L]
+    RewriteRule ^kategoria/([^/]+)/?$ /vizsgaremek/src/web/router.php?codecategory=$1 [QSA,L]
+
+    RewriteRule ^kod/([^/]+)$ /vizsgaremek/src/web/router.php?codeid=$1 [QSA,L]
+    RewriteRule ^kod/([^/]+)/?$ /vizsgaremek/src/web/router.php?codeid=$1 [QSA,L]
+
+    RewriteRule ^felhasznalo/([^/]+)$ /vizsgaremek/src/web/router.php?username=$1 [QSA,L]
+    RewriteRule ^felhasznalo/([^/]+)/?$ /vizsgaremek/src/web/router.php?username=$1 [QSA,L]
 </IfModule>

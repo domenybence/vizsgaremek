@@ -3,9 +3,6 @@
 include_once "../php_functions/php_functions.php";
 $db = getDb();
 
-// $fullURL = explode("/", $_SERVER["REQUEST_URI"]);
-// $url = explode("?", end($fullURL))[0];
-
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = json_decode(file_get_contents("php://input"), true);
     if($data) {

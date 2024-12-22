@@ -16,13 +16,13 @@ else{
 }
 
 async function fetchLikeValue(value){
-    const userId = 8; //todo
-    const codeId = 3; //todo
+    const userId = document.getElementById("userid").value;
+    const codeId = document.getElementById("codeid").value;
     try{
         const response = await fetch("/vizsgaremek/src/web/upload_likes.php",{
-            method: 'POST',
+            method: "POST",
             headers:{
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 userid: userId,
@@ -39,7 +39,7 @@ async function fetchLikeValue(value){
         }
     }
     catch(error){
-        console.log(error);
+        console.error(error);
     }
 }
 
