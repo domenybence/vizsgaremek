@@ -3,7 +3,6 @@
     RewriteBase /vizsgaremek/
 
     RewriteRule ^src/php_functions(/|$) - [F,L]
-    RewriteRule ^src/web/codes(/|$) - [F,L]
 
     RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/home\.html$
     RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/dashboard\.php$
@@ -17,6 +16,8 @@
 
     RewriteRule ^kod/([^/]+)$ /vizsgaremek/src/web/router.php?codeid=$1 [QSA,L]
     RewriteRule ^kod/([^/]+)/?$ /vizsgaremek/src/web/router.php?codeid=$1 [QSA,L]
+    RewriteRule ^kod/([^/]+)/fetch$ /vizsgaremek/src/web/router.php?codeid=$1/fetch [QSA,L]
+    RewriteRule ^kod/([^/]+)/fetch/$ /vizsgaremek/src/web/router.php?codeid=$1/fetch [QSA,L]
 
     RewriteRule ^felhasznalo/([^/]+)$ /vizsgaremek/src/web/router.php?username=$1 [QSA,L]
     RewriteRule ^felhasznalo/([^/]+)/?$ /vizsgaremek/src/web/router.php?username=$1 [QSA,L]

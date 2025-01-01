@@ -1,5 +1,6 @@
 const likeWrapper = document.querySelector(".svg-like-wrapper");
 const dislikeWrapper = document.querySelector(".svg-dislike-wrapper");
+
 let likechecked;
 let dislikechecked;
 if(likeWrapper.classList.contains("checked")){
@@ -16,8 +17,6 @@ else{
 }
 
 async function fetchLikeValue(value){
-    const userId = document.getElementById("userid").value;
-    const codeId = document.getElementById("codeid").value;
     try{
         const response = await fetch("/vizsgaremek/src/web/upload_likes.php",{
             method: "POST",
@@ -31,11 +30,16 @@ async function fetchLikeValue(value){
             })
         });
         if(!response.ok){
-            console.error(response.status, response.statusText);
+            throw new Error(response.status, response.statusText);
         }
         else{
             let data = await response.json();
-            document.querySelector(".likes").innerHTML = data["likeCount"];
+            if(data["likeCount"] === null){
+                document.querySelector(".likes").innerHTML = "0";
+            }
+            else{
+                document.querySelector(".likes").innerHTML = data["likeCount"];
+            }
         }
     }
     catch(error){

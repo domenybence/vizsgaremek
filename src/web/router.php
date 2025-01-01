@@ -1,14 +1,19 @@
 <?php
 include_once "../php_functions/php_functions.php";
 
-if(isset($_GET["codeid"])) {
+if (isset($_GET["codeid"])) {
     startSession();
-    $codeid = $_GET["codeid"];
-    if(preparedGetData("SELECT * FROM kod WHERE kod.id = ? AND kod.jovahagyott = true;", "i", [$codeid]) != false) {
+    $codeid = explode("/", $_GET["codeid"])[0];
+    if (preparedGetData("SELECT * FROM kod WHERE kod.id = ? AND kod.jovahagyott = true;", "i", [$codeid]) != false) {
         $currentUrl = $_SERVER["REQUEST_URI"];
         $redirectUrl = "/vizsgaremek/kod/$codeid";
+        if (str_ends_with($currentUrl, "/fetch")) {
+            if ($currentUrl != $redirectUrl) {
+                header("Location: $redirectUrl");
+            }
+        }
         if ($currentUrl != $redirectUrl) {
-            header("Location: /vizsgaremek/kod/$codeid");
+            header("Location: $redirectUrl");
             exit;
         }
         else {
@@ -21,7 +26,7 @@ if(isset($_GET["codeid"])) {
 }
 else if(isset($_GET["codeid"]) && isset($_GET["codecategory"])) {
     startSession();
-    $codeId = $_GET["codeid"];
+    $codeid = explode("/", $_GET["codeid"])[0];
     $codeCategory = $_GET["codecategory"];
     if(preparedGetData("SELECT * FROM kod INNER JOIN kategoria ON kod.kategoria_id = kategoria.id WHERE kod.id = ? AND kategoria.nev = ? AND kod.jovahagyott = true;", "is", [$codeId, $codeCategory]) != false) {
         $codeCategory = $_GET["codecategory"];
