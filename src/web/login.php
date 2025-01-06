@@ -10,7 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="./icon.png">
-    <script type="module" src="./js/login.js" defer></script>
 </head>
 <body>
     <div class="background"></div>
@@ -37,7 +36,7 @@
                 </div>
                 
                 <?php
-                include "../php_functions/db_functions.php";
+                include "../php_functions/php_functions.php";
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $username = $_POST["username"];
                     $password = $_POST["password"];

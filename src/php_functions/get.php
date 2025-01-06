@@ -1,6 +1,6 @@
 <?php
 
-include_once "db_connect.php";
+include_once "php_functions.php";
 
 function preparedGetData($queryText, $parameterTypes, $bindParameters = []) {
     $db = getDb();
