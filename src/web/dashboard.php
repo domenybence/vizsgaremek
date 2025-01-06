@@ -1,5 +1,5 @@
 <?php
-
+include_once "loader.html";
 include_once "../php_functions/php_functions.php";
 
 startSession();

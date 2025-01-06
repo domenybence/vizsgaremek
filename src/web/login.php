@@ -1,3 +1,4 @@
+<?php include_once "loader.html"; ?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
