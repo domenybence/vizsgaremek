@@ -1,8 +1,7 @@
 async function kodFeltoltes(){
     let Name = document.getElementById('nevInput').value;
-    let categoryId = document.getElementById('katInput').value;
+    let categoryId = document.getElementById('katInput');
     let Price = document.getElementById('arInput').value;
-
     try{
         const response = await fetch("./upload.php",{
             method: "POST",

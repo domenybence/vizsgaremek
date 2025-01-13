@@ -38,7 +38,7 @@ async function szoftverekLekerese() {
       szoftverek.innerHTML = "";
       for (const data of datas) {
         let col = document.createElement('col');
-        col.classList.add('col-4', 'col-md-6', 'col-sm-12');
+        col.classList.add('col-12', 'col-md-6', 'col-sm-12');
         let div1 = document.createElement('div');
         let div2 = document.createElement('div');
         let div3 = document.createElement('div');
