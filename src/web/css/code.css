@@ -13,6 +13,7 @@ body {
     justify-content: flex-start;
     padding: 20px;
     box-sizing: border-box;
+    font-family: "Montserrat";
 }
 
 .title-wrapper {

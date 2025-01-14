@@ -63,7 +63,7 @@ function confirmPasswordClearError(element){
     confirmPasswordErrorVisible = false;
 }
 function validateUsername(){
-    const usernameRegex = /^[a-zA-Z0-9]{4,15}$/;
+    const usernameRegex = /^[a-zA-Z0-9]{4,20}$/;
     if(!usernameChanged){
         showError(username, "Kérjük adja meg a felhasználónevét.");
         usernameValidated = false;
@@ -74,7 +74,7 @@ function validateUsername(){
             usernameValidated = true;
         }
         else {
-            showError(username, "A felhasználónévnek 4-14 karakter hosszúnek kell lennie.");
+            showError(username, "A felhasználónévnek 4-20 karakter hosszúnek kell lennie.");
             usernameValidated = false;
         }
     }
@@ -289,8 +289,49 @@ document.addEventListener("click", (event) => {
 });
 
 document.getElementById("registrationForm").addEventListener("submit", (event) => {
-    registrationValidate();
     if (!formValidated) {
         event.preventDefault();
     }
 });
+
+async function registration(username, email, password) {
+    try{
+        const response = await fetch("/vizsgaremek/src/web/upload_likes.php",{
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: username,
+                email: email,
+                password: password
+            })
+        });
+        if(!response.ok){
+            throw new Error(response.text);
+        }
+        else{
+            document.body.innerHTML += `<div class="registration-wrapper">
+                                                <div class="registration-popup">
+                                                    <div class="title-container">
+                                                        <h3>Sikeres regisztráció!</h3>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                                        </svg>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="content">
+                                                        <p>Kellemes időtöltést és jó kódolást kívánunk!</p>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="button-container">
+                                                        <a id="button_login" href="./login.php">Bejelentkezés</a>
+                                                    </div>
+                                                </div>
+                                            </div>`;
+        }
+    }
+    catch(error){
+        console.error(error);
+    }
+}
