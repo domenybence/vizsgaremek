@@ -294,6 +294,7 @@ document.getElementById("registrationForm").addEventListener("submit", (event) =
     }
 });
 
+/* ---------------------------------- todo! --------------------------------- */
 async function registration(username, email, password) {
     try{
         const response = await fetch("/vizsgaremek/src/web/upload_likes.php",{
