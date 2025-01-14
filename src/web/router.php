@@ -21,6 +21,7 @@ if (isset($_GET["codeid"])) {
         }
     }
     else {
+        http_response_code(404);
         include "./404.html";
     }
 }
@@ -40,6 +41,7 @@ else if(isset($_GET["codeid"]) && isset($_GET["codecategory"])) {
         echo "<br>Kodid: " . $codeId;
     }
     else {
+        http_response_code(404);
         include "./404.html";
     }
 }
@@ -57,6 +59,7 @@ else if(isset($_GET["codecategory"]) ) {
         echo "\nkategoria";
     }
     else {
+        http_response_code(404);
         include "./404.html";
     }
 }
@@ -73,10 +76,12 @@ else if(isset($_GET["username"])) {
     }
     }
     else {
+        http_response_code(404);
         include "./404.html";
     }
 }
 else {
     startSession();
+    http_response_code(404);
     include "./404.html";
 }
