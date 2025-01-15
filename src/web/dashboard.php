@@ -36,14 +36,3 @@ startSession();
     </form>
 </body>
 </html>
-
-<?php
-
-if(isset($_POST["logout"])){
-    unsetCookie();
-    session_unset();
-    session_destroy();
-    exit();
-}
-
-?>
