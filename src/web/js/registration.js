@@ -11,6 +11,8 @@ let usernameChanged = false;
 let emailChanged = false;
 let passwordChanged = false;
 let confirmPasswordChanged = false;
+let captchaResponse = "";
+let 
 const username = document.getElementById("username");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
@@ -150,7 +152,7 @@ function validateCheckbox(){
 }
 function validateCaptcha(){
     if(checkboxValidated){
-        var captchaResponse = grecaptcha.getResponse();
+        captchaResponse = grecaptcha.getResponse();
         if (captchaResponse.length !== 0){
             let errorLabel = captcha.nextElementSibling;
             if (errorLabel && errorLabel.classList.contains("inline-error")) {
@@ -208,7 +210,7 @@ document.getElementById("registrationForm").addEventListener("input", function()
     }
 });
 let errorVisible = false;
-window.onerror = function(message){
+window.onerror = (message) => {
     if (!errorVisible) {
         errorVisible = true;
         let errordiv = document.createElement("div");
@@ -220,15 +222,6 @@ window.onerror = function(message){
         document.querySelector(".error-group").innerText = message;
     }
 };
-function registrationResponse(){
-    let registrationPopup = `<div class="registration-wrapper">
-    <div class="registration-popup">
-    <h3>Sikeres regisztráció</h3>
-    <p>Jó kódolást kívánunk!</p>
-    </div>
-    </div>`;
-    document.body.appendChild(registrationPopup);
-}
 function closePopup(){
     document.querySelector("div.registration-wrapper").style.opacity = 0;
     document.querySelector("div.registration-wrapper").style.transition = "opacity, 0.3s";
@@ -288,51 +281,105 @@ document.addEventListener("click", (event) => {
     }
 });
 
-document.getElementById("registrationForm").addEventListener("submit", (event) => {
-    if (!formValidated) {
-        event.preventDefault();
-    }
-});
+document.querySelector("#button_submit").addEventListener("click", registration);
+async function registration() {
+    registrationValidate();
+    if(formValidated) {
+        try {
+            console.log("kugi")
+            const response = await fetch("/vizsgaremek/src/php_functions/registration_fetch.php",{
+                method: "POST",
+                headers:{
+                    "Content-Type": "application/json",
+                    "Javascript-Fetch-Request": "fetch-req"
+                },
+                body: JSON.stringify({
+                    username: document.getElementById("username").value,
+                    email: document.getElementById("email").value,
+                    password: document.getElementById("password").value,
+                    captcha: captchaResponse
+                })
+            });
+            const result = await response.json();
+            if(result.result == "success") {
+                showSuccessModal();
+            }
+            else if(result.result == "taken-username") {
+                showTakenUsernameModal();
+            }
+            else if(result.result == "taken-email") {
+                showTakenEmailModal();
+            }
+            else if(result.result == "failed") {
 
-/* ---------------------------------- todo! --------------------------------- */
-async function registration(username, email, password) {
-    try{
-        const response = await fetch("/vizsgaremek/src/web/upload_likes.php",{
-            method: "POST",
-            headers:{
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username: username,
-                email: email,
-                password: password
-            })
-        });
-        if(!response.ok){
-            throw new Error(response.text);
+            }
+            else {
+                throw new Error("Hiba történt.");
+            }
         }
-        else{
-            document.body.innerHTML += `<div class="registration-wrapper">
-                                                <div class="registration-popup">
-                                                    <div class="title-container">
-                                                        <h3>Sikeres regisztráció!</h3>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                                                        </svg>
-                                                    </div>
-                                                    <hr>
-                                                    <div class="content">
-                                                        <p>Kellemes időtöltést és jó kódolást kívánunk!</p>
-                                                    </div>
-                                                    <hr>
-                                                    <div class="button-container">
-                                                        <a id="button_login" href="./login.php">Bejelentkezés</a>
-                                                    </div>
-                                                </div>
-                                            </div>`;
+        catch(error) {
+            console.error(error);
         }
     }
-    catch(error){
-        console.error(error);
-    }
+}
+
+function showSuccessModal() {
+    document.body.innerHTML += `<div class="registration-wrapper">
+                                    <div class="registration-popup">
+                                        <div class="title-container">
+                                            <h3>Sikeres regisztráció!</h3>
+                                            <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                            </svg>
+                                        </div>
+                                        <hr>
+                                        <div class="content">
+                                            <p>Kellemes időtöltést és jó kódolást kívánunk!</p>
+                                        </div>
+                                        <hr>
+                                        <div class="button-container">
+                                            <a id="button_login" href="./login.php">Bejelentkezés</a>
+                                        </div>
+                                    </div>
+                                </div>`;
+}
+function showTakenUsernameModal() {
+    document.body.innerHTML += `<div class="registration-wrapper">
+                                    <div class="failed-registration-popup">
+                                        <div class="failed-title-container">
+                                            <h3>Foglalt felhasználónév!</h3>
+                                            <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                            </svg>
+                                        </div>
+                                        <hr>
+                                        <div class="content">
+                                            <p>Kérjük válasszon másik felhasználónevet.</p>
+                                        </div>
+                                        <hr>
+                                        <div class="button-container">
+                                            <button id="button_okay">Rendben</button>
+                                        </div>
+                                    </div>
+                                </div>`;
+}
+function showTakenEmailModal() {
+    document.body.innerHTML += `<div class="registration-wrapper">
+                                    <div class="failed-registration-popup">
+                                        <div class="failed-title-container">
+                                            <h3>Foglalt email cím!</h3>
+                                            <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                            </svg>
+                                        </div>
+                                        <hr>
+                                        <div class="content">
+                                            <p>Kérjük válasszon másik emailt.</p>
+                                        </div>
+                                        <hr>
+                                        <div class="button-container">
+                                            <button id="button_okay">Rendben</button>
+                                        </div>
+                                    </div>
+                                </div>`;
 }
