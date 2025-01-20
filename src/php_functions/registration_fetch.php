@@ -17,7 +17,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $isValid = false;
         }
         if (empty($password) || !preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/", $password)) {
-            
+            $isValid = false;
         }
         if (empty($captcha)) {
             $isValid = false;
@@ -26,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $key = "6LdsP3kqAAAAADt-AI6ixXN1XQG5OZ9eUkdzfKid";
             $verifyResponse = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . urlencode($key) . "&response=" . urlencode($captcha));
             $captchaResponse = json_decode($verifyResponse, true);
-            if (!$responseData["success"]) {
+            if (!$captchaResponse["success"]) {
                 $isValid = false;
             }
         }

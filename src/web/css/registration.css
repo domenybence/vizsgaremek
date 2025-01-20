@@ -1,6 +1,7 @@
 @import url("/vizsgaremek/src/web/css/montserrat-font.css");
 
 body {
+    font-family: "Montserrat";
     display: flex;
     flex-direction: column;
     
@@ -12,7 +13,6 @@ body {
     
     background-color: #222831;
     overflow-y: auto;
-    font-family: "Montserrat";
 }
 
 .bg {
@@ -269,12 +269,9 @@ body {
 
 .checkbox-group > .inline-error,
 .captcha-container > .inline-error{
-    margin: 0;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    all: unset;
+    font-family: "Montserrat";
+    color: #ff0019;
 }
 
 .inline-checkbox-text {

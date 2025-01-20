@@ -12,7 +12,6 @@ let emailChanged = false;
 let passwordChanged = false;
 let confirmPasswordChanged = false;
 let captchaResponse = "";
-let 
 const username = document.getElementById("username");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
@@ -132,7 +131,7 @@ function validateConfirmPassword(){
 function validateCheckbox(){
     if (checkbox.checked){
         let errorLabel = checkboxLabel[0].querySelector(".inline-error");
-        if (errorLabel) {
+        if (errorLabel && errorLabel.classList.contains("inline-error")) {
             errorLabel.remove();
         }
         checkboxValidated = true;
@@ -169,7 +168,7 @@ function validateCaptcha(){
                     errorLabel = document.createElement("label");
                     errorLabel.className = "inline-error";
                     errorLabel.innerText = "Kérjük végezze el a reCAPTCHA ellenőrzést!";
-                    captcha.parentNode.appendChild(errorLabel);
+                    document.querySelector(".captcha-container").appendChild(errorLabel);
                 }
                 inputErrorVisible = true;
             }
@@ -286,7 +285,6 @@ async function registration() {
     registrationValidate();
     if(formValidated) {
         try {
-            console.log("kugi")
             const response = await fetch("/vizsgaremek/src/php_functions/registration_fetch.php",{
                 method: "POST",
                 headers:{
@@ -301,6 +299,8 @@ async function registration() {
                 })
             });
             const result = await response.json();
+            grecaptcha.reset();
+            registrationValidate();
             if(result.result == "success") {
                 showSuccessModal();
             }
@@ -311,7 +311,7 @@ async function registration() {
                 showTakenEmailModal();
             }
             else if(result.result == "failed") {
-
+                showError();
             }
             else {
                 throw new Error("Hiba történt.");
@@ -324,62 +324,77 @@ async function registration() {
 }
 
 function showSuccessModal() {
-    document.body.innerHTML += `<div class="registration-wrapper">
-                                    <div class="registration-popup">
-                                        <div class="title-container">
-                                            <h3>Sikeres regisztráció!</h3>
-                                            <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+    if(!document.body.classList.contains("registration-wrapper")) {
+        document.body.insertAdjacentHTML("beforeend", `<div class="registration-wrapper">
+            <div class="registration-popup">
+            <div class="title-container">
+            <h3>Sikeres regisztráció!</h3>
+            <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
                                             </svg>
                                         </div>
                                         <hr>
                                         <div class="content">
-                                            <p>Kellemes időtöltést és jó kódolást kívánunk!</p>
+                                        <p>Kellemes időtöltést és jó kódolást kívánunk!</p>
                                         </div>
                                         <hr>
                                         <div class="button-container">
-                                            <a id="button_login" href="./login.php">Bejelentkezés</a>
+                                        <a id="button_login" href="./login.php">Bejelentkezés</a>
                                         </div>
                                     </div>
-                                </div>`;
+                                    </div>`);
+    }
+    else {
+        document.querySelector("div.registration-wrapper").style.opacity = 1;
+    }
 }
 function showTakenUsernameModal() {
-    document.body.innerHTML += `<div class="registration-wrapper">
-                                    <div class="failed-registration-popup">
-                                        <div class="failed-title-container">
-                                            <h3>Foglalt felhasználónév!</h3>
-                                            <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                                            </svg>
-                                        </div>
-                                        <hr>
-                                        <div class="content">
-                                            <p>Kérjük válasszon másik felhasználónevet.</p>
-                                        </div>
-                                        <hr>
-                                        <div class="button-container">
-                                            <button id="button_okay">Rendben</button>
-                                        </div>
-                                    </div>
-                                </div>`;
+    if(!document.body.classList.contains("registration-wrapper")) {
+        document.body.insertAdjacentHTML("beforeend", `<div class="registration-wrapper">
+            <div class="failed-registration-popup">
+                <div class="failed-title-container">
+                    <h3>Foglalt felhasználónév!</h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                    </svg>
+                </div>
+                <hr>
+                <div class="content">
+                    <p>Kérjük válasszon másik felhasználónevet.</p>
+                </div>
+                <hr>
+                <div class="button-container">
+                    <button id="button_okay">Rendben</button>
+                </div>
+            </div>
+        </div>`);
+    }
+    else {
+        document.querySelector("div.registration-wrapper").style.opacity = 1;
+    }
 }
 function showTakenEmailModal() {
-    document.body.innerHTML += `<div class="registration-wrapper">
-                                    <div class="failed-registration-popup">
-                                        <div class="failed-title-container">
-                                            <h3>Foglalt email cím!</h3>
-                                            <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                                            </svg>
-                                        </div>
-                                        <hr>
-                                        <div class="content">
-                                            <p>Kérjük válasszon másik emailt.</p>
-                                        </div>
-                                        <hr>
-                                        <div class="button-container">
-                                            <button id="button_okay">Rendben</button>
-                                        </div>
-                                    </div>
-                                </div>`;
+    if(!document.body.classList.contains("registration-wrapper")) {
+        document.body.insertAdjacentHTML("beforeend",`<div class="registration-wrapper">
+            <div class="failed-registration-popup">
+                <div class="failed-title-container">
+                    <h3>Foglalt email cím!</h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                    </svg>
+                </div>
+                <hr>
+                <div class="content">
+                    <p>Kérjük válasszon másik emailt.</p>
+                </div>
+                <hr>
+                <div class="button-container">
+                    <button id="button_okay">Rendben</button>
+                </div>
+            </div>
+        </div>`);
+    }
+    else {
+        document.querySelector("div.registration-wrapper").style.opacity = 1;
+    }
 }
