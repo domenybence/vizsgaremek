@@ -33,7 +33,7 @@ startSession();
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            gap: 20px;
+            gap: 40px;
         }
         .nav-group:last-of-type {
             margin-right: 2%;
@@ -167,6 +167,11 @@ startSession();
                 margin-bottom: 15%; 
             }
         }
+        @media screen and (max-width: 600px) {
+            nav {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -245,6 +250,11 @@ startSession();
                     onComplete: resetDropdown
                 });
             }
+            dropdownItems.forEach(dropdownItem => {
+                if(dropdownItem.classList.contains("visible") && !event.target.closest("nav")) {
+                    resetDropdown();
+                }
+            })
         });
         function resetDropdown() {
             dropdownButtons.forEach(button => {
@@ -282,12 +292,12 @@ startSession();
             event.stopPropagation();
             const isVisible = dropdownItem.classList.contains("visible");
             dropdownButtons.forEach(selectedButton => {
-                if (selectedButton !== button) {
+                if (selectedButton != button) {
                     selectedButton.classList.remove("active");
                 }
             });
             dropdownItems.forEach(item => {
-                if (item !== dropdownItem) {
+                if (item != dropdownItem) {
                     gsap.to(item, {
                         height: 0,
                         opacity: 0,
