@@ -17,7 +17,7 @@ startSession();
             width: 100%;
             height: 7vh;
             font-size: 18px;
-            background-color: #222;
+            background-color: #1E1E1E;
             display: flex;
             flex-direction: row;
             align-items: center;
