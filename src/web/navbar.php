@@ -89,12 +89,11 @@ startSession();
             text-align: left;
             position: absolute;
             left: 0;
-            background-color: #222;
+            background-color: #1E1E1E;
             padding: 10px 5px;
             width: 100%;
             z-index: 1000;
             top: calc(100% + 5px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
         }
         .nav-dropdown-item.visible {
             display: block;

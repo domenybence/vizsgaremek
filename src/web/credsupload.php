@@ -8,7 +8,7 @@
     <link rel="icon" type="image/x-icon" href="./icon.png">
     <?php include "loader.html"; ?>
     <?php include "navbar.php"; ?>
-    <script src="/js/credsupload.php"></script>
+    <script src="./js/credsupload.js"></script>
 </head>
 <body>
     <div class="container">
