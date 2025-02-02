@@ -4,6 +4,14 @@ body {
     background-color: #1E1E1E;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 .container {
     color: white;
     font-size: 20px;
@@ -48,10 +56,21 @@ body {
     background-color: #4d4d4d;
     padding: 10px;
     border-radius: 4px;
-    transition: 0.2s all ease-out;
+    transition: 0.3s all ease-out;
+    user-select: none;
 }
 
 .button-input:hover {
     cursor: pointer;
-    background-color: #646464;
+    outline: white solid 1px;
+}
+
+.button-input:active {
+    background-color: white;
+    color: black;
+    outline: white solid 1px;
+}
+
+#message-container {
+    margin-top: 15px;
 }

@@ -1,25 +1,31 @@
+<?php
+include_once "../php_functions/php_functions.php";
+?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pontokvásárlás</title>
+    <title>Pontok feltöltése</title>
     <link rel="stylesheet" href="/vizsgaremek/src/web/css/credsupload.css">
     <link rel="icon" type="image/x-icon" href="./icon.png">
-    <?php include "loader.html"; ?>
-    <?php include "navbar.php"; ?>
-    <script src="./js/credsupload.js"></script>
+    <script src="./js/credsupload.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <div class="column">
-            <h1 class="page-title">Pontok vásárlása</h1>
-            <span>Pontok száma</span>
-            <input type="text" class="num-input">
-            <span>Ár</span>
-            <input type="text" class="num-input">
-            <button type="button" class="button-input">Vásárlás</button>
+    <?php include "loader.html"; ?>
+    <?php include "navbar.php"; ?>
+    <?php $price = simpleGetData("SELECT * FROM pont_ar"); ?>
+    <script>const price = <?php echo json_encode($price[0]["ar"]) ?></script>
+        <div class="container">
+            <div class="column">
+                <h1 class="page-title">Pontok feltöltése</h1>
+                <span>Pontok száma</span>
+                <input type="number" id="points" class="num-input" default="0" min="1">
+                <span>Ár</span>
+                <input type="number" id="price" class="num-input" default="0" min="1">
+                <button type="button" class="button-input">Vásárlás</button>
+                <div id="message-container"></div>
+            </div>
         </div>
-    </div>
 </body>
 </html>
