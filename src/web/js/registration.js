@@ -343,6 +343,7 @@ function showSuccessModal() {
                                         </div>
                                     </div>
                                     </div>`);
+                                    document.querySelector("#button_login").addEventListener("click", translateOut);
     }
     else {
         document.querySelector("div.registration-wrapper").style.opacity = 1;

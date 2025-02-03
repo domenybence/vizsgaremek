@@ -7,9 +7,10 @@
     <title>Bejelentkezés</title>
     <link rel="stylesheet" href="./css/login.css">
     <link rel="icon" type="image/x-icon" href="./icon.png">
-    <?php include "loader.html"; ?>
+    <script type="module" src="./js/login.js" defer></script>
 </head>
 <body>
+    <?php include "loader.html"; ?>
         <div class="background"></div>
         <div class="container" id="container">
             <div class="wrapper">
@@ -32,28 +33,6 @@
                     <div class="inline-group">
                         <button class="inline-button" type="submit" name="button_submit" id="button_submit">Bejelentkezés</button>
                     </div>
-                    
-                    <?php
-                    include "../php_functions/php_functions.php";
-                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        $username = $_POST["username"];
-                        $password = $_POST["password"];
-                        $rememberme = isset($_POST["rememberme"]);
-                        if (!empty($username) && !empty($password)) {
-                            $loginResult = login($username, $password, $rememberme);
-                            if ($loginResult === true) {
-                                header("Location: dashboard.php");
-                                exit();
-                            }
-                            else {
-                                echo $loginResult;
-                            }
-                        } 
-                        else {
-                            echo "<div class='inline-error'>Kérjük töltse ki mindkét mezőt!</div>";
-                        }
-                    }
-                    ?>
                     <p class="inline-text register-text">Még nincs fiókja? <a href="./registration.php" class="inline-link">Regisztráljon itt.</a></p>
                 </form>
                 </div>

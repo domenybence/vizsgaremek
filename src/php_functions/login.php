@@ -6,7 +6,7 @@ function login($username, $password, $rememberme) {
     if(!$rememberme) {
         $user = preparedGetData("SELECT felhasznalo.id AS id, felhasznalo.nev AS username, felhasznalo.jelszo AS password, felhasznalo.tipus AS role FROM felhasznalo WHERE felhasznalo.nev = ?;", "s", $username);
         if (!$user) {
-            return "<div class='inline-error'>Hibás felhasználónév vagy jelszó!</div>";
+            return false;
         }
         if (password_verify($password, $user[0]["password"])) {
             $role = setRole($user[0]["role"]);
@@ -15,13 +15,13 @@ function login($username, $password, $rememberme) {
             return true;
         }
         else {
-            return "<div class='inline-error'>Hibás felhasználónév vagy jelszó!</div>";
+            return false;
         }
     }
     else {
         $user = preparedGetData("SELECT felhasznalo.id AS id, felhasznalo.nev AS username, felhasznalo.jelszo AS password, felhasznalo.tipus AS role FROM felhasznalo WHERE felhasznalo.nev = ?;", "s", $username);
         if (!$user) {
-            return "<div class='inline-error'>Hibás felhasználónév vagy jelszó!</div>";
+            return false;
         }
         $user = $user[0];
         if (password_verify($password, $user["password"])) {
@@ -30,12 +30,11 @@ function login($username, $password, $rememberme) {
                 return true;
             }
             else {
-                echo "<div class='inline-error'>Hiba lépett fel a felhasználó beléptetése során, kérjük próbálja újra később.</div>";
                 return false;
             }
         }
         else {
-            return "<div class='inline-error'>Hibás felhasználónév vagy jelszó!</div>";
+            return false;
         }
     }
 }

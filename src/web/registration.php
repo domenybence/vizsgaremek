@@ -19,9 +19,9 @@ if(isset($_SESSION)){
     <link rel="icon" type="image/x-icon" href="./icon.png">
     <script src="https://www.google.com/recaptcha/api.js?hl=hu" async defer></script>
     <script type="module" src="./js/registration.js" defer></script>
-    <?php include "loader.html"; ?>
 </head>
 <body>
+    <?php include "loader.html"; ?>
     <div class="background"></div>
     <div class="container" id="container">
         <div class="wrapper">
