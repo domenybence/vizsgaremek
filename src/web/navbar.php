@@ -205,8 +205,16 @@ startSession();
                 echo '
                     <div class="nav-dropdown-button nav-link">'.$_SESSION["username"].'
                         <div class="nav-dropdown-item">
-                            <a class="nav-link" href="http://localhost/vizsgaremek/src/web/library.php">Könyvtár</a>
-                            <a class="nav-link" href="http://localhost/vizsgaremek/src/web/logout.php">Kijelentkezés</a>
+                            ';
+                            if($_SESSION["role"] == "moderator") {
+                                echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/library.php">Könyvtár</a>
+                                <a class="nav-link" href="http://localhost/vizsgaremek/src/web/approve.php">Jóváhagyások</a>';
+                            }
+                            else {
+                                echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/approval.php">Jóváhagyások</a>
+                                <a class="nav-link" href="http://localhost/vizsgaremek/src/web/admin.php">Admin</a>';
+                            }
+                            echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/logout.php">Kijelentkezés</a>
                         </div>
                     </div>';
             }

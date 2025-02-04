@@ -40,9 +40,10 @@ else {
         </script>
     <script src="/vizsgaremek/src/web/js/code.js" defer></script>
     <script src="/vizsgaremek/src/web//js/gsap-public/minified/gsap.min.js"></script>
-    <?php include "loader.html"; ?>
 </head>
 <body>
+    <?php include "loader.html"; ?>
+    <?php include "navbar.php"; ?>
     <?php
         if(!$isOwned) {
             if($_SESSION["username"]!="Vendég") {
