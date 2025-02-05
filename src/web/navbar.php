@@ -1,6 +1,8 @@
 <?php
 include_once "../php_functions/php_functions.php";
-startSession();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 <!DOCTYPE html>
 <html lang="hu">

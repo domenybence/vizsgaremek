@@ -21,7 +21,8 @@ async function fetchLikeValue(value){
         const response = await fetch("/vizsgaremek/src/web/upload_likes.php",{
             method: "POST",
             headers:{
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Javascript-Fetch-Request": "likes-fetch-req"
             },
             body: JSON.stringify({
                 userid: userId,
@@ -39,6 +40,78 @@ async function fetchLikeValue(value){
             }
             else{
                 document.querySelector(".likes").innerHTML = data["likeCount"];
+            }
+        }
+    }
+    catch(error){
+        console.error(error);
+    }
+}
+
+document.querySelector(".checkout").addEventListener("click", fetchPurchase);
+
+async function fetchPurchase(){
+    try{
+        const response = await fetch("/vizsgaremek/src/web/upload_likes.php ?>",{
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json",
+                "Javascript-Fetch-Request": "codepurchase-fetch-req"
+            },
+            body: JSON.stringify({
+                userid: userId,
+                codeid: codeId
+            })
+        });
+        if(!response.ok){
+            throw new Error(response.status, response.statusText);
+        }
+        else{
+            let data = await response.json();
+            if(data["result"] == "success"){
+                if(!document.body.classList.contains(".modal-wrapper")) {
+                    document.body.insertAdjacentHTML("beforeend", `<div class="modal-wrapper">
+                                                                        <div class="modal-popup">
+                                                                            <div class="title-container">
+                                                                                <h3>Sikeres vásárlás!</h3>
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                                                                </svg>
+                                                                            </div>
+                                                                            <hr>
+                                                                            <div class="content">
+                                                                                <p>Reméljük a kóddal meg lesz elégedve.</p>
+                                                                            </div>
+                                                                            <hr>
+                                                                            <div class="button-container">
+                                                                                <a id="button_next" href="">Tovább</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>`);
+                                                document.querySelector("#button_next").addEventListener("click", translateOut);
+                }
+            }
+            else if(data["result"] == "error"){
+                if(!document.body.classList.contains(".modal-wrapper")) {
+                    document.body.insertAdjacentHTML("beforeend",`<div class="error-modal-wrapper">
+                                                                        <div class="error-modal-popup">
+                                                                            <div class="error-title-container">
+                                                                                <h3>Sikertelen vásárlás!</h3>
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                                                                </svg>
+                                                                            </div>
+                                                                            <hr>
+                                                                            <div class="content">
+                                                                                <p>A vásárlás során valami hiba történt!</p>
+                                                                            </div>
+                                                                            <hr>
+                                                                            <div class="error-button-container">
+                                                                                <a id="error_button_next" href="">Tovább</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>`);
+                }
             }
         }
     }

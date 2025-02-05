@@ -35,8 +35,8 @@ else {
     <link rel="icon" type="image/x-icon" href="/vizsgaremek/src/web/icon.png">
     <link rel="stylesheet" href="/vizsgaremek/src/web/css/code.css">
     <script>
-        const codeId = <?php echo $codeid; ?>;
-        const userId = <?php echo $userid; ?>;
+        const codeId = <?php echo json_encode($codeid) ?? 0 ?>;
+        const userId = <?php echo json_encode($userid); ?>;
         </script>
     <script src="/vizsgaremek/src/web/js/code.js" defer></script>
     <script src="/vizsgaremek/src/web//js/gsap-public/minified/gsap.min.js"></script>
@@ -130,7 +130,7 @@ else {
                                             echo '
                                     </div>
                                 </div>
-                                
+                                <hr>
                                 <div class="title-group">
                                     <div class="title-item" style="user-select: none;">Ár</div>
                                     <div class="title-item" style="user-select: none;">';
@@ -141,7 +141,7 @@ else {
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="checkout">Megvásárlás</a>
+                    <button class="checkout">Megvásárlás</button>
                 </div>
             </div>';
             }
