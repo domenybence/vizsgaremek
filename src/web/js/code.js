@@ -1,19 +1,18 @@
-const likeWrapper = document.querySelector(".svg-like-wrapper");
-const dislikeWrapper = document.querySelector(".svg-dislike-wrapper");
-
 let likechecked;
 let dislikechecked;
-if(likeWrapper.classList.contains("checked")){
-    likechecked = true;
-}
-else{
-    likechecked = false;
-}
-if(dislikeWrapper.classList.contains("checked")){
-    dislikechecked = true;
-}
-else{
-    dislikechecked = false;
+if(document.body.contains(document.querySelector(".svg-like-wrapper"))) {
+    if(document.querySelector(".svg-like-wrapper").classList.contains("checked")){
+        likechecked = true;
+    }
+    else{
+        likechecked = false;
+    }
+    if(document.querySelector(".svg-dislike-wrapper").classList.contains("checked")){
+        dislikechecked = true;
+    }
+    else{
+        dislikechecked = false;
+    }
 }
 
 async function fetchLikeValue(value){
@@ -48,11 +47,15 @@ async function fetchLikeValue(value){
     }
 }
 
-document.querySelector(".checkout").addEventListener("click", fetchPurchase);
+
+if(document.body.contains(document.querySelector(".checkout"))) {
+    document.querySelector(".checkout").addEventListener("click", fetchPurchase);
+}
 
 async function fetchPurchase(){
+    const numcodeid = Number(codeId);
     try{
-        const response = await fetch("/vizsgaremek/src/web/upload_likes.php ?>",{
+        const response = await fetch("/vizsgaremek/src/php_functions/purchase_fetch.php",{
             method: "POST",
             headers:{
                 "Content-Type": "application/json",
@@ -60,7 +63,7 @@ async function fetchPurchase(){
             },
             body: JSON.stringify({
                 userid: userId,
-                codeid: codeId
+                codeid: numcodeid
             })
         });
         if(!response.ok){
@@ -146,18 +149,20 @@ async function dislikeChecked(){
 
 function updateState(){
     if(likechecked) {
-        likeWrapper.classList.add("checked");
+        document.querySelector(".svg-like-wrapper").classList.add("checked");
     }
     else {
-        likeWrapper.classList.remove("checked");
+        document.querySelector(".svg-like-wrapper").classList.remove("checked");
     }
     if(dislikechecked){
-        dislikeWrapper.classList.add("checked");
+        document.querySelector(".svg-dislike-wrapper").classList.add("checked");
     }
     else {
-        dislikeWrapper.classList.remove("checked");
+        document.querySelector(".svg-dislike-wrapper").classList.remove("checked");
     }
 }
 
-likeWrapper.addEventListener("click", likeChecked);
-dislikeWrapper.addEventListener("click", dislikeChecked);
+if(document.body.contains(document.querySelector(".svg-like-wrapper"))) {
+    document.querySelector(".svg-like-wrapper").addEventListener("click", likeChecked);
+    document.querySelector(".svg-dislike-wrapper").addEventListener("click", dislikeChecked);
+}

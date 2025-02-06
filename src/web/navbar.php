@@ -196,7 +196,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 }
                 ?>
             </div>
-            <div class="nav-item nav-link">Felkérések</div>
+            <a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/requests.php">Felkérések</a>
         </div>
         <div class="nav-group">
             <?php
@@ -212,11 +212,12 @@ if (session_status() === PHP_SESSION_NONE) {
                                 echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/library.php">Könyvtár</a>
                                 <a class="nav-link" href="http://localhost/vizsgaremek/src/web/approve.php">Jóváhagyások</a>';
                             }
-                            else {
+                            else if($_SESSION["role"] == "admin") {
                                 echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/approval.php">Jóváhagyások</a>
                                 <a class="nav-link" href="http://localhost/vizsgaremek/src/web/admin.php">Admin</a>';
                             }
-                            echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/logout.php">Kijelentkezés</a>
+                            echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/requests.php">Felkérések</a>
+                                    <a class="nav-link" href="http://localhost/vizsgaremek/src/web/logout.php">Kijelentkezés</a>
                         </div>
                     </div>';
             }
