@@ -1,7 +1,7 @@
 <?php
 include_once "../php_functions/php_functions.php";
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+    startSession();
 }
 ?>
 <!DOCTYPE html>
@@ -38,7 +38,7 @@ if (session_status() === PHP_SESSION_NONE) {
             gap: 40px;
         }
         .nav-group:last-of-type {
-            margin-right: 2%;
+            margin-right: 5vw;
         }
         .nav-dropdown-item:not(.visible) {
             display: none;

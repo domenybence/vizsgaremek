@@ -71,49 +71,76 @@ async function fetchPurchase(){
         }
         else{
             let data = await response.json();
-            if(data["result"] == "success"){
+            if(data["result"] == "success") {
                 if(!document.body.classList.contains(".modal-wrapper")) {
-                    document.body.insertAdjacentHTML("beforeend", `<div class="modal-wrapper">
-                                                                        <div class="modal-popup">
-                                                                            <div class="title-container">
-                                                                                <h3>Sikeres vásárlás!</h3>
-                                                                                <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                                                                                </svg>
-                                                                            </div>
-                                                                            <hr>
-                                                                            <div class="content">
-                                                                                <p>Reméljük a kóddal meg lesz elégedve.</p>
-                                                                            </div>
-                                                                            <hr>
-                                                                            <div class="button-container">
-                                                                                <a id="button_next" href="">Tovább</a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>`);
-                                                document.querySelector("#button_next").addEventListener("click", translateOut);
+                    document.body.insertAdjacentHTML("beforeend",
+                        `<div class="modal-wrapper">
+                            <div class="modal-popup">
+                                <div class="title-container">
+                                    <h3>Sikeres vásárlás!</h3>
+                                    <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                    </svg>
+                                </div>
+                                <hr>
+                                <div class="content">
+                                    <p>Reméljük a kóddal meg lesz elégedve.</p>
+                                </div>
+                                <hr>
+                                <div class="button-container">
+                                    <a id="button_okay" href="">Tovább</a>
+                                </div>
+                            </div>
+                        </div>`);
+                        document.querySelector("#button_okay").addEventListener("click", translateOut);
                 }
             }
-            else if(data["result"] == "error"){
+            else if(data["result"] == "error") {
                 if(!document.body.classList.contains(".modal-wrapper")) {
-                    document.body.insertAdjacentHTML("beforeend",`<div class="error-modal-wrapper">
-                                                                        <div class="error-modal-popup">
-                                                                            <div class="error-title-container">
-                                                                                <h3>Sikertelen vásárlás!</h3>
-                                                                                <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                                                                                </svg>
-                                                                            </div>
-                                                                            <hr>
-                                                                            <div class="content">
-                                                                                <p>A vásárlás során valami hiba történt!</p>
-                                                                            </div>
-                                                                            <hr>
-                                                                            <div class="error-button-container">
-                                                                                <a id="error_button_next" href="">Tovább</a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>`);
+                    document.body.insertAdjacentHTML("beforeend",
+                        `<div class="modal-wrapper">
+                            <div class="error-modal-popup">
+                                <div class="error-title-container">
+                                    <h3>Sikertelen vásárlás!</h3>
+                                    <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                    </svg>
+                                </div>
+                                <hr>
+                                <div class="content">
+                                    <p>A vásárlás során valami hiba történt!</p>
+                                </div>
+                                <hr>
+                                <div class="error-button-container">
+                                    <a id="button_not_okay" href="">Tovább</a>
+                                </div>
+                            </div>
+                        </div>`);
+                        document.querySelector("#button_not_okay").addEventListener("click", translateOut);
+                }
+            }
+            else if(data["result"] == "insufficient_points") {
+                if(!document.body.classList.contains(".modal-wrapper")) {
+                    document.body.insertAdjacentHTML("beforeend",
+                    `<div class="modal-wrapper">
+                        <div class="error-modal-popup">
+                            <div class="error-title-container">
+                                <h3>Sikertelen vásárlás!</h3>
+                                <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                </svg>
+                            </div>
+                            <hr>
+                            <div class="content">
+                                <p>Nincs elegendő pontja a kód megvásárlásához.</p>
+                            </div>
+                            <hr>
+                            <div class="button-container">
+                                <a id="button_not_okay" href="">Tovább</a>
+                            </div>
+                        </div>
+                    </div>`);
+                document.querySelector("#button_not_okay").addEventListener("click", translateOut);
                 }
             }
         }
@@ -147,14 +174,32 @@ async function dislikeChecked(){
     updateState();
 }
 
-function updateState(){
+document.addEventListener("click", (event) => {
+    if(event.target.closest("svg")) {
+        closePopup();
+    }
+    if(event.target.closest("div.button-container > button")) {
+        closePopup();
+    }
+});
+
+function closePopup(){
+    document.querySelector("div.modal-wrapper").style.opacity = 0;
+    document.querySelector("div.modal-wrapper").style.transition = "opacity, 0.3s";
+    setTimeout(() => {
+        document.querySelector("div.modal-wrapper").remove();
+    }, 300);
+}
+
+
+function updateState() {
     if(likechecked) {
         document.querySelector(".svg-like-wrapper").classList.add("checked");
     }
     else {
         document.querySelector(".svg-like-wrapper").classList.remove("checked");
     }
-    if(dislikechecked){
+    if(dislikechecked) {
         document.querySelector(".svg-dislike-wrapper").classList.add("checked");
     }
     else {

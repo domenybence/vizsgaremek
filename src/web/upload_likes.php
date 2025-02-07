@@ -4,7 +4,7 @@ include_once "../php_functions/php_functions.php";
 $db = getDb();
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_SERVER["HTTP_JAVASCRIPT_FETCH_REQUEST"]) && $_SERVER["HTTP_JAVASCRIPT_FETCH_REQUEST"] === "like-fetch-req") {
+    if (isset($_SERVER["HTTP_JAVASCRIPT_FETCH_REQUEST"]) && $_SERVER["HTTP_JAVASCRIPT_FETCH_REQUEST"] === "likes-fetch-req") {
     $data = json_decode(file_get_contents("php://input"), true);
     if($data) {
         $userid = $data["userid"];

@@ -13,6 +13,9 @@ $price = $data[0]["price"];
 $likeState = returnLikeState($userid, $codeid);
 
 $isOwned = false;
+if($_SESSION["role"] == "admin") {
+    $isOwned = true;
+}
 if($price === 0) {
     $isOwned = true;
 }
@@ -151,7 +154,7 @@ else {
                         <div class="main">
                             <div class="title-wrapper">
                                 <div class="title-item-wrapper">
-                                    <div class="col">
+                                    <div class="col"></div>
                                     <div class="col">
                                         <div class="title-group">
                                             <div class="title-item" style="user-select: none;">Feltöltő</div>
@@ -188,7 +191,7 @@ else {
                                                     echo '
                                             </div>
                                         </div>
-                                        
+                                        <hr>
                                         <div class="title-group">
                                             <div class="title-item" style="user-select: none;">Ár</div>
                                             <div class="title-item" style="user-select: none;">';

@@ -8,7 +8,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $codeid = $data["codeid"];
         $userpoints = preparedGetData("SELECT felhasznalo.pontok FROM felhasznalo WHERE felhasznalo.id = ?;", "i", [$userid]);
         $codeprice = preparedGetData("SELECT kod.ar FROM kod WHERE kod.id = ?;", "i", [$codeid]);
-        if($userpoints[0]["ar"] >= $codeprice[0]["ar"]) {
+        if($userpoints[0]["pontok"] >= $codeprice[0]["ar"]) {
             $successful = insertData("UPDATE felhasznalo SET felhasznalo.pontok = felhasznalo.pontok - ? WHERE felhasznalo.id = ?;", "ii", [$codeprice[0]["ar"], $userid]);
             if($successful) {
                 $successful2 = insertData("INSERT INTO felhasznalo_megvett(felhasznalo_id, kod_id) VALUES (?,?);", "ii", [$userid, $codeid]);
@@ -20,5 +20,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             }
         }
+        echo json_encode(["result" => "insufficient_points"], JSON_UNESCAPED_UNICODE);
     }
 }
