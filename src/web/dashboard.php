@@ -1,5 +1,5 @@
 <?php
-
+include_once "loader.html";
 include_once "../php_functions/php_functions.php";
 
 startSession();
@@ -36,14 +36,3 @@ startSession();
     </form>
 </body>
 </html>
-
-<?php
-
-if(isset($_POST["logout"])){
-    unsetCookie();
-    session_unset();
-    session_destroy();
-    exit();
-}
-
-?>

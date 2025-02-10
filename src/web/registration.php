@@ -21,6 +21,7 @@ if(isset($_SESSION)){
     <script type="module" src="./js/registration.js" defer></script>
 </head>
 <body>
+    <?php include "loader.html"; ?>
     <div class="background"></div>
     <div class="container" id="container">
         <div class="wrapper">
@@ -53,97 +54,8 @@ if(isset($_SESSION)){
                             <div class="g-recaptcha" id="captcha" data-sitekey="6LdsP3kqAAAAAB_5T7GZTTTQfiWLUs68G_KTta2a"></div>
                         </div>
                         <div class="inline-group">
-                            <button class="inline-button" type="submit" name="button_submit" title="" id="button_submit">Regisztráció</button>
+                            <button class="inline-button" type="button" name="button_submit" title="" id="button_submit">Regisztráció</button>
                         </div>
-                        <?php
-                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        $username= filter_input(INPUT_POST,'username',FILTER_SANITIZE_SPECIAL_CHARS);
-                        $email = filter_var(trim($_POST["email"]), FILTER_VALIDATE_EMAIL);
-                        $password = $_POST["password"];
-                        $passwordConfirm = $_POST["password_confirm"];
-                        $policyCheckbox = $_POST["policy-checkbox"];
-                        $usernameRegex = "/^[a-zA-Z0-9]{4,15}$/";
-                        $passwordRegex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d\s@$!%*?&]{8,20}$/";
-                        if ($username && $email && preg_match($usernameRegex, $username) && preg_match($passwordRegex, $password) && $password === $passwordConfirm && isset($policyCheckbox)) {
-                            if(isset($_POST['g-recaptcha-response'])) {
-                                $captcha = $_POST['g-recaptcha-response'];
-                                $secretKey = "6LdsP3kqAAAAADt-AI6ixXN1XQG5OZ9eUkdzfKid";
-                                $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$secretKey}&response={$captcha}&remoteip=" . $_SERVER['REMOTE_ADDR']);
-                                $g_response = json_decode($response);
-                                if ($g_response->success === true) {
-                                    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-                                    $result = registration($username, $email, $hashedPassword);
-                                    if($result === "success") {
-                                        echo '<div class="registration-wrapper">
-                                                <div class="registration-popup">
-                                                    <div class="title-container">
-                                                        <h3>Sikeres regisztráció!</h3>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                                                        </svg>
-                                                    </div>
-                                                    <hr>
-                                                    <div class="content">
-                                                        <p>Kellemes időtöltést és jó kódolást kívánunk!</p>
-                                                    </div>
-                                                    <hr>
-                                                    <div class="button-container">
-                                                        <a id="button_login" href="./login.php">Bejelentkezés</a>
-                                                    </div>
-                                                </div>
-                                            </div>';
-                                    }
-                                    else if($result === "taken-username") {
-                                        echo '<div class="registration-wrapper">
-                                                <div class="failed-registration-popup">
-                                                    <div class="failed-title-container">
-                                                        <h3>Foglalt felhasználónév!</h3>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                                                        </svg>
-                                                    </div>
-                                                    <hr>
-                                                    <div class="content">
-                                                        <p>Kérjük válasszon másik felhasználónevet.</p>
-                                                    </div>
-                                                    <hr>
-                                                    <div class="button-container">
-                                                        <button id="button_okay">Rendben</button>
-                                                    </div>
-                                                </div>
-                                            </div>';
-                                    }
-                                    else if($result === "taken-email") {
-                                        echo '<div class="registration-wrapper">
-                                                <div class="failed-registration-popup">
-                                                    <div class="failed-title-container">
-                                                        <h3>Foglalt email cím!</h3>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                                                        </svg>
-                                                    </div>
-                                                    <hr>
-                                                    <div class="content">
-                                                        <p>Kérjük válasszon másik emailt.</p>
-                                                    </div>
-                                                    <hr>
-                                                    <div class="button-container">
-                                                        <button id="button_okay">Rendben</button>
-                                                    </div>
-                                                </div>
-                                            </div>';
-                                    }
-                                }
-                                else {
-                                    echo "<div class='inline-error captcha-error'>A reCAPTCHA ellenőrzés sikertelen volt!</div>";
-                                }
-                            }
-                            else {
-                                echo "<div class='inline-error captcha-error'>Kérjük végezze el a reCAPTCHA ellenőrzést!</div>";
-                            }
-                        }
-                    }
-                    ?>
                     <p class="inline-text" id="login-text">Van már fiókja? <a href="./login.php" class="inline-link">Jelentkezzen be itt.</a></p>
                     </form>
                 </div>

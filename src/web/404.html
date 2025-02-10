@@ -3,9 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>404</title>
+    <style>
+        body {
+            font-family: "Montserrat", sans-serif;
+            height: 100vh;
+            margin: 0;
+            background-color: #1E1E1E;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+            gap: 3%;
+        }
+        .missing-page-title {
+            font-size: clamp(25px, 20vw, 100px);
+            margin: 0;
+            margin-top: -5%;
+        }
+        .missing-page-content {
+            font-size: clamp(10px, 5vw, 25px);
+            margin: 0;
+        }
+        .home-link {
+            margin-top: 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: clamp(15px, 5vw, 22px);
+            color: white;
+            text-decoration: none;
+            width: 20%;
+            height: 5%;
+            min-width: fit-content;
+            text-align: center;
+            padding: 10px;
+            border: 2px solid white;
+            border-radius: 36px;
+            background-color: rgb(84, 53, 194);
+            transition: padding 0.3s ease, background-color 0.3s ease, border-radius 0.3s ease, border-color 0.3s ease;
+        }
+
+        .home-link:hover {
+            padding: 10px;
+            background-color: rgb(59, 31, 160);
+            border-radius: 60px;
+            border-color: rgb(59, 31, 160);
+        }
+
+
+    </style>
 </head>
 <body>
-    <h1>404</h1>
+    <h1 class="missing-page-title">404</h1>
+    <p class="missing-page-content">Az oldal nem található.</p>
+    <a class="home-link" href="http://localhost/vizsgaremek/codeoverflow">Vissza a főoldalra.</a>
 </body>
 </html>

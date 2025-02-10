@@ -10,8 +10,8 @@ function startSession() {
         $user = simpleGetData("SELECT felhasznalo.id AS id, felhasznalo.nev AS username, felhasznalo.tipus AS role, felhasznalo_token.token FROM felhasznalo INNER JOIN felhasznalo_token ON felhasznalo_token.felhasznalo_id = felhasznalo.id WHERE felhasznalo_token.lejarat > NOW()");
         $tokenExists = false;
         if($user != false) {
-        foreach ($user as $u) {
-            if(password_verify($token, $u["token"])){
+            foreach ($user as $u) {
+                if(password_verify($token, $u["token"])){
                     generateToken($u["id"]);
                     $role = setRole($u["role"]);
                     setSession($u["username"], $u["id"], $role);

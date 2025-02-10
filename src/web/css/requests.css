@@ -1,0 +1,11 @@
+@import url("/vizsgaremek/src/web/css/montserrat-font.css");
+
+body {
+    background-color: #1E1E1E;
+}
+
+.main {
+    width: 100%;
+    height: 95vh;
+    font-family: "Montserrat";
+}
