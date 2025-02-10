@@ -1,3 +1,7 @@
+import { fire } from 'sweetalert2';
+
+
+
 async function kodFeltoltes(){
     let Name = document.getElementById('nevInput').value;
     let categoryId = document.getElementById('katInput').value;
@@ -19,6 +23,12 @@ async function kodFeltoltes(){
         });
         if(!response.ok){
             throw new Error(response.status, response.statusText);
+        }
+        else {
+            alert('Sikeres kódfeltöltés');
+           
+            window.location.replace("http://localhost/13c-varga/vizsgaremek/src/web/home.html");
+        
         }
         
         

@@ -1,5 +1,6 @@
-
 <?php
+
+include '../php_functions/adatbazis_lekeres.php';
 $target_dir = "codes/"; 
     $target_file = $target_dir 
       . basename($_FILES["fileToUpload"]["name"]); 
@@ -27,11 +28,23 @@ $target_dir = "codes/";
               else { 
                   if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],  
                     $target_file)) { 
-                      echo "The file ".  $_FILES["fileToUpload"]["name"].  
-                        " has been uploaded."; 
+                       
+                    
+                        $eleresi_sql = "UPDATE kod SET eleresi_ut = '$file_name' WHERE id = (SELECT id FROM kod ORDER BY id DESC LIMIT 1)";
+                        $eleresi = adatokValtoztatasa($eleresi_sql);
+                        if($eleresi = "Sikeres művelet!")
+                        {//Locationt át kell írni éles verzióban
+                         
+                           header('SUCCESS',true, 200);
+                        }
+                        else
+                        {
+                            header('PATH ERROR', true, 400);
+                        }
+
                   }  
                   else { 
-                      echo "Hiba."; 
+                    header('ALREADY EXISTS', true, 400);
                   } 
               } 
            
