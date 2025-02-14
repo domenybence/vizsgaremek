@@ -1,0 +1,13 @@
+FILE LEGELEJÉRE:
+    <?php
+        if(session_status() === PHP_SESSION_NONE) {
+            startSession();
+        }
+    ?>
+
+A HEADBE:
+    <script src="./js/navbar.js" defer></script>
+    <link rel="stylesheet" href="./css/navbar.css">
+
+A BODYBA:
+    <?php include "navbar.php"; ?>

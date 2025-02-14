@@ -42,10 +42,13 @@ else {
         const userId = <?php echo json_encode($userid); ?>;
         </script>
     <script src="/vizsgaremek/src/web/js/code.js" defer></script>
-    <script src="/vizsgaremek/src/web//js/gsap-public/minified/gsap.min.js"></script>
+    <link rel="stylesheet" href="./css/loader.css">
 </head>
 <body>
-    <?php include "loader.html"; ?>
+    <script src="/vizsgaremek/src/web//js/gsap-public/minified/gsap.min.js"></script>
+    <div class="page-cover">
+        <h1 class="page-cover-title">Betöltés...</h1>
+    </div>
     <?php include "navbar.php"; ?>
     <?php
         if(!$isOwned) {
@@ -388,5 +391,6 @@ else {
             </div>';
             }
         } ?>
+    <script src="/vizsgaremek/src/web/js/loader.js"></script>
 </body>
 </html>

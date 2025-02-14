@@ -317,6 +317,7 @@ hr {
         background-size: 100vw 100vh;
     }
     .container {
+        overflow: hidden;
         border-radius: 0px;
         backdrop-filter: blur(8.4px);
         -webkit-backdrop-filter: blur(8.4px);

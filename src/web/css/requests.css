@@ -4,8 +4,22 @@ body {
     background-color: #1E1E1E;
 }
 
-.main {
+.container {
+    display: flex;
+    justify-content: center;
     width: 100%;
     height: 95vh;
     font-family: "Montserrat";
 }
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 100px;
+}
+
+.inline-item {
+    color: white;
+}
+
