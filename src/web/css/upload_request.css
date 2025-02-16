@@ -9,7 +9,6 @@ body {
     display: flex;
     justify-content: center;
     width: 100%;
-    font-size: 20px;
     font-family: "Montserrat";
 }
 
@@ -34,8 +33,8 @@ body {
     background-color: #3b1fa0;
     color: white;
     font-size: 17px;
-    width: 40vw;
-    height: 6vh;
+    width: 50vw;
+    height: 10vh;
     border: none;
     border-radius: 25px;
     transition: background 0.2s ease;
@@ -54,10 +53,10 @@ body {
     .container {
         margin-top: 8vh;
     }
-    
+
     .upload-button {
         font-size: 17px;
         width: 12vw;
         height: 5vh;
-    } 
+    }
 }
