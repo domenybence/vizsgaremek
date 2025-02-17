@@ -42,7 +42,7 @@ else {
         const userId = <?php echo json_encode($userid); ?>;
         </script>
     <script src="/vizsgaremek/src/web/js/code.js" defer></script>
-    <link rel="stylesheet" href="./css/loader.css">
+    <link rel="stylesheet" href="/vizsgaremek/src/web/css/navbar.css">
 </head>
 <body>
     <script src="/vizsgaremek/src/web//js/gsap-public/minified/gsap.min.js"></script>

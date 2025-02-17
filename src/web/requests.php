@@ -3,6 +3,12 @@ include_once "../php_functions/php_functions.php";
 if(session_status() === PHP_SESSION_NONE) {
     startSession();
 }
+$data = preparedGetData("SELECT felkeres.nev AS requestname, felkeres.leiras AS description, felhasznalo.nev AS username, felkeres.feltoltesi_ido AS uploadtime, felkeres.ar AS payment FROM felkeres INNER JOIN kod ON felkeres.kod_id = kod.id INNER JOIN felhasznalo ON felhasznalo.id = felkeres.felhasznalo_id WHERE felkeres.id = ?;", "i", [$request]);
+$requestname = $data[0]["requestname"];
+$username = $data[0]["username"];
+$uploadtime = $data[0]["uploadtime"];
+$payment = $data[0]["payment"];
+$description = $data[0]["description"];
 ?>
 
 <!DOCTYPE html>
@@ -12,12 +18,12 @@ if(session_status() === PHP_SESSION_NONE) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A CodeOverflow felkéréseinek felülete.">
     <title>Felkérések</title>
-    <link rel="stylesheet" href="./css/requests.css">
-    <link rel="icon" type="image/x-icon" href="./icon.png">
-    <script type="module" src="./js/requests.js" defer></script>
-    <script src="./js/navbar.js" defer></script>
-    <link rel="stylesheet" href="./css/navbar.css">
-    <link rel="stylesheet" href="./css/loader.css">
+    <link rel="stylesheet" href="/vizsgaremek/src/web/css/requests.css">
+    <link rel="icon" type="image/x-icon" href="/vizsgaremek/src/web/icon.png">
+    <script type="module" src="/vizsgaremek/src/web/js/requests.js" defer></script>
+    <script src="/vizsgaremek/src/web/js/navbar.js" defer></script>
+    <link rel="stylesheet" href="/vizsgaremek/src/web/css/navbar.css">
+    <link rel="stylesheet" href="/vizsgaremek/src/web/css/loader.css">
 </head>
 <body>
     <?php include "navbar.php"; ?>
@@ -32,7 +38,7 @@ if(session_status() === PHP_SESSION_NONE) {
                     <p>Név</p>
                 </div>
                 <div class="inline-item">
-                    <p>Kód neve</p>
+                <p><?php echo $requestname ?></p>
                 </div>
             </div>
             <div class="inline-group">
@@ -40,7 +46,7 @@ if(session_status() === PHP_SESSION_NONE) {
                     <p>Feltöltés ideje</p>
                 </div>
                 <div class="inline-item">
-                    <p>2024.02.16.</p>
+                    <?php echo $uploadtime ?>
                 </div>
             </div>
             <div class="inline-group">
@@ -48,12 +54,12 @@ if(session_status() === PHP_SESSION_NONE) {
                     <p>Ár</p>
                 </div>
                 <div class="inline-item">
-                    <p>5000</p>
+                    <?php echo $payment ?>
                 </div>
             </div>
             <div class="inline-group">
                 <div class="inline-item">
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet minima velit blanditiis asperiores doloribus laborum, voluptatibus harum enim molestiae, delectus, mollitia ea corporis. Ipsum quod similique iusto rem voluptatem illo?</p>
+                    <?php echo $description ?>
                 </div>
             </div>
             <div class="inline-group">

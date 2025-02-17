@@ -66,14 +66,32 @@ else if(isset($_GET["codecategory"]) ) {
 else if(isset($_GET["username"])) {
     startSession();
     if(preparedGetData("SELECT * FROM felhasznalo WHERE felhasznalo.nev = ?", "s", [$_GET["username"]]) != false) {
-    $username = $_GET["username"];
-    $currentUrl = $_SERVER["REQUEST_URI"];
-    $redirectUrl = "/vizsgaremek/felhasznalo/$username";
-    echo "Felhasznalónév:" . $username;
-    if ($currentUrl != $redirectUrl) {
-        header("Location: /vizsgaremek/felhasznalo/$username");
-        exit;
+        $username = $_GET["username"];
+        $currentUrl = $_SERVER["REQUEST_URI"];
+        $redirectUrl = "/vizsgaremek/felhasznalo/$username";
+        if ($currentUrl != $redirectUrl) {
+            header("Location: /vizsgaremek/felhasznalo/$username");
+            exit;
+        }
     }
+    else {
+        http_response_code(404);
+        include "./404.html";
+    }
+}
+else if(isset($_GET["request"])) {
+    startSession();
+    if(preparedGetData("SELECT * FROM felkeres WHERE felkeres.id = ?", "i", [$_GET["request"]]) != false) {
+        $request = $_GET["request"];
+        $currentUrl = $_SERVER["REQUEST_URI"];
+        $redirectUrl = "/vizsgaremek/felkeres/$request";
+        if ($currentUrl != $redirectUrl) {
+            header("Location: /vizsgaremek/felkeres/$request");
+            exit;
+        }
+        else {
+            include "./requests.php";
+        }
     }
     else {
         http_response_code(404);

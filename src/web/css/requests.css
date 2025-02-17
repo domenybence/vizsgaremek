@@ -17,12 +17,19 @@ body {
     display: flex;
     flex-direction: column;
     width: 80%;
-    height: 100px;
+    height: auto;
 }
 
 .inline-group {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.inline-group:last-of-type {
+    display: flex;
+    justify-content: center;
 }
 
 .inline-item {
@@ -33,9 +40,10 @@ body {
     margin-top: 20px;
     background-color: #3b1fa0;
     color: white;
-    font-size: 17px;
-    width: 40vw;
-    height: 6vh;
+    font-size: 15px;
+    width: 50%;
+    max-width: 300px;
+    height: 5vh;
     border: none;
     border-radius: 25px;
     transition: background 0.2s ease;
@@ -54,10 +62,15 @@ body {
     .container {
         margin-top: 8vh;
     }
+
+    .inline-group:last-of-type {
+        display: block;
+    }
     
     .upload-button {
         font-size: 17px;
-        width: 12vw;
+        width: 40%;
+        max-width: 200px;
         height: 5vh;
-    } 
+    }
 }
