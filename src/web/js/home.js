@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
   const softwareContainer = document.getElementById("szoftverek");
-
+  //Segédvüggvény
   function $(id) {
     return document.getElementById(id);
   }
 
 
-
+  //Szoftverek adatbázisból való lekérése
   async function fetchSoftware(endpoint, bodyData = null) {
     try {
       const options = bodyData ? {
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Lekérés sikertelen!");
     }
   }
-
+  //Szoftverek megjelenítése
   function displaySoftware(data) {
     softwareContainer.innerHTML = "";
     data.forEach(item => {
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
       softwareContainer.innerHTML += card;
     });
   }
-
+  //Szoftverkeresés
   async function searchSoftware() {
     const query = $("kereso").value.trim().toLowerCase();
     if (!query) return;
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     displaySoftware(filteredData);
     $("kereso").value = "";
   }
-
+  //Koszinusz szimilaritás
   function wordCountMap(str) {
     let words = str.split(' ');
     let wordCount = {};
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return cosineSimilarity(vectorA, vectorB);
   }
 
-  // Event Listeners
+  // EventListenerek
   $("ossz").addEventListener("click", () => fetchSoftware("./osszesszoftver"));
   $("html").addEventListener("click", () => fetchSoftware("./katkereses", { kategoria: 1 }));
   $("css").addEventListener("click", () => fetchSoftware("./katkereses", { kategoria: 2 }));
@@ -125,5 +125,5 @@ document.addEventListener("DOMContentLoaded", () => {
   $("cs").addEventListener("click", () => fetchSoftware("./katkereses", { kategoria: 5 }));
   $("keresobtn").addEventListener("click", searchSoftware);
 
-  fetchSoftware("./osszesszoftver"); // Load all software on page load
+  fetchSoftware("./osszesszoftver"); // Összes szoftver betöltése az oldal betöltésekor
 });
