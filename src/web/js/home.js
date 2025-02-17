@@ -1,148 +1,66 @@
-function $(id) {
-  return document.getElementById(id);
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const softwareContainer = document.getElementById("szoftverek");
+
+  function $(id) {
+    return document.getElementById(id);
+  }
 
 
-var btnContainer = document.getElementById("btncontainer");
 
-var btns = btnContainer.getElementsByClassName("btn btn-default navbar-btn text-white");
-
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function () {
-    var current = document.getElementsByClassName("active");
-
-
-    if (current.length > 0) {
-      current[0].className = current[0].className.replace(" active", "");
-    }
-
-    this.className += " active";
-  });
-}
-
-
-async function szoftverekLekerese() {
-  try {
-
-    let response = await fetch("./osszesszoftver", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
+  async function fetchSoftware(endpoint, bodyData = null) {
+    try {
+      const options = bodyData ? {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bodyData)
+      } : {};
+      
+      let response = await fetch(endpoint, options);
+      let data = await response.json();
+      
+      if (response.ok) {
+        displaySoftware(data);
+      } else {
+        alert("Lekérés sikertelen!");
       }
+    } catch (error) {
+      console.error(error);
+      alert("Lekérés sikertelen!");
+    }
+  }
+
+  function displaySoftware(data) {
+    softwareContainer.innerHTML = "";
+    data.forEach(item => {
+      let card = `
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card bg-dark text-light mb-3">
+            <div class="card-header">${item.kategoria_id}</div>
+            <div class="card-body bg-light text-dark">
+              <h5 class="card-title">${item.nev}</h5>
+              <a href="#" class="btn btn-dark">Megtekintés</a>
+            </div>
+          </div>
+        </div>`;
+      softwareContainer.innerHTML += card;
     });
-
-    const datas = await response.json();
-    if (response.ok) {
-      console.log(datas);
-      let szoftverek = $('szoftverek');
-      szoftverek.innerHTML = "";
-      for (const data of datas) {
-        let col = document.createElement('col');
-        col.classList.add('col-12', 'col-md-6', 'col-sm-12');
-        let div1 = document.createElement('div');
-        let div2 = document.createElement('div');
-        let div3 = document.createElement('div');
-        div1.classList.add('card', 'bg-dark', 'text-light', 'pb-3', 'mt-2');
-        div2.classList.add('card-header');
-        div3.classList.add('card-body', 'bg-light', 'text-dark');
-        let h5 = document.createElement('h5');
-        let p = document.createElement('p');
-        let a = document.createElement('a');
-        h5.classList.add('card-title');
-        p.classList.add('card-text');
-        a.classList.add('btn', 'btn-dark', 'text-light');
-
-        div2.innerHTML = data.kategoria_id;
-        h5.innerHTML = data.nev;
-        a.innerHTML = "Megtekintés";
-
-        div3.appendChild(h5);
-        div3.appendChild(p);
-        div3.appendChild(a);
-        div1.appendChild(div2);
-        div1.appendChild(div3);
-        col.appendChild(div1);
-        szoftverek.appendChild(col);
-      }
-
-
-    }
-    else {
-      alert('Lekérés sikertelen!');
-    }
-
-  } catch (error) {
-    console.log(error);
-    alert('Lekérés sikertelen!');
   }
 
-}
-
-
-async function katLekerese(kat) {
-  try {
-
-    let kategoria = {
-      "kategoria": kat
-    }
-
-
-    let response = await fetch("./katkereses", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(kategoria)
-
-    })
-    const datas = await response.json();
-    if (response.ok) {
-      console.log(datas);
-      let szoftverek = $('szoftverek');
-      szoftverek.innerHTML = "";
-      for (const data of datas) {
-        let col = document.createElement('col');
-        col.classList.add('col-12', 'col-md-6', 'col-sm-12');
-        let div1 = document.createElement('div');
-        let div2 = document.createElement('div');
-        let div3 = document.createElement('div');
-        div1.classList.add('card', 'bg-dark', 'text-light', 'pb-3', 'mt-2');
-        div2.classList.add('card-header');
-        div3.classList.add('card-body', 'bg-light', 'text-dark');
-        let h5 = document.createElement('h5');
-        let p = document.createElement('p');
-        let a = document.createElement('a');
-        h5.classList.add('card-title');
-        p.classList.add('card-text');
-        a.classList.add('btn', 'btn-dark', 'text-light');
-
-        div2.innerHTML = data.kategoria_id;
-        h5.innerHTML = data.nev;
-        a.innerHTML = "Megtekintés";
-
-        div3.appendChild(h5);
-        div3.appendChild(p);
-        div3.appendChild(a);
-        div1.appendChild(div2);
-        div1.appendChild(div3);
-        col.appendChild(div1);
-        szoftverek.appendChild(col);
-      }
-
-
-    }
-    else {
-      alert('Lekérés sikertelen!');
-    }
-
-  } catch (error) {
-    console.log(error);
-    alert('Lekérés sikertelen!');
+  async function searchSoftware() {
+    const query = $("kereso").value.trim().toLowerCase();
+    if (!query) return;
+    
+    let response = await fetch("./osszesszoftver");
+    let data = await response.json();
+    
+    let filteredData = data.filter(item => 
+      item.nev.toLowerCase().includes(query) || textCosineSimilarity(query, item.nev) > 0.4
+    );
+    console.log(filteredData);
+    displaySoftware(filteredData);
+    $("kereso").value = "";
   }
 
-}
-
-async function searchLekeres() {
   function wordCountMap(str) {
     let words = str.split(' ');
     let wordCount = {};
@@ -198,85 +116,14 @@ async function searchLekeres() {
     return cosineSimilarity(vectorA, vectorB);
   }
 
-  try {
-    let searchparam = document.getElementById('kereso').value;
-    console.log(searchparam);
-    let response = await fetch("./osszesszoftver", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
+  // Event Listeners
+  $("ossz").addEventListener("click", () => fetchSoftware("./osszesszoftver"));
+  $("html").addEventListener("click", () => fetchSoftware("./katkereses", { kategoria: 1 }));
+  $("css").addEventListener("click", () => fetchSoftware("./katkereses", { kategoria: 2 }));
+  $("js").addEventListener("click", () => fetchSoftware("./katkereses", { kategoria: 3 }));
+  $("php").addEventListener("click", () => fetchSoftware("./katkereses", { kategoria: 4 }));
+  $("cs").addEventListener("click", () => fetchSoftware("./katkereses", { kategoria: 5 }));
+  $("keresobtn").addEventListener("click", searchSoftware);
 
-    const datas = await response.json();
-    if (response.ok) {
-      console.log(datas);
-      let szoftverek = $('szoftverek');
-      szoftverek.innerHTML = "";
-      
-      for (const data of datas) {
-        console.log(textCosineSimilarity(searchparam,data.nev));
-       if(textCosineSimilarity(searchparam,data.nev) > 0.4 || (data.nev).includes(searchparam))
-       {
-        let col = document.createElement('col');
-        col.classList.add('col-12', 'col-md-6', 'col-sm-12');
-        let div1 = document.createElement('div');
-        let div2 = document.createElement('div');
-        let div3 = document.createElement('div');
-        div1.classList.add('card', 'bg-dark', 'text-light', 'pb-3', 'mt-2');
-        div2.classList.add('card-header');
-        div3.classList.add('card-body', 'bg-light', 'text-dark');
-        let h5 = document.createElement('h5');
-        let p = document.createElement('p');
-        let a = document.createElement('a');
-        h5.classList.add('card-title');
-        p.classList.add('card-text');
-        a.classList.add('btn', 'btn-dark', 'text-light');
-
-        div2.innerHTML = data.kategoria_id;
-        h5.innerHTML = data.nev;
-        a.innerHTML = "Megtekintés";
-
-        div3.appendChild(h5);
-        div3.appendChild(p);
-        div3.appendChild(a);
-        div1.appendChild(div2);
-        div1.appendChild(div3);
-        col.appendChild(div1);
-        szoftverek.appendChild(col);
-       }
-      }
-
-      $('kereso').value = "";
-    }
-    else {
-      alert('Lekérés sikertelen!');
-    }
-
-  } catch (error) {
-    console.log(error);
-    alert('Lekérés sikertelen!');
-  }
-
-
-
-}
-
-window.addEventListener('load', szoftverekLekerese);
-$('ossz').addEventListener('click', szoftverekLekerese)
-$('html').addEventListener('click', function () {
-  katLekerese(1)
-}, false);
-$('css').addEventListener('click', function () {
-  katLekerese(2)
-}, false);
-$('js').addEventListener('click', function () {
-  katLekerese(3)
-}, false);
-$('php').addEventListener('click', function () {
-  katLekerese(4)
-}, false);
-$('cs').addEventListener('click', function () {
-  katLekerese(5)
-}, false);
-$('keresobtn').addEventListener('click', searchLekeres)
+  fetchSoftware("./osszesszoftver"); // Load all software on page load
+});

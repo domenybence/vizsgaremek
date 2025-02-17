@@ -13,13 +13,28 @@ $data = json_decode(file_get_contents('php://input'), true);
         $name = $data["name"];
         $price = $data["price"];
 
+        if(isset($file_name) && isset($userid) && isset($categoryid) && isset($name) && isset($price))
+        {
+            $feltoltes_sql = "INSERT INTO `kod` (`id`, `felhasznalo_id`, `kategoria_id`, `nev`, `ar`, `eleresi_ut`, `feltoltesi_ido`, `jovahagyott`) VALUES (NULL , '$userid', '$categoryid', '$name' , '$price' , '$file_name', CURRENT_TIMESTAMP , 0)";
+            $feltoltes = adatokValtoztatasa($feltoltes_sql);
+           
+            if($feltoltes == "Sikeres feltöltés")
+            {
+                echo $feltoltes;
+            }  
+            else
+            {
+                echo json_encode(['valasz' => 'Sikertelen művelet!'], JSON_UNESCAPED_UNICODE);
+            }
+    
+        }
+        else
+        {
+            echo json_encode(['valasz' => 'Hiányzó adatok!'], JSON_UNESCAPED_UNICODE);
+            header('bad request', true, 400);
+        }
 
-        $feltoltes_sql = "INSERT INTO `kod` (`id`, `felhasznalo_id`, `kategoria_id`, `nev`, `ar`, `eleresi_ut`, `feltoltesi_ido`, `jovahagyott`) VALUES (NULL , '$userid', '$categoryid', '$name' , '$price' , '$file_name', CURRENT_TIMESTAMP , 0)";
-        $feltoltes = adatokValtoztatasa($feltoltes_sql);
-        echo $feltoltes;
        
-                
-
 
 
     }
