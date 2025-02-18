@@ -3,12 +3,14 @@ include_once "../php_functions/php_functions.php";
 if(session_status() === PHP_SESSION_NONE) {
     startSession();
 }
-$data = preparedGetData("SELECT felkeres.nev AS requestname, felkeres.leiras AS description, felhasznalo.nev AS username, felkeres.feltoltesi_ido AS uploadtime, felkeres.ar AS payment FROM felkeres INNER JOIN kod ON felkeres.kod_id = kod.id INNER JOIN felhasznalo ON felhasznalo.id = felkeres.felhasznalo_id WHERE felkeres.id = ?;", "i", [$request]);
+$data = preparedGetData("SELECT felkeres.nev AS requestname, felkeres.leiras AS description, felhasznalo.nev AS username, felkeres.elvallalo_felhasznalo_id AS assignee_id, felkeres.feltoltesi_ido AS uploadtime, felkeres.ar AS offered_price FROM felkeres INNER JOIN kod ON felkeres.kod_id = kod.id INNER JOIN felhasznalo ON felhasznalo.id = felkeres.felhasznalo_id WHERE felkeres.id = ?;", "i", [$request]);
 $requestname = $data[0]["requestname"];
 $username = $data[0]["username"];
 $uploadtime = $data[0]["uploadtime"];
-$payment = $data[0]["payment"];
+$payment = $data[0]["offered_price"];
 $description = $data[0]["description"];
+$assigneeid = $data[0]["assignee_id"];
+$userid = preparedGetData("SELECT felhasznalo.id FROM felhasznalo WHERE felhasznalo.nev = ?;", "s", [$_SESSION["username"]])[0]["id"];
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +26,10 @@ $description = $data[0]["description"];
     <script src="/vizsgaremek/src/web/js/navbar.js" defer></script>
     <link rel="stylesheet" href="/vizsgaremek/src/web/css/navbar.css">
     <link rel="stylesheet" href="/vizsgaremek/src/web/css/loader.css">
+    <script>
+        const userId = <?php echo json_encode($userid); ?>;
+        const requestId = <?php echo json_encode($request); ?>;
+    </script>
 </head>
 <body>
     <?php include "navbar.php"; ?>
@@ -62,9 +68,11 @@ $description = $data[0]["description"];
                     <?php echo $description ?>
                 </div>
             </div>
-            <div class="inline-group">
-                <button class="upload-button">Felkérés feltöltése</button>
-            </div>
+            <?php if($assigneeid === null) echo '
+                <div class="inline-group">
+                    <button class="upload-button">Felkérés elvállalása</button>
+                </div>
+            '; ?>
         </div>
     </div>
     <script src="/vizsgaremek/src/web/js/loader.js"></script>
