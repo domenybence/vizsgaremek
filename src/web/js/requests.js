@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 async function acceptRequest(requestId) {
     try {
         const response = await fetch("/vizsgaremek/src/api/accept_request.php", {
@@ -123,31 +122,3 @@ document.addEventListener("DOMContentLoaded", () => {
         rejectSolutionButton.addEventListener("click", () => rejectSolution(requestid));
     }
 })
-=======
-async function fetchRequest() {
-    try {
-        const response = await fetch("/vizsgaremek/src/php_functions/accept_request_fetch.php",{
-            method: "POST",
-            headers:{
-                "Content-Type": "application/json",
-                "Javascript-Fetch-Request": "accreq-fetch-req"
-            },
-            body: JSON.stringify({
-                userid: userId,
-                requestid: Number(requestId)
-            })
-        });
-        const result = await response.json();
-        if(result.result == "error") {
-            throw new Error("Hiba történt!");
-        }
-    }
-    catch(error) {
-        console.error(error);
-    }
-}
-
-if(document.contains(document.querySelector(".upload-button"))) {
-    document.querySelector(".upload-button").addEventListener("click", fetchRequest);
-}
->>>>>>> 6ddc53096dcecddf0fe15ad01063e2dbf417fd68
