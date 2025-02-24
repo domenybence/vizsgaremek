@@ -1,11 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
   const softwareContainer = document.getElementById("szoftverek");
+  const paginationContainer = document.createElement("div");
+  paginationContainer.classList.add("pagination-container", "mt-3", "d-flex", "justify-content-center");
+  softwareContainer.parentNode.appendChild(paginationContainer);
   //Segédvüggvény
   function $(id) {
     return document.getElementById(id);
   }
 
-
+  let currentPage = 1;
+  const itemsPerPage = 9; 
+  let softwareData = [];
   //Szoftverek adatbázisból való lekérése
   async function fetchSoftware(endpoint, bodyData = null) {
     try {
@@ -19,7 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
       let data = await response.json();
       
       if (response.ok) {
-        displaySoftware(data);
+        softwareData = data;
+        currentPage = 1;
+        displaySoftware();
       } else {
         alert("Lekérés sikertelen!");
       }
@@ -29,9 +36,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   //Szoftverek megjelenítése
-  function displaySoftware(data) {
+  function displaySoftware() {
     softwareContainer.innerHTML = "";
-    data.forEach(item => {
+    let start = (currentPage - 1) * itemsPerPage;
+    let end = start + itemsPerPage;
+    let paginatedItems = softwareData.slice(start, end);
+
+    paginatedItems.forEach((item) => {
       let card = `
         <div class="col-12 col-md-6 col-lg-4">
           <div class="card bg-dark text-light mb-3">
@@ -44,22 +55,30 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>`;
       softwareContainer.innerHTML += card;
     });
+
+    setupPagination();
   }
-  //Szoftverkeresés
-  async function searchSoftware() {
-    const query = $("kereso").value.trim().toLowerCase();
-    if (!query) return;
-    
-    let response = await fetch("./osszesszoftver");
-    let data = await response.json();
-    
-    let filteredData = data.filter(item => 
-      item.nev.toLowerCase().includes(query) || textCosineSimilarity(query, item.nev) > 0.4
-    );
-    console.log(filteredData);
-    displaySoftware(filteredData);
-    $("kereso").value = "";
+
+  function setupPagination() {
+    paginationContainer.innerHTML = "";
+    let pageCount = Math.ceil(softwareData.length / itemsPerPage);
+
+    for (let i = 1; i <= pageCount; i++) {
+      let btn = document.createElement("button");
+      btn.classList.add("btn", "btn-outline-dark", "mx-1");
+      btn.textContent = i;
+      if (i === currentPage) btn.classList.add("btn-primary");
+
+      btn.addEventListener("click", () => {
+        currentPage = i;
+        displaySoftware();
+      });
+
+      paginationContainer.appendChild(btn);
+    }
   }
+
+ 
   //Koszinusz szimilaritás
   function wordCountMap(str) {
     let words = str.split(' ');
@@ -123,7 +142,22 @@ document.addEventListener("DOMContentLoaded", () => {
   $("js").addEventListener("click", () => fetchSoftware("./katkereses", { kategoria: 3 }));
   $("php").addEventListener("click", () => fetchSoftware("./katkereses", { kategoria: 4 }));
   $("cs").addEventListener("click", () => fetchSoftware("./katkereses", { kategoria: 5 }));
-  $("keresobtn").addEventListener("click", searchSoftware);
+  $("keresobtn").addEventListener("click", async () => {
+    const query = document.getElementById("kereso").value.trim().toLowerCase();
+    if (!query) return;
+
+    let response = await fetch("./osszesszoftver");
+    let data = await response.json();
+
+    softwareData = data.filter(
+      (item) => item.nev.toLowerCase().includes(query) || textCosineSimilarity(query, item.nev) > 0.4
+    );
+
+    currentPage = 1;
+    displaySoftware();
+    document.getElementById("kereso").value = "";
+  });
+
 
   fetchSoftware("./osszesszoftver"); // Összes szoftver betöltése az oldal betöltésekor
 });
