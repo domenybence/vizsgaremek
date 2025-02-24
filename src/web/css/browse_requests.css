@@ -1,0 +1,137 @@
+@import url("/vizsgaremek/src/web/css/montserrat-font.css");
+
+body {
+    background-color: #1a1a1a;
+    font-family: "Montserrat";
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 8vh;
+    box-sizing: border-box;
+}
+
+.request-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;  
+    width: 100%;
+}
+
+.request-card {
+    width: 95%;
+    min-height: 220px;
+    height: auto;
+    margin: 0 auto;
+    background: #222222;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 25px;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.request-card:hover {
+    border-color: #444;
+}
+
+.request-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.request-header h2 {
+    margin: 0;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.status {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.status.nyitott {
+    background: rgba(40, 167, 69, 0.8);
+    color: white;
+}
+
+.status.folyamatban {
+    background: rgba(255, 193, 7, 0.8);
+    color: black;
+}
+
+.status.teljesitve {
+    background: rgba(23, 162, 184, 0.8);
+    color: white;
+}
+
+.status.elutasitva {
+    background: rgba(220, 53, 69, 0.8);
+    color: white;
+}
+
+.request-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 10px 0;
+    margin-top: auto;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-item label {
+    color: #888;
+    font-size: 16px;
+}
+
+.info-item span {
+    color: #fff;
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .request-card {
+        width: 98%;
+        min-height: 220px;
+    }
+    
+    .request-header h2 {
+        font-size: 18px;
+    }
+    
+    .info-item label,
+    .info-item span {
+        font-size: 14px;
+    }
+}

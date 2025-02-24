@@ -20,7 +20,7 @@ include_once "../php_functions/php_functions.php";
             }
             ?>
         </div>
-        <a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/requests.php">Felkérések</a>
+        <a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/browse_requests.php">Felkérések</a>
     </div>
     <div class="nav-group">
         <?php

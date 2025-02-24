@@ -2,6 +2,7 @@
 
 body {
     background-color: #1E1E1E;
+    font-family: "Montserrat";
 }
 
 .container {
@@ -9,22 +10,30 @@ body {
     display: flex;
     justify-content: center;
     width: 100%;
-    font-size: 20px;
-    font-family: "Montserrat";
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .content {
+    background: #1E1E1E;
+    border-radius: 8px;
+    padding: 25px;
+    width: 100%;
+    max-width: 1600px;
     display: flex;
     flex-direction: column;
-    width: 80%;
-    height: auto;
+    gap: 20px;
+    border: 1px solid #333;
+    position: relative;
+    box-sizing: border-box;
 }
 
 .inline-group {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
 }
 
 .inline-group:last-of-type {
@@ -37,25 +46,251 @@ body {
 }
 
 .upload-button {
-    margin-top: 20px;
     background-color: #3b1fa0;
     color: white;
-    font-size: 15px;
-    width: 50%;
-    max-width: 300px;
-    height: 5vh;
     border: none;
     border-radius: 25px;
-    transition: background 0.2s ease;
+    padding: 10px 20px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .upload-button:hover {
     outline: 2px solid white;
-    cursor: pointer;
 }
 
 .upload-button:active {
     background-color: #22154f;
+}
+
+.upload-button.accept {
+    background-color: #28a745;
+}
+
+.upload-button.reject {
+    background-color: #dc3545;
+}
+
+.request-details {
+    background: #252525;
+    border-radius: 8px;
+    padding: 25px;
+    width: 100%;
+    max-width: 1600px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.request-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
+}
+
+.request-header h1 {
+    margin: 0;
+    color: #fff;
+    font-size: 24px;
+}
+
+.status-badge {
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.status-badge.nyitott { background: #28a745; color: white; }
+.status-badge.folyamatban { background: #ffc107; color: black; }
+.status-badge.teljesitve { background: #17a2b8; color: white; }
+.status-badge.elutasitva { background: #dc3545; color: white; }
+
+.request-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 15px;
+    background: #1E1E1E;
+    border-radius: 6px;
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    min-width: 200px;
+}
+
+.meta-item label {
+    color: #888;
+    font-size: 14px;
+}
+
+.meta-item span {
+    color: #fff;
+    font-size: 16px;
+}
+
+.request-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.request-content h3 {
+    color: #fff;
+    font-size: 18px;
+    margin: 0;
+}
+
+.description {
+    color: #ddd;
+    line-height: 1.6;
+    padding: 20px;
+    background: #1E1E1E;
+    border-radius: 6px;
+    border: 1px solid #333;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+}
+
+.code-sample {
+    margin-top: 15px;
+    padding: 15px;
+    background: #1E1E1E;
+    border-radius: 6px;
+}
+
+.code-sample pre {
+    margin: 10px 0 0 0;
+    padding: 15px;
+    background: #111;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.code-sample code {
+    color: #e6e6e6;
+    font-family: 'Consolas', monospace;
+    font-size: 14px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 20px;
+    border-top: 1px solid #333;
+    position: relative;
+}
+
+.button {
+    padding: 10px 20px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+    background: #1E1E1E;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    border-color: #333;
+    background: #252525;
+}
+
+.button.primary {
+    background: #1E1E1E;
+    border: 1px solid #333;
+}
+
+.button.success {
+    background: #1E1E1E;
+    border: 1px solid #28a745;
+    color: #28a745;
+}
+
+.button.danger {
+    background: #1E1E1E;
+    border: 1px solid #dc3545;
+    color: #dc3545;
+}
+
+.button.success:hover {
+    background: #28a745;
+    color: white;
+}
+
+.button.danger:hover {
+    background: #dc3545;
+    color: white;
+}
+
+.review-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.info-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 15px;
+    background: #1E1E1E;
+    border-radius: 6px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    min-width: 200px;
+}
+
+.info-item label {
+    color: #888;
+    font-size: 14px;
+}
+
+.info-item span {
+    color: #fff;
+    font-size: 16px;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.text-content {
+    color: #ddd;
+    line-height: 1.6;
+    padding: 15px;
+    background: #1E1E1E;
+    border-radius: 6px;
+}
+
+.code-content {
+    margin-top: 15px;
+    padding: 15px;
+    background: #1E1E1E;
+    border-radius: 6px;
 }
 
 @media screen and (min-width: 800px) {
@@ -72,5 +307,193 @@ body {
         width: 40%;
         max-width: 200px;
         height: 5vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .request-details {
+        padding: 15px;
+    }
+
+    .request-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .request-meta {
+        grid-template-columns: 1fr;
+    }
+
+    .meta-item {
+        width: 100%;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .button {
+        width: 100%;
+    }
+
+    .review-actions {
+        width: 100%;
+    }
+}
+
+.title-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 20px;
+    background: #1E1E1E;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border: 1px solid #333;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    /* ...existing styles... */
+}
+
+.title-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    min-width: 200px;
+}
+
+.title-item label {
+    color: #888;
+    font-size: 14px;
+}
+
+.title-item span {
+    color: #fff;
+    font-size: 16px;
+}
+
+.status {
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.status.nyitott {
+    background: rgba(40, 167, 69, 0.8); color: white;
+}
+.status.folyamatban {
+    background: rgba(255, 193, 7, 0.8); color: black;
+}
+.status.teljesitve {
+    background: rgba(23, 162, 184, 0.8); color: white;
+}
+.status.elutasitva {
+    background: rgba(220, 53, 69, 0.8); color: white;
+}
+
+h1, h3 {
+    color: #fff;
+    margin: 0;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.button {
+    padding: 10px 20px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+    background: #1E1E1E;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    border-color: #333;
+    background: #252525;
+}
+
+/* Remove the gradient effects */
+.button::before {
+    display: none;
+}
+
+.button.primary {
+    background: #1E1E1E;
+    border: 1px solid #333;
+}
+
+.button.success {
+    background: #1E1E1E;
+    border: 1px solid #28a745;
+    color: #28a745;
+}
+
+.button.danger {
+    background: #1E1E1E;
+    border: 1px solid #dc3545;
+    color: #dc3545;
+}
+
+.button.success:hover {
+    background: #28a745;
+    color: white;
+}
+
+.button.danger:hover {
+    background: #dc3545;
+    color: white;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .content {
+        padding: 15px;
+    }
+
+    .inline-group {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .title-item {
+        width: 100%;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .button {
+        width: 100%;
+    }
+
+    .review-actions {
+        width: 100%;
     }
 }
