@@ -1,0 +1,20 @@
+.my-sidebar {
+    -ms-flex: 0 0 230px;
+    flex: 0 0 230px; 
+    
+    }
+
+@media (max-width: 890px) {
+    .my-sidebar {
+      display: none; 
+    } 
+  }
+
+
+  @media (max-width: 992px) {
+    #mlchange {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      margin-top: 10px;
+    }
+  }
