@@ -1,27 +1,23 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /vizsgaremek/
-
+    
+    RewriteRule ^src/web/browse_requests\.php$ /vizsgaremek/felkeresek [R=301,L]
 
     RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/home\.html$
     RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/dashboard\.php$
     RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/login\.php$
     RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/registration\.php$
-
     RewriteRule ^kategoria/([^/]+)/([^/]+)/?$ /vizsgaremek/src/web/router.php?codecategory=$1&codeid=$2 [QSA,L]
     
     RewriteRule ^kategoria/([^/]+)$ /vizsgaremek/src/web/router.php?codecategory=$1 [QSA,L]
     RewriteRule ^kategoria/([^/]+)/?$ /vizsgaremek/src/web/router.php?codecategory=$1 [QSA,L]
-
     RewriteRule ^felkeres/([^/]+)/?$ /vizsgaremek/src/web/router.php?request=$1 [QSA,L]
-
     RewriteRule ^felkeresek/?$ /vizsgaremek/src/web/router.php?requests [L]
-
     RewriteRule ^kod/([^/]+)$ /vizsgaremek/src/web/router.php?codeid=$1 [QSA,L]
     RewriteRule ^kod/([^/]+)/?$ /vizsgaremek/src/web/router.php?codeid=$1 [QSA,L]
     RewriteRule ^kod/([^/]+)/fetch$ /vizsgaremek/src/web/router.php?codeid=$1/fetch [QSA,L]
     RewriteRule ^kod/([^/]+)/fetch/$ /vizsgaremek/src/web/router.php?codeid=$1/fetch [QSA,L]
-
     RewriteRule ^felhasznalo/([^/]+)$ /vizsgaremek/src/web/router.php?username=$1 [QSA,L]
     RewriteRule ^felhasznalo/([^/]+)/?$ /vizsgaremek/src/web/router.php?username=$1 [QSA,L]
 </IfModule>
