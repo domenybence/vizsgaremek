@@ -1,0 +1,62 @@
+@import url("/vizsgaremek/src/web/css/montserrat-font.css");
+
+body {
+    background-color: #1E1E1E;
+}
+
+.container {
+    margin-top: 8vh;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-family: "Montserrat";
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 100px;
+}
+
+.inline-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.inline-item {
+    color: white;
+}
+
+.upload-button {
+    margin-top: 20px;
+    background-color: #3b1fa0;
+    color: white;
+    font-size: 17px;
+    width: 50vw;
+    height: 10vh;
+    border: none;
+    border-radius: 25px;
+    transition: background 0.2s ease;
+}
+
+.upload-button:hover {
+    outline: 2px solid white;
+    cursor: pointer;
+}
+
+.upload-button:active {
+    background-color: #22154f;
+}
+
+@media screen and (min-width: 800px) {
+    .container {
+        margin-top: 8vh;
+    }
+
+    .upload-button {
+        font-size: 17px;
+        width: 12vw;
+        height: 5vh;
+    }
+}

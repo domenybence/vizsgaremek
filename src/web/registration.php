@@ -1,7 +1,7 @@
 <?php
 include_once "../php_functions/php_functions.php";
-if(isset($_SESSION)){
-    session_destroy();
+if(session_status() === PHP_SESSION_NONE) {
+    startSession();
 }
 ?>
 
@@ -19,9 +19,13 @@ if(isset($_SESSION)){
     <link rel="icon" type="image/x-icon" href="./icon.png">
     <script src="https://www.google.com/recaptcha/api.js?hl=hu" async defer></script>
     <script type="module" src="./js/registration.js" defer></script>
+    <link rel="stylesheet" href="./css/loader.css">
 </head>
 <body>
-    <?php include "loader.html"; ?>
+    <script src="/vizsgaremek/src/web//js/gsap-public/minified/gsap.min.js"></script>
+    <div class="page-cover">
+        <h1 class="page-cover-title">Betöltés...</h1>
+    </div>
     <div class="background"></div>
     <div class="container" id="container">
         <div class="wrapper">
@@ -67,6 +71,6 @@ if(isset($_SESSION)){
             </div>
         </div>
     </div>
+    <script src="/vizsgaremek/src/web/js/loader.js"></script>
 </body>
-
 </html>

@@ -1,6 +1,8 @@
 let likechecked;
 let dislikechecked;
-if(document.body.contains(document.querySelector(".svg-like-wrapper"))) {
+
+// Only initialize like/dislike functionality if user owns the code
+if(document.body.contains(document.querySelector(".svg-like-wrapper")) && isOwned) {
     if(document.querySelector(".svg-like-wrapper").classList.contains("checked")){
         likechecked = true;
     }
@@ -13,9 +15,17 @@ if(document.body.contains(document.querySelector(".svg-like-wrapper"))) {
     else{
         dislikechecked = false;
     }
+    
+    // Only add event listeners if user owns the code
+    document.querySelector(".svg-like-wrapper").addEventListener("click", likeChecked);
+    document.querySelector(".svg-dislike-wrapper").addEventListener("click", dislikeChecked);
 }
 
 async function fetchLikeValue(value){
+    if (!isOwned) {
+        alert("A kód értékeléséhez először meg kell vásárolnia azt!");
+        return;
+    }
     try{
         const response = await fetch("/vizsgaremek/src/web/upload_likes.php",{
             method: "POST",
@@ -151,6 +161,10 @@ async function fetchPurchase(){
 }
 
 async function likeChecked(){
+    if (!isOwned) {
+        alert("A kód értékeléséhez először meg kell vásárolnia azt!");
+        return;
+    }
     likechecked = !likechecked;
     if(likechecked){
         dislikechecked = false;
@@ -163,6 +177,10 @@ async function likeChecked(){
 }
 
 async function dislikeChecked(){
+    if (!isOwned) {
+        alert("A kód értékeléséhez először meg kell vásárolnia azt!");
+        return;
+    }
     dislikechecked = !dislikechecked;
     if(dislikechecked){
         likechecked = false;
@@ -175,7 +193,7 @@ async function dislikeChecked(){
 }
 
 document.addEventListener("click", (event) => {
-    if(event.target.closest("svg")) {
+    if(event.target.closest("div.button-container > svg")) {
         closePopup();
     }
     if(event.target.closest("div.button-container > button")) {
@@ -205,9 +223,4 @@ function updateState() {
     else {
         document.querySelector(".svg-dislike-wrapper").classList.remove("checked");
     }
-}
-
-if(document.body.contains(document.querySelector(".svg-like-wrapper"))) {
-    document.querySelector(".svg-like-wrapper").addEventListener("click", likeChecked);
-    document.querySelector(".svg-dislike-wrapper").addEventListener("click", dislikeChecked);
 }

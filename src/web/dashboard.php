@@ -1,8 +1,9 @@
 <?php
 include_once "loader.html";
 include_once "../php_functions/php_functions.php";
-
-startSession();
+if(session_status() === PHP_SESSION_NONE) {
+    startSession();
+}
 
 ?>
 <!DOCTYPE html>
@@ -11,9 +12,16 @@ startSession();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Főoldal</title>
+    <script src="./js/navbar.js" defer></script>
+    <link rel="stylesheet" href="./css/navbar.css">
+    <link rel="stylesheet" href="./css/loader.css">
 </head>
 <body>
-    
+    <script src="/vizsgaremek/src/web//js/gsap-public/minified/gsap.min.js"></script>
+    <div class="page-cover">
+        <h1 class="page-cover-title">Betöltés...</h1>
+    </div>
+    <?php include "navbar.php"; ?>
     <h1>Üdvözlet,
     <?php
         echo $_SESSION["username"];
@@ -35,4 +43,5 @@ startSession();
         <button type="submit" name="logout">Kijelentkezés</button>
     </form>
 </body>
+<script src="/vizsgaremek/src/web/js/loader.js"></script>
 </html>

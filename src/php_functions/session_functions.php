@@ -44,8 +44,8 @@ function setSession($username, $userid, $role) {
     if(!isset($_SESSION)) {
         session_start();
     }
-    $_SESSION["userid"] = $userid;
     $_SESSION["username"] = $username;
+    $_SESSION["userid"] = $userid;
     $_SESSION["role"] = $role;
 }
 
@@ -68,4 +68,19 @@ function setFirstSession($username, $id, $role) {
     else {
         return false;
     }
+}
+
+function getStatusText($status) {
+    $statusMap = [
+        "nyitott" => "Nyitott",
+        "folyamatban" => "Folyamatban",
+        "teljesitve" => "Teljesítve",
+        "elutasitva" => "Elutasítva"
+    ];
+    return $statusMap[$status] ?? $status;
+}
+
+function formatDate($date) {
+    if (!$date) return "Nincs megadva";
+    return date("Y.m.d H:i", strtotime($date));
 }

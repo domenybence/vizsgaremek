@@ -1,3 +1,9 @@
+<?php
+if(session_status() === PHP_SESSION_NONE) {
+    include_once "../php_functions/php_functions.php";
+    startSession();
+}
+?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -8,9 +14,13 @@
     <link rel="stylesheet" href="./css/login.css">
     <link rel="icon" type="image/x-icon" href="./icon.png">
     <script type="module" src="./js/login.js" defer></script>
+    <link rel="stylesheet" href="./css/loader.css">
 </head>
 <body>
-    <?php include "loader.html"; ?>
+    <script src="/vizsgaremek/src/web//js/gsap-public/minified/gsap.min.js"></script>
+    <div class="page-cover">
+        <h1 class="page-cover-title">Betöltés...</h1>
+    </div>
         <div class="background"></div>
         <div class="container" id="container">
             <div class="wrapper">
@@ -39,5 +49,6 @@
             </div>
             </div>
         </div>
+    <script src="/vizsgaremek/src/web/js/loader.js"></script>
 </body>
 </html>

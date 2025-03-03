@@ -1,0 +1,11 @@
+A HEAD VÉGÉRE:
+    <link rel="stylesheet" href="./css/loader.css">
+
+A BODY ELEJÉRE(elvileg mindegy hova de m1):
+    <script src="/vizsgaremek/src/web//js/gsap-public/minified/gsap.min.js"></script>
+    <div class="page-cover">
+        <h1 class="page-cover-title">Betöltés...</h1>
+    </div>
+
+A BODY VÉGÉRE:
+    <script src="/vizsgaremek/src/web/js/loader.js"></script>
