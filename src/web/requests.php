@@ -4,9 +4,18 @@ if(session_status() === PHP_SESSION_NONE) {
     startSession();
 }
 
-$data = preparedGetdata("SELECT felkeres.id AS requestid, felkeres.nev AS requestname, felkeres.leiras AS description, felkeres.statusz AS status, felkeres.ar AS price, felkeres.hatarido AS deadline, felkeres.feltoltesi_ido AS uploadtime, felkeres.felhasznalo_id AS userid, felkeres.elvallalo_felhasznalo_id AS assigneeid, felhasznalo.nev AS username FROM felkeres  INNER JOIN felhasznalo ON felkeres.felhasznalo_id = felhasznalo.id WHERE felkeres.id = ?;", "i", [$request]);
+$data = preparedGetdata("SELECT felkeres.id AS requestid, felkeres.nev AS requestname, 
+    felkeres.leiras AS description, felkeres.statusz AS status, felkeres.ar AS price, 
+    felkeres.hatarido AS deadline, felkeres.feltoltesi_ido AS uploadtime, 
+    felkeres.felhasznalo_id AS userid, felkeres.elvallalo_felhasznalo_id AS assigneeid, 
+    felkeres.kod_eleresi_ut,
+    felhasznalo.nev AS username, kategoria.compiler_azonosito AS compilerid 
+    FROM felkeres 
+    INNER JOIN felhasznalo ON felkeres.felhasznalo_id = felhasznalo.id 
+    INNER JOIN kategoria ON kategoria.id = felkeres.kategoria_id 
+    WHERE felkeres.id = ?;", "i", [$request]);
 
-if (!$data) {
+if(!$data) {
     header("Location: 404.html");
     exit();
 }
@@ -17,12 +26,18 @@ $sessionUserid = $_SESSION["userid"];
 $sessionUserid == $data["userid"] ? $isOwner = true : $isOwner = false;
 $sessionUserid == $data["assigneeid"] ? $isAssigned = true : $isAssigned = false;
 
-if (!$isOwner && !$isAssigned && ($_SESSION["role"] !== "admin" || $_SESSION["role"] !== "moderator")) {
+$isAdmin = $_SESSION["role"] === "admin";
+$isModerator = $_SESSION["role"] === "moderator";
+$requestIsPublic = $data["status"] === "nyitott";
+
+if(!$isOwner && !$isAssigned && !$isAdmin && !$isModerator && !$requestIsPublic) {
     header("Location: /vizsgaremek/src/web/404.html");
     exit();
 }
+
 !$isOwner && $data["status"] === "nyitott" ? $canAccept = true : $canAccept = false;
 $data["assigneeid"] == $sessionUserid ? $isSubmitted = true : $isSubmitted = false;
+$canEdit = $isOwner && $data["status"] === "nyitott";
 
 ?>
 
@@ -52,7 +67,7 @@ $data["assigneeid"] == $sessionUserid ? $isSubmitted = true : $isSubmitted = fal
     <div class="container">
         <div class="content">
             <div class="request-header">
-                <h1><?php echo htmlspecialchars($data["requestname"]); ?></h1>
+                <h1 id="request-title"><?php echo htmlspecialchars($data["requestname"]); ?></h1>
                 <span class="status <?php echo $data["status"]; ?>">
                     <?php echo getStatusText($data["status"]); ?>
                 </span>
@@ -68,31 +83,94 @@ $data["assigneeid"] == $sessionUserid ? $isSubmitted = true : $isSubmitted = fal
                 </div>
                 <div class="title-item">
                     <label>Határidő:</label>
-                    <span><?php echo formatDate($data["deadline"]); ?></span>
+                    <span id="deadline-display"><?php echo formatDate($data["deadline"]); ?></span>
                 </div>
                 <div class="title-item">
                     <label>Díjazás:</label>
-                    <span><?php echo number_format($data["price"]); ?> pont</span>
+                    <span id="price-display"><?php echo number_format($data["price"]); ?> pont</span>
                 </div>
             </div>
             <div class="content">
                 <h3>Leírás</h3>
-                <div class="description">
+                <div class="description" id="description-display">
                     <?php echo nl2br(htmlspecialchars($data["description"])); ?>
                 </div>
             </div>
+            
+            <?php if($canEdit): ?>
+            <div class="edit-section">
+                <button id="edit-request-btn" class="button primary">Szerkesztés</button>
+                
+                <div id="edit-form" class="edit-form" style="display: none;">
+                    <h3>Felkérés szerkesztése</h3>
+                    <div class="form-group">
+                        <label for="edit-title">Cím</label>
+                        <input type="text" id="edit-title" class="form-control" value="<?php echo htmlspecialchars($data["requestname"]); ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-price">Díjazás (pont)</label>
+                        <input type="number" id="edit-price" class="form-control" value="<?php echo $data["price"]; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-deadline">Határidő</label>
+                        <input type="date" id="edit-deadline" class="form-control" value="<?php echo date('Y-m-d', strtotime($data["deadline"])); ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-description">Leírás</label>
+                        <textarea id="edit-description" class="form-control" rows="6"><?php echo htmlspecialchars($data["description"]); ?></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button id="cancel-edit-btn" class="button secondary">Mégse</button>
+                        <button id="save-edit-btn" class="button success">Mentés</button>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
+            
+            <?php if($isAssigned && ($data["status"] === "folyamatban")): ?>
+            <div class="editor-section">
+                <div class="editor-header">
+                    <h3>Kód szerkesztése</h3>
+                </div>
+                <div id="monaco-editor" style="width:100%; height:500px; border:1px solid #444; border-radius: 4px;"></div>
+            <?php 
+                $fileExtension = $data["compilerid"];
+                $initialCode = "";
+                if(!empty($data["kod_eleresi_ut"]) && file_exists("codes/" . $data["kod_eleresi_ut"])) {
+                    $initialCode = file_get_contents("codes/" . $data["kod_eleresi_ut"]);
+                }
+            ?>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+                <script src="/vizsgaremek/src/web/js/compiler.js"></script>
+                <script>
+                    const fileExtension = "<?php echo $fileExtension; ?>";
+                    const fileContent = <?php echo json_encode($initialCode); ?>;
+                    document.addEventListener("DOMContentLoaded", () => {
+                        createCompiler("monaco-editor", false);
+                        const acceptSolutionButton = document.querySelector(".accept-solution");
+                        const rejectSolutionButton = document.querySelector(".reject-solution");
+                        if(acceptSolutionButton) {
+                            acceptSolutionButton.addEventListener("click", () => acceptSolution(requestId));
+                        }
+                        if(rejectSolutionButton) {
+                            rejectSolutionButton.addEventListener("click", () => rejectSolution(requestId));
+                        }
+                    });
+                </script>
+                <div class="button-container">
+                    <button id="save-solution" class="button primary">Kód mentése</button>
+                    <button class="button success submit-solution">Megoldás beküldése</button>
+                </div>
+            </div>
+            <?php endif; ?>
             <div class="actions">
                 <?php if($canAccept) {
                     echo    '<button class="button primary accept-request">
                                 Felkérés elvállalása
                             </button>';
                 }
-                if($isSubmitted && $data["status"] === "folyamatban") {
-                    echo    '<button class="button primary submit-solution">
-                                Kód beküldése
-                            </button>';
-                }
-                if($isOwner && $data["beadott_kod"]) {
+                
+                if($isOwner && $data["status"] === "teljesitve" && !empty($data["kod_eleresi_ut"])) {
                     echo    '<div class="review-actions">
                                 <button class="button success accept-solution">Elfogadás</button>
                                 <button class="button danger reject-solution">Elutasítás</button>

@@ -35,6 +35,7 @@ nav {
     margin: 5px 0;
 }
 .nav-dropdown-item.visible {
+    width: auto;
     opacity: 1;
     visibility: visible;
 }
