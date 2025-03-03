@@ -27,6 +27,32 @@ document.addEventListener("DOMContentLoaded", () => {
                 softwareData = data;
                 currentPage = 1;
                 displaySoftware();
+
+                softwareContainer.addEventListener('click', async (event) => {
+                    if (event.target.tagName === 'BUTTON' && event.target.hasAttribute('id') && event.target.classList.contains("jovahagyas-btn")) {
+                        const itemId = event.target.getAttribute('id');
+                        console.log(itemId);
+                        if (!itemId) return;
+                        
+                        const response = await fetch("./jovahagyas",{
+                            method: "POST",
+                            headers:{
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                id: itemId 
+                            })
+                        });
+                          const data = await response.json();
+                            console.log(data);
+                            alert(data);
+                            location.reload();
+                       
+                        currentPage = 1;
+                        displaySoftware();
+                    }
+                });
+
             } else {
                 alert("Lekérés sikertelen!");
             }
@@ -50,14 +76,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="card-body bg-light text-dark">
                   <h5 class="card-title">${item.nev}</h5>
                   <a href="#" class="btn btn-dark mb-2">Megtekintés</a>
-                  <button class="btn btn-dark" type="button" id="jovahagy" value=${item.id}>Jóváhagyás</a>
+                  <button class="btn btn-dark jovahagyas-btn" type="button" id=${item.id} value=${item.id}>Jóváhagyás</a>
                 </div>
               </div>
             </div>`;
             softwareContainer.innerHTML += card;
+            
+            
+
+            
         });
 
         setupPagination();
+
+        
     }
 
     function setupPagination() {
@@ -155,4 +187,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     fetchSoftware("./jovahagyando");
+
 });

@@ -54,6 +54,21 @@ switch (mb_strtolower($url[0])) {
             header('bad request', true, 400);
         }
         break;
+        case 'jovahagyas':
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $id = $bodyAdatok['id'];
+                $jovahagy_sql = "UPDATE `kod` SET jovahagyott = 1 WHERE id = {$id}";
+                $jovahagy = adatokValtoztatasa($jovahagy_sql);
+
+                echo json_encode($jovahagy, JSON_UNESCAPED_UNICODE);
+
+                    
+            }
+            else{
+                echo json_encode(['valasz' => 'Hibás metódus!'], JSON_UNESCAPED_UNICODE);
+                header('bad request', true, 400);
+            }
+            break;
     
     default:
         echo 'nem megfelelő http url';
