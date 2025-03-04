@@ -104,10 +104,30 @@ body {
     font-size: 14px;
 }
 
-.status-badge.nyitott { background: #28a745; color: white; }
-.status-badge.folyamatban { background: #ffc107; color: black; }
-.status-badge.teljesitve { background: #17a2b8; color: white; }
-.status-badge.elutasitva { background: #dc3545; color: white; }
+.status-badge.nyitott {
+    background: #28a745;
+    color: white;
+}
+
+.status-badge.folyamatban {
+    background: #ffc107;
+    color: black;
+}
+
+.status-badge.teljesitve {
+    background: #17a2b8;
+    color: white;
+}
+
+.status-badge.elutasitva {
+    background: #dc3545;
+    color: white;
+}
+
+.status-badge.jóváhagyott {
+    background: #8a2be2;
+    color: white;
+}
 
 .request-meta {
     display: flex;
