@@ -357,8 +357,8 @@ async function saveRequestEdits() {
             document.getElementById("request-title").textContent = titleInput.value.trim();
             document.getElementById("price-display").textContent = `${parseInt(priceInput.value).toLocaleString()} pont`;
             const deadlineDate = new Date(deadlineInput.value);
-            document.getElementById("deadline-display").textContent = deadlineDate.toLocaleDateString('hu-HU', {year: "numeric", month: "long", day: "numeric"});
-            document.getElementById("description-display").innerHTML = descriptionInput.value.trim().replace(/\n/g, '<br>');
+            document.getElementById("deadline-display").textContent = deadlineDate.toLocaleDateString("hu-HU", {year: "numeric", month: "long", day: "numeric"});
+            document.getElementById("description-display").innerHTML = descriptionInput.value.trim().replace(/\n/g, "<br>");
             toggleEditForm();    
             showMessage("A felkérés sikeresen frissítve!");
         }
