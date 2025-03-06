@@ -86,6 +86,11 @@ body {
     color: white;
 }
 
+.status.jóváhagyott {
+    background: #8a2be2;
+    color: white;
+}
+
 .request-info {
     display: flex;
     flex-direction: column;
@@ -107,7 +112,7 @@ body {
 }
 
 .info-item label {
-    color: #888;
+    color: #dddddd;
     font-size: 16px;
 }
 
