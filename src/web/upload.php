@@ -1,3 +1,11 @@
+<?php
+
+include_once "../php_functions/php_functions.php";
+include '../php_functions/adatbazis_lekeres.php';
+if (session_status() === PHP_SESSION_NONE) {
+  startSession();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="hu">
@@ -8,9 +16,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/upload.css">
     <link rel="icon" type="image/x-icon" href="./icon.png">
+    <script src="./js/navbar.js" defer></script>
+    <link rel="stylesheet" href="./css/navbar.css">
+    <script src="./js/gsap-public/minified/gsap.min.js" defer></script>
 </head>
-<body class="bg-dark text-light">
-    
+<body class="bg-dark text-light" style="padding-top: 100px;">
+
+
+<?php include "navbar.php"; ?>
+    <!--
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
         <div class="container">
             <a class="navbar-brand" href="home.html">CodeOverflow</a>
@@ -38,7 +52,7 @@
             </div>
         </div>
     </nav>
-
+    -->
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8 col-sm-12">

@@ -8,7 +8,7 @@ include_once "../php_functions/php_functions.php";
 </div>
 <nav>
     <div class="nav-group nav-home">
-        <a class="nav-item nav-link" href="http://localhost/vizsgaremek/codeoverflow">CodeOverflow</a>
+        <a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/home.php">CodeOverflow</a>
     </div>
     <div class="nav-group">
         <div class="nav-dropdown-button nav-link">
@@ -22,6 +22,10 @@ include_once "../php_functions/php_functions.php";
         </div>
         <a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/browse_requests.php">Felkérések</a>
     </div>
+    <form class="d-flex">
+          <input class="form-control me-2" id="kereso" type="search" placeholder="Szoftverkeresés">
+          <button class="btn btn-outline-primary" id="keresobtn" type="button">Keresés</button>
+        </form>
     <div class="nav-group">
         <?php
         if($_SESSION["username"] == "Vendég") {
@@ -34,13 +38,14 @@ include_once "../php_functions/php_functions.php";
                         ';
                         if($_SESSION["role"] == "moderator") {
                             echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/library.php">Könyvtár</a>
-                            <a class="nav-link" href="http://localhost/vizsgaremek/src/web/approve.php">Jóváhagyások</a>';
+                            <a class="nav-link" href="http://localhost/vizsgaremek/src/web/admin.php">Jóváhagyások</a>';
                         }
                         else if($_SESSION["role"] == "admin") {
-                            echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/approval.php">Jóváhagyások</a>
+                            echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/admin.php">Jóváhagyások</a>
                             <a class="nav-link" href="http://localhost/vizsgaremek/src/web/admin.php">Admin</a>';
                         }
-                        echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/requests.php">Felkérések</a>
+                        echo '  <a class="nav-link" href="http://localhost/vizsgaremek/src/web/upload.php">Feltöltés</a>
+                                <a class="nav-link" href="http://localhost/vizsgaremek/src/web/requests.php">Felkérések</a>
                                 <a class="nav-link" href="http://localhost/vizsgaremek/src/web/logout.php">Kijelentkezés</a>
                     </div>
                 </div>';

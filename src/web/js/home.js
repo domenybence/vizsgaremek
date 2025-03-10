@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="card-header">${item.kategoria_id}</div>
             <div class="card-body bg-light text-dark">
               <h5 class="card-title">${item.nev}</h5>
-              <a href="#" class="btn btn-dark">Megtekintés</a>
+              <a href="./kod/${item.id}" class="btn btn-dark">Megtekintés</a>
             </div>
           </div>
         </div>`;

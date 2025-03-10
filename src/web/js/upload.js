@@ -1,7 +1,7 @@
 
 async function kodFeltoltes(){
     let Name = document.getElementById('nevInput').value;
-    let categoryId = document.getElementById('katInput').value;
+    let categoryId = parseInt(document.getElementById('katInput').value);
     let Price = document.getElementById('arInput').value;
     if(Name == "" || categoryId == "" || Price == "")
     {
@@ -25,7 +25,7 @@ async function kodFeltoltes(){
         });
         
         if(!response.ok){
-            throw new Error(response.status, response.statusText);
+            console.log(response.JSON());
             
         }
         else {

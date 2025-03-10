@@ -8,7 +8,7 @@ include_once "../php_functions/php_functions.php";
 </div>
 <nav>
     <div class="nav-group nav-home">
-        <a class="nav-item nav-link" href="http://localhost/vizsgaremek/codeoverflow">CodeOverflow</a>
+        <a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/home.php">CodeOverflow</a>
     </div>
     <div class="nav-group">
         <div class="nav-dropdown-button nav-link">
@@ -39,8 +39,9 @@ include_once "../php_functions/php_functions.php";
                         else if($_SESSION["role"] == "admin") {
                             echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/approval.php">Jóváhagyások</a>
                             <a class="nav-link" href="http://localhost/vizsgaremek/src/web/admin.php">Admin</a>';
-                        }
-                        echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/requests.php">Felkérések</a>
+                        }       
+                        echo '  <a class="nav-link" href="http://localhost/vizsgaremek/src/web/upload.php">Feltöltés</a>
+                                <a class="nav-link" href="http://localhost/vizsgaremek/src/web/requests.php">Felkérések</a>
                                 <a class="nav-link" href="http://localhost/vizsgaremek/src/web/logout.php">Kijelentkezés</a>
                     </div>
                 </div>';

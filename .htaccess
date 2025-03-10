@@ -4,7 +4,7 @@
     
     RewriteRule ^src/web/browse_requests\.php$ /vizsgaremek/felkeresek [R=301,L]
 
-    RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/home\.html$
+    RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/home\.php$
     RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/dashboard\.php$
     RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/login\.php$
     RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/registration\.php$

@@ -19,12 +19,13 @@ if (session_status() === PHP_SESSION_NONE) {
   <link rel="icon" type="image/x-icon" href="./icon.png">
   <script src="js/home.js" defer></script>
   <script src="./js/navbar.js" defer></script>
+  <script src="./js/gsap-public/minified/gsap.min.js" defer></script>
   <link rel="stylesheet" href="./css/navbar.css">
 </head>
 
 <body class="bg-dark text-light" style="padding-top: 100px;">
   
-  <?php include "navbar.php"; ?>
+  <?php include "navbarsearch.php"; ?>
   
   <!--
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
