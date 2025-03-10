@@ -109,8 +109,20 @@ else if(isset($_GET["requests"])) {
         include "./browse_requests.php";
     }
 }
+else if(isset($_GET["upload_request"])) {
+    $currentUrl = $_SERVER["REQUEST_URI"];
+    $redirectUrl = "/vizsgaremek/felkeresek/feltoltes";
+    if ($currentUrl != $redirectUrl) {
+        header("Location: /vizsgaremek/felkeresek/feltoltes");
+        exit;
+    }
+    else {
+        include "./upload_request.php";
+    }
+}
 else {
     startSession();
     http_response_code(404);
     include "./404.html";
 }
+?>

@@ -39,6 +39,15 @@ if(!$isOwner && !$isAssigned && !$isAdmin && !$isModerator && !$requestIsPublic)
 $data["assigneeid"] == $sessionUserid ? $isSubmitted = true : $isSubmitted = false;
 $canEdit = $isOwner && $data["status"] === "nyitott";
 
+$userRole = $_SESSION["role"] ?? "user";
+$isAdmin = ($userRole === "admin");
+$isModerator = ($userRole === "moderator");
+$isOwner = ($data["userid"] == $_SESSION["userid"]);
+$isOpen = ($data["status"] === "nyitott");
+
+$canEdit = $isAdmin || $isModerator || ($isOwner && $isOpen);
+$canDelete = $isAdmin || $isModerator || ($isOwner && $isOpen);
+
 ?>
 
 <!DOCTYPE html>
@@ -56,6 +65,7 @@ $canEdit = $isOwner && $data["status"] === "nyitott";
     <script src="/vizsgaremek/src/web/js/requests.js" defer></script>
     <script>
         const requestid = <?php echo $request; ?>;
+        const userRole = "<?php echo $_SESSION['role']; ?>";
     </script>
 </head>
 <body>

@@ -13,14 +13,26 @@ include_once "../php_functions/php_functions.php";
     <div class="nav-group">
         <div class="nav-dropdown-button nav-link">
             Kategóriák
+            <div class="nav-dropdown-item">
             <?php
-            $categories = simpleGetData("SELECT kategoria.nev FROM kategoria;")[0];
-            foreach ($categories as $category) {
-                echo '<div class="nav-dropdown-item"><a class="nav-link" href="http://localhost/vizsgaremek/kategoria/' . $category . '">' . $category . '</a></div>';
+            $categories = simpleGetData("SELECT nev, compiler_azonosito FROM kategoria ORDER BY nev");
+            if($categories && count($categories) > 0) {
+                foreach ($categories as $category) {
+                    echo '<a class="nav-link" href="http://localhost/vizsgaremek/kategoria/' . $category['compiler_azonosito'] . '">' . $category['nev'] . '</a>';
+                }
+            } else {
+                echo '<a class="nav-link">Nincs elérhető kategória</a>';
             }
             ?>
+            </div>
         </div>
-        <a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/browse_requests.php">Felkérések</a>
+        <div class="nav-dropdown-button nav-link">
+            Felkérések
+            <div class="nav-dropdown-item">
+                <a class="nav-link" href="http://localhost/vizsgaremek/felkeresek/feltoltes">Feltöltés</a>
+                <a class="nav-link" href="http://localhost/vizsgaremek/felkeresek">Böngészés</a>
+            </div>
+        </div>
     </div>
     <div class="nav-group">
         <?php
@@ -37,11 +49,9 @@ include_once "../php_functions/php_functions.php";
                             <a class="nav-link" href="http://localhost/vizsgaremek/src/web/approve.php">Jóváhagyások</a>';
                         }
                         else if($_SESSION["role"] == "admin") {
-                            echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/approval.php">Jóváhagyások</a>
-                            <a class="nav-link" href="http://localhost/vizsgaremek/src/web/admin.php">Admin</a>';
+                            echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/admin.php">Admin</a>';
                         }
-                        echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/requests.php">Felkérések</a>
-                                <a class="nav-link" href="http://localhost/vizsgaremek/src/web/logout.php">Kijelentkezés</a>
+                        echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/logout.php">Kijelentkezés</a>
                     </div>
                 </div>';
         }

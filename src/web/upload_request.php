@@ -3,63 +3,78 @@ include_once "../php_functions/php_functions.php";
 if(session_status() === PHP_SESSION_NONE) {
     startSession();
 }
-?>
 
+if($_SESSION["username"] === "Vendég") {
+    header("Location: /vizsgaremek/src/web/login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A CodeOverflow felkéréseinek felülete.">
-    <title>Felkérések</title>
-    <link rel="stylesheet" href="./css/requests.css">
-    <link rel="icon" type="image/x-icon" href="./icon.png">
-    <script type="module" src="./js/requests.js" defer></script>
-    <script src="./js/navbar.js" defer></script>
-    <link rel="stylesheet" href="./css/navbar.css">
-    <link rel="stylesheet" href="./css/loader.css">
+    <title>Felkérés létrehozása</title>
+    <link rel="stylesheet" href="/vizsgaremek/src/web/css/upload_request.css">
+    <link rel="stylesheet" href="/vizsgaremek/src/web/css/loader.css">
+    <link rel="stylesheet" href="/vizsgaremek/src/web/css/navbar.css">
+    <link rel="icon" type="image/x-icon" href="/vizsgaremek/src/web/icon.png">
+    <script src="/vizsgaremek/src/web/js/navbar.js" defer></script>
+    <script src="/vizsgaremek/src/web/js/upload_request.js" defer></script>
 </head>
 <body>
-    <?php include "navbar.php"; ?>
-    <script src="/vizsgaremek/src/web//js/gsap-public/minified/gsap.min.js"></script>
+    <script src="/vizsgaremek/src/web/js/gsap-public/minified/gsap.min.js"></script>
+
     <div class="page-cover">
         <h1 class="page-cover-title">Betöltés...</h1>
     </div>
+    
+    <?php include "navbar.php"; ?>
+    
     <div class="container">
         <div class="content">
-            <div class="inline-group">
-                <div class="inline-item">
-                    <p>Név</p>
-                </div>
-                <div class="inline-item">
-                    <p>Kód neve</p>
-                </div>
+            <div class="request-header">
+                <h1>Új felkérés létrehozása</h1>
             </div>
-            <div class="inline-group">
-                <div class="inline-item">
-                    <p>Feltöltés ideje</p>
+            
+            <form id="request-form" class="edit-form" onsubmit="event.preventDefault();">
+                <div class="form-group">
+                    <label for="request-title">Cím</label>
+                    <input type="text" id="request-title" class="form-control">
                 </div>
-                <div class="inline-item">
-                    <p>2024.02.16.</p>
+                
+                <div class="form-group">
+                    <label for="request-category">Kategória</label>
+                    <select id="request-category" class="form-control">
+                        <option value="">Betöltés...</option>
+                    </select>
                 </div>
-            </div>
-            <div class="inline-group">
-                <div class="inline-item">
-                    <p>Ár</p>
+                
+                <div class="form-group">
+                    <label for="request-price">Díjazás (pont)</label>
+                    <input type="number" id="request-price" class="form-control" min="0" value="0">
                 </div>
-                <div class="inline-item">
-                    <p>5000</p>
+                
+                <div class="form-group">
+                    <label for="request-deadline">Határidő (ÉÉÉÉ-HH-NN)</label>
+                    <input type="date" id="request-deadline" class="form-control" value="" data-date-format="YYYY-MM-DD">
+                    <small class="date-format-hint">Magyar formátum: ÉÉÉÉ-HH-NN</small>
                 </div>
-            </div>
-            <div class="inline-group">
-                <div class="inline-item">
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet minima velit blanditiis asperiores doloribus laborum, voluptatibus harum enim molestiae, delectus, mollitia ea corporis. Ipsum quod similique iusto rem voluptatem illo?</p>
+                
+                <div class="form-group">
+                    <label for="request-description">Leírás</label>
+                    <textarea id="request-description" class="form-control" rows="6"></textarea>
                 </div>
-            </div>
-            <div class="inline-group">
-                <button class="upload-button">Felkérés feltöltése</button>
-            </div>
+                
+                <div id="message-container"></div>
+                
+                <div class="button-group">
+                    <button type="button" id="create-request-btn" class="button success">Felkérés létrehozása</button>
+                </div>
+            </form>
         </div>
     </div>
+    
     <script src="/vizsgaremek/src/web/js/loader.js"></script>
 </body>
+</html>
