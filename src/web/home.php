@@ -1,5 +1,15 @@
+<?php
+
+include_once "../php_functions/php_functions.php";
+
+if (session_status() === PHP_SESSION_NONE) {
+  startSession();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +17,16 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/home.css">
   <link rel="icon" type="image/x-icon" href="./icon.png">
+  <script src="js/home.js" defer></script>
+  <script src="./js/navbar.js" defer></script>
+  <link rel="stylesheet" href="./css/navbar.css">
 </head>
-<body class="bg-dark text-light">
+
+<body class="bg-dark text-light" style="padding-top: 100px;">
   
+  <?php include "navbar.php"; ?>
+  
+  <!--
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
     <div class="container">
       <a class="navbar-brand" href="home.html">CodeOverflow</a>
@@ -42,7 +59,7 @@
       </div>
     </div>
   </nav>
-
+-->
   <div class="container-fluid mt-3">
     <div class="row">
       <aside class="col-md-3 col-lg-2 bg-dark p-3">
@@ -59,7 +76,7 @@
           </div>
         </form>
       </aside>
-      
+
       <main class="col-md-9 col-lg-10 bg-light p-3">
         <div id="carousel-fokepek" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-indicators">
@@ -91,6 +108,7 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/home.js"></script>
+  
 </body>
+
 </html>

@@ -1,4 +1,7 @@
+
+
 document.addEventListener("DOMContentLoaded", () => {
+    
     const menuButton = document.querySelector(".nav-menu-button");
     const nav = document.querySelector("nav");
     const dropdownButtons = document.querySelectorAll(".nav-dropdown-button");

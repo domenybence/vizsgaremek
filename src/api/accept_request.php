@@ -7,26 +7,22 @@ if(session_status() === PHP_SESSION_NONE) {
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SERVER["HTTP_JAVASCRIPT_FETCH_REQUEST"]) && $_SERVER["HTTP_JAVASCRIPT_FETCH_REQUEST"] === "accept-request") {
     $data = json_decode(file_get_contents("php://input"), true);
     $requestId = $data["requestId"];
-    $request = preparedGetData(
-        'SELECT felkeres.* FROM felkeres WHERE felkeres.id = ? AND felkeres.statusz = "nyitott"', 
-        "i", 
-        [$requestId]
+    $request = preparedGetData('SELECT * FROM felkeres WHERE id = ? AND statusz = "nyitott" AND (elvallalo_felhasznalo_id IS NULL OR elvallalo_felhasznalo_id = 0)',"i", [$requestId]
     );
-    if (!$request || $request[0]["felhasznalo_id"] == $_SESSION["userid"]) {
-        echo json_encode(["success" => false, "message" => "A felkérés nem vállalható el."]);
+    
+    if (!$request || empty($request)) {
+        echo json_encode([
+            "success" => false, 
+            "message" => "A felkérés már nem elérhető vagy valaki más már elvállalta."
+        ]);
         exit;
     }
-    $filename = "test_r_" . $requestId;
-    $filepath = "../web/codes/" . $filename . ".uqw";
-    $fileContent = $request[0]["kod_minta"] ?? "// Nincs megadott kód minta";
-    if (file_put_contents($filepath, $fileContent) === false) {
-        echo json_encode(["success" => false, "message" => "Hiba történt a fájl létrehozása közben."]);
-        exit;
-    }
-    $success = insertData(
-        'UPDATE felkeres SET statusz = "folyamatban", elvallalo_felhasznalo_id = ?,kod_eleresi_ut = ? WHERE id = ?', 
-        "isi", 
-        [$_SESSION["userid"], $filename, $requestId]
+    $success = insertData('UPDATE felkeres SET statusz = "folyamatban", elvallalo_felhasznalo_id = ? WHERE id = ?', "ii", [$_SESSION["userid"], $requestId]
     );
-    echo json_encode(["success" => $success]);
+    
+    echo json_encode([
+        "success" => $success,
+        "message" => $success ? "A felkérés sikeresen elvállalva." : "Hiba történt a felkérés elvállalása közben."
+    ]);
+    exit;
 }

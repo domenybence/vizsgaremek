@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "gsap": "^3.12.7",
     "sweetalert": "^2.1.2"
   }
 }

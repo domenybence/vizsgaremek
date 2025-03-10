@@ -17,24 +17,20 @@ if(session_status() === PHP_SESSION_NONE) {
     <link rel="stylesheet" href="./css/loader.css">
 </head>
 <body>
-    <script src="/vizsgaremek/src/web//js/gsap-public/minified/gsap.min.js"></script>
-    <div class="page-cover">
-        <h1 class="page-cover-title">Betöltés...</h1>
-    </div>
     <?php include "navbar.php"; ?>
     <h1>Üdvözlet,
-    <?php
+        <?php
         echo $_SESSION["username"];
-    ?>
+        ?>
     (
-    <?php
+        <?php
         echo $_SESSION["role"];
-    ?>
+        ?>
     )!</h1>
     <hr>
     <?php
         if(isset($_COOKIE["rememberme"])) { echo $_COOKIE["rememberme"]; }
-    ?>
+        ?>
     <br>
     <a href="./registration.php">Regisztráció</a>
     <a href="./login.php">Bejelentkezés</a>
@@ -43,5 +39,4 @@ if(session_status() === PHP_SESSION_NONE) {
         <button type="submit" name="logout">Kijelentkezés</button>
     </form>
 </body>
-<script src="/vizsgaremek/src/web/js/loader.js"></script>
 </html>
