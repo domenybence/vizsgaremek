@@ -4,31 +4,27 @@ if(session_status() === PHP_SESSION_NONE) {
     startSession();
 }
 
-$userId = $_SESSION["userid"];
-$_SESSION["role"] === "admin" ? $isAdmin = true : $isAdmin = false;
-$_SESSION["role"] === "moderator" ? $isModerator = true : $isModerator = false;
+if(!isset($_SESSION["userid"])) {
+    header("Location: /vizsgaremek/src/web/login.php");
+    exit;
+}
 
+$userId = $_SESSION["userid"];
+$isAdmin = isset($_SESSION["role"]) && $_SESSION["role"] === "admin";
+$isModerator = isset($_SESSION["role"]) && $_SESSION["role"] === "moderator";
 $requests = [];
-if ($isAdmin || $isModerator) {
-    $result = simpleGetData("SELECT felkeres.*, felhasznalo.nev AS username, kategoria.nev AS kategoria 
-        FROM felkeres 
-        INNER JOIN felhasznalo ON felkeres.felhasznalo_id = felhasznalo.id 
-        LEFT JOIN kategoria ON felkeres.kategoria_id = kategoria.id 
-        ORDER BY felkeres.feltoltesi_ido DESC");
-    if($result) $requests = $result;
+
+if($isAdmin || $isModerator) {
+    $result = simpleGetData("SELECT felkeres.*, felhasznalo.nev AS username, kategoria.nev AS kategoria FROM felkeres INNER JOIN felhasznalo ON felkeres.felhasznalo_id = felhasznalo.id LEFT JOIN kategoria ON felkeres.kategoria_id = kategoria.id ORDER BY felkeres.feltoltesi_ido DESC");
+    if($result) {
+        $requests = $result;
+    }
 }
 else {
-    $result = preparedGetData("SELECT felkeres.*, felhasznalo.nev AS username, kategoria.nev AS kategoria 
-        FROM felkeres 
-        INNER JOIN felhasznalo ON felkeres.felhasznalo_id = felhasznalo.id 
-        LEFT JOIN kategoria ON felkeres.kategoria_id = kategoria.id 
-        WHERE felkeres.felhasznalo_id = ? 
-        OR felkeres.elvallalo_felhasznalo_id = ? 
-        OR (felkeres.statusz = 'nyitott' AND felkeres.elvallalo_felhasznalo_id IS NULL) 
-        ORDER BY felkeres.feltoltesi_ido DESC", 
-        "ii", 
-        [$userId, $userId]);
-    if($result) $requests = $result;
+    $result = preparedGetData("SELECT felkeres.*, felhasznalo.nev AS username, kategoria.nev AS kategoria FROM felkeres INNER JOIN felhasznalo ON felkeres.felhasznalo_id = felhasznalo.id LEFT JOIN kategoria ON felkeres.kategoria_id = kategoria.id WHERE felkeres.felhasznalo_id = ? OR felkeres.elvallalo_felhasznalo_id = ? OR (felkeres.statusz = 'nyitott' AND felkeres.elvallalo_felhasznalo_id IS NULL) ORDER BY felkeres.feltoltesi_ido DESC", "ii", [$userId, $userId]);
+    if($result) {
+        $requests = $result;
+    }
 }
 ?>
 
