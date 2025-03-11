@@ -56,9 +56,8 @@ if($_SESSION["username"] === "Vendég") {
                 </div>
                 
                 <div class="form-group">
-                    <label for="request-deadline">Határidő (ÉÉÉÉ-HH-NN)</label>
+                    <label for="request-deadline">Határidő</label>
                     <input type="date" id="request-deadline" class="form-control" value="" data-date-format="YYYY-MM-DD">
-                    <small class="date-format-hint">Magyar formátum: ÉÉÉÉ-HH-NN</small>
                 </div>
                 
                 <div class="form-group">
