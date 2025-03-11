@@ -178,6 +178,7 @@ async function likeChecked(){
 
 async function dislikeChecked(){
     if (!isOwned) {
+        /* ---------------------------------- TODO ---------------------------------- */
         alert("A kód értékeléséhez először meg kell vásárolnia azt!");
         return;
     }
