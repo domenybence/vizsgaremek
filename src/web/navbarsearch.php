@@ -38,10 +38,10 @@ include_once "../php_functions/php_functions.php";
                         ';
                         if($_SESSION["role"] == "moderator") {
                             echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/library.php">Könyvtár</a>
-                            <a class="nav-link" href="http://localhost/vizsgaremek/src/web/admin.php">Jóváhagyások</a>';
+                            <a class="nav-link" href="http://localhost/vizsgaremek/src/web/approve.php">Jóváhagyások</a>';
                         }
                         else if($_SESSION["role"] == "admin") {
-                            echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/admin.php">Jóváhagyások</a>
+                            echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/approve.php">Jóváhagyások</a>
                             <a class="nav-link" href="http://localhost/vizsgaremek/src/web/admin.php">Admin</a>';
                         }
                         echo '  <a class="nav-link" href="http://localhost/vizsgaremek/src/web/upload.php">Feltöltés</a>

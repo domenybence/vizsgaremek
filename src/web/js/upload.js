@@ -33,7 +33,7 @@ async function kodFeltoltes(){
          
             alert('Sikeres kódfeltöltés');
            
-            window.location.replace("http://localhost/13c-varga/vizsgaremek/src/web/home.html");
+            window.location.replace("http://localhost/vizsgaremek/src/web/home.php");
         
         }
         

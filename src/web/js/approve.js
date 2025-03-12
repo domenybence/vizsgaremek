@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="card-header">${item.kategoria_id}</div>
                 <div class="card-body bg-light text-dark">
                   <h5 class="card-title">${item.nev}</h5>
-                  <a href="#" class="btn btn-dark mb-2">Megtekintés</a>
+                  <a href="../../kod/${item.id}" class="btn btn-dark mb-2">Megtekintés</a>
                   <button class="btn btn-dark jovahagyas-btn" type="button" id=${item.id} value=${item.id}>Jóváhagyás</a>
                 </div>
               </div>
