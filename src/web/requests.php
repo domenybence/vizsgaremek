@@ -157,14 +157,6 @@ $canDelete = $isAdmin || $isModerator || ($isOwner && $isOpen);
                     const fileContent = <?php echo json_encode($initialCode); ?>;
                     document.addEventListener("DOMContentLoaded", () => {
                         createCompiler("monaco-editor", false);
-                        const acceptSolutionButton = document.querySelector(".accept-solution");
-                        const rejectSolutionButton = document.querySelector(".reject-solution");
-                        if(acceptSolutionButton) {
-                            acceptSolutionButton.addEventListener("click", () => acceptSolution(requestId));
-                        }
-                        if(rejectSolutionButton) {
-                            rejectSolutionButton.addEventListener("click", () => rejectSolution(requestId));
-                        }
                     });
                 </script>
                 <div class="button-container">
@@ -173,23 +165,61 @@ $canDelete = $isAdmin || $isModerator || ($isOwner && $isOpen);
                 </div>
             </div>
             <?php endif; ?>
-            <div class="actions">
-                <?php if($canAccept) {
-                    echo    '<button class="button primary accept-request">
-                                Felkérés elvállalása
-                            </button>';
-                }
-                
-                if($isOwner && $data["status"] === "teljesitve" && !empty($data["kod_eleresi_ut"])) {
-                    echo    '<div class="review-actions">
-                                <button class="button success accept-solution">Elfogadás</button>
-                                <button class="button danger reject-solution">Elutasítás</button>
-                            </div>';
+            
+            <?php if($isOwner && $data["status"] === "teljesitve" && !empty($data["kod_eleresi_ut"])): ?>
+            <div class="editor-section">
+                <div class="editor-header">
+                    <h3>Kód áttekintése</h3>
+                </div>
+                <div id="review-monaco-editor" style="width:100%; height:500px; border:1px solid #444; border-radius: 4px;"></div>
+                <?php 
+                $fileExtension = $data["compilerid"];
+                $reviewCode = "";
+                if(!empty($data["kod_eleresi_ut"]) && file_exists("codes/" . $data["kod_eleresi_ut"])) {
+                    $reviewCode = file_get_contents("codes/" . $data["kod_eleresi_ut"]);
                 }
                 ?>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+                <script src="/vizsgaremek/src/web/js/compiler.js"></script>
+                <script>
+                    const reviewFileExtension = "<?php echo $fileExtension; ?>";
+                    const reviewFileContent = <?php echo json_encode($reviewCode); ?>;
+                    document.addEventListener("DOMContentLoaded", () => {
+                        createCompiler("review-monaco-editor", true);
+                    });
+                </script>
             </div>
+            <?php endif; ?>
         </div>
     </div>
+    
+    <div class="action-buttons-container">
+        <?php if($canAccept): ?>
+            <button class="button primary accept-request">Felkérés elvállalása</button>
+        <?php endif; ?>
+        
+        <?php if($isOwner && $data["status"] === "teljesitve" && !empty($data["kod_eleresi_ut"])): ?>
+            <div class="review-actions">
+                <button class="button success accept-solution">Elfogadás</button>
+                <button class="button danger reject-solution">Elutasítás</button>
+            </div>
+        <?php endif; ?>
+    </div>
+    
+    <div id="script-container" style="display:none;">
+        <?php 
+        $editorFileExtension = $data["compilerid"] ?? "plaintext";
+        $editorInitialCode = "";
+        if(!empty($data["kod_eleresi_ut"]) && file_exists("codes/" . $data["kod_eleresi_ut"])) {
+            $editorInitialCode = file_get_contents("codes/" . $data["kod_eleresi_ut"]);
+        }
+        ?>
+        <script>
+            window.fileExtension = "<?php echo $editorFileExtension; ?>";
+            window.fileContent = <?php echo json_encode($editorInitialCode); ?>;
+        </script>
+    </div>
+
     <script src="/vizsgaremek/src/web/js/loader.js"></script>
 </body>
 </html>

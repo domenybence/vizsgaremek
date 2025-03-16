@@ -225,9 +225,7 @@ async function acceptSolution(requestId) {
         const data = await response.json();
         if(data.success) {
             showMessage(data.message);
-            setTimeout(() => {
-                location.reload();
-            }, 2000);
+            translateOut();
         }
         else {
             showError(data.message || "Hiba történt a megoldás elfogadása közben.");
@@ -247,18 +245,14 @@ function rejectSolution(requestId) {
     <div class="modal-overlay">
         <div class="modal-error-popup">
             <div class="modal-header">
-                <h3>Megoldás elutasítása</h3>
+                <h3>Kód elutasítása</h3>
                 <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
                 </svg>
             </div>
             <hr>
             <div class="content">
-                <p>Kérjük, adja meg az elutasítás okát:</p>
-                <textarea id="rejection-reason" class="form-control" rows="4" style="width: 100%; margin-top: 10px;"></textarea>
-                <div class="rejection-error" style="color: red; margin-top: 10px; display: none;">
-                    Az elutasítás oka nem lehet üres!
-                </div>
+                <p>Biztosan el szeretné utasítani a beküldött kódot?</p>
             </div>
             <hr>
             <div class="button-container">
@@ -273,38 +267,33 @@ function rejectSolution(requestId) {
     document.querySelector("#svg_x").addEventListener("click", closeModal);
     document.querySelector("#cancel-reject-btn").addEventListener("click", closeModal);
     document.querySelector("#confirm-reject-btn").addEventListener("click", function() {
-        const reason = document.querySelector("#rejection-reason").value.trim();
-        if(!reason) {
-            document.querySelector(".rejection-error").style.display = "block";
-        } else {
-            closeModal();
-            
-            fetch("/vizsgaremek/src/api/reject_solution.php", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "JavaScript-Fetch-Request": "reject-solution"
-                },
-                body: JSON.stringify({ 
-                    requestId,
-                    reason
-                })
+        closeModal();
+        
+        fetch("/vizsgaremek/src/api/reject_solution.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "JavaScript-Fetch-Request": "reject-solution"
+            },
+            body: JSON.stringify({ 
+                requestId,
+                reason: "Megoldás elutasítva"
             })
-            .then(response => response.json())
-            .then(data => {
-                if(data.success) {
-                    showMessage(data.message);
-                    setTimeout(() => {
-                        location.reload();
-                    }, 2000);
-                } else {
-                    showError(data.message || "Hiba történt a megoldás elutasítása közben.");
-                }
-            })
-            .catch(() => {
-                showError("Hiba történt a megoldás elutasítása közben.");
-            });
-        }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.success) {
+                showMessage(data.message);
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            } else {
+                showError(data.message || "Hiba történt a megoldás elutasítása közben.");
+            }
+        })
+        .catch(() => {
+            showError("Hiba történt a megoldás elutasítása közben.");
+        });
     });
 }
 

@@ -178,7 +178,8 @@ body {
     position: relative;
     overflow: hidden;
     box-sizing: border-box;
-    hyphens: auto;
+    word-break: break-all;
+    text-align: justify;
     width: 100%;
     margin: 0;
     margin-bottom: 30px;
@@ -228,6 +229,8 @@ body {
     position: relative;
     overflow: hidden;
     margin: 5px 0;
+    height: auto;
+    line-height: normal;
 }
 
 .button:hover {
@@ -235,7 +238,6 @@ body {
     background: #252525;
 }
 
-/* Remove the gradient effects */
 .button::before {
     display: none;
 }
@@ -277,6 +279,8 @@ body {
     background-color: #222;
     border-radius: 5px;
     border: 1px solid #333;
+    min-height: 60px;
+    align-items: center;
 }
 
 .review-actions h3 {
@@ -293,6 +297,18 @@ body {
 .review-actions .button-container {
     display: flex;
     gap: 15px;
+    align-items: center;
+    min-height: 50px;
+}
+
+.review-actions + .editor-section {
+    margin-top: 20px;
+    border-top: 1px solid #333;
+    padding-top: 15px;
+}
+
+#review-monaco-editor {
+    margin-bottom: 20px;
 }
 
 .info-group {
@@ -559,6 +575,8 @@ textarea.form-control {
     gap: 15px;
     margin-top: 25px;
     padding-top: 15px;
+    align-items: center;
+    min-height: 50px;
 }
 .editor-section {
     margin-top: 30px;
@@ -862,4 +880,47 @@ textarea.form-control {
 .modal-overlay h3 {
     color: white;
     margin: 0;
+}
+
+.action-buttons-container {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 1600px;
+    margin: 20px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.action-buttons-container .button {
+    padding: 15px 30px;
+    font-size: 16px;
+    min-width: 200px;
+}
+
+.action-buttons-container .review-actions {
+    display: flex;
+    gap: 20px;
+    width: auto;
+    justify-content: flex-start;
+    background: transparent;
+    border: none;
+    padding: 0;
+    min-height: unset;
+}
+
+@media screen and (max-width: 768px) {
+    .action-buttons-container {
+        flex-direction: column;
+        padding: 0 15px;
+    }
+    
+    .action-buttons-container .review-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .action-buttons-container .button {
+        width: 100%;
+    }
 }

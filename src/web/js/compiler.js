@@ -2,13 +2,26 @@ function createCompiler(container, readOnly = true){
     require.config({ paths: { "vs": "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs" } });
     require(["vs/editor/editor.main"], function (){
         monaco.editor.setTheme("vs-dark");
+        
+        let content = fileContent;
+        let language = fileExtension;
+        
+        if (container === "review-monaco-editor" && typeof reviewFileContent !== 'undefined') {
+            content = reviewFileContent;
+            language = reviewFileExtension;
+        }
+        
         let editor = monaco.editor.create(document.getElementById(container), {
-            value: fileContent,
-            language: fileExtension,
+            value: content,
+            language: language,
             fontSize: 20,
             readOnly: readOnly
         });
-        window.monacoEditor = editor;
+        
+        if (!readOnly) {
+            window.monacoEditor = editor;
+        }
+        
         function adjustFontSize(){
             if (window.matchMedia("(min-width: 1024px)").matches) {
                 editor.updateOptions({ fontSize: 20 });
