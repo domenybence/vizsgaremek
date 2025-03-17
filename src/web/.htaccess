@@ -9,6 +9,7 @@
     RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/dashboard\.php$
     RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/login\.php$
     RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/registration\.php$
+    RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/approve\.php$
 
     RewriteRule ^kategoria/([^/]+)/([^/]+)/?$ /vizsgaremek/src/web/router.php?codecategory=$1&codeid=$2 [QSA,L]
     

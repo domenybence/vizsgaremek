@@ -6,13 +6,13 @@
          startSession();
     }
     
-    ?>
+?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jóváhagyás - CodeOverflow</title>
+    <title>Könyvtár</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/upload.css">
     <link rel="icon" type="image/x-icon" href="./icon.png">
@@ -29,7 +29,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8 col-sm-12">
                 <div class="card bg-light text-dark shadow-lg p-4">
-                    <h2 class="text-center mb-2">Szoftver Jóváhagyása</h2>
+                    <h2 class="text-center mb-2">Könyvtár</h2>
                     </form>
                 </div>
             </div>
@@ -40,7 +40,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8 col-sm-12">
                 <div class="card bg-light text-dark shadow-lg p-4">
-                    <input class="form-control me-2 mb-2" id="kereso" type="search" placeholder="Jóváhagyandó szoftver keresése">
+                    <input class="form-control me-2 mb-2" id="kereso" type="search" placeholder="Megvásárolt Szoftver keresése">
                     <button class="btn btn-outline-primary" id="keresobtn" type="button">Keresés</button>
                     
                 </div>
@@ -61,6 +61,6 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/approve.js"></script>
+    <script src="js/library.js"></script>
 </body>
 </html>

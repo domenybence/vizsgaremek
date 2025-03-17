@@ -15,7 +15,6 @@ async function kodFeltoltes(){
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                userid: 8,
                 categoryid: categoryId,
                 name: Name,
                 price: Price,

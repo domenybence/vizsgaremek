@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let card = `
         <div class="col-12 col-md-6 col-lg-4">
           <div class="card bg-dark text-light mb-3">
-            <div class="card-header">${item.kategoria_id}</div>
+            <div class="card-header">${item.katnev}</div>
             <div class="card-body bg-light text-dark">
               <h5 class="card-title">${item.nev}</h5>
               <a href="./kod/${item.id}" class="btn btn-dark">Megtekintés</a>
@@ -135,6 +135,27 @@ document.addEventListener("DOMContentLoaded", () => {
     return cosineSimilarity(vectorA, vectorB);
   }
 
+  async function fetchCategories() {
+    try {
+      let kat = document.getElementById('kategoriak');
+      const response = await fetch("./kategoriak");
+      const data = await response.json();   
+      console.log('a');  
+      
+       for (const kategoria of data) {
+        kat.innerHTML += "<button type='button' id='" + kategoria.compiler_azonosito + "' class='btn btn-outline-light'> " + kategoria.nev + "</button>"
+       }
+    
+      
+         console.log('v');
+      
+  }
+  catch(error) {
+      console.error(error);
+      
+  }
+  }
+
   // EventListenerek
   $("ossz").addEventListener("click", () => fetchSoftware("./osszesszoftver"));
   $("html").addEventListener("click", () => fetchSoftware("./katkereses", { kategoria: 1 }));
@@ -160,4 +181,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   fetchSoftware("./osszesszoftver"); // Összes szoftver betöltése az oldal betöltésekor
+  fetchCategories();
 });

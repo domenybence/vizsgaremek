@@ -27,47 +27,13 @@ if (session_status() === PHP_SESSION_NONE) {
   
   <?php include "navbarsearch.php"; ?>
   
-  <!--
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
-    <div class="container">
-      <a class="navbar-brand" href="home.html">CodeOverflow</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item"><a class="nav-link" href="#">Szoftverek</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Kérések</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Könyvtár</a></li>
-        </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" id="kereso" type="search" placeholder="Szoftverkeresés">
-          <button class="btn btn-outline-primary" id="keresobtn" type="button">Keresés</button>
-        </form>
-        <div class="dropdown ms-3">
-          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
-            <img src="https://github.com/mdo.png" alt="Profile" width="32" height="32" class="rounded-circle me-2">
-            <strong>ProfilNév</strong>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark">
-            <li><a class="dropdown-item" href="upload.php">Szoftverfeltöltés</a></li>
-            <li><a class="dropdown-item" href="#">Beállítások</a></li>
-            <li><a class="dropdown-item" href="#">Profil</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Kijelentkezés</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </nav>
--->
   <div class="container-fluid mt-3">
     <div class="row">
       <aside class="col-md-3 col-lg-2 bg-dark p-3">
         <h4>Kategóriák</h4>
         <hr>
         <form>
-          <div class="d-grid gap-2">
+          <div class="d-grid gap-2" id="kategoriak">
             <button type="button" id="ossz" class="btn btn-outline-light">Összes</button>
             <button type="button" id="html" class="btn btn-outline-light">HTML</button>
             <button type="button" id="css" class="btn btn-outline-light">CSS</button>

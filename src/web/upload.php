@@ -24,35 +24,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
 <?php include "navbar.php"; ?>
-    <!--
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
-        <div class="container">
-            <a class="navbar-brand" href="home.html">CodeOverflow</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="home.html">Főoldal</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Szoftverek</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Kapcsolat</a></li>
-                </ul>
-                <div class="dropdown">
-                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
-                        <img src="https://github.com/mdo.png" alt="Profile" width="32" height="32" class="rounded-circle me-2">
-                        <strong>Profil</strong>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item" href="#">Beállítások</a></li>
-                        <li><a class="dropdown-item" href="#">Profil</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Kijelentkezés</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
-    -->
+   
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8 col-sm-12">

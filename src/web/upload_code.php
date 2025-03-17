@@ -1,14 +1,20 @@
 <?php
 
 
+include_once "../php_functions/php_functions.php";
 include '../php_functions/adatbazis_lekeres.php';
+
+
+if (session_status() === PHP_SESSION_NONE) {
+    startSession();
+  }
 
 $data = json_decode(file_get_contents('php://input'), true);
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $file_name = "";
         var_dump($file_name);
-        $userid = $data["userid"];
+        $userid = $_SESSION["userid"];
         $categoryid = $data["categoryid"];
         $name = $data["name"];
         $price = $data["price"];

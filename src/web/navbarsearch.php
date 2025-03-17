@@ -36,6 +36,7 @@ include_once "../php_functions/php_functions.php";
                 <div class="nav-dropdown-button nav-link">'.$_SESSION["username"].'
                     <div class="nav-dropdown-item">
                         ';
+                        echo '<div class="nav-item nav-link"><a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/library.php">Könyvtár</a></div>';
                         if($_SESSION["role"] == "moderator") {
                             echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/library.php">Könyvtár</a>
                             <a class="nav-link" href="http://localhost/vizsgaremek/src/web/approve.php">Jóváhagyások</a>';
