@@ -4,5 +4,5 @@ startSession();
 unsetCookie();
 session_unset();
 session_destroy();
-header("Location: home.html");
+header("Location: home.php");
 exit();

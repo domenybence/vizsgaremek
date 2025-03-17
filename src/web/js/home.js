@@ -139,15 +139,14 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       let kat = document.getElementById('kategoriak');
       const response = await fetch("./kategoriak");
-      const data = await response.json();   
-      console.log('a');  
+      const data = await response.json();    
       
        for (const kategoria of data) {
-        kat.innerHTML += "<button type='button' id='" + kategoria.compiler_azonosito + "' class='btn btn-outline-light'> " + kategoria.nev + "</button>"
+        kat.innerHTML += "<button type='button' id='" + kategoria.id + "' class='btn btn-outline-light katbtn'> " + kategoria.nev + "</button>"
        }
     
       
-         console.log('v');
+         
       
   }
   catch(error) {
@@ -157,12 +156,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // EventListenerek
-  $("ossz").addEventListener("click", () => fetchSoftware("./osszesszoftver"));
-  $("html").addEventListener("click", () => fetchSoftware("./katkereses", { kategoria: 1 }));
-  $("css").addEventListener("click", () => fetchSoftware("./katkereses", { kategoria: 2 }));
-  $("js").addEventListener("click", () => fetchSoftware("./katkereses", { kategoria: 3 }));
-  $("php").addEventListener("click", () => fetchSoftware("./katkereses", { kategoria: 4 }));
-  $("cs").addEventListener("click", () => fetchSoftware("./katkereses", { kategoria: 5 }));
+ 
+  const container = document.querySelector('#kategoriak');
+  container.addEventListener('click', function (e) {
+    if (e.target.classList.contains('katbtn')) {
+      fetchSoftware("./katkereses",{kategoria : e.target.id} );
+    }
+    else
+    {
+      fetchSoftware("./osszesszoftver")
+    }
+  });
+ 
+
+  
   $("keresobtn").addEventListener("click", async () => {
     const query = document.getElementById("kereso").value.trim().toLowerCase();
     if (!query) return;
@@ -178,8 +185,8 @@ document.addEventListener("DOMContentLoaded", () => {
     displaySoftware();
     document.getElementById("kereso").value = "";
   });
-
-
+  
+  
   fetchSoftware("./osszesszoftver"); // Összes szoftver betöltése az oldal betöltésekor
   fetchCategories();
 });

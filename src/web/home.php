@@ -35,11 +35,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <form>
           <div class="d-grid gap-2" id="kategoriak">
             <button type="button" id="ossz" class="btn btn-outline-light">Összes</button>
-            <button type="button" id="html" class="btn btn-outline-light">HTML</button>
-            <button type="button" id="css" class="btn btn-outline-light">CSS</button>
-            <button type="button" id="js" class="btn btn-outline-light">JS</button>
-            <button type="button" id="php" class="btn btn-outline-light">PHP</button>
-            <button type="button" id="cs" class="btn btn-outline-light">C#</button>
+           
           </div>
         </form>
       </aside>
