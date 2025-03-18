@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     
     document.getElementById("user-search").addEventListener("keypress", (e) => {
-        if (e.key === "Enter") {
+        if(e.key === "Enter") {
             searchTerm = e.target.value.trim();
             currentPage = 1;
             fetchUsers();
@@ -46,14 +46,14 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     
     document.getElementById("prev-page").addEventListener("click", function() {
-        if (currentPage > 1) {
+        if(currentPage > 1) {
             currentPage--;
             fetchUsers();
         }
     });
     
     document.getElementById("next-page").addEventListener("click", function() {
-        if (currentPage < totalPages) {
+        if(currentPage < totalPages) {
             currentPage++;
             fetchUsers();
         }
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const tableContainer = document.querySelector(".users-table-container");
         
         let loadingOverlay = document.querySelector(".table-loading-overlay");
-        if (!loadingOverlay) {
+        if(!loadingOverlay) {
             loadingOverlay = document.createElement("div");
             loadingOverlay.className = "table-loading-overlay";
             loadingOverlay.innerHTML = `
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
             const data = await response.json();
             
-            if (!data.success) {
+            if(!data.success) {
                 throw new Error(data.message || "Failed to fetch users");
             }
             
@@ -110,11 +110,13 @@ document.addEventListener("DOMContentLoaded", function() {
             displayUsers(data.users);
             renderPagination(pagination);
             
-        } catch (error) {
+        }
+        catch (error) {
             console.error("Error fetching users:", error);
             showToast("Hiba történt a felhasználók betöltésekor: " + error.message, true);
             tableBody.innerHTML = "<tr><td colspan=\"7\" class=\"table-loading\">Hiba történt a betöltés során.</td></tr>";
-        } finally {
+        }
+        finally {
             setTimeout(() => {
                 loadingOverlay.style.opacity = "0";
                 setTimeout(() => {
@@ -125,7 +127,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
     
-    // New simplified pagination renderer
     function renderPagination(pagination) {
         const pageNumbers = document.getElementById("page-numbers");
         const prevButton = document.getElementById("prev-page");
@@ -133,24 +134,22 @@ document.addEventListener("DOMContentLoaded", function() {
         
         pageNumbers.innerHTML = '';
         
-        // Ensure valid page range
         const totalPages = Math.max(1, pagination.totalPages);
         const currentPage = Math.min(totalPages, Math.max(1, pagination.currentPage));
         
-        // Calculate pages to show
         let startPage = Math.max(1, currentPage - 2);
         let endPage = Math.min(totalPages, currentPage + 2);
         
-        if (endPage - startPage < 4 && totalPages > 5) {
-            if (currentPage < 3) {
+        if(endPage - startPage < 4 && totalPages > 5) {
+            if(currentPage < 3) {
                 endPage = Math.min(5, totalPages);
-            } else if (currentPage > totalPages - 2) {
+            }
+            else if(currentPage > totalPages - 2) {
                 startPage = Math.max(1, totalPages - 4);
             }
         }
         
-        // Create page buttons
-        for (let i = startPage; i <= endPage; i++) {
+        for(let i = startPage; i <= endPage; i++) {
             const pageBtn = document.createElement("span");
             pageBtn.className = "page-number" + (i === currentPage ? " active" : "");
             pageBtn.textContent = i;
@@ -163,19 +162,20 @@ document.addEventListener("DOMContentLoaded", function() {
             pageNumbers.appendChild(pageBtn);
         }
         
-        // Update prev/next buttons
         prevButton.disabled = currentPage <= 1;
         nextButton.disabled = currentPage >= totalPages;
         
         if (prevButton.disabled) {
             prevButton.classList.add("disabled");
-        } else {
+        }
+        else {
             prevButton.classList.remove("disabled");
         }
         
         if (nextButton.disabled) {
             nextButton.classList.add("disabled");
-        } else {
+        }
+        else {
             nextButton.classList.remove("disabled");
         }
     }
@@ -189,9 +189,10 @@ document.addEventListener("DOMContentLoaded", function() {
             onComplete: () => {
                 tableBody.innerHTML = "";
                 
-                if (usersList.length === 0) {
+                if(usersList.length === 0) {
                     tableBody.innerHTML = "<tr><td colspan=\"7\" class=\"table-loading\">Nincs találat</td></tr>";
-                } else {
+                }
+                else {
                     usersList.forEach(user => {
                         const row = document.createElement("tr");
                         
@@ -261,7 +262,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             modalBody.innerHTML = originalContent;
             
-            if (data.success) {
+            if(data.success) {
                 document.getElementById("user-id").value = data.user.id;
                 document.getElementById("username").value = data.user.username;
                 document.getElementById("email").value = data.user.email;
@@ -270,7 +271,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("password").value = "";
                 
                 setupFormSubmitHandler();
-            } else {
+            }
+            else {
                 closeModalWithAnimation("user-modal");
                 showToast("Hiba a felhasználó betöltésekor: " + data.message, true);
             }
@@ -366,13 +368,15 @@ document.addEventListener("DOMContentLoaded", function() {
             
             closeModalWithAnimation("confirm-modal");
             
-            if (data.success) {
+            if(data.success) {
                 showToast("Felhasználó sikeresen törölve.");
                 fetchUsers();
-            } else {
+            }
+            else {
                 showToast("Hiba a felhasználó törlésekor: " + data.message, true);
             }
-        } catch (error) {
+        }
+        catch (error) {
             console.error("Error deleting user:", error);
             closeModalWithAnimation("confirm-modal");
             showToast("Hiba a felhasználó törlésekor.", true);
@@ -421,6 +425,5 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 3000);
     }
     
-    // Initial fetch
     fetchUsers();
 });
