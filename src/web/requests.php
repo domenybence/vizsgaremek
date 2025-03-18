@@ -56,7 +56,7 @@ $canDelete = $isAdmin || $isModerator || ($isOwner && $isOpen);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A CodeOverflow felkéréseinek felülete.">
-    <title>Felkérések</title>
+    <title>Felkérések - CodeOverflow</title>
     <link rel="stylesheet" href="/vizsgaremek/src/web/css/requests.css">
     <link rel="stylesheet" href="/vizsgaremek/src/web/css/loader.css">
     <link rel="stylesheet" href="/vizsgaremek/src/web/css/navbar.css">
