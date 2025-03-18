@@ -1,9 +1,10 @@
 <?php
+include_once "../php_functions/php_functions.php";
 if(session_status() === PHP_SESSION_NONE) {
-    include_once "../php_functions/php_functions.php";
     startSession();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="hu">
 <head>
