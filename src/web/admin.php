@@ -54,7 +54,7 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
                     </li>
                     <li class="sidebar-item" data-tab="content">
                         <i class="icon content-icon"></i>
-                        <span>Tartalom</span>
+                        <span>Kategóriák</span>
                     </li>
                     <li class="sidebar-item" data-tab="settings">
                         <i class="icon settings-icon"></i>
@@ -117,12 +117,12 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
                 
                 <div class="tab-content" id="content-tab">
                     <div class="content-header">
-                        <h2>Tartalom kezelése</h2>
+                        <h2>Kategóriák kezelése</h2>
                     </div>
                     <div class="content-management">
-                        <p>Itt kezelheti az oldal tartalmát, beleértve a kódokat és a felkéréseket.</p>
+                        <p>Ezen a felületen módosíthatja a kategóriákat.</p>
                         <div class="placeholder-box">
-                            <p>Tartalom kezelési lehetőségek</p>
+                            <p>Kategóriák placeholder</p>
                         </div>
                     </div>
                 </div>
