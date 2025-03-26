@@ -11,26 +11,34 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SERVER["HTTP_JAVASCRIPT_FETCH
     $price = $data["price"];
     $deadline = $data["deadline"];
     $description = $data["description"];
-    $request = preparedGetData("SELECT felkeres.* FROM felkeres WHERE felkeres.id = ? AND felkeres.felhasznalo_id = ? AND felkeres.statusz = 'nyitott'", "ii", [$requestId, $_SESSION["userid"]]);
+    
+    $userRole = $_SESSION["role"] ?? "user";
+    $isAdmin = ($userRole === "admin");
+    $isModerator = ($userRole === "moderator");
+    
+    $request = preparedGetData("SELECT * FROM felkeres WHERE id = ?", "i", [$requestId]);
+    
     if(!$request || empty($request)) {
-        echo json_encode([
-            "success" => false, 
-            "message" => "Nincs jogosultsága a felkérés szerkesztéséhez vagy a felkérést már valaki elvállalta."
-        ]);
+        echo json_encode(["success" => false, "message" => "A felkérés nem található."]);
         exit;
     }
-    $success = insertData("UPDATE felkeres SET nev = ?, ar = ?, hatarido = ?, leiras = ? WHERE id = ? AND felhasznalo_id = ? AND statusz = 'nyitott'", "sissii", [$title, $price, $deadline, $description, $requestId, $_SESSION["userid"]]);   
-    if($success) {
-        echo json_encode([
-            "success" => true,
-            "message" => "A felkérés sikeresen frissítve."
-        ]);
+    
+    $request = $request[0];
+    $isOwner = ($request["felhasznalo_id"] == $_SESSION["userid"]);
+    $isEditable = ($request["statusz"] === "nyitott");
+    
+    if(!($isAdmin || $isModerator || ($isOwner && $isEditable))) {
+        echo json_encode(["success" => false, "message" => "Nincs jogosultsága szerkeszteni ezt a felkérést."]);
+        exit;
+    }
+    
+    $result = insertData("UPDATE felkeres SET nev = ?, ar = ?, hatarido = ?, leiras = ? WHERE id = ?", "sissi", [$title, $price, $deadline, $description, $requestId]);
+    
+    if($result) {
+        echo json_encode(["success" => true, "message" => "A felkérés sikeresen frissítve."]);
     }
     else {
-        echo json_encode([
-            "success" => false,
-            "message" => "Hiba történt a felkérés frissítése közben."
-        ]);
+        echo json_encode(["success" => false, "message" => "Hiba történt a felkérés frissítése közben."]);
     }
     exit;
 }

@@ -11,7 +11,7 @@ if(session_status() === PHP_SESSION_NONE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A CodeOverflow regisztrációs felülete.">
-    <title>Regisztráció</title>
+    <title>Regisztráció - CodeOverflow</title>
     <link rel="stylesheet" href="./css/registration.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

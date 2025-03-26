@@ -14,6 +14,7 @@
     RewriteRule ^kategoria/([^/]+)/?$ /vizsgaremek/src/web/router.php?codecategory=$1 [QSA,L]
     RewriteRule ^felkeres/([^/]+)/?$ /vizsgaremek/src/web/router.php?request=$1 [QSA,L]
     RewriteRule ^felkeresek/?$ /vizsgaremek/src/web/router.php?requests [L]
+    RewriteRule ^felkeresek/feltoltes/?$ /vizsgaremek/src/web/router.php?upload_request [L]
     RewriteRule ^kod/([^/]+)$ /vizsgaremek/src/web/router.php?codeid=$1 [QSA,L]
     RewriteRule ^kod/([^/]+)/?$ /vizsgaremek/src/web/router.php?codeid=$1 [QSA,L]
     RewriteRule ^kod/([^/]+)/fetch$ /vizsgaremek/src/web/router.php?codeid=$1/fetch [QSA,L]

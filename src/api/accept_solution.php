@@ -59,7 +59,3 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SERVER["HTTP_JAVASCRIPT_FETCH
     ]);
     exit;
 }
-
-http_response_code(403);
-echo json_encode(["success" => false, "message" => "Nem megengedett hozzáférés."]);
-exit;
