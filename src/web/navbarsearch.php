@@ -11,15 +11,7 @@ include_once "../php_functions/php_functions.php";
         <a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/home.php">CodeOverflow</a>
     </div>
     <div class="nav-group">
-        <div class="nav-dropdown-button nav-link">
-            Kategóriák
-            <?php
-            $categories = simpleGetData("SELECT kategoria.nev FROM kategoria;")[0];
-            foreach ($categories as $category) {
-                echo '<div class="nav-dropdown-item"><a class="nav-link" href="http://localhost/vizsgaremek/kategoria/' . $category . '">' . $category . '</a></div>';
-            }
-            ?>
-        </div>
+       
         <a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/browse_requests.php">Felkérések</a>
     </div>
     <form class="d-flex">

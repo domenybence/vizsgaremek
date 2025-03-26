@@ -11,21 +11,7 @@ include_once "../php_functions/php_functions.php";
         <a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/home.php">CodeOverflow</a>
     </div>
     <div class="nav-group">
-        <div class="nav-dropdown-button nav-link">
-            Kategóriák
-            <div class="nav-dropdown-item">
-            <?php
-            $categories = simpleGetData("SELECT nev, compiler_azonosito FROM kategoria ORDER BY nev");
-            if($categories && count($categories) > 0) {
-                foreach ($categories as $category) {
-                    echo '<a class="nav-link" href="http://localhost/vizsgaremek/kategoria/' . $category['compiler_azonosito'] . '">' . $category['nev'] . '</a>';
-                }
-            } else {
-                echo '<a class="nav-link">Nincs elérhető kategória</a>';
-            }
-            ?>
-            </div>
-        </div>
+      
         <div class="nav-dropdown-button nav-link">
             Felkérések
             <div class="nav-dropdown-item">

@@ -49,13 +49,13 @@ if (session_status() === PHP_SESSION_NONE) {
           </div>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="https://placehold.co/800x300" class="d-block w-100" alt="Slide 1">
+              <img src="./img/carousel1.jpg" class="d-block w-100" alt="Kép 1">
             </div>
             <div class="carousel-item">
-              <img src="https://placehold.co/800x300" class="d-block w-100" alt="Slide 2">
+              <img src="./img/carousel2.jpg" class="d-block w-100" alt="Kép 2">
             </div>
             <div class="carousel-item">
-              <img src="https://placehold.co/800x300" class="d-block w-100" alt="Slide 3">
+              <img src="./img/carousel3.jpg" class="d-block w-100" alt="Kép 3">
             </div>
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carousel-fokepek" data-bs-slide="prev">
