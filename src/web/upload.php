@@ -42,11 +42,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         <div class="mb-3">
                             <label for="category" class="form-label">Kategória</label>
                             <select class="form-select" id="katInput" name="category" required>
-                                <option value="1">HTML</option>
-                                <option value="2">CSS</option>
-                                <option value="3">JavaScript</option>
-                                <option value="4">PHP</option>
-                                <option value="5">C#</option>
+                                
                             </select>
                         </div>
                         <div class="mb-3">

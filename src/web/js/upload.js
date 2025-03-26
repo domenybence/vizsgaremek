@@ -1,3 +1,23 @@
+async function fetchCategories() {
+    try {
+      let kat = document.getElementById('katInput');
+      const response = await fetch("./kategoriak");
+      const data = await response.json();    
+      
+       for (const kategoria of data) {
+        kat.innerHTML += "<option value="+ kategoria.id +">"+ kategoria.nev +"</option>";
+       }
+    
+      
+         
+      
+  }
+  catch(error) {
+      console.error(error);
+      
+  }
+  }
+
 
 async function kodFeltoltes(){
     let Name = document.getElementById('nevInput').value;
@@ -45,3 +65,4 @@ async function kodFeltoltes(){
 
 
 document.getElementById('uploadBtn').addEventListener('click', kodFeltoltes);
+window.addEventListener('load',fetchCategories);

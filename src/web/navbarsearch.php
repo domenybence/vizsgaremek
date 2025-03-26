@@ -46,7 +46,6 @@ include_once "../php_functions/php_functions.php";
                             <a class="nav-link" href="http://localhost/vizsgaremek/src/web/admin.php">Admin</a>';
                         }
                         echo '  <a class="nav-link" href="http://localhost/vizsgaremek/src/web/upload.php">Feltöltés</a>
-                                <a class="nav-link" href="http://localhost/vizsgaremek/src/web/requests.php">Felkérések</a>
                                 <a class="nav-link" href="http://localhost/vizsgaremek/src/web/logout.php">Kijelentkezés</a>
                     </div>
                 </div>';
