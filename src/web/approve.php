@@ -19,9 +19,13 @@
     <script src="./js/navbar.js" defer></script>
     <link rel="stylesheet" href="./css/navbar.css">
     <script src="./js/gsap-public/minified/gsap.min.js" defer></script>
+    <link rel="stylesheet" href="./css/loader.css">
 </head>
 <body class="bg-dark text-light" style="padding-top: 100px;">
-
+<script src="/vizsgaremek/src/web/js/gsap-public/minified/gsap.min.js"></script>
+    <div class="page-cover">
+        <h1 class="page-cover-title">Betöltés...</h1>
+    </div>
 
     <?php include "navbar.php"; ?>
 
@@ -62,5 +66,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/approve.js"></script>
+    <script src="/vizsgaremek/src/web/js/loader.js"></script>
 </body>
 </html>
