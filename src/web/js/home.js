@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="col-12 col-md-6 col-lg-4">
         <div class="card-group">
           <div class="card">
-            <img src="img/${item.katnev}.jpg" class="card-img-top" alt="${item.nev}"/>
+            <img src="img/${item.kep}" class="card-img-top" alt="${item.nev}"/>
             <div class="card-body">
               <h5 class="card-title">${item.nev}</h5>
               <p class="card-text">

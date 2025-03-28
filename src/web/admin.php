@@ -125,7 +125,8 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
                                 <tr>
                                     <th>Azonosító</th>
                                     <th>Név</th>
-                                    <th>Leírás</th>
+                                    <th>Compiler azonosító</th>
+                                    <th>Kép</th>
                                     <th>Műveletek</th>
                                 </tr>
                             </thead>

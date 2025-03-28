@@ -293,6 +293,35 @@ body {
     background-color: #c82333;
 }
 
+.editkat-btn, 
+.deletekat-btn {
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    font-size: 13px;
+    font-family: inherit;
+}
+
+.editkat-btn {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.editkat-btn:hover {
+    background-color: #0069d9;
+}
+
+.deletekat-btn {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.deletekat-btn:hover {
+    background-color: #c82333;
+}
+
 .table-loading {
     text-align: center;
     padding: 30px;
