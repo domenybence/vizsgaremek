@@ -1,5 +1,8 @@
 <?php
 include_once "../php_functions/php_functions.php";
+if(session_status() === PHP_SESSION_NONE) {
+    startSession();
+}
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -15,12 +18,11 @@ include_once "../php_functions/php_functions.php";
     <link rel="stylesheet" href="./css/loader.css">
 </head>
 <body>
+    <div class="page-cover"></div>
     <script src="/vizsgaremek/src/web//js/gsap-public/minified/gsap.min.js"></script>
-    <div class="page-cover">
-        <h1 class="page-cover-title">Betöltés...</h1>
-    </div>
-    <?php include "navbar.php"; ?>
-    <?php $price = simpleGetData("SELECT * FROM pont_ar"); ?>
+    <?php
+    include "navbar.php";
+    $price = simpleGetData("SELECT * FROM pont_ar"); ?>
     <script>const price = <?php echo json_encode($price[0]["ar"]) ?></script>
         <div class="container">
             <div class="column">

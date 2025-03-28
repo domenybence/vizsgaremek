@@ -11,7 +11,6 @@ include_once "../php_functions/php_functions.php";
         <a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/home.php">CodeOverflow</a>
     </div>
     <div class="nav-group">
-      
         <div class="nav-dropdown-button nav-link">
             Felkérések
             <div class="nav-dropdown-item">
@@ -23,14 +22,16 @@ include_once "../php_functions/php_functions.php";
     <div class="nav-group">
         <?php
         if($_SESSION["username"] == "Vendég") {
-            echo '<div class="nav-item nav-link"><a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/login.php">Bejelentkezés</a></div>';
+            echo '<a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/login.php">Bejelentkezés</a>';
         }
         else {
             echo '
                 <div class="nav-dropdown-button nav-link">'.$_SESSION["username"].'
                     <div class="nav-dropdown-item">
                         ';
-                        echo '<div class="nav-item nav-link"><a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/library.php">Könyvtár</a></div>';
+                        echo '
+                        <a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/credsupload.php">Pontok feltöltése</a>
+                        <a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/library.php">Könyvtár</a>';
                         if($_SESSION["role"] == "moderator") {
                             echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/library.php">Könyvtár</a>
                             <a class="nav-link" href="http://localhost/vizsgaremek/src/web/approve.php">Jóváhagyások</a>';
@@ -41,7 +42,7 @@ include_once "../php_functions/php_functions.php";
                             
                         }
                         
-                        echo '  <a class="nav-link" href="http://localhost/vizsgaremek/src/web/upload.php">Feltöltés</a>
+                        echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/upload.php">Feltöltés</a>
                         <a class="nav-link" href="http://localhost/vizsgaremek/src/web/logout.php">Kijelentkezés</a>
             </div>
         </div>';

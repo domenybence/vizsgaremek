@@ -11,8 +11,13 @@ include_once "../php_functions/php_functions.php";
         <a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/home.php">CodeOverflow</a>
     </div>
     <div class="nav-group">
-       
-        <a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/browse_requests.php">Felkérések</a>
+        <div class="nav-dropdown-button nav-link">
+            Felkérések
+            <div class="nav-dropdown-item">
+                <a class="nav-link" href="http://localhost/vizsgaremek/felkeresek/feltoltes">Feltöltés</a>
+                <a class="nav-link" href="http://localhost/vizsgaremek/felkeresek">Böngészés</a>
+            </div>
+        </div>
     </div>
     <form class="d-flex">
           <input class="form-control me-2" id="kereso" type="search" placeholder="Szoftverkeresés">

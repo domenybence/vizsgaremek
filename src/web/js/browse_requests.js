@@ -15,12 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     window.location.href = targetUrl;
                 }
             });
-            gsap.to(".page-cover-title", {
-                y: 0,
-                opacity: 1,
-                duration: 0.8,
-                ease: "power4.inOut"
-            });
         });
     });
 });

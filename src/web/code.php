@@ -48,9 +48,7 @@ else {
 </head>
 <body>
     <script src="/vizsgaremek/src/web//js/gsap-public/minified/gsap.min.js"></script>
-    <div class="page-cover">
-        <h1 class="page-cover-title">Betöltés...</h1>
-    </div>
+    <div class="page-cover"></div>
     <?php include "navbar.php"; ?>
     <?php if(!$isOwned): ?>
         <?php if($_SESSION["username"] != "Vendég"): ?>

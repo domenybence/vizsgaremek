@@ -19,9 +19,7 @@ if(session_status() === PHP_SESSION_NONE) {
 </head>
 <body>
     <script src="/vizsgaremek/src/web//js/gsap-public/minified/gsap.min.js"></script>
-    <div class="page-cover">
-        <h1 class="page-cover-title">Betöltés...</h1>
-    </div>
+    <div class="page-cover"></div>
         <div class="background"></div>
         <div class="container" id="container">
             <div class="wrapper">

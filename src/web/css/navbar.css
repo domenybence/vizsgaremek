@@ -33,9 +33,7 @@ nav {
 .nav-dropdown-item.visible {
     display: block;
     margin: 5px 0;
-}
-.nav-dropdown-item.visible {
-    width: auto;
+    width: 12vw;
     opacity: 1;
     visibility: visible;
 }
