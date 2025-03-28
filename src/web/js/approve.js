@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <li class="list-group-item d-flex justify-content-between align-items-center">
               <div>
                 <h5 class="mb-1">${item.nev}</h5>
-                <p class="mb-1">${item.katnev}</p>
+                <p class="mb-1">${item.kep}</p>
               </div>
               <div>
                 <a href="./kod/${item.id}" class="btn btn-dark">Megtekintés</a>

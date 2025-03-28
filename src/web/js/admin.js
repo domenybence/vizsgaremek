@@ -428,7 +428,7 @@ document.addEventListener("DOMContentLoaded", function() {
     fetchUsers();
 
     function fetchCategories() {
-        fetch('/vizsgaremek/src/php/fetch_categories.php')
+        fetch('./kategoriak')
             .then(response => response.json())
             .then(categories => {
                 const tableBody = document.getElementById("categories-table-body");
@@ -438,11 +438,12 @@ document.addEventListener("DOMContentLoaded", function() {
                     const row = document.createElement("tr");
                     row.innerHTML = `
                         <td>${category.id}</td>
-                        <td>${category.name}</td>
-                        <td>${category.description}</td>
+                        <td>${category.nev}</td>
+                        <td>${category.compiler_azonosito}</td>
+                         <td>${category.kep}</td>
                         <td>
-                            <button class="edit-btn" onclick="editCategory(${category.id})">Szerkesztés</button>
-                            <button class="delete-btn" onclick="deleteCategory(${category.id})">Törlés</button>
+                            <button class="editkat-btn">Szerkesztés</button>
+                            <button class="deletekat-btn">Törlés</button>
                         </td>
                     `;
                     tableBody.appendChild(row);
@@ -451,24 +452,9 @@ document.addEventListener("DOMContentLoaded", function() {
             .catch(error => console.error("Hiba a kategóriák betöltése közben:", error));
     }
     
-    function editCategory(categoryId) {
-        alert(`Szerkesztés: ${categoryId}`);
-        
-    }
     
-    function deleteCategory(categoryId) {
-        if (confirm("Biztosan törölni szeretné ezt a kategóriát?")) {
-            fetch(`/vizsgaremek/src/php/delete_category.php?id=${categoryId}`, { method: 'DELETE' })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        fetchCategories();
-                    } else {
-                        alert("Hiba történt a törlés során.");
-                    }
-                })
-                .catch(error => console.error("Hiba a törlés közben:", error));
-        }
+    fetchCategories();
+
     
 });
 
