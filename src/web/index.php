@@ -50,7 +50,7 @@ switch (mb_strtolower($url[0])) {
         break;
     case 'jovahagyando':
         if($_SERVER['REQUEST_METHOD'] == 'GET'){
-            $jova_sql = "SELECT * FROM `kod` WHERE kod.jovahagyott = 0";
+            $jova_sql = "SELECT kod.id, kod.nev, kategoria.nev AS katnev FROM `kod` INNER JOIN kategoria ON kod.kategoria_id = kategoria.id WHERE kod.jovahagyott = 0";
             $jova = adatokLekerese($jova_sql);
                 
             echo json_encode($jova, JSON_UNESCAPED_UNICODE);

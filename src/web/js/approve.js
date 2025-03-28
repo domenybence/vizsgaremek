@@ -63,34 +63,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     //Szoftverek megjelenítése
     function displaySoftware() {
-        softwareContainer.innerHTML = "";
+        softwareContainer.innerHTML = "<ul class='list-group'>";
         let start = (currentPage - 1) * itemsPerPage;
         let end = start + itemsPerPage;
         let paginatedItems = softwareData.slice(start, end);
-
+      
         paginatedItems.forEach((item) => {
-            let card = `
-            <div class="col-12 col-md-6 col-lg-4">
-              <div class="card bg-dark text-light mb-3">
-                <div class="card-header">${item.kategoria_id}</div>
-                <div class="card-body bg-light text-dark">
-                  <h5 class="card-title">${item.nev}</h5>
-                  <a href="../../kod/${item.id}" class="btn btn-dark mb-2">Megtekintés</a>
-                  <button class="btn btn-dark jovahagyas-btn" type="button" id=${item.id} value=${item.id}>Jóváhagyás</a>
-                </div>
+          let listItem = `
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <div>
+                <h5 class="mb-1">${item.nev}</h5>
+                <p class="mb-1">${item.katnev}</p>
               </div>
-            </div>`;
-            softwareContainer.innerHTML += card;
-
-
-
-
+              <div>
+                <a href="./kod/${item.id}" class="btn btn-dark">Megtekintés</a>
+                 <button class="btn btn-dark jovahagyas-btn" type="button" id=${item.id} value=${item.id}>Jóváhagyás</a>
+              </div>
+            </li>`;
+          softwareContainer.innerHTML += listItem;
         });
-
+      
+        softwareContainer.innerHTML += "</ul>";
+      
         setupPagination();
-
-
-    }
+      }
 
     function setupPagination() {
         paginationContainer.innerHTML = "";
