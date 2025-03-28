@@ -79,7 +79,7 @@ switch (mb_strtolower($url[0])) {
         case 'konyvtar':
             if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 $userid = $_SESSION["userid"];
-                $konyvtar_sql = "SELECT * FROM kod INNER JOIN felhasznalo_megvett ON kod.id = felhasznalo_megvett.kod_id WHERE felhasznalo_megvett.felhasznalo_id = {$userid}";
+                $konyvtar_sql = "SELECT kod.id, kod.nev, kategoria.nev AS katnev FROM `kod` INNER JOIN kategoria ON kod.kategoria_id = kategoria.id INNER JOIN felhasznalo_megvett ON kod.id = felhasznalo_megvett.kod_id WHERE felhasznalo_megvett.felhasznalo_id = {$userid}";
                 $konyvtar = adatokLekerese($konyvtar_sql);
 
                 echo json_encode($konyvtar, JSON_UNESCAPED_UNICODE);

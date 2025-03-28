@@ -44,21 +44,33 @@ function displaySoftware() {
   let paginatedItems = softwareData.slice(start, end);
 
   paginatedItems.forEach((item) => {
+    if(item.katnev == "C#")
+    {
+      item.katnev = "CS";
+    }
     let card = `
-      <div class="col-12 col-md-6 col-lg-4">
-        <div class="card bg-dark text-light mb-3">
-          <div class="card-header">${item.kategoria_id}</div>
-          <div class="card-body bg-light text-dark">
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card-group">
+        <div class="card">
+          <img src="img/${item.katnev}.jpg" class="card-img-top" alt="${item.nev}"/>
+          <div class="card-body">
             <h5 class="card-title">${item.nev}</h5>
+            <p class="card-text">
+              ${item.katnev}
+            </p>
+          </div>
+          <div class="card-footer">
             <a href="./kod/${item.id}" class="btn btn-dark">Megtekintés</a>
           </div>
         </div>
-      </div>`;
+      </div>
+    </div>`;
     softwareContainer.innerHTML += card;
   });
 
   setupPagination();
 }
+
 
 function setupPagination() {
   paginationContainer.innerHTML = "";

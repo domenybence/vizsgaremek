@@ -115,15 +115,26 @@ if(!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
                     </div>
                 </div>
                 
-                <div class="tab-content" id="content-tab">
+                < <div class="tab-content" id="content-tab">
                     <div class="content-header">
                         <h2>Kategóriák kezelése</h2>
                     </div>
-                    <div class="content-management">
-                        <p>Ezen a felületen módosíthatja a kategóriákat.</p>
-                        <div class="placeholder-box">
-                            <p>Kategóriák placeholder</p>
-                        </div>
+                    <div class="categories-table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Azonosító</th>
+                                    <th>Név</th>
+                                    <th>Leírás</th>
+                                    <th>Műveletek</th>
+                                </tr>
+                            </thead>
+                            <tbody id="categories-table-body">
+                                <tr>
+                                    <td colspan="4" class="table-loading">Kategóriák betöltése...</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 
