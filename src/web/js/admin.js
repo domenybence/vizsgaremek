@@ -450,8 +450,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
             })
             .catch(error => console.error("Hiba a kategóriák betöltése közben:", error));
+
+           
     }
-    
+
+   
     
     fetchCategories();
 

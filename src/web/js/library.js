@@ -29,11 +29,11 @@ async function fetchSoftware(endpoint, bodyData = null) {
       currentPage = 1;
       displaySoftware();
     } else {
-      alert("Lekérés sikertelen!");
+      console.log("Lekérés sikertelen!");
     }
   } catch (error) {
     console.error(error);
-    alert("Lekérés sikertelen!");
+    console.log("Lekérés sikertelen!");
   }
 }
 //Szoftverek megjelenítése

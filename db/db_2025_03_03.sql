@@ -236,20 +236,21 @@ INSERT INTO `felkeres` (`id`, `nev`, `leiras`, `kod_id`, `kategoria_id`, `feltol
 CREATE TABLE `kategoria` (
   `id` int(10) UNSIGNED NOT NULL,
   `nev` varchar(50) NOT NULL,
-  `compiler_azonosito` varchar(50) NOT NULL
+  `compiler_azonosito` varchar(50) NOT NULL,
+  `kep` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `kategoria`
 --
 
-INSERT INTO `kategoria` (`id`, `nev`, `compiler_azonosito`) VALUES
-(1, 'CSS', 'css'),
-(2, 'PHP', 'php'),
-(3, 'JavaScript', 'javascript'),
-(4, 'Python', 'python'),
-(5, 'C#', 'csharp'),
-(6, 'SQL', 'sql');
+INSERT INTO `kategoria` (`id`, `nev`, `compiler_azonosito`,`kep`) VALUES
+(1, 'CSS', 'css', 'CSS.jpg'),
+(2, 'PHP', 'php', 'PHP.jpg'),
+(3, 'JavaScript', 'javascript', 'JavaScript.jpg'),
+(4, 'Python', 'python', 'Python.jpg'),
+(5, 'C#', 'csharp', 'CS.jpg'),
+(6, 'SQL', 'sql', 'SQL.jpg');
 
 -- --------------------------------------------------------
 
