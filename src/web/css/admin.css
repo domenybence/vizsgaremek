@@ -293,8 +293,8 @@ body {
     background-color: #c82333;
 }
 
-.editkat-btn, 
-.deletekat-btn {
+.edit-category-btn, 
+.delete-category-btn {
     padding: 6px 12px;
     border-radius: 4px;
     cursor: pointer;
@@ -304,21 +304,21 @@ body {
     font-family: inherit;
 }
 
-.editkat-btn {
+.edit-category-btn {
     background-color: #007bff;
     color: #fff;
 }
 
-.editkat-btn:hover {
+.edit-category-btn:hover {
     background-color: #0069d9;
 }
 
-.deletekat-btn {
+.delete-category-btn  {
     background-color: #dc3545;
     color: #fff;
 }
 
-.deletekat-btn:hover {
+.delete-category-btn:hover {
     background-color: #c82333;
 }
 
@@ -694,3 +694,4 @@ body {
         height: 30px;
     }
 }
+

@@ -219,31 +219,51 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
     </div>
 
     <div id="category-modal" class="modal">
-        <div class="modal-content">
-            <h2 id="category-modal-title">Kategória szerkesztése</h2>
+        <div class="modal-content">      
+            <div class="modal-header">
+                <h3 id="modal-title">Kategória szerkesztése</h2>
+                <span class="close" onclick="closeModalWithAnimation('category-modal')">&times;</span>
+            </div>
+            <div class="modal-body">
             <form id="category-form">
                 <input type="hidden" id="category-id">
-                <label for="category-name">Név:</label>
-                <input type="text" id="category-name" required>
-                <label for="category-compiler">Compiler azonosító:</label>
-                <input type="text" id="category-compiler" required>
+                <div class="form-group">
+                    <label for="category-name">Név</label>
+                    <input type="text" id="category-name" name="category-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="category-compiler">Compiler azonosító:</label>
+                    <input type="text" id="category-compiler" required>
+                </div>
+                <div class="form-group">
                 <label for="category-image">Kép URL:</label>
                 <input type="text" id="category-image">
-                <button type="submit">Mentés</button>
-                <button type="button" onclick="closeModalWithAnimation('category-modal')">Mégse</button>
+                </div>
+                <div class="form-actions">
+                <button type="button" id="cancel-btn" class="secondary-btn" onclick="closeModalWithAnimation('category-modal')">Mégse</button>
+                <button type="submit" id="save-category-btn" class="primary-btn">Mentés</button>
+                </div>
             </form>
         </div>
-    </div>
-
-    <!-- Confirm Delete Category Modal -->
-    <div id="confirm-category-modal" class="modal">
-        <div class="modal-content">
-            <h2>Biztosan törölni szeretné ezt a kategóriát?</h2>
-            <button id="confirm-category-delete-btn">Igen</button>
-            <button type="button" onclick="closeModalWithAnimation('confirm-category-modal')">Mégse</button>
         </div>
     </div>
 
+
+    <div id="confirm-category-modal" class="modal">
+        <div class="modal-content confirm-modal-content">
+            <div class="modal-header">
+                <h3>Megerősítés</h3>
+                <span class="close" onclick="closeModalWithAnimation('confirm-category-modal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h2>Biztosan törölni szeretné ezt a kategóriát?</h2>
+                <div class="form-actions">
+                    <button id="confirm-category-delete-btn" class="secondary-btn" onclick="deleteCategory()">Igen</button>
+                    <button type="button" onclick="closeModalWithAnimation('confirm-category-modal')" class="danger-btn">Mégse</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="toast-message" class="toast-message"></div>
 
     <script src="/vizsgaremek/src/web/js/loader.js"></script>

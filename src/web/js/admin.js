@@ -5,6 +5,25 @@ function closeModalWithAnimation(modalId) {
     }
 }
 
+function openCategoryEditModal(categoryId) {
+   
+    document.getElementById('category-id').value = categoryId;
+    document.getElementById('category-name').value = "Example Name"; 
+    document.getElementById('category-compiler').value = "12345"; 
+    document.getElementById('category-image').value = "example.jpg";
+
+  
+    document.getElementById('category-modal').style.display = 'flex';
+}
+
+function openCategoryDeleteModal(categoryId) {
+   
+    document.getElementById('confirm-category-delete-btn').setAttribute('data-category-id', categoryId);
+
+  
+    document.getElementById('confirm-category-modal').style.display = 'flex';
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     const sidebarItems = document.querySelectorAll(".sidebar-item");
     const tabContents = document.querySelectorAll(".tab-content");
@@ -442,8 +461,8 @@ document.addEventListener("DOMContentLoaded", function() {
                         <td>${category.compiler_azonosito}</td>
                          <td>${category.kep}</td>
                         <td>
-                            <button class="editkat-btn">Szerkesztés</button>
-                            <button class="deletekat-btn">Törlés</button>
+                            <button class="edit-category-btn" onclick="openCategoryEditModal(${category.id})">Szerkesztés</button>
+                            <button class="delete-category-btn" onclick="openCategoryDeleteModal(${category.id})">Törlés</button>
                         </td>
                     `;
                     tableBody.appendChild(row);
@@ -451,12 +470,13 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .catch(error => console.error("Hiba a kategóriák betöltése közben:", error));
 
-           
     }
 
-   
     
+
     fetchCategories();
+
+
 
     
 });
