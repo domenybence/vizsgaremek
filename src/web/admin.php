@@ -258,8 +258,8 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
             <div class="modal-body">
                 <h2>Biztosan törölni szeretné ezt a kategóriát?</h2>
                 <div class="form-actions">
-                    <button id="confirm-category-delete-btn" class="secondary-btn" onclick="deleteCategory()">Igen</button>
-                    <button type="button" onclick="closeModalWithAnimation('confirm-category-modal')" class="danger-btn">Mégse</button>
+                    <button type="button" id="cancel-category-delete-btn" class="secondary-btn" onclick="closeModalWithAnimation('confirm-category-modal')">Mégse</button>
+                    <button type="button" id="confirm-category-delete-btn" onclick="closeModalWithAnimation('confirm-category-modal')" class="danger-btn">Törlés</button>
                 </div>
             </div>
         </div>
