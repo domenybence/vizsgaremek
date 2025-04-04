@@ -35,3 +35,33 @@
     border-radius: 4px;
     position: relative;
 }
+
+.toast-message {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(150%);
+  background-color: #333;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 5px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s ease-in-out, opacity 0.3s ease;
+  z-index: 1001;
+  font-size: 14px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.toast-message.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.toast-message.error {
+  background-color: #dc3545;
+
+
+}
+

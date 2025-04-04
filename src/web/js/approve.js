@@ -8,6 +8,33 @@ document.addEventListener("DOMContentLoaded", () => {
         return document.getElementById(id);
     }
 
+    function showToast(message, isError = false) {
+        const toast = document.getElementById("toast-message");
+    
+        if (toast.timeoutId) {
+            clearTimeout(toast.timeoutId);
+        }
+    
+        toast.style.visibility = "visible";
+        toast.style.opacity = "1";
+        toast.style.display = "block";
+    
+        toast.textContent = message;
+        toast.className = "toast-message show" + (isError ? " error" : "");
+    
+        toast.timeoutId = setTimeout(() => {
+            toast.className = "toast-message";
+    
+            setTimeout(() => {
+                if (!toast.className.includes("show")) {
+                    toast.style.opacity = "0";
+                    toast.style.visibility = "hidden";
+                    toast.textContent = "";
+                }
+            }, 500);
+        }, 3000);
+    }
+
     let currentPage = 1;
     const itemsPerPage = 9;
     let softwareData = [];
@@ -45,8 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         });
                           const data = await response.json();
                             console.log(data);
-                            alert(data);
-                            location.reload();
+                            showToast(data);
+                            fetchSoftware("./jovahagyando");
 
                         currentPage = 1;
                         displaySoftware();

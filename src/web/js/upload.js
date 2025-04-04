@@ -18,6 +18,32 @@ async function fetchCategories() {
   }
   }
 
+  function showToast(message, isError = false) {
+    const toast = document.getElementById("toast-message");
+
+    if (toast.timeoutId) {
+        clearTimeout(toast.timeoutId);
+    }
+
+    toast.style.visibility = "visible";
+    toast.style.opacity = "1";
+    toast.style.display = "block";
+
+    toast.textContent = message;
+    toast.className = "toast-message show" + (isError ? " error" : "");
+
+    toast.timeoutId = setTimeout(() => {
+        toast.className = "toast-message";
+
+        setTimeout(() => {
+            if (!toast.className.includes("show")) {
+                toast.style.opacity = "0";
+                toast.style.visibility = "hidden";
+                toast.textContent = "";
+            }
+        }, 500);
+    }, 3000);
+}
 
 async function kodFeltoltes(){
     let Name = document.getElementById('nevInput').value;
@@ -25,7 +51,7 @@ async function kodFeltoltes(){
     let Price = document.getElementById('arInput').value;
     if(Name == "" || categoryId == "" || Price == "")
     {
-        alert('Hiányzó adatok');
+        showToast('Hiányzó adatok',true);
         return;
     }
     try{
@@ -49,9 +75,8 @@ async function kodFeltoltes(){
         }
         else {
           
-         
-            alert('Sikeres kódfeltöltés');
-           
+            alert('Sikeres feltöltés');
+
             window.location.replace("http://localhost/vizsgaremek/src/web/home.php");
         
         }
