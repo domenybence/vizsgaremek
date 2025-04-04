@@ -1,3 +1,109 @@
+function fetchCategories() {
+    fetch('./kategoriak')
+        .then(response => response.json())
+        .then(categories => {
+            const tableBody = document.getElementById("categories-table-body");
+            tableBody.innerHTML = "";
+
+            categories.forEach(category => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${category.id}</td>
+                    <td>${category.nev}</td>
+                    <td>${category.compiler_azonosito}</td>
+                     <td>${category.kep}</td>
+                    <td>
+                        <button class="edit-category-btn" onclick="openCategoryEditModal(${category.id})">Szerkesztés</button>
+                        <button class="delete-category-btn" onclick="openCategoryDeleteModal(${category.id})">Törlés</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error("Hiba a kategóriák betöltése közben:", error));
+
+}
+
+fetchCategories();
+
+function setupCategoryFormSubmitHandler() {
+    const form = document.getElementById("category-form");
+
+    form.removeEventListener("submit", form.submitHandler);
+
+    form.submitHandler = async function (e) {
+        e.preventDefault();
+
+        const id = document.getElementById("category-id").value;
+        const nev = document.getElementById("category-name").value;
+        const compiler_azonosito = document.getElementById("category-compiler").value;
+        const kep = document.getElementById("category-image").value;
+
+        if (!id || !nev || !compiler_azonosito || !kep) {
+            showToast("Kérem töltse ki az összes mezőt!", true);
+            return;
+        }
+
+        try {
+            const response = await fetch("/vizsgaremek/src/api/update_category.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "JavaScript-Fetch-Request": "update-category"
+                },
+                body: JSON.stringify({
+                    id: id,
+                    nev,
+                    compiler_azonosito,
+                    kep,
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                closeModalWithAnimation("category-modal");
+                showToast("Kategória sikeresen frissítve.");
+                fetchCategories();
+            } else {
+                showToast("Hiba a kategória frissítésekor: " + data.message, true);
+            }
+        } catch (error) {
+            console.error("Error updating category:", error);
+            showToast("Hiba a kategória frissítésekor.", true);
+        }
+    };
+
+    form.addEventListener("submit", form.submitHandler);
+}
+
+function showToast(message, isError = false) {
+    const toast = document.getElementById("toast-message");
+
+    if (toast.timeoutId) {
+        clearTimeout(toast.timeoutId);
+    }
+
+    toast.style.visibility = "visible";
+    toast.style.opacity = "1";
+    toast.style.display = "block";
+
+    toast.textContent = message;
+    toast.className = "toast-message show" + (isError ? " error" : "");
+
+    toast.timeoutId = setTimeout(() => {
+        toast.className = "toast-message";
+
+        setTimeout(() => {
+            if (!toast.className.includes("show")) {
+                toast.style.opacity = "0";
+                toast.style.visibility = "hidden";
+                toast.textContent = "";
+            }
+        }, 500);
+    }, 3000);
+}
+
 function closeModalWithAnimation(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
@@ -24,6 +130,8 @@ function openCategoryEditModal(categoryId) {
             document.getElementById('category-compiler').value = json[0].compiler_azonosito;
             document.getElementById('category-image').value = json[0].kep;
 
+            setupCategoryFormSubmitHandler();
+
             console.log(json);
         } catch (error) {
             console.error(error.message);
@@ -41,9 +149,51 @@ function openCategoryDeleteModal(categoryId) {
 
     document.getElementById('confirm-category-delete-btn').setAttribute('data-category-id', categoryId);
 
+    const confirmBtn = document.getElementById("confirm-category-delete-btn");
+
+    confirmBtn.removeEventListener("click", confirmBtn.deleteHandler);
+
+    confirmBtn.deleteHandler = () => {
+        deleteCategory(categoryId);
+    };
+
+    confirmBtn.addEventListener("click", confirmBtn.deleteHandler);
+
 
     document.getElementById('confirm-category-modal').style.display = 'flex';
 }
+
+async function deleteCategory(categoryId) {
+    try {
+        const response = await fetch("/vizsgaremek/src/api/delete_category.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "JavaScript-Fetch-Request": "delete-category"
+            },
+            body: JSON.stringify({ id: categoryId })
+        });
+
+        const data = await response.json();
+
+        closeModalWithAnimation("confirm-modal");
+
+        if (data.success) {
+            showToast("Kategória sikeresen törölve.");
+            fetchCategories();
+        }
+        else {
+            showToast("Hiba a kategória törlésekor: " + data.message, true);
+        }
+    }
+    catch (error) {
+        console.error("Error kategória user:", error);
+        closeModalWithAnimation("confirm-modal");
+        showToast("Hiba a kategória törlésekor.", true);
+    }
+}
+
+
 
 document.addEventListener("DOMContentLoaded", function () {
     const sidebarItems = document.querySelectorAll(".sidebar-item");
@@ -466,39 +616,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     fetchUsers();
-
-    function fetchCategories() {
-        fetch('./kategoriak')
-            .then(response => response.json())
-            .then(categories => {
-                const tableBody = document.getElementById("categories-table-body");
-                tableBody.innerHTML = "";
-
-                categories.forEach(category => {
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
-                        <td>${category.id}</td>
-                        <td>${category.nev}</td>
-                        <td>${category.compiler_azonosito}</td>
-                         <td>${category.kep}</td>
-                        <td>
-                            <button class="edit-category-btn" onclick="openCategoryEditModal(${category.id})">Szerkesztés</button>
-                            <button class="delete-category-btn" onclick="openCategoryDeleteModal(${category.id})">Törlés</button>
-                        </td>
-                    `;
-                    tableBody.appendChild(row);
-                });
-            })
-            .catch(error => console.error("Hiba a kategóriák betöltése közben:", error));
-
-    }
-
-
-
-    fetchCategories();
-
-
-
 
 });
 

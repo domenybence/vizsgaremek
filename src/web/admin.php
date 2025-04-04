@@ -115,7 +115,7 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
                     </div>
                 </div>
 
-                < <div class="tab-content" id="content-tab">
+                <div class="tab-content" id="content-tab">
                     <div class="content-header">
                         <h2>Kategóriák kezelése</h2>
                     </div>
