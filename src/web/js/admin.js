@@ -26,6 +26,65 @@ function fetchCategories() {
 
 fetchCategories();
 
+function setupNewCategoryFormSubmitHandler() {
+    const form = document.getElementById("new-category-form");
+
+    form.removeEventListener("submit", form.submitHandler);
+
+    form.submitHandler = async function (e) {
+        e.preventDefault();
+
+        const nev = document.getElementById("new-category-name").value;
+        const compiler_azonosito = document.getElementById("new-category-compiler").value;
+        const kep = document.getElementById("new-category-image").value;
+
+        if (!nev || !compiler_azonosito || !kep) {
+            showToast("Kérem töltse ki az összes mezőt!", true);
+            return;
+        }
+
+        try {
+            const response = await fetch("/vizsgaremek/src/api/create_category.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "JavaScript-Fetch-Request": "create-category"
+                },
+                body: JSON.stringify({
+                    nev : nev,
+                    compiler_azonosito,
+                    kep
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                closeModalWithAnimation("new-category-modal");
+                showToast("Kategória sikeresen feltöltve.");
+                fetchCategories();
+            } else {
+                showToast("Hiba a kategória feltöltésekor: " + data.message, true);
+            }
+        } catch (error) {
+            console.error("Error creating category:", error);
+            showToast("Hiba a kategória feltöltésekor.", true);
+        }
+    };
+
+    form.addEventListener("submit", form.submitHandler);
+}
+
+
+function openNewCategoryEditModal() {
+
+    setupNewCategoryFormSubmitHandler();
+
+    document.getElementById('new-category-modal').style.display = 'flex';
+
+}
+
+
 function setupCategoryFormSubmitHandler() {
     const form = document.getElementById("category-form");
 

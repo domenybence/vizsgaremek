@@ -118,6 +118,11 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
                 <div class="tab-content" id="content-tab">
                     <div class="content-header">
                         <h2>Kategóriák kezelése</h2>
+                        <div class="content-actions">
+                            <div class="search-box">
+                                <button id="new-category-button" class="primary-btn" onclick="openNewCategoryEditModal()">Új kategória</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="categories-table-container">
                         <table class="admin-table">
@@ -264,6 +269,37 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
             </div>
         </div>
     </div>
+
+    <div id="new-category-modal" class="modal">
+        <div class="modal-content">      
+            <div class="modal-header">
+                <h3 id="modal-title">Új kategória</h2>
+                <span class="close" onclick="closeModalWithAnimation('category-modal')">&times;</span>
+            </div>
+            <div class="modal-body">
+            <form id="new-category-form">
+            
+                <div class="form-group">
+                    <label for="category-name">Név</label>
+                    <input type="text" id="new-category-name" name="category-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="category-compiler">Compiler azonosító:</label>
+                    <input type="text" id="new-category-compiler" required>
+                </div>
+                <div class="form-group">
+                <label for="category-image">Kép URL:</label>
+                <input type="text" id="new-category-image">
+                </div>
+                <div class="form-actions">
+                <button type="button" id="cancel-btn" class="secondary-btn" onclick="closeModalWithAnimation('new-category-modal')">Mégse</button>
+                <button type="submit" id="save-new-category-btn" class="primary-btn">Mentés</button>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+
     <div id="toast-message" class="toast-message"></div>
 
     <script src="/vizsgaremek/src/web/js/loader.js"></script>

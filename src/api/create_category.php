@@ -8,7 +8,7 @@ if(session_status() === PHP_SESSION_NONE) {
 }
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SERVER["HTTP_JAVASCRIPT_FETCH_REQUEST"]) && 
-   $_SERVER["HTTP_JAVASCRIPT_FETCH_REQUEST"] === "update-category") {
+   $_SERVER["HTTP_JAVASCRIPT_FETCH_REQUEST"] === "create-category") {
     
     if(!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
         http_response_code(403);
@@ -18,22 +18,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SERVER["HTTP_JAVASCRIPT_FETCH
     
     $data = json_decode(file_get_contents("php://input"), true);
     
-    if (!isset($data["id"]) || !isset($data["nev"]) || !isset($data["compiler_azonosito"]) || 
+    if (!isset($data["nev"]) || !isset($data["compiler_azonosito"]) || 
         !isset($data["kep"])) {
         http_response_code(400);
         echo json_encode(["success" => false, "message" => "Missing required fields"]);
         exit();
     }
     
-    $id = (int)$data["id"];
     $nev = $data["nev"];
     $compiler_azonosito = $data["compiler_azonosito"];
     $kep = $data["kep"];
     
     
     try {
-        $checkQuery = "SELECT id FROM kategoria WHERE (nev = ? OR compiler_azonosito = ?) AND id != ?";
-        $existingCategory = preparedGetData($checkQuery, "ssi", [$nev, $compiler_azonosito, $id]);
+        $checkQuery = "SELECT * FROM kategoria WHERE compiler_azonosito = ?";
+        $existingCategory = preparedGetData($checkQuery, "s", [$compiler_azonosito]);
         
         if ($existingCategory && is_array($existingCategory)) {
             http_response_code(409);
@@ -46,20 +45,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SERVER["HTTP_JAVASCRIPT_FETCH
         
      
            
-        $query = "UPDATE kategoria SET nev = ?, compiler_azonosito = ?, kep = ? WHERE id = ?";
-        $success = insertData($query, "sssi", [$nev, $compiler_azonosito, $kep, $id]);
+        $query = "INSERT INTO `kategoria` (`id`, `nev`, `compiler_azonosito`, `kep`) VALUES (NULL, ?, ?, ?)";
+        $success = insertData($query, "sss", [$nev, $compiler_azonosito, $kep]);
         
         
         if ($success === true) {
             echo json_encode([
                 "success" => true,
-                "message" => "A kategória sikeresen frissítve."
+                "message" => "A kategória sikeresen feltöltve."
             ]);
         } else {
             http_response_code(500);
             echo json_encode([
                 "success" => false,
-                "message" => "Hiba történt a kategória frissítésekor."
+                "message" => "Hiba történt a kategória feltöltésekor."
             ]);
         }
     }

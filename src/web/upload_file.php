@@ -33,7 +33,7 @@ $target_dir = "codes/";
                         $eleresi_sql = "UPDATE kod SET eleresi_ut = '$file_name' WHERE id = (SELECT id FROM kod ORDER BY id DESC LIMIT 1)";
                         $eleresi = adatokValtoztatasa($eleresi_sql);
                         if($eleresi = "Sikeres művelet!")
-                        {//Locationt át kell írni éles verzióban
+                        {
                          
                            header('SUCCESS',true, 200);
                         }
