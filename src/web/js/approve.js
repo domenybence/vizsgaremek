@@ -54,11 +54,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
             } else {
-                alert("Lekérés sikertelen!");
+               
             }
         } catch (error) {
             console.error(error);
-            alert("Lekérés sikertelen!");
+            
         }
     }
     //Szoftverek megjelenítése
