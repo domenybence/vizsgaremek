@@ -1,0 +1,1 @@
+CREATE TABLE todos (id INT PRIMARY KEY, task TEXT, completed BOOLEAN);

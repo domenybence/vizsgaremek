@@ -1,0 +1,1 @@
+print('Displaying image gallery')

@@ -1,0 +1,1 @@
+<?php echo '<nav>Simple Navbar</nav>'; ?>

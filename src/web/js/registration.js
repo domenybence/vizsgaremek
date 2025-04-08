@@ -285,7 +285,7 @@ async function registration() {
     registrationValidate();
     if(formValidated) {
         try {
-            const response = await fetch("/vizsgaremek/src/php_functions/registration_fetch.php",{
+            const response = await fetch("/src/php_functions/registration_fetch.php",{
                 method: "POST",
                 headers:{
                     "Content-Type": "application/json",
@@ -339,7 +339,7 @@ function showSuccessModal() {
                                         </div>
                                         <hr>
                                         <div class="button-container">
-                                            <a id="button_login" href="./login.php">Bejelentkezés</a>
+                                            <a id="button_login" href="/bejelentkezes">Bejelentkezés</a>
                                         </div>
                                     </div>
                                     </div>`);
@@ -349,6 +349,7 @@ function showSuccessModal() {
         document.querySelector("div.registration-wrapper").style.opacity = 1;
     }
 }
+
 function showTakenUsernameModal() {
     if(!document.body.classList.contains("registration-wrapper")) {
         document.body.insertAdjacentHTML("beforeend", `<div class="registration-wrapper">

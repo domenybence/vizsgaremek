@@ -5,7 +5,7 @@ if(session_status() === PHP_SESSION_NONE) {
 }
 
 if(!isset($_SESSION["userid"])) {
-    header("Location: /vizsgaremek/src/web/login.php");
+    header("Location: /src/web/login.php");
     exit;
 }
 
@@ -35,15 +35,15 @@ else {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A CodeOverflow oldalának felkérésböngésző oldala.">
     <title>Felkérések böngészése</title>
-    <link rel="stylesheet" href="/vizsgaremek/src/web/css/browse_requests.css">
-    <link rel="stylesheet" href="/vizsgaremek/src/web/css/navbar.css">
-    <link rel="stylesheet" href="/vizsgaremek/src/web/css/loader.css">
-    <link rel="icon" type="image/x-icon" href="/vizsgaremek/src/web/icon.png">
-    <script src="/vizsgaremek/src/web/js/browse_requests.js" defer></script>
-    <script src="/vizsgaremek/src/web/js/navbar.js" defer></script>
+    <link rel="stylesheet" href="/src/web/css/browse_requests.css">
+    <link rel="stylesheet" href="/src/web/css/navbar.css">
+    <link rel="stylesheet" href="/src/web/css/loader.css">
+    <link rel="icon" type="image/x-icon" href="/src/web/icon.png">
+    <script src="/src/web/js/browse_requests.js" defer></script>
+    <script src="/src/web/js/navbar.js" defer></script>
 </head>
 <body>
-    <script src="/vizsgaremek/src/web/js/gsap-public/minified/gsap.min.js"></script>
+    <script src="/src/web/js/gsap-public/minified/gsap.min.js"></script>
     <div class="page-cover"></div>
     <?php include "navbar.php"; ?>
     <div class="container">
@@ -78,6 +78,6 @@ else {
             <?php endforeach; ?>
         </div>
     </div>
-    <script src="/vizsgaremek/src/web/js/loader.js"></script>
+    <script src="/src/web/js/loader.js"></script>
 </body>
 </html>

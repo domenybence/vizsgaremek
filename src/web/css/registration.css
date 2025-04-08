@@ -1,4 +1,4 @@
-@import url("/vizsgaremek/src/web/css/montserrat-font.css");
+@import url("/src/web/css/montserrat-font.css");
 
 body {
     font-family: "Montserrat";
@@ -81,7 +81,7 @@ body {
     width: 100%;
     min-height: 700px;
     background-size: cover;
-    background-image: url('../login_photo.jpeg');
+    background-image: url("../login_photo.jpeg");
     opacity: 0.6;
     border-radius: 0 36px 36px 0;
 }

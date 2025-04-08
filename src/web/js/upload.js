@@ -1,20 +1,15 @@
 async function fetchCategories() {
-    try {
-      let kat = document.getElementById('katInput');
-      const response = await fetch("./kategoriak");
-      const data = await response.json();    
-      
-       for (const kategoria of data) {
-        kat.innerHTML += "<option value="+ kategoria.id +">"+ kategoria.nev +"</option>";
-       }
+  try {
+    let kat = document.getElementById('katInput');
+    const response = await fetch("/src/web/index.php/kategoriak");
+    const data = await response.json();    
     
-      
-         
-      
+    for (const kategoria of data) {
+      kat.innerHTML += "<option value="+ kategoria.id +">"+ kategoria.nev +"</option>";
+    }
   }
   catch(error) {
-      console.error(error);
-      
+    console.error(error);
   }
   }
 
@@ -88,6 +83,5 @@ async function kodFeltoltes(){
     }
 }
 
-
-document.getElementById('uploadBtn').addEventListener('click', kodFeltoltes);
-window.addEventListener('load',fetchCategories);
+// Only fetch categories on page load, let the form handle the submission
+window.addEventListener('load', fetchCategories);

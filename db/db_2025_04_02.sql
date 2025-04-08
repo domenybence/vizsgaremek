@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2025 at 09:55 PM
+-- Generation Time: Apr 02, 2025 at 09:58 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -104,7 +104,7 @@ INSERT INTO `felhasznalo` (`id`, `nev`, `email`, `jelszo`, `pontok`, `letrehozas
 --
 
 CREATE TABLE `felhasznalo_megvett` (
-  `id` int(11) UNSIGNED NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
   `felhasznalo_id` int(10) UNSIGNED NOT NULL,
   `kod_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -113,6 +113,8 @@ CREATE TABLE `felhasznalo_megvett` (
 -- Dumping data for table `felhasznalo_megvett`
 --
 
+INSERT INTO `felhasznalo_megvett` (`id`, `felhasznalo_id`, `kod_id`) VALUES
+(10, 152, 10);
 
 -- --------------------------------------------------------
 
@@ -242,7 +244,7 @@ CREATE TABLE `kategoria` (
 -- Dumping data for table `kategoria`
 --
 
-INSERT INTO `kategoria` (`id`, `nev`, `compiler_azonosito`,`kep`) VALUES
+INSERT INTO `kategoria` (`id`, `nev`, `compiler_azonosito`, `kep`) VALUES
 (1, 'CSS', 'css', 'CSS.jpg'),
 (2, 'PHP', 'php', 'PHP.jpg'),
 (3, 'JavaScript', 'javascript', 'JavaScript.jpg'),
@@ -264,7 +266,7 @@ CREATE TABLE `kod` (
   `ar` int(10) DEFAULT 0,
   `eleresi_ut` varchar(255) NOT NULL,
   `feltoltesi_ido` timestamp NULL DEFAULT current_timestamp(),
-  `jovahagyott` tinyint(1) DEFAULT NULL
+  `jovahagyott` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -272,36 +274,29 @@ CREATE TABLE `kod` (
 --
 
 INSERT INTO `kod` (`id`, `felhasznalo_id`, `kategoria_id`, `nev`, `ar`, `eleresi_ut`, `feltoltesi_ido`, `jovahagyott`) VALUES
-(11, 45, 1, 'Login Form', 50, 'login-form.css', '2025-03-01 10:15:30', 1),
 (12, 78, 1, 'Signup Form', 120, 'signup-form.css', '2025-03-02 11:30:50', 1),
-(13, 33, 1, 'Contact Form', 80, 'contact-form.css', '2025-03-03 14:05:15', 1),
 (14, 120, 1, 'Survey Form', 200, 'survey-form.css', '2025-03-04 16:20:45', 1),
 (15, 90, 1, 'Feedback Form', 300, 'feedback-form.css', '2025-03-05 18:40:10', 1),
-
 (16, 12, 2, 'Simple Navbar', 150, 'simple-navbar.php', '2025-03-01 12:50:25', 1),
 (17, 143, 2, 'Dropdown Menu', 220, 'dropdown-menu.php', '2025-03-02 14:35:55', 1),
 (18, 60, 2, 'Sidebar Navigation', 275, 'sidebar-navigation.php', '2025-03-03 16:10:40', 1),
 (19, 99, 2, 'Mega Menu', 350, 'mega-menu.php', '2025-03-04 17:45:20', 1),
 (20, 23, 2, 'Sticky Header', 180, 'sticky-header.php', '2025-03-05 19:00:05', 1),
-
 (21, 87, 3, 'Dashboard UI', 500, 'dashboard-ui.js', '2025-03-01 09:30:15', 1),
 (22, 56, 3, 'Admin Panel', 750, 'admin-panel.js', '2025-03-02 10:50:25', 1),
 (23, 142, 3, 'Analytics Dashboard', 650, 'analytics-dashboard.js', '2025-03-03 13:15:40', 1),
 (24, 101, 3, 'User Management', 400, 'user-management.js', '2025-03-04 15:20:10', 1),
 (25, 33, 3, 'Project Management', 550, 'project-management.js', '2025-03-05 17:35:55', 1),
-
 (26, 98, 4, 'Image Gallery', 250, 'image-gallery.py', '2025-03-01 11:45:30', 1),
 (27, 76, 4, 'Video Player', 600, 'video-player.py', '2025-03-02 12:55:50', 1),
 (28, 41, 4, 'Music Player', 500, 'music-player.py', '2025-03-03 14:25:15', 1),
 (29, 67, 4, 'Slideshow', 350, 'slideshow.py', '2025-03-04 16:10:45', 1),
 (30, 115, 4, 'Interactive Map', 700, 'interactive-map.py', '2025-03-05 18:25:10', 1),
-
 (31, 88, 5, 'Portfolio Website', 800, 'portfolio-website.cs', '2025-03-01 10:15:30', 1),
 (32, 54, 5, 'Business Landing Page', 900, 'business-landing.cs', '2025-03-02 11:40:50', 1),
 (33, 124, 5, 'Blog Template', 350, 'blog-template.cs', '2025-03-03 13:55:15', 1),
 (34, 99, 5, 'E-commerce Store', 950, 'ecommerce-store.cs', '2025-03-04 15:10:45', 1),
 (35, 73, 5, 'Personal Resume', 500, 'personal-resume.cs', '2025-03-05 17:30:10', 1),
-
 (36, 123, 6, 'Task Manager', 600, 'task-manager.sql', '2025-03-01 12:10:25', 1),
 (37, 132, 6, 'To-Do List', 200, 'todo-list.sql', '2025-03-02 13:45:55', 1),
 (38, 85, 6, 'Expense Tracker', 450, 'expense-tracker.sql', '2025-03-03 15:20:40', 1),
@@ -524,7 +519,7 @@ ALTER TABLE `kategoria`
 -- AUTO_INCREMENT for table `kod`
 --
 ALTER TABLE `kod`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `kodellenorzes`
@@ -559,13 +554,6 @@ ALTER TABLE `ugyfelszolgalat`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `felhasznalo_megvett`
---
-ALTER TABLE `felhasznalo_megvett`
-  ADD CONSTRAINT `felhasznalo_megvett_ibfk_1` FOREIGN KEY (`felhasznalo_id`) REFERENCES `felhasznalo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `felhasznalo_megvett_ibfk_2` FOREIGN KEY (`kod_id`) REFERENCES `kod` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `felhasznalo_token`

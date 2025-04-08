@@ -8,21 +8,21 @@ include_once "../php_functions/php_functions.php";
 </div>
 <nav>
     <div class="nav-group nav-home">
-        <a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/home.php">CodeOverflow</a>
+        <a class="nav-item nav-link" href="http://localhost/">CodeOverflow</a>
     </div>
     <div class="nav-group">
         <div class="nav-dropdown-button nav-link">
             Felkérések
             <div class="nav-dropdown-item">
-                <a class="nav-link" href="http://localhost/vizsgaremek/felkeresek/feltoltes">Feltöltés</a>
-                <a class="nav-link" href="http://localhost/vizsgaremek/felkeresek">Böngészés</a>
+                <a class="nav-link" href="http://localhost/felkeresek/feltoltes">Feltöltés</a>
+                <a class="nav-link" href="http://localhost/felkeresek/bongeszes">Böngészés</a>
             </div>
         </div>
     </div>
     <div class="nav-group">
         <?php
         if($_SESSION["username"] == "Vendég") {
-            echo '<a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/login.php">Bejelentkezés</a>';
+            echo '<a class="nav-item nav-link" href="http://localhost/bejelentkezes">Bejelentkezés</a>';
         }
         else {
             echo '
@@ -30,20 +30,20 @@ include_once "../php_functions/php_functions.php";
                     <div class="nav-dropdown-item">
                         ';
                         echo '
-                        <a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/credsupload.php">Pontok feltöltése</a>
-                        <a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/library.php">Könyvtár</a>';
+                        <a class="nav-link" href="http://localhost/pontfeltoltes">Pontok feltöltése</a>
+                        <a class="nav-link" href="http://localhost/konyvtar">Könyvtár</a>';
                         if($_SESSION["role"] == "moderator") {
-                            echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/library.php">Könyvtár</a>
-                            <a class="nav-link" href="http://localhost/vizsgaremek/src/web/approve.php">Jóváhagyások</a>';
+                            echo '<a class="nav-link" href="http://localhost/konyvtar">Könyvtár</a>
+                            <a class="nav-link" href="http://localhost/jovahagyasok">Jóváhagyások</a>';
                         }
                         else if($_SESSION["role"] == "admin") {
-                            echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/approve.php">Jóváhagyások</a>';
-                            echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/admin.php">Admin</a>';
+                            echo '<a class="nav-link" href="http://localhost/jovahagyasok">Jóváhagyások</a>';
+                            echo '<a class="nav-link" href="http://localhost/admin">Admin</a>';
                             
                         }
                         
-                        echo '<a class="nav-link" href="http://localhost/vizsgaremek/src/web/upload.php">Feltöltés</a>
-                        <a class="nav-link" href="http://localhost/vizsgaremek/src/web/logout.php">Kijelentkezés</a>
+                        echo '<a class="nav-link" href="http://localhost/kodfeltoltes">Kód feltöltése</a>
+                        <a class="nav-link" href="http://localhost/kijelentkezes">Kijelentkezés</a>
             </div>
         </div>';
         }

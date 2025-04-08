@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     requestCards.forEach(card => {
         card.addEventListener("click", (event) => {
             event.preventDefault();
-            const targetUrl = `/vizsgaremek/felkeres/${card.dataset.requestId}`;
+            const targetUrl = `/felkeresek/${card.dataset.requestId}`;
             const pageCover = document.querySelector(".page-cover");
             pageCover.style.display = "block";
             gsap.to(".page-cover", {

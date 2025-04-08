@@ -1,0 +1,1 @@
+public class LandingPage { static void Main() { System.Console.WriteLine("Business Landing Page"); } }

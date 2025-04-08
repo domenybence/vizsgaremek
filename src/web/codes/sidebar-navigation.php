@@ -1,0 +1,1 @@
+<?php echo '<aside>Sidebar</aside>'; ?>

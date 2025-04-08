@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Redirect if user is not admin
 if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
-    header("Location: /vizsgaremek/src/web/home.html");
+    header("Location: /");
     exit();
 }
 ?>
@@ -18,16 +18,16 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="CodeOverflow adminisztrációs felület">
     <title>Admin Panel - CodeOverflow</title>
-    <link rel="stylesheet" href="/vizsgaremek/src/web/css/admin.css">
-    <link rel="stylesheet" href="/vizsgaremek/src/web/css/loader.css">
-    <link rel="stylesheet" href="/vizsgaremek/src/web/css/navbar.css">
-    <link rel="icon" type="image/x-icon" href="/vizsgaremek/src/web/icon.png">
-    <script src="/vizsgaremek/src/web/js/navbar.js" defer></script>
-    <script src="/vizsgaremek/src/web/js/admin.js" defer></script>
+    <link rel="stylesheet" href="/src/web/css/admin.css">
+    <link rel="stylesheet" href="/src/web/css/loader.css">
+    <link rel="stylesheet" href="/src/web/css/navbar.css">
+    <link rel="icon" type="image/x-icon" href="/src/web/icon.png">
+    <script src="/src/web/js/navbar.js" defer></script>
+    <script src="/src/web/js/admin.js" defer></script>
 </head>
 
-<body>
-    <script src="/vizsgaremek/src/web/js/gsap-public/minified/gsap.min.js"></script>
+<body class="bg-dark">
+    <script src="/src/web/js/gsap-public/minified/gsap.min.js"></script>
 
     <div class="page-cover"></div>
 
@@ -253,7 +253,6 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
         </div>
     </div>
 
-
     <div id="confirm-category-modal" class="modal">
         <div class="modal-content confirm-modal-content">
             <div class="modal-header">
@@ -302,7 +301,7 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
 
     <div id="toast-message" class="toast-message"></div>
 
-    <script src="/vizsgaremek/src/web/js/loader.js"></script>
+    <script src="/src/web/js/loader.js"></script>
 </body>
 
 </html>

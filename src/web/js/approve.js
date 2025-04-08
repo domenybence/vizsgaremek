@@ -100,11 +100,12 @@ document.addEventListener("DOMContentLoaded", () => {
             <li class="list-group-item d-flex justify-content-between align-items-center">
               <div>
                 <h5 class="mb-1">${item.nev}</h5>
-                <p class="mb-1">${item.kep}</p>
+                <p class="mb-1">${item.katnev}</p>
               </div>
               <div>
                 <a href="./kod/${item.id}" class="btn btn-dark">Megtekintés</a>
-                 <button class="btn btn-dark jovahagyas-btn" type="button" id=${item.id} value=${item.id}>Jóváhagyás</a>
+                <button class="btn jovahagyas-btn" type="button" data-id="${item.id}">Jóváhagyás</button>
+                <button class="btn disapprove-btn" type="button" data-id="${item.id}">Elutasítás</button>
               </div>
             </li>`;
           softwareContainer.innerHTML += listItem;
@@ -195,7 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const query = document.getElementById("kereso").value.trim().toLowerCase();
         if (!query) return;
 
-        let response = await fetch("./jovahagyando");
+        let response = await fetch("./src/web/index.php/jovahagyando");
         let data = await response.json();
 
         softwareData = data.filter(
@@ -209,6 +210,110 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    fetchSoftware("./jovahagyando");
+    // Event listeners for approval and disapproval
+    softwareContainer.addEventListener('click', async (event) => {
+        // Handle approval button clicks
+        if (event.target.classList.contains("jovahagyas-btn")) {
+            const itemId = event.target.dataset.id;
+            if (!itemId) return;
+
+            try {
+                const response = await fetch("./src/web/index.php/jovahagyas", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        id: itemId 
+                    })
+                });
+
+                const data = await response.json();
+                if (data === "Sikeres művelet!") {
+                    showSuccessMessage("Kód sikeresen jóváhagyva!");
+                    // Remove the item from the display
+                    event.target.closest('li').remove();
+                    // Update the softwareData array
+                    softwareData = softwareData.filter(item => item.id != itemId);
+                    displaySoftware();
+                } else {
+                    showErrorMessage("Hiba történt a jóváhagyás során!");
+                }
+            } catch (error) {
+                console.error(error);
+                showErrorMessage("Hiba történt a jóváhagyás során!");
+            }
+        }
+        
+        // Handle disapproval button clicks
+        if (event.target.classList.contains("disapprove-btn")) {
+            const itemId = event.target.dataset.id;
+            if (!itemId) return;
+
+            if (confirm("Biztosan el szeretné utasítani és törölni ezt a kódot?")) {
+                try {
+                    const response = await fetch("./src/web/index.php/kod_torles", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            id: itemId 
+                        })
+                    });
+
+                    const data = await response.json();
+                    if (data === "Sikeres művelet!") {
+                        showSuccessMessage("Kód sikeresen elutasítva és törölve!");
+                        // Remove the item from the display
+                        event.target.closest('li').remove();
+                        // Update the softwareData array
+                        softwareData = softwareData.filter(item => item.id != itemId);
+                        displaySoftware();
+                    } else {
+                        showErrorMessage("Hiba történt az elutasítás során!");
+                    }
+                } catch (error) {
+                    console.error(error);
+                    showErrorMessage("Hiba történt az elutasítás során!");
+                }
+            }
+        }
+    });
+
+    // Helper functions for messages
+    function showSuccessMessage(message) {
+        const alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-success alert-dismissible fade show';
+        alertDiv.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+        document.querySelector('.container').prepend(alertDiv);
+        
+        // Auto-dismiss after 3 seconds
+        setTimeout(() => {
+            alertDiv.classList.remove('show');
+            setTimeout(() => alertDiv.remove(), 300);
+        }, 3000);
+    }
+
+    function showErrorMessage(message) {
+        const alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-danger alert-dismissible fade show';
+        alertDiv.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+        document.querySelector('.container').prepend(alertDiv);
+        
+        // Auto-dismiss after 3 seconds
+        setTimeout(() => {
+            alertDiv.classList.remove('show');
+            setTimeout(() => alertDiv.remove(), 300);
+        }, 3000);
+    }
+    
+    fetchSoftware("./src/web/index.php/jovahagyando");
 
 });

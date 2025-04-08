@@ -31,7 +31,7 @@ $isModerator = $_SESSION["role"] === "moderator";
 $requestIsPublic = $data["status"] === "nyitott";
 
 if(!$isOwner && !$isAssigned && !$isAdmin && !$isModerator && !$requestIsPublic) {
-    header("Location: /vizsgaremek/src/web/404.html");
+    header("Location: /src/web/404.html");
     exit();
 }
 
@@ -57,19 +57,19 @@ $canDelete = $isAdmin || $isModerator || ($isOwner && $isOpen);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A CodeOverflow felkéréseinek felülete.">
     <title>Felkérések - CodeOverflow</title>
-    <link rel="stylesheet" href="/vizsgaremek/src/web/css/requests.css">
-    <link rel="stylesheet" href="/vizsgaremek/src/web/css/loader.css">
-    <link rel="stylesheet" href="/vizsgaremek/src/web/css/navbar.css">
-    <link rel="icon" type="image/x-icon" href="/vizsgaremek/src/web/icon.png">
-    <script src="/vizsgaremek/src/web/js/navbar.js" defer></script>
-    <script src="/vizsgaremek/src/web/js/requests.js" defer></script>
+    <link rel="stylesheet" href="/src/web/css/requests.css">
+    <link rel="stylesheet" href="/src/web/css/loader.css">
+    <link rel="stylesheet" href="/src/web/css/navbar.css">
+    <link rel="icon" type="image/x-icon" href="/src/web/icon.png">
+    <script src="/src/web/js/navbar.js" defer></script>
+    <script src="/src/web/js/requests.js" defer></script>
     <script>
         const requestid = <?php echo $request; ?>;
         const userRole = "<?php echo $_SESSION['role']; ?>";
     </script>
 </head>
 <body>
-    <script src="/vizsgaremek/src/web/js/gsap-public/minified/gsap.min.js"></script>
+    <script src="/src/web/js/gsap-public/minified/gsap.min.js"></script>
     <div class="page-cover"></div>
     <?php include "navbar.php"; ?>
     <div class="container">
@@ -149,7 +149,7 @@ $canDelete = $isAdmin || $isModerator || ($isOwner && $isOpen);
                 }
             ?>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
-                <script src="/vizsgaremek/src/web/js/compiler.js"></script>
+                <script src="/src/web/js/compiler.js"></script>
                 <script>
                     const fileExtension = "<?php echo $fileExtension; ?>";
                     const fileContent = <?php echo json_encode($initialCode); ?>;
@@ -178,7 +178,7 @@ $canDelete = $isAdmin || $isModerator || ($isOwner && $isOpen);
                 }
                 ?>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
-                <script src="/vizsgaremek/src/web/js/compiler.js"></script>
+                <script src="/src/web/js/compiler.js"></script>
                 <script>
                     const reviewFileExtension = "<?php echo $fileExtension; ?>";
                     const reviewFileContent = <?php echo json_encode($reviewCode); ?>;
@@ -218,6 +218,6 @@ $canDelete = $isAdmin || $isModerator || ($isOwner && $isOpen);
         </script>
     </div>
 
-    <script src="/vizsgaremek/src/web/js/loader.js"></script>
+    <script src="/src/web/js/loader.js"></script>
 </body>
 </html>

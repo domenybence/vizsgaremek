@@ -102,7 +102,31 @@ switch (mb_strtolower($url[0])) {
             header('bad request', true, 400);
         }
         break;
+        case 'kod_torles':
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $id = $bodyAdatok['id'];
+            
+            $kod_info_sql = "SELECT eleresi_ut FROM kod WHERE id = {$id}";
+            $kod_info = adatokLekerese($kod_info_sql);
+            
+            $torles_sql = "DELETE FROM kod WHERE id = {$id}";
+            $torles = adatokValtoztatasa($torles_sql);
+            
+            if($torles == "Sikeres művelet!" && !empty($kod_info) && !empty($kod_info[0]['eleresi_ut'])) {
+                $file_path = __DIR__ . "/codes/" . $kod_info[0]['eleresi_ut'];
+                if(file_exists($file_path)) {
+                    unlink($file_path);
+                }
+            }
 
+            echo json_encode($torles, JSON_UNESCAPED_UNICODE);
+        }
+        else{
+            echo json_encode(['valasz' => 'Hibás metódus!'], JSON_UNESCAPED_UNICODE);
+            header('bad request', true, 400);
+        }
+        break;
+    
     default:
         echo 'nem megfelelő http url';
         break;

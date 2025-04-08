@@ -14,7 +14,7 @@ document.querySelector(".button-input").addEventListener("click", async () => {
     const messageContainer = document.getElementById("message-container");
     messageContainer.innerHTML = "";  
     try {
-        const response = await fetch("/vizsgaremek/src/php_functions/creds_fetch.php", {
+        const response = await fetch("/src/php_functions/creds_fetch.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

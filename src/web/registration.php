@@ -12,17 +12,17 @@ if(session_status() === PHP_SESSION_NONE) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A CodeOverflow regisztrációs felülete.">
     <title>Regisztráció - CodeOverflow</title>
-    <link rel="stylesheet" href="./css/registration.css">
+    <link rel="stylesheet" href="./src/web/css/registration.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="./icon.png">
+    <link rel="icon" type="image/x-icon" href="./src/web/icon.png">
     <script src="https://www.google.com/recaptcha/api.js?hl=hu" async defer></script>
-    <script type="module" src="./js/registration.js" defer></script>
-    <link rel="stylesheet" href="./css/loader.css">
+    <script type="module" src="./src/web/js/registration.js" defer></script>
+    <link rel="stylesheet" href="./src/web/css/loader.css">
 </head>
 <body>
-    <script src="/vizsgaremek/src/web//js/gsap-public/minified/gsap.min.js"></script>
+    <script src="./src/web/js/gsap-public/minified/gsap.min.js"></script>
     <div class="page-cover"></div>
     <div class="background"></div>
     <div class="container" id="container">
@@ -58,7 +58,7 @@ if(session_status() === PHP_SESSION_NONE) {
                         <div class="inline-group">
                             <button class="inline-button" type="button" name="button_submit" title="" id="button_submit">Regisztráció</button>
                         </div>
-                    <p class="inline-text" id="login-text">Van már fiókja? <a href="./login.php" class="inline-link">Jelentkezzen be itt.</a></p>
+                    <p class="inline-text" id="login-text">Van már fiókja? <a href="./bejelentkezes" class="inline-link">Jelentkezzen be itt.</a></p>
                     </form>
                 </div>
             </div>
@@ -69,6 +69,6 @@ if(session_status() === PHP_SESSION_NONE) {
             </div>
         </div>
     </div>
-    <script src="/vizsgaremek/src/web/js/loader.js"></script>
+    <script src="./src/web/js/loader.js"></script>
 </body>
 </html>

@@ -124,7 +124,7 @@ function createAdminEditForm() {
 
 async function acceptRequest(requestId) {
     try {
-        const response = await fetch("/vizsgaremek/src/api/accept_request.php", {
+        const response = await fetch("/src/api/accept_request.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -134,7 +134,7 @@ async function acceptRequest(requestId) {
         });
         const data = await response.json();     
         if(data.success) {
-            location.reload();
+            translateOut(window.location.href);
         }
         else {
             showError(data.message || "Hiba történt a felkérés elvállalása közben.");
@@ -150,7 +150,7 @@ async function saveSolution() {
     try {
         const code = window.monacoEditor.getValue();
         
-        const response = await fetch("/vizsgaremek/src/api/save_solution.php", {
+        const response = await fetch("/src/api/save_solution.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -185,7 +185,7 @@ function submitSolution() {
         return;
     }
     
-    fetch("/vizsgaremek/src/api/submit_solution.php", {
+    fetch("/src/api/submit_solution.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -201,7 +201,7 @@ function submitSolution() {
         if(data.success) {
             showBasicSuccessDialog("A megoldás sikeresen beküldve!");
             setTimeout(() => {
-                location.reload();
+                translateOut(window.location.href);
             }, 1500);
         } else {
             showError(data.message || "Hiba történt a kód beküldése során.");
@@ -214,7 +214,7 @@ function submitSolution() {
 
 async function acceptSolution(requestId) {
     try {
-        const response = await fetch("/vizsgaremek/src/api/accept_solution.php", {
+        const response = await fetch("/src/api/accept_solution.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -269,7 +269,7 @@ function rejectSolution(requestId) {
     document.querySelector("#confirm-reject-btn").addEventListener("click", function() {
         closeModal();
         
-        fetch("/vizsgaremek/src/api/reject_solution.php", {
+        fetch("/src/api/reject_solution.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -333,7 +333,7 @@ function deleteRequest(requestId) {
         const preloader = document.querySelector(".page-cover");
         if (preloader) preloader.style.display = "flex";
         
-        fetch("/vizsgaremek/src/api/delete_request.php", {
+        fetch("/src/api/delete_request.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -386,12 +386,12 @@ function showSuccessAndRedirect(message) {
     
     document.querySelector("#svg_x").addEventListener("click", () => {
         closeModal();
-        window.location.href = "/vizsgaremek/felkeresek";
+        translateOut("/felkeresek/bongeszes");
     });
     
     document.querySelector("#success-ok-btn").addEventListener("click", () => {
         closeModal();
-        window.location.href = "/vizsgaremek/felkeresek";
+        translateOut("/felkeresek/bongeszes");
     });
 }
 
@@ -564,7 +564,7 @@ async function saveRequestEdits() {
     }
     
     try {
-        const response = await fetch("/vizsgaremek/src/api/edit_request.php", {
+        const response = await fetch("/src/api/edit_request.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

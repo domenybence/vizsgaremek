@@ -1,5 +1,5 @@
 function fetchCategories() {
-    fetch('./kategoriak')
+    fetch('./src/web/index.php/kategoriak')
         .then(response => response.json())
         .then(categories => {
             const tableBody = document.getElementById("categories-table-body");
@@ -44,7 +44,7 @@ function setupNewCategoryFormSubmitHandler() {
         }
 
         try {
-            const response = await fetch("/vizsgaremek/src/api/create_category.php", {
+            const response = await fetch("/src/api/create_category.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -104,7 +104,7 @@ function setupCategoryFormSubmitHandler() {
         }
 
         try {
-            const response = await fetch("/vizsgaremek/src/api/update_category.php", {
+            const response = await fetch("/src/api/update_category.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -173,7 +173,7 @@ function closeModalWithAnimation(modalId) {
 function openCategoryEditModal(categoryId) {
 
     async function getData() {
-        const url = "./kat";
+        const url = "./src/web/index.php/kat";
         try {
             const response = await fetch(url, {
                 method: "POST",
@@ -224,7 +224,7 @@ function openCategoryDeleteModal(categoryId) {
 
 async function deleteCategory(categoryId) {
     try {
-        const response = await fetch("/vizsgaremek/src/api/delete_category.php", {
+        const response = await fetch("/src/api/delete_category.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -329,7 +329,7 @@ document.addEventListener("DOMContentLoaded", function () {
         loadingOverlay.style.display = "flex";
 
         try {
-            const url = `/vizsgaremek/src/api/get_users.php?page=${currentPage}&limit=10${searchTerm ? '&search=' + encodeURIComponent(searchTerm) : ''}`;
+            const url = `/src/api/get_users.php?page=${currentPage}&limit=10${searchTerm ? '&search=' + encodeURIComponent(searchTerm) : ''}`;
 
             const response = await fetch(url, {
                 method: "GET",
@@ -502,7 +502,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("modal-title").textContent = "Felhasználó szerkesztése";
         document.getElementById("user-modal").style.display = "flex";
 
-        fetch(`/vizsgaremek/src/api/get_user.php?id=${userId}`, {
+        fetch(`/src/api/get_user.php?id=${userId}`, {
             headers: {
                 "JavaScript-Fetch-Request": "get-user"
             }
@@ -568,7 +568,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             try {
-                const response = await fetch("/vizsgaremek/src/api/update_user.php", {
+                const response = await fetch("/src/api/update_user.php", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -604,7 +604,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function deleteUser(userId) {
         try {
-            const response = await fetch("/vizsgaremek/src/api/delete_user.php", {
+            const response = await fetch("/src/api/delete_user.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

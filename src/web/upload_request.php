@@ -5,7 +5,7 @@ if(session_status() === PHP_SESSION_NONE) {
 }
 
 if($_SESSION["username"] === "Vendég") {
-    header("Location: /vizsgaremek/src/web/login.php");
+    header("Location: /bejelentkezes");
     exit();
 }
 ?>
@@ -15,15 +15,15 @@ if($_SESSION["username"] === "Vendég") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Felkérés létrehozása</title>
-    <link rel="stylesheet" href="/vizsgaremek/src/web/css/upload_request.css">
-    <link rel="stylesheet" href="/vizsgaremek/src/web/css/loader.css">
-    <link rel="stylesheet" href="/vizsgaremek/src/web/css/navbar.css">
-    <link rel="icon" type="image/x-icon" href="/vizsgaremek/src/web/icon.png">
-    <script src="/vizsgaremek/src/web/js/navbar.js" defer></script>
-    <script src="/vizsgaremek/src/web/js/upload_request.js" defer></script>
+    <link rel="stylesheet" href="/src/web/css/upload_request.css">
+    <link rel="stylesheet" href="/src/web/css/loader.css">
+    <link rel="stylesheet" href="/src/web/css/navbar.css">
+    <link rel="icon" type="image/x-icon" href="/src/web/icon.png">
+    <script src="/src/web/js/navbar.js" defer></script>
+    <script src="/src/web/js/upload_request.js" defer></script>
 </head>
 <body>
-    <script src="/vizsgaremek/src/web/js/gsap-public/minified/gsap.min.js"></script>
+    <script src="/src/web/js/gsap-public/minified/gsap.min.js"></script>
 
     <div class="page-cover"></div>
     
@@ -72,6 +72,6 @@ if($_SESSION["username"] === "Vendég") {
         </div>
     </div>
     
-    <script src="/vizsgaremek/src/web/js/loader.js"></script>
+    <script src="/src/web/js/loader.js"></script>
 </body>
 </html>
