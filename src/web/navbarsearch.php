@@ -33,7 +33,7 @@ include_once "../php_functions/php_functions.php";
                 <div class="nav-dropdown-button nav-link">'.$_SESSION["username"].'
                     <div class="nav-dropdown-item">
                         ';
-                        echo '<div class="nav-item nav-link"><a class="nav-item nav-link" href="http://localhost/konyvtar">Könyvtár</a></div>';
+                       
                         echo '
                          <a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/credsupload.php">Pontok feltöltése</a>
                         <div class="nav-item nav-link"><a class="nav-item nav-link" href="http://localhost/vizsgaremek/src/web/library.php">Könyvtár</a></div>';
