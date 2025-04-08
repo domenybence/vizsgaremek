@@ -9,17 +9,35 @@
     RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/dashboard\.php$
     RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/login\.php$
     RewriteCond %{REQUEST_URI} !^/vizsgaremek/src/web/registration\.php$
-    RewriteRule ^kategoria/([^/]+)/([^/]+)/?$ /vizsgaremek/src/web/router.php?codecategory=$1&codeid=$2 [QSA,L]
     
-    RewriteRule ^kategoria/([^/]+)$ /vizsgaremek/src/web/router.php?codecategory=$1 [QSA,L]
-    RewriteRule ^kategoria/([^/]+)/?$ /vizsgaremek/src/web/router.php?codecategory=$1 [QSA,L]
-    RewriteRule ^felkeres/([^/]+)/?$ /vizsgaremek/src/web/router.php?request=$1 [QSA,L]
-    RewriteRule ^felkeresek/?$ /vizsgaremek/src/web/router.php?requests [L]
-    RewriteRule ^felkeresek/feltoltes/?$ /vizsgaremek/src/web/router.php?upload_request [L]
-    RewriteRule ^kod/([^/]+)$ /vizsgaremek/src/web/router.php?codeid=$1 [QSA,L]
-    RewriteRule ^kod/([^/]+)/?$ /vizsgaremek/src/web/router.php?codeid=$1 [QSA,L]
-    RewriteRule ^kod/([^/]+)/fetch$ /vizsgaremek/src/web/router.php?codeid=$1/fetch [QSA,L]
-    RewriteRule ^kod/([^/]+)/fetch/$ /vizsgaremek/src/web/router.php?codeid=$1/fetch [QSA,L]
-    RewriteRule ^felhasznalo/([^/]+)$ /vizsgaremek/src/web/router.php?username=$1 [QSA,L]
-    RewriteRule ^felhasznalo/([^/]+)/?$ /vizsgaremek/src/web/router.php?username=$1 [QSA,L]
+    RewriteRule ^kategoria/([^/]+)/([^/]+)/?$ /src/web/router.php?codecategory=$1&codeid=$2 [QSA,L]
+    RewriteRule ^kategoria/([^/]+)$ /src/web/router.php?codecategory=$1 [QSA,L]
+    RewriteRule ^kategoria/([^/]+)/?$ /src/web/router.php?codecategory=$1 [QSA,L]
+    
+    
+    RewriteRule ^kod/([^/]+)$ /src/web/router.php?codeid=$1 [QSA,L]
+    RewriteRule ^kod/([^/]+)/?$ /src/web/router.php?codeid=$1 [QSA,L]
+    RewriteRule ^kod/([^/]+)/fetch$ /src/web/router.php?codeid=$1/fetch [QSA,L]
+    RewriteRule ^kod/([^/]+)/fetch/$ /src/web/router.php?codeid=$1/fetch [QSA,L]
+    
+    RewriteRule ^felhasznalo/([^/]+)$ /src/web/router.php?username=$1 [QSA,L]
+    RewriteRule ^felhasznalo/([^/]+)/?$ /src/web/router.php?username=$1 [QSA,L]
+
+    RewriteRule ^bejelentkezes/?$ /src/web/login.php [L]
+    RewriteRule ^regisztracio/?$ /src/web/registration.php [L]
+    RewriteRule ^kijelentkezes/?$ /src/web/logout.php [L]
+    
+    RewriteRule ^felkeresek/bongeszes?$ /src/web/browse_requests.php [L]
+    RewriteRule ^felkeresek/feltoltes?$ /src/web/upload_request.php [L]
+    RewriteRule ^felkeresek/([^/]+)/?$ /src/web/router.php?request=$1 [QSA,L]
+
+    RewriteRule ^konyvtar/?$ /src/web/library.php [L]
+    RewriteRule ^jovahagyasok/?$ /src/web/approve.php [L]
+    RewriteRule ^kodfeltoltes/?$ /src/web/upload.php [L]
+    RewriteRule ^pontfeltoltes/?$ /src/web/credsupload.php [L]
+    RewriteRule ^admin/?$ /src/web/admin.php [L]
+
+    RewriteRule ^$ /src/web/home.php [L]
+
+    ErrorDocument 404 /src/web/404.html
 </IfModule>
