@@ -324,7 +324,7 @@ else {
                 <div id="container"></div>
                 <script src="/src/web/js/compiler.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs/loader.js"></script>
-                <?php $file_content = file_get_contents("./codes/$fileurl.uqw"); ?>
+                <?php $file_content = file_get_contents("./codes/$fileurl"); ?>
                 <script>
                     const fileExtension = "<?php echo $category; ?>";
                     const fileContent = <?php echo json_encode($file_content); ?>;
