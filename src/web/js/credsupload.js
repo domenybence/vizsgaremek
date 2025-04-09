@@ -31,6 +31,7 @@ document.querySelector(".button-input").addEventListener("click", async () => {
             let data = await response.json();
             if(data["result"] == "success"){
                 const successMessage = document.createElement("div");
+                successMessage.id = "responseMessage"
                 successMessage.textContent = "Sikeres feltöltés!";
                 successMessage.style.color = "green";
                 messageContainer.appendChild(successMessage);
@@ -39,6 +40,7 @@ document.querySelector(".button-input").addEventListener("click", async () => {
     }
     catch(error) {
         const errorMessage = document.createElement("div");
+        errorMessage.id = "responseMessage"
         errorMessage.textContent = "Hiba történt a tranzakció során!";
         errorMessage.style.color = "red";
         messageContainer.appendChild(errorMessage);

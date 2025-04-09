@@ -26,7 +26,7 @@ include_once "../php_functions/php_functions.php";
         }
         else {
             echo '
-                <div class="nav-dropdown-button nav-link">'.$_SESSION["username"].'
+                <div class="nav-dropdown-button nav-link id="navusername">'.$_SESSION["username"].'
                     <div class="nav-dropdown-item">
                         ';
                         echo '
