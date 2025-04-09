@@ -29,11 +29,11 @@ async function fetchSoftware(endpoint, bodyData = null) {
       currentPage = 1;
       displaySoftware();
     } else {
-      alert("Lekérés sikertelen!");
+      console.log("Lekérés sikertelen!");
     }
   } catch (error) {
     console.error(error);
-    alert("Lekérés sikertelen!");
+    console.log("Lekérés sikertelen!");
   }
 }
 //Szoftverek megjelenítése
@@ -44,21 +44,33 @@ function displaySoftware() {
   let paginatedItems = softwareData.slice(start, end);
 
   paginatedItems.forEach((item) => {
+    if(item.katnev == "C#")
+    {
+      item.katnev = "CS";
+    }
     let card = `
-      <div class="col-12 col-md-6 col-lg-4">
-        <div class="card bg-dark text-light mb-3">
-          <div class="card-header">${item.kategoria_id}</div>
-          <div class="card-body bg-light text-dark">
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card-group">
+        <div class="card">
+          <img src="./src/web/img/${item.katnev}.jpg" class="card-img-top" alt="${item.nev}"/>
+          <div class="card-body">
             <h5 class="card-title">${item.nev}</h5>
+            <p class="card-text">
+              ${item.katnev}
+            </p>
+          </div>
+          <div class="card-footer">
             <a href="./kod/${item.id}" class="btn btn-dark">Megtekintés</a>
           </div>
         </div>
-      </div>`;
+      </div>
+    </div>`;
     softwareContainer.innerHTML += card;
   });
 
   setupPagination();
 }
+
 
 function setupPagination() {
   paginationContainer.innerHTML = "";
@@ -139,9 +151,12 @@ function textCosineSimilarity(txtA,txtB){
 // EventListenerek
 $("keresobtn").addEventListener("click", async () => {
   const query = document.getElementById("kereso").value.trim().toLowerCase();
-  if (!query) return;
+  if (!query) {
+    fetchSoftware("./src/web/index.php/konyvtar");
+    return;
+  }
 
-  let response = await fetch("./konyvtar");
+  let response = await fetch("./src/web/index.php/konyvtar");
   let data = await response.json();
 
   softwareData = data.filter(
@@ -150,9 +165,23 @@ $("keresobtn").addEventListener("click", async () => {
 
   currentPage = 1;
   displaySoftware();
-  document.getElementById("kereso").value = "";
+  
+  if (!document.getElementById("resetbtn")) {
+    const searchBox = document.querySelector(".d-flex");
+    const resetButton = document.createElement("button");
+    resetButton.id = "resetbtn";
+    resetButton.className = "btn btn-secondary ms-2";
+    resetButton.type = "button";
+    resetButton.textContent = "Összes";
+    resetButton.addEventListener("click", () => {
+      document.getElementById("kereso").value = "";
+      fetchSoftware("./src/web/index.php/konyvtar");
+      resetButton.remove();
+    });
+    searchBox.appendChild(resetButton);
+  }
 });
 
-fetchSoftware("./konyvtar");
+fetchSoftware("./src/web/index.php/konyvtar");
 
 });

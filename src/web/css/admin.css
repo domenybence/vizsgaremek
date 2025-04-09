@@ -1,4 +1,4 @@
-@import url("/vizsgaremek/src/web/css/montserrat-font.css");
+@import url("/src/web/css/montserrat-font.css");
 
 body {
     font-family: "Montserrat", sans-serif;
@@ -290,6 +290,35 @@ body {
 }
 
 .delete-btn:hover {
+    background-color: #c82333;
+}
+
+.edit-category-btn, 
+.delete-category-btn {
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    font-size: 13px;
+    font-family: inherit;
+}
+
+.edit-category-btn {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.edit-category-btn:hover {
+    background-color: #0069d9;
+}
+
+.delete-category-btn  {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.delete-category-btn:hover {
     background-color: #c82333;
 }
 
@@ -665,3 +694,4 @@ body {
         height: 30px;
     }
 }
+

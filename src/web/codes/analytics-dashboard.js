@@ -1,0 +1,1 @@
+console.log('Analytics dashboard ready');

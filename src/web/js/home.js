@@ -20,7 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify(bodyData)
       } : {};
       
-      let response = await fetch(endpoint, options);
+      // Remove /vizsgaremek/ from the path
+      let response = await fetch(endpoint.replace("./", "/").replace("/vizsgaremek/", "/"), options);
       let data = await response.json();
       
       if (response.ok) {
@@ -28,11 +29,11 @@ document.addEventListener("DOMContentLoaded", () => {
         currentPage = 1;
         displaySoftware();
       } else {
-        alert("Lekérés sikertelen!");
+        console.log("Lekérés sikertelen!");
       }
     } catch (error) {
       console.error(error);
-      alert("Lekérés sikertelen!");
+      console.log("Lekérés sikertelen!");
     }
   }
   //Szoftverek megjelenítése
@@ -43,16 +44,27 @@ document.addEventListener("DOMContentLoaded", () => {
     let paginatedItems = softwareData.slice(start, end);
 
     paginatedItems.forEach((item) => {
+      if(item.katnev == "C#")
+      {
+        item.katnev = "CS";
+      }
       let card = `
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card bg-dark text-light mb-3">
-            <div class="card-header">${item.katnev}</div>
-            <div class="card-body bg-light text-dark">
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card-group">
+          <div class="card">
+            <img src="./src/web/img/${item.kep}" class="card-img-top" alt="${item.nev}"/>
+            <div class="card-body">
               <h5 class="card-title">${item.nev}</h5>
+              <p class="card-text">
+                ${item.katnev}
+              </p>
+            </div>
+            <div class="card-footer">
               <a href="./kod/${item.id}" class="btn btn-dark">Megtekintés</a>
             </div>
           </div>
-        </div>`;
+        </div>
+      </div>`;
       softwareContainer.innerHTML += card;
     });
 
@@ -138,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function fetchCategories() {
     try {
       let kat = document.getElementById('kategoriak');
-      const response = await fetch("./kategoriak");
+      const response = await fetch("./src/web/index.php/kategoriak");
       const data = await response.json();    
       
        for (const kategoria of data) {
@@ -160,11 +172,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector('#kategoriak');
   container.addEventListener('click', function (e) {
     if (e.target.classList.contains('katbtn')) {
-      fetchSoftware("./katkereses",{kategoria : e.target.id} );
+      fetchSoftware("/src/web/index.php/katkereses", {kategoria : e.target.id});
     }
     else
     {
-      fetchSoftware("./osszesszoftver")
+      fetchSoftware("/src/web/index.php/osszesszoftver");
     }
   });
  
@@ -174,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const query = document.getElementById("kereso").value.trim().toLowerCase();
     if (!query) return;
 
-    let response = await fetch("./osszesszoftver");
+    let response = await fetch("/src/web/index.php/osszesszoftver");
     let data = await response.json();
 
     softwareData = data.filter(
@@ -187,6 +199,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   
   
-  fetchSoftware("./osszesszoftver"); // Összes szoftver betöltése az oldal betöltésekor
+  fetchSoftware("/src/web/index.php/osszesszoftver"); // Összes szoftver betöltése az oldal betöltésekor
   fetchCategories();
 });

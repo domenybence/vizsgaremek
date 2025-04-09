@@ -236,20 +236,21 @@ INSERT INTO `felkeres` (`id`, `nev`, `leiras`, `kod_id`, `kategoria_id`, `feltol
 CREATE TABLE `kategoria` (
   `id` int(10) UNSIGNED NOT NULL,
   `nev` varchar(50) NOT NULL,
-  `compiler_azonosito` varchar(50) NOT NULL
+  `compiler_azonosito` varchar(50) NOT NULL,
+  `kep` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `kategoria`
 --
 
-INSERT INTO `kategoria` (`id`, `nev`, `compiler_azonosito`) VALUES
-(1, 'CSS', 'css'),
-(2, 'PHP', 'php'),
-(3, 'JavaScript', 'javascript'),
-(4, 'Python', 'python'),
-(5, 'C#', 'csharp'),
-(6, 'SQL', 'sql');
+INSERT INTO `kategoria` (`id`, `nev`, `compiler_azonosito`,`kep`) VALUES
+(1, 'CSS', 'css', 'CSS.jpg'),
+(2, 'PHP', 'php', 'PHP.jpg'),
+(3, 'JavaScript', 'javascript', 'JavaScript.jpg'),
+(4, 'Python', 'python', 'Python.jpg'),
+(5, 'C#', 'csharp', 'CS.jpg'),
+(6, 'SQL', 'sql', 'SQL.jpg');
 
 -- --------------------------------------------------------
 
@@ -273,9 +274,41 @@ CREATE TABLE `kod` (
 --
 
 INSERT INTO `kod` (`id`, `felhasznalo_id`, `kategoria_id`, `nev`, `ar`, `eleresi_ut`, `feltoltesi_ido`, `jovahagyott`) VALUES
-(7, 65, 4, 'jnksdajnk', 0, 'jnksdajnk-7.uqw', '2025-03-03 18:46:10', 1),
-(8, 64, 3, 'jnksdajnk', 0, 'jnksdajnk-8.uqw', '2025-03-03 19:06:19', 1),
-(10, 152, 3, 'asd', 0, 'asd-10.uqw', '2025-03-03 20:46:26', 1);
+(11, 45, 1, 'Login Form', 50, 'login-form.css', '2025-03-01 10:15:30', 1),
+(12, 78, 1, 'Signup Form', 120, 'signup-form.css', '2025-03-02 11:30:50', 1),
+(13, 33, 1, 'Contact Form', 80, 'contact-form.css', '2025-03-03 14:05:15', 1),
+(14, 120, 1, 'Survey Form', 200, 'survey-form.css', '2025-03-04 16:20:45', 1),
+(15, 90, 1, 'Feedback Form', 300, 'feedback-form.css', '2025-03-05 18:40:10', 1),
+
+(16, 12, 2, 'Simple Navbar', 150, 'simple-navbar.php', '2025-03-01 12:50:25', 1),
+(17, 143, 2, 'Dropdown Menu', 220, 'dropdown-menu.php', '2025-03-02 14:35:55', 1),
+(18, 60, 2, 'Sidebar Navigation', 275, 'sidebar-navigation.php', '2025-03-03 16:10:40', 1),
+(19, 99, 2, 'Mega Menu', 350, 'mega-menu.php', '2025-03-04 17:45:20', 1),
+(20, 23, 2, 'Sticky Header', 180, 'sticky-header.php', '2025-03-05 19:00:05', 1),
+
+(21, 87, 3, 'Dashboard UI', 500, 'dashboard-ui.js', '2025-03-01 09:30:15', 1),
+(22, 56, 3, 'Admin Panel', 750, 'admin-panel.js', '2025-03-02 10:50:25', 1),
+(23, 142, 3, 'Analytics Dashboard', 650, 'analytics-dashboard.js', '2025-03-03 13:15:40', 1),
+(24, 101, 3, 'User Management', 400, 'user-management.js', '2025-03-04 15:20:10', 1),
+(25, 33, 3, 'Project Management', 550, 'project-management.js', '2025-03-05 17:35:55', 1),
+
+(26, 98, 4, 'Image Gallery', 250, 'image-gallery.py', '2025-03-01 11:45:30', 1),
+(27, 76, 4, 'Video Player', 600, 'video-player.py', '2025-03-02 12:55:50', 1),
+(28, 41, 4, 'Music Player', 500, 'music-player.py', '2025-03-03 14:25:15', 1),
+(29, 67, 4, 'Slideshow', 350, 'slideshow.py', '2025-03-04 16:10:45', 1),
+(30, 115, 4, 'Interactive Map', 700, 'interactive-map.py', '2025-03-05 18:25:10', 1),
+
+(31, 88, 5, 'Portfolio Website', 800, 'portfolio-website.cs', '2025-03-01 10:15:30', 1),
+(32, 54, 5, 'Business Landing Page', 900, 'business-landing.cs', '2025-03-02 11:40:50', 1),
+(33, 124, 5, 'Blog Template', 350, 'blog-template.cs', '2025-03-03 13:55:15', 1),
+(34, 99, 5, 'E-commerce Store', 950, 'ecommerce-store.cs', '2025-03-04 15:10:45', 1),
+(35, 73, 5, 'Personal Resume', 500, 'personal-resume.cs', '2025-03-05 17:30:10', 1),
+
+(36, 123, 6, 'Task Manager', 600, 'task-manager.sql', '2025-03-01 12:10:25', 1),
+(37, 132, 6, 'To-Do List', 200, 'todo-list.sql', '2025-03-02 13:45:55', 1),
+(38, 85, 6, 'Expense Tracker', 450, 'expense-tracker.sql', '2025-03-03 15:20:40', 1),
+(39, 140, 6, 'Fitness Tracker', 700, 'fitness-tracker.sql', '2025-03-04 16:50:20', 1),
+(40, 77, 6, 'Event Calendar', 300, 'event-calendar.sql', '2025-03-05 18:15:05', 1);
 
 -- --------------------------------------------------------
 

@@ -1,0 +1,1 @@
+CREATE TABLE events (id INT PRIMARY KEY, event_name TEXT, date DATE);

@@ -1,5 +1,8 @@
 <?php
 include_once "../php_functions/php_functions.php";
+if(session_status() === PHP_SESSION_NONE) {
+    startSession();
+}
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -7,20 +10,19 @@ include_once "../php_functions/php_functions.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pontok feltöltése</title>
-    <link rel="stylesheet" href="/vizsgaremek/src/web/css/credsupload.css">
-    <link rel="icon" type="image/x-icon" href="./icon.png">
-    <script src="./js/credsupload.js" defer></script>
-    <script src="./js/navbar.js" defer></script>
-    <link rel="stylesheet" href="./css/navbar.css">
-    <link rel="stylesheet" href="./css/loader.css">
+    <link rel="stylesheet" href="src/web/css/credsupload.css">
+    <link rel="icon" type="image/x-icon" href="src/web/icon.png">
+    <script src="./src/web/js/credsupload.js" defer></script>
+    <script src="./src/web/js/navbar.js" defer></script>
+    <link rel="stylesheet" href="./src/web/css/navbar.css">
+    <link rel="stylesheet" href="./src/web/css/loader.css">
 </head>
 <body>
-    <script src="/vizsgaremek/src/web//js/gsap-public/minified/gsap.min.js"></script>
-    <div class="page-cover">
-        <h1 class="page-cover-title">Betöltés...</h1>
-    </div>
-    <?php include "navbar.php"; ?>
-    <?php $price = simpleGetData("SELECT * FROM pont_ar"); ?>
+    <script src="src/web/js/gsap-public/minified/gsap.min.js"></script>
+    <div class="page-cover"></div>
+    <?php
+    include "navbar.php";
+    $price = simpleGetData("SELECT * FROM pont_ar"); ?>
     <script>const price = <?php echo json_encode($price[0]["ar"]) ?></script>
         <div class="container">
             <div class="column">
@@ -33,6 +35,6 @@ include_once "../php_functions/php_functions.php";
                 <div id="message-container"></div>
             </div>
         </div>
-    <script src="/vizsgaremek/src/web/js/loader.js"></script>
+    <script src="/src/web/js/loader.js"></script>
 </body>
 </html>

@@ -16,28 +16,18 @@ function translateIn(){
             document.querySelector(".page-cover").style.display = "none";
         }
     });
-    gsap.to(".page-cover-title", {
-        y: "-30px",
-        duration: 0.8,
-        ease: "power4.inOut",
-        opacity: 0,
-        delay: 0.2
-    })
 }
 
 function translateOut(event){
-    event.preventDefault();
-    gsap.fromTo(".page-cover-title", {
-        y: "30px",
-        opacity: 0
-    },
-    {
-        y: "0",
-        duration: 0.8,
-        ease: "power4.inOut",
-        opacity: 1,
-        display: "block",
-    });
+    let url;
+    if(typeof event === "string") {
+        url = event;
+    }
+    else {
+        event.preventDefault();
+        url = event.target.href;
+    }
+    
     gsap.fromTo(".page-cover", {
         opacity: 0
     },
@@ -47,7 +37,6 @@ function translateOut(event){
         opacity: 1,
         display: "block",
         onComplete: () => {
-            const url = event.target.href;
             window.location.href = url;
         }
     });

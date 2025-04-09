@@ -33,9 +33,7 @@ nav {
 .nav-dropdown-item.visible {
     display: block;
     margin: 5px 0;
-}
-.nav-dropdown-item.visible {
-    width: auto;
+    width: 12vw;
     opacity: 1;
     visibility: visible;
 }
@@ -134,6 +132,7 @@ nav {
     .nav-dropdown-button {
         width: 100%;
         text-align: left;
+        display: block;
     }
     .nav-dropdown-item {
         position: relative;
@@ -143,15 +142,32 @@ nav {
         box-shadow: none;
         margin: 5px 0;
         padding: 0;
+        box-sizing: border-box;
+        min-width: 100%;
     }
     .nav-link {
-        width: unset;
+        width: 100%;
+        box-sizing: border-box;
+        display: block;
     }
     .nav-item.nav-link {
         padding: 10px 0;
+        width: 100%;
+        box-sizing: border-box;
     }
     .nav-dropdown-item a {
         padding: 10px 25px;
+        width: 100%;
+        box-sizing: border-box;
+        display: block;
+    }
+    .nav-dropdown-item .nav-item {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .nav-dropdown-item > * {
+        width: 100%;
+        box-sizing: border-box;
     }
     .nav-home {
         margin-top: 15%;
@@ -163,5 +179,15 @@ nav {
 @media screen and (max-width: 600px) {
     nav {
         width: 100%;
+    }
+    /* Ensure dropdown elements take full width on small screens */
+    .nav-dropdown-item,
+    .nav-item.nav-link,
+    .nav-link,
+    .nav-dropdown-button {
+        width: 100% !important;
+        min-width: 100% !important;
+        display: block;
+        box-sizing: border-box;
     }
 }

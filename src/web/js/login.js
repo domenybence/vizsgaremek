@@ -61,7 +61,7 @@ async function login(event) {
     }
     
     try {
-        const response = await fetch("/vizsgaremek/src/php_functions/login_fetch.php", {
+        const response = await fetch("/src/php_functions/login_fetch.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -91,7 +91,7 @@ async function login(event) {
                                                 </div>
                                                 <hr>
                                                 <div class="button-container">
-                                                    <a id="button_login" href="./dashboard.php">Tovább</a>
+                                                    <a id="button_login" href="/">Tovább</a>
                                                 </div>
                                             </div>
                                             </div>`);
@@ -144,3 +144,41 @@ password.addEventListener("input", () => {
 });
 
 loginForm.addEventListener("submit", login);
+
+document.getElementById("button_submit").addEventListener("click", async function() {
+    event.preventDefault();
+    const isUsernameValid = validateUsername();
+    const isPasswordValid = validatePassword();
+    if (!isUsernameValid || !isPasswordValid) {
+        return;
+    }
+    
+    try {
+        const response = await fetch("/src/php_functions/login_fetch.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "JavaScript-Fetch-Request": "login-fetch-req"
+            },
+            body: JSON.stringify({
+                username: username.value,
+                password: password.value,
+                rememberme: rememberMe.checked
+            })
+        });
+        const result = await response.json();
+        
+        if (result.result == "success") {
+            translateOut("/");
+        }
+        else if (result.result == "unsuccessful") {
+            showError(password, "Hibás felhasználónév vagy jelszó.");
+        }
+        else {
+            showError(password, "Hiba történt a bejelentkezés során.");
+        }
+    }
+    catch (error) {
+        showError(password, "Hálózati hiba. Próbálja újra később.");
+    }
+});

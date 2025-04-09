@@ -1,0 +1,1 @@
+CREATE TABLE fitness (id INT PRIMARY KEY, activity TEXT, duration INT);

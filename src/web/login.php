@@ -12,16 +12,14 @@ if(session_status() === PHP_SESSION_NONE) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A CodeOverflow bejelentkezési felülete.">
     <title>Bejelentkezés - CodeOverflow</title>
-    <link rel="stylesheet" href="./css/login.css">
-    <link rel="icon" type="image/x-icon" href="./icon.png">
-    <script type="module" src="./js/login.js" defer></script>
-    <link rel="stylesheet" href="./css/loader.css">
+    <link rel="stylesheet" href="./src/web/css/login.css">
+    <link rel="icon" type="image/x-icon" href="./src/web/icon.png">
+    <script type="module" src="./src/web/js/login.js" defer></script>
+    <link rel="stylesheet" href="./src/web/css/loader.css">
 </head>
 <body>
-    <script src="/vizsgaremek/src/web//js/gsap-public/minified/gsap.min.js"></script>
-    <div class="page-cover">
-        <h1 class="page-cover-title">Betöltés...</h1>
-    </div>
+    <script src="./src/web/js/gsap-public/minified/gsap.min.js"></script>
+    <div class="page-cover"></div>
         <div class="background"></div>
         <div class="container" id="container">
             <div class="wrapper">
@@ -44,12 +42,12 @@ if(session_status() === PHP_SESSION_NONE) {
                     <div class="inline-group">
                         <button class="inline-button" type="submit" name="button_submit" id="button_submit">Bejelentkezés</button>
                     </div>
-                    <p class="inline-text register-text">Még nincs fiókja? <a href="./registration.php" class="inline-link">Regisztráljon itt.</a></p>
+                    <p class="inline-text register-text">Még nincs fiókja? <a href="./regisztracio" class="inline-link">Regisztráljon itt.</a></p>
                 </form>
                 </div>
             </div>
             </div>
         </div>
-    <script src="/vizsgaremek/src/web/js/loader.js"></script>
+    <script src="./src/web/js/loader.js"></script>
 </body>
 </html>

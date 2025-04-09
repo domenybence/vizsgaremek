@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     async function fetchCategories() {
         try {
-            const response = await fetch("/vizsgaremek/src/api/get_categories.php", {
+            const response = await fetch("/src/api/get_categories.php", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const description = document.getElementById("request-description").value.trim();
         
         try {
-            const response = await fetch("/vizsgaremek/src/api/create_request.php", {
+            const response = await fetch("/src/api/create_request.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -169,8 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById("request-description").value = "";
                 
                 setTimeout(() => {
-                    translateOut();
-                    window.location.href = `/vizsgaremek/felkeres/${data.requestId}`;
+                    translateOut("/felkeresek/bongeszes");
                 }, 2000);
             }
             else {

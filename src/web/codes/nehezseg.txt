@@ -1,0 +1,13 @@
+Nehézségek
+
+Saját feladat (Kékheyg szálló):
+
+1. feladat: 3
+2. feladat: 3
+3. feladat: 4
+
+Megoldott feladat (feladat_masiknak):
+
+1. feladat: 2
+2. feladat: 1
+3. feladat: 1
