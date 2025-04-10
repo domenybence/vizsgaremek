@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
               </p>
             </div>
             <div class="card-footer">
-              <a href="./kod/${item.id}" class="btn btn-dark">Megtekintés</a>
+              <a href="./kod/${item.id}"  id=kodgomb${item.id} class="btn btn-dark">Megtekintés</a>
             </div>
           </div>
         </div>

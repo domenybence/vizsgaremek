@@ -1,6 +1,6 @@
 let webdriver = require("selenium-webdriver");
 const { Builder, By, until } = require('selenium-webdriver');
-
+const assert = require("assert")
 require("chromedriver");
 
 async function HomeAlap() {
@@ -17,10 +17,11 @@ async function HomeAlap() {
 
         var title = await driver.getTitle();
         console.log('Az oldal címe:', title);
+        assert.strictEqual(title, "CodeOverflow");
 
         await driver.findElement(By.id("3")).click();
 
-        const el = await driver.wait(
+        var el = await driver.wait(
             until.elementLocated(By.id('kod21')),
             10000
         );
@@ -47,13 +48,13 @@ async function HomeAlap() {
 
         await driver.findElement(By.css('button[type="submit"]')).click();
         console.log("Bejelentkezés gomb megnyomása sikeres!")
-        const el2 = await driver.wait(
+        var el = await driver.wait(
             until.elementLocated(By.linkText('CodeOverflow')),
             10000
         );
 
 
-        await driver.wait(until.elementIsVisible(el2), 5000);;
+        await driver.wait(until.elementIsVisible(el), 5000);
 
 
         var title = await driver.getTitle();
@@ -94,19 +95,70 @@ async function HomeAlap() {
 
         await driver.findElement(By.className('button-input')).click();
 
-        const el3 = await driver.wait(
+        var el = await driver.wait(
             until.elementLocated(By.id('responseMessage')),
             5000
         );
 
-        const messageText = await el3.getText();
-
+        const messageText = await el.getText();
 
         console.log(messageText)
 
+        await driver.findElement(By.linkText('CodeOverflow')).click();
+
+        var el = await driver.wait(
+            until.elementLocated(By.id('szoftverek')),
+            10000
+        );
+
+
+        await driver.wait(until.elementIsVisible(el), 5000);
+
+        await driver.findElement(By.id('kodgomb12')).click();
+
+        var el = await driver.wait(
+            until.elementLocated(By.id('container')),
+            10000
+        );
+
+
+        await driver.wait(until.elementIsVisible(el), 5000);
+        
+        var title = await driver.getTitle();
+        console.log('Az oldal címe:', title);
+
+
+        console.log("12-es id-jű kód oldala megnyílik!")
+
+        
+        await driver.findElement(By.linkText('CodeOverflow')).click();
+
+        
+        var el = await driver.wait(
+            until.elementLocated(By.id('szoftverek')),
+            10000
+        );
+
+
+        await driver.wait(until.elementIsVisible(el), 5000);
+
+
+        const dropdownToggle2 = await driver.findElement(By.id('navusername'));
+
+        await dropdownToggle2.click();
+
+
+        const dropdownButton2 = await driver.wait(
+            until.elementLocated(By.linkText('Könyvtár')),
+            5000
+        );
+
+        await dropdownButton2.click();
+
+
         await driver.quit();
 
-
+        
     } catch (err) {
         console.error('Hiba:', err);
         await driver.quit();
