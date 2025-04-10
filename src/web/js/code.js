@@ -220,27 +220,29 @@ async function likeChecked(){
 
 async function dislikeChecked(){
     if (!isOwned) {
-        if(!document.body.classList.contains(".modal-wrapper")) {
+        if(!document.body.querySelector(".modal-wrapper")) {
             document.body.insertAdjacentHTML("beforeend",
                 `<div class="modal-wrapper">
                     <div class="error-modal-popup">
                         <div class="error-title-container">
                             <h3>Sikertelen vásárlás!</h3>
-                            <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                        </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" id="svg_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                            </svg>
+                        </div>
+                        <hr>
+                        <div class="content">
+                            <p>A kód értékeléséhez először meg kell vásárolnia azt!.</p>
+                        </div>
+                        <hr>
+                        <div class="button-container">
+                            <a id="button_not_okay" href="">Tovább</a>
+                        </div>
                     </div>
-                    <hr>
-                    <div class="content">
-                        <p>A kód értékeléséhez először meg kell vásárolnia azt!.</p>
-                    </div>
-                    <hr>
-                    <div class="button-container">
-                        <a id="button_not_okay" href="">Tovább</a>
-                    </div>
-                </div>
-            </div>`);
-        document.querySelector("#button_not_okay").addEventListener("click", translateOut);
+                </div>`);
+            document.querySelector("#button_not_okay").addEventListener("click", closePopup);
+            document.querySelector("#svg_x").addEventListener("click", closePopup);
+        }
         return;
     }
     dislikechecked = !dislikechecked;
@@ -252,9 +254,7 @@ async function dislikeChecked(){
         await fetchLikeValue(null);
     }
     updateState();
-    }
 }
-
 
 document.addEventListener("click", (event) => {
     if(event.target.closest("div.button-container > svg")) {
@@ -329,7 +329,7 @@ async function deleteCode() {
                             <div class="title-container">
                                 <h3>Sikeres törlés</h3>
                                 <svg xmlns="http://www.w3.org/2000/svg" id="svg_success_x" width="35" height="35" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
                                 </svg>
                             </div>
                             <hr>
