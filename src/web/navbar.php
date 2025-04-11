@@ -1,5 +1,6 @@
 <?php
 include_once "../php_functions/php_functions.php";
+
 ?>
 <div class="nav-menu-button">
     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-list" viewBox="0 0 16 16">
@@ -7,6 +8,7 @@ include_once "../php_functions/php_functions.php";
     </svg>
 </div>
 <nav>
+    
     <div class="nav-group nav-home">
         <a class="nav-item nav-link" href="http://localhost/">CodeOverflow</a>
     </div>
@@ -19,6 +21,7 @@ include_once "../php_functions/php_functions.php";
             </div>
         </div>
     </div>
+    <div class="nav-group" id="pointsdisplay"></div>
     <div class="nav-group">
         <?php
         if($_SESSION["username"] == "Vendég") {
@@ -26,7 +29,8 @@ include_once "../php_functions/php_functions.php";
         }
         else {
             echo '
-                <div class="nav-dropdown-button nav-link">'.$_SESSION["username"].'
+                <div id="id" hidden>'.$_SESSION["userid"].'</div>
+                <div class="nav-dropdown-button nav-link id="navusername">'.$_SESSION["username"].'
                     <div class="nav-dropdown-item">
                         ';
                         echo '

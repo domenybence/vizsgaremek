@@ -38,6 +38,11 @@
         </div>
     </div>
 
+    <div class="alert alert-info container mt-4">
+            <strong>Információ:</strong> Itt láthatók a felhasználók által megvásárolt kódok.
+            
+        </div>
+
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8 col-sm-12">
@@ -56,6 +61,7 @@
                 <div class="bg-light text-dark shadow-lg p-4">
                    
                <div class="row mt-3" id="szoftverek"></div>
+                <div id="nocodes">Nincsenek megvásárolt kódok!</div>
                 </div>
             </div>
         </div>

@@ -19,20 +19,27 @@ include_once "../php_functions/php_functions.php";
             </div>
         </div>
     </div>
+   
     <form class="d-flex">
           <input class="form-control me-2" id="kereso" type="search" placeholder="Szoftverkeresés">
           <button class="btn btn-outline-primary" id="keresobtn" type="button">Keresés</button>
         </form>
+
+    <div class="nav-group">
+    <div class="nav-group mx-3" id="pointsdisplay"></div>
+    </div>
     <div class="nav-group">
         <?php
         if($_SESSION["username"] == "Vendég") {
-            echo '<div class="nav-item nav-link"><a class="nav-item nav-link" href="http://localhost/bejelentkezes">Bejelentkezés</a></div>';
+            echo '<div class="nav-item nav-link"><a class="nav-item nav-link" id="login" href="http://localhost/bejelentkezes">Bejelentkezés</a></div>';
         }
         else {
             echo '
-                <div class="nav-dropdown-button nav-link">'.$_SESSION["username"].'
+                <div id="id" hidden>'.$_SESSION["userid"].'</div>
+                <div class="nav-dropdown-button nav-link" id="navusername">'.$_SESSION["username"].'
                     <div class="nav-dropdown-item">
                         ';
+                      
                         echo '
                          <a class="nav-item nav-link" href="http://localhost/pontfeltoltes">Pontok feltöltése</a>
                         <div class="nav-item nav-link"><a class="nav-item nav-link" href="http://localhost/konyvtar">Könyvtár</a></div>';

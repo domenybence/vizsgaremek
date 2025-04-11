@@ -102,7 +102,7 @@ nav {
     cursor: pointer;
     z-index: 101;
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 950px) {
     .nav-menu-button {
         display: flex;
         position: fixed;
@@ -176,7 +176,7 @@ nav {
         margin-bottom: 15%; 
     }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 750px) {
     nav {
         width: 100%;
     }
@@ -190,4 +190,15 @@ nav {
         display: block;
         box-sizing: border-box;
     }
+}
+
+
+.nav-group {
+    display: flex;
+    
+}
+
+#points {
+    white-space: nowrap;
+   
 }

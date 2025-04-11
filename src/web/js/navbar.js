@@ -17,14 +17,14 @@ document.addEventListener("DOMContentLoaded", () => {
             duration: 0.3,
             ease: "power2.inOut",
             onComplete: () => {
-                if(!isMenuOpen) {
+                if (!isMenuOpen) {
                     resetDropdown()
                 }
             }
         });
     });
     document.addEventListener("click", (event) => {
-        if(isMenuOpen && !event.target.closest("nav")) {
+        if (isMenuOpen && !event.target.closest("nav")) {
             isMenuOpen = false;
             gsap.to(nav, {
                 x: "-100%",
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
         dropdownItems.forEach(dropdownItem => {
-            if(dropdownItem.classList.contains("visible") && !event.target.closest("nav")) {
+            if (dropdownItem.classList.contains("visible") && !event.target.closest("nav")) {
                 resetDropdown();
             }
         })
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
     window.addEventListener("resize", () => {
-        if(window.innerWidth > 800) {
+        if (window.innerWidth > 800) {
             gsap.set(nav, {
                 x: 0
             });
@@ -70,32 +70,32 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
     dropdownButtons.forEach(button => {
-    const dropdownItem = button.querySelector(".nav-dropdown-item");
-    button.addEventListener("click", (event) => {
-        event.stopPropagation();
-        const isVisible = dropdownItem.classList.contains("visible");
-        dropdownButtons.forEach(selectedButton => {
-            if (selectedButton != button) {
-                selectedButton.classList.remove("active");
-            }
-        });
-        dropdownItems.forEach(item => {
-            if (item != dropdownItem) {
-                gsap.to(item, {
-                    height: 0,
-                    opacity: 0,
-                    duration: 0.3,
-                    ease: "power2.out",
-                    onComplete: () => {
-                        item.classList.remove("visible");
-                    }
-                });
-            }
-        });
-        button.classList.toggle("active");
-        if (!isVisible) {
-            dropdownItem.classList.add("visible");
-            gsap.fromTo(dropdownItem, {
+        const dropdownItem = button.querySelector(".nav-dropdown-item");
+        button.addEventListener("click", (event) => {
+            event.stopPropagation();
+            const isVisible = dropdownItem.classList.contains("visible");
+            dropdownButtons.forEach(selectedButton => {
+                if (selectedButton != button) {
+                    selectedButton.classList.remove("active");
+                }
+            });
+            dropdownItems.forEach(item => {
+                if (item != dropdownItem) {
+                    gsap.to(item, {
+                        height: 0,
+                        opacity: 0,
+                        duration: 0.3,
+                        ease: "power2.out",
+                        onComplete: () => {
+                            item.classList.remove("visible");
+                        }
+                    });
+                }
+            });
+            button.classList.toggle("active");
+            if (!isVisible) {
+                dropdownItem.classList.add("visible");
+                gsap.fromTo(dropdownItem, {
                     height: 0,
                     opacity: 0
                 }, {
@@ -104,18 +104,54 @@ document.addEventListener("DOMContentLoaded", () => {
                     duration: 0.3,
                     ease: "power2.out"
                 });
-        }
-        else {
-            gsap.to(dropdownItem, {
-                height: 0,
-                opacity: 0,
-                duration: 0.3,
-                ease: "power2.out",
-                onComplete: () => {
-                    dropdownItem.classList.remove("visible");
-                }
-            });
-        }
+            }
+            else {
+                gsap.to(dropdownItem, {
+                    height: 0,
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: "power2.out",
+                    onComplete: () => {
+                        dropdownItem.classList.remove("visible");
+                    }
+                });
+            }
+        });
+
     });
+    async function getPoints() {
+        let userId = document.getElementById('id').innerHTML;
+        if(userId != "")
+        {
+            try {
+                const response = await fetch("/src/api/get_points.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "JavaScript-Fetch-Request": "get-points"
+                    },
+                    body: JSON.stringify({
+                        id: userId
+                    })
+                });
+    
+                const data = await response.json();
+               
+               
+                document.getElementById('pointsdisplay').innerHTML ="Egyenleg: " +  data.user.points + " pont";
+                
+                
+            }
+            catch(error) {
+                console.log(error);
+            }
+
+        }
+        
+    }
+    getPoints();
+
+
+
 });
-});
+
