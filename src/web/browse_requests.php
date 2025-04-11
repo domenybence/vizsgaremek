@@ -5,7 +5,7 @@ if(session_status() === PHP_SESSION_NONE) {
 }
 
 if(!isset($_SESSION["userid"])) {
-    header("Location: /src/web/login.php");
+    header("Location: /bejelentkezes");
     exit;
 }
 
@@ -21,7 +21,13 @@ if($isAdmin || $isModerator) {
     }
 }
 else {
-    $result = preparedGetData("SELECT felkeres.*, felhasznalo.nev AS username, kategoria.nev AS kategoria FROM felkeres INNER JOIN felhasznalo ON felkeres.felhasznalo_id = felhasznalo.id LEFT JOIN kategoria ON felkeres.kategoria_id = kategoria.id WHERE felkeres.felhasznalo_id = ? OR felkeres.elvallalo_felhasznalo_id = ? OR (felkeres.statusz = 'nyitott' AND felkeres.elvallalo_felhasznalo_id IS NULL) ORDER BY felkeres.feltoltesi_ido DESC", "ii", [$userId, $userId]);
+    $result = preparedGetData("SELECT felkeres.*, felhasznalo.nev AS username, kategoria.nev AS kategoria FROM felkeres 
+        INNER JOIN felhasznalo ON felkeres.felhasznalo_id = felhasznalo.id 
+        LEFT JOIN kategoria ON felkeres.kategoria_id = kategoria.id 
+        WHERE (felkeres.felhasznalo_id = ? OR felkeres.elvallalo_felhasznalo_id = ? OR 
+              (felkeres.statusz = 'nyitott' AND felkeres.elvallalo_felhasznalo_id IS NULL))
+        AND felkeres.jovahagyott = 1  
+        ORDER BY felkeres.feltoltesi_ido DESC", "ii", [$userId, $userId]);
     if($result) {
         $requests = $result;
     }
@@ -48,34 +54,40 @@ else {
     <?php include "navbar.php"; ?>
     <div class="container">
         <div class="request-wrapper">
-            <?php foreach($requests as $request): ?>
-                <div class="request-card" data-request-id="<?php echo $request["id"]; ?>">
-                    <div class="request-header">
-                        <h2><?php echo htmlspecialchars($request["nev"]); ?></h2>
-                        <span class="status <?php echo $request["statusz"]; ?>">
-                            <?php echo getStatusText($request["statusz"]); ?>
-                        </span>
-                    </div>
-                    <div class="request-info">
-                        <div class="info-item">
-                            <label>Feltöltő:</label>
-                            <span><?php echo htmlspecialchars($request["username"]); ?></span>
-                        </div>
-                        <div class="info-item">
-                            <label>Kategória:</label>
-                            <span><?php echo htmlspecialchars($request["kategoria"]); ?></span>
-                        </div>
-                        <div class="info-item">
-                            <label>Díjazás:</label>
-                            <span><?php echo number_format($request["ar"]); ?> pont</span>
-                        </div>
-                        <div class="info-item">
-                            <label>Feltöltés ideje:</label>
-                            <span><?php echo formatDate($request["feltoltesi_ido"]); ?></span>
-                        </div>
-                    </div>
+            <?php if(empty($requests)): ?>
+                <div class="no-requests-message">
+                    <p>Nincs megjeleníthető felkérés.</p>
                 </div>
-            <?php endforeach; ?>
+            <?php else: ?>
+                <?php foreach($requests as $request): ?>
+                    <div class="request-card" data-request-id="<?php echo $request["id"]; ?>">
+                        <div class="request-header">
+                            <h2><?php echo htmlspecialchars($request["nev"]); ?></h2>
+                            <span class="status <?php echo $request["statusz"]; ?>">
+                                <?php echo getStatusText($request["statusz"]); ?>
+                            </span>
+                        </div>
+                        <div class="request-info">
+                            <div class="info-item">
+                                <label>Feltöltő:</label>
+                                <span><?php echo htmlspecialchars($request["username"]); ?></span>
+                            </div>
+                            <div class="info-item">
+                                <label>Kategória:</label>
+                                <span><?php echo htmlspecialchars($request["kategoria"]); ?></span>
+                            </div>
+                            <div class="info-item">
+                                <label>Díjazás:</label>
+                                <span><?php echo number_format($request["ar"]); ?> pont</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Feltöltés ideje:</label>
+                                <span><?php echo formatDate($request["feltoltesi_ido"]); ?></span>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </div>
     <script src="/src/web/js/loader.js"></script>

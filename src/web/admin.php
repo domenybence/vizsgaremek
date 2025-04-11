@@ -4,7 +4,6 @@ if (session_status() === PHP_SESSION_NONE) {
     startSession();
 }
 
-// Redirect if user is not admin
 if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
     header("Location: /");
     exit();
@@ -48,17 +47,9 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
                         <i class="icon users-icon"></i>
                         <span>Felhasználók</span>
                     </li>
-                    <li class="sidebar-item" data-tab="permissions">
-                        <i class="icon permissions-icon"></i>
-                        <span>Jogosultságok</span>
-                    </li>
                     <li class="sidebar-item" data-tab="content">
                         <i class="icon content-icon"></i>
                         <span>Kategóriák</span>
-                    </li>
-                    <li class="sidebar-item" data-tab="settings">
-                        <i class="icon settings-icon"></i>
-                        <span>Beállítások</span>
                     </li>
                 </ul>
             </div>
@@ -103,17 +94,6 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
                         </div>
                     </div>
                 </div>
-                <div class="tab-content" id="permissions-tab">
-                    <div class="content-header">
-                        <h2>Jogosultságok kezelése</h2>
-                    </div>
-                    <div class="permissions-content">
-                        <p>Ezen a felületen beállíthatja a különböző felhasználói jogosultságokat.</p>
-                        <div class="placeholder-box">
-                            <p>Jogosultsági beállítások</p>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="tab-content" id="content-tab">
                     <div class="content-header">
@@ -142,18 +122,6 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
                             </tbody>
                         </table>
                     </div>
-            </div>
-
-            <div class="tab-content" id="settings-tab">
-                <div class="content-header">
-                    <h2>Rendszer beállítások</h2>
-                </div>
-                <div class="settings-content">
-                    <p>Itt módosíthatja a rendszer különböző beállításait.</p>
-                    <div class="placeholder-box">
-                        <p>Rendszerbeállítások</p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

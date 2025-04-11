@@ -121,6 +121,15 @@ body {
     font-size: 16px;
 }
 
+.no-requests-message {
+    width: 100%;
+    text-align: center;
+    padding: 50px 0;
+    color: #888;
+    font-size: 18px;
+    font-style: italic;
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 10px;
