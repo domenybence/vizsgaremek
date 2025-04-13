@@ -117,41 +117,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }
         });
-
     });
-    async function getPoints() {
-        let userId = document.getElementById('id').innerHTML;
-        if(userId != "")
-        {
-            try {
-                const response = await fetch("/src/api/get_points.php", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "JavaScript-Fetch-Request": "get-points"
-                    },
-                    body: JSON.stringify({
-                        id: userId
-                    })
-                });
-    
-                const data = await response.json();
-               
-               
-                document.getElementById('pointsdisplay').innerHTML ="Egyenleg: " +  data.user.points + " pont";
-                
-                
-            }
-            catch(error) {
-                console.log(error);
-            }
-
-        }
-        
-    }
-    getPoints();
-
-
-
 });
 

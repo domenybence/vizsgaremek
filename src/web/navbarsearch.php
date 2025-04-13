@@ -19,42 +19,40 @@ include_once "../php_functions/php_functions.php";
             </div>
         </div>
     </div>
-   
-    <form class="d-flex">
-          <input class="form-control me-2" id="kereso" type="search" placeholder="Szoftverkeresés">
-          <button class="btn btn-outline-primary" id="keresobtn" type="button">Keresés</button>
+        <form class="d-flex">
+            <input class="form-control me-2" id="kereso" type="search" placeholder="Szoftverkeresés">
+            <button class="btn btn-outline-primary" id="keresobtn" type="button">Keresés</button>
         </form>
 
     <div class="nav-group">
-    <div class="nav-group mx-3" id="pointsdisplay"></div>
-    </div>
-    <div class="nav-group">
         <?php
         if($_SESSION["username"] == "Vendég") {
-            echo '<div class="nav-item nav-link"><a class="nav-item nav-link" id="login" href="http://localhost/bejelentkezes">Bejelentkezés</a></div>';
+            echo '<a class="nav-item nav-link" href="http://localhost/bejelentkezes">Bejelentkezés</a>';
         }
         else {
+            $userId = $_SESSION["userid"];
+            
+            $points = preparedGetData("SELECT pontok FROM felhasznalo WHERE id = ?", "i", [$userId]);
             echo '
                 <div id="id" hidden>'.$_SESSION["userid"].'</div>
                 <div class="nav-dropdown-button nav-link" id="navusername">'.$_SESSION["username"].'
                     <div class="nav-dropdown-item">
-                        ';
-                      
-                        echo '
-                         <a class="nav-item nav-link" href="http://localhost/pontfeltoltes">Pontok feltöltése</a>
-                        <div class="nav-item nav-link"><a class="nav-item nav-link" href="http://localhost/konyvtar">Könyvtár</a></div>';
-                        if($_SESSION["role"] == "moderator") {
-                            echo '<a class="nav-link" href="http://localhost/konyvtar">Könyvtár</a>
-                            <a class="nav-link" href="http://localhost/jovahagyasok">Jóváhagyások</a>';
-                        }
-                        else if($_SESSION["role"] == "admin") {
-                            echo '<a class="nav-link" href="http://localhost/jovahagyasok">Jóváhagyások</a>
-                                 <a class="nav-link" href="http://localhost/admin">Admin</a>';
-                        }
-                        echo '  <a class="nav-link" href="http://localhost/kodfeltoltes">Kód feltöltése</a>
+                        <div class="nav-link points-display">Egyenleg: '.$points[0]["pontok"].' pont</div>';
+                            echo '
+                            <a class="nav-link" href="http://localhost/pontfeltoltes">Pontok feltöltése</a>
+                            <a class="nav-link" href="http://localhost/konyvtar">Könyvtár</a>';
+                            if($_SESSION["role"] == "moderator") {
+                                echo '<a class="nav-link" href="http://localhost/jovahagyasok">Jóváhagyások</a>';
+                            }
+                            else if($_SESSION["role"] == "admin") {
+                                echo '<a class="nav-link" href="http://localhost/jovahagyasok">Jóváhagyások</a>';
+                                echo '<a class="nav-link" href="http://localhost/admin">Admin</a>';
+                            }
+                            
+                            echo '<a class="nav-link" href="http://localhost/kodfeltoltes">Kód feltöltése</a>
                                 <a class="nav-link" href="http://localhost/kijelentkezes">Kijelentkezés</a>
-                        </div>
-                    </div>';
+                    </div>
+                </div>';
         }
         ?>
     </div>

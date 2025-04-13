@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const paginationContainer = document.createElement("div");
   paginationContainer.classList.add("pagination-container", "mt-3", "d-flex", "justify-content-center");
   softwareContainer.parentNode.appendChild(paginationContainer);
-  //Segédvüggvény
+  //Segédfüggvény
   function $(id) {
     return document.getElementById(id);
   }
@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify(bodyData)
       } : {};
       
-      // Remove /vizsgaremek/ from the path
       let response = await fetch(endpoint.replace("./", "/").replace("/vizsgaremek/", "/"), options);
       let data = await response.json();
       
@@ -60,12 +59,20 @@ document.addEventListener("DOMContentLoaded", () => {
               </p>
             </div>
             <div class="card-footer">
-              <a href="./kod/${item.id}"  id=kodgomb${item.id} class="btn btn-dark">Megtekintés</a>
+              <a href="./kod/${item.id}" data-href="./kod/${item.id}" id=kodgomb${item.id} class="btn btn-dark view-link">Megtekintés</a>
             </div>
           </div>
         </div>
       </div>`;
       softwareContainer.innerHTML += card;
+    });
+
+    const viewLinks = document.querySelectorAll(".view-link");
+    viewLinks.forEach(link => {
+      link.addEventListener("click", function(e) {
+        e.preventDefault();
+        translateOut(this.getAttribute("data-href"));
+      });
     });
 
     setupPagination();

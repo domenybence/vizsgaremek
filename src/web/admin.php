@@ -8,6 +8,8 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
     header("Location: /");
     exit();
 }
+
+$currentUserId = $_SESSION["userid"];
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -25,7 +27,7 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
     <script src="/src/web/js/admin.js" defer></script>
 </head>
 
-<body class="bg-dark">
+<body class="bg-dark" data-current-userid="<?php echo $currentUserId; ?>">
     <script src="/src/web/js/gsap-public/minified/gsap.min.js"></script>
 
     <div class="page-cover"></div>
@@ -85,13 +87,6 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
                                 </tr>
                             </tbody>
                         </table>
-
-                        <div class="pagination">
-                            <button class="pagination-btn" id="prev-page">&laquo; Előző</button>
-                            <div id="page-numbers" class="page-numbers">
-                            </div>
-                            <button class="pagination-btn" id="next-page">Következő &raquo;</button>
-                        </div>
                     </div>
                 </div>
 

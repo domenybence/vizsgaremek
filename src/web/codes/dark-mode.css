@@ -1,0 +1,15 @@
+body {
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #82aaff;
+}
+
+a:hover {
+  color: #ffffff;
+}

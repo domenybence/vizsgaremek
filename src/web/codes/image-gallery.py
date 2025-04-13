@@ -1,1 +1,0 @@
-print('Displaying image gallery')

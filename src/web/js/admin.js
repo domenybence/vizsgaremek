@@ -1,11 +1,11 @@
 function fetchCategories() {
-    fetch('./src/web/index.php/kategoriak')
-        .then(response => response.json())
-        .then(categories => {
+    fetch("./src/web/index.php/kategoriak")
+        .then((response) => response.json())
+        .then((categories) => {
             const tableBody = document.getElementById("categories-table-body");
             tableBody.innerHTML = "";
 
-            categories.forEach(category => {
+            categories.forEach((category) => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
                     <td>${category.id}</td>
@@ -20,8 +20,9 @@ function fetchCategories() {
                 tableBody.appendChild(row);
             });
         })
-        .catch(error => console.error("Hiba a kategóriák betöltése közben:", error));
-
+        .catch((error) =>
+            console.error("Hiba a kategóriák betöltése közben:", error)
+        );
 }
 
 fetchCategories();
@@ -35,7 +36,9 @@ function setupNewCategoryFormSubmitHandler() {
         e.preventDefault();
 
         const nev = document.getElementById("new-category-name").value;
-        const compiler_azonosito = document.getElementById("new-category-compiler").value;
+        const compiler_azonosito = document.getElementById(
+            "new-category-compiler"
+        ).value;
         const kep = document.getElementById("new-category-image").value;
 
         if (!nev || !compiler_azonosito || !kep) {
@@ -48,13 +51,13 @@ function setupNewCategoryFormSubmitHandler() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "JavaScript-Fetch-Request": "create-category"
+                    "JavaScript-Fetch-Request": "create-category",
                 },
                 body: JSON.stringify({
-                    nev : nev,
+                    nev: nev,
                     compiler_azonosito,
-                    kep
-                })
+                    kep,
+                }),
             });
 
             const data = await response.json();
@@ -75,15 +78,11 @@ function setupNewCategoryFormSubmitHandler() {
     form.addEventListener("submit", form.submitHandler);
 }
 
-
 function openNewCategoryEditModal() {
-
     setupNewCategoryFormSubmitHandler();
 
-    document.getElementById('new-category-modal').style.display = 'flex';
-
+    document.getElementById("new-category-modal").style.display = "flex";
 }
-
 
 function setupCategoryFormSubmitHandler() {
     const form = document.getElementById("category-form");
@@ -95,7 +94,8 @@ function setupCategoryFormSubmitHandler() {
 
         const id = document.getElementById("category-id").value;
         const nev = document.getElementById("category-name").value;
-        const compiler_azonosito = document.getElementById("category-compiler").value;
+        const compiler_azonosito =
+            document.getElementById("category-compiler").value;
         const kep = document.getElementById("category-image").value;
 
         if (!id || !nev || !compiler_azonosito || !kep) {
@@ -108,14 +108,14 @@ function setupCategoryFormSubmitHandler() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "JavaScript-Fetch-Request": "update-category"
+                    "JavaScript-Fetch-Request": "update-category",
                 },
                 body: JSON.stringify({
                     id: id,
                     nev,
                     compiler_azonosito,
                     kep,
-                })
+                }),
             });
 
             const data = await response.json();
@@ -171,7 +171,6 @@ function closeModalWithAnimation(modalId) {
 }
 
 function openCategoryEditModal(categoryId) {
-
     async function getData() {
         const url = "./src/web/index.php/kat";
         try {
@@ -184,10 +183,11 @@ function openCategoryEditModal(categoryId) {
             }
 
             const json = await response.json();
-            document.getElementById('category-id').value = json[0].id;
-            document.getElementById('category-name').value = json[0].nev;
-            document.getElementById('category-compiler').value = json[0].compiler_azonosito;
-            document.getElementById('category-image').value = json[0].kep;
+            document.getElementById("category-id").value = json[0].id;
+            document.getElementById("category-name").value = json[0].nev;
+            document.getElementById("category-compiler").value =
+                json[0].compiler_azonosito;
+            document.getElementById("category-image").value = json[0].kep;
 
             setupCategoryFormSubmitHandler();
 
@@ -196,17 +196,15 @@ function openCategoryEditModal(categoryId) {
             console.error(error.message);
         }
     }
-    getData()
+    getData();
 
-
-
-
-    document.getElementById('category-modal').style.display = 'flex';
+    document.getElementById("category-modal").style.display = "flex";
 }
 
 function openCategoryDeleteModal(categoryId) {
-
-    document.getElementById('confirm-category-delete-btn').setAttribute('data-category-id', categoryId);
+    document
+        .getElementById("confirm-category-delete-btn")
+        .setAttribute("data-category-id", categoryId);
 
     const confirmBtn = document.getElementById("confirm-category-delete-btn");
 
@@ -218,8 +216,7 @@ function openCategoryDeleteModal(categoryId) {
 
     confirmBtn.addEventListener("click", confirmBtn.deleteHandler);
 
-
-    document.getElementById('confirm-category-modal').style.display = 'flex';
+    document.getElementById("confirm-category-modal").style.display = "flex";
 }
 
 async function deleteCategory(categoryId) {
@@ -228,9 +225,9 @@ async function deleteCategory(categoryId) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "JavaScript-Fetch-Request": "delete-category"
+                "JavaScript-Fetch-Request": "delete-category",
             },
-            body: JSON.stringify({ id: categoryId })
+            body: JSON.stringify({ id: categoryId }),
         });
 
         const data = await response.json();
@@ -240,8 +237,7 @@ async function deleteCategory(categoryId) {
         if (data.success) {
             showToast("Kategória sikeresen törölve.");
             fetchCategories();
-        }
-        else {
+        } else {
             showToast("Hiba a kategória törlésekor: " + data.message, true);
         }
     }
@@ -252,24 +248,20 @@ async function deleteCategory(categoryId) {
     }
 }
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
     const sidebarItems = document.querySelectorAll(".sidebar-item");
     const tabContents = document.querySelectorAll(".tab-content");
 
-    let currentPage = 1;
     let searchTerm = "";
-    let totalPages = 1;
 
-    sidebarItems.forEach(item => {
+    sidebarItems.forEach((item) => {
         item.addEventListener("click", function () {
             const tabName = this.getAttribute("data-tab");
 
-            sidebarItems.forEach(item => item.classList.remove("active"));
+            sidebarItems.forEach((item) => item.classList.remove("active"));
             this.classList.add("active");
 
-            tabContents.forEach(tab => {
+            tabContents.forEach((tab) => {
                 tab.classList.remove("active");
                 if (tab.id === `${tabName}-tab`) {
                     tab.classList.add("active");
@@ -278,35 +270,28 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    fetchUsers();
+    if (document.querySelector('.page-cover').style.display === 'none') {
+        initializeAdmin();
+    }
+    else {
+        document.addEventListener('pageTransitionComplete', initializeAdmin);
+    }
+    
+    function initializeAdmin() {
+        document.getElementById("search-button").addEventListener("click", () => {
+            searchTerm = document.getElementById("user-search").value.trim();
+            fetchUsers();
+        });
 
-    document.getElementById("search-button").addEventListener("click", () => {
-        searchTerm = document.getElementById("user-search").value.trim();
-        currentPage = 1;
+        document.getElementById("user-search").addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                searchTerm = e.target.value.trim();
+                fetchUsers();
+            }
+        });
+        
         fetchUsers();
-    });
-
-    document.getElementById("user-search").addEventListener("keypress", (e) => {
-        if (e.key === "Enter") {
-            searchTerm = e.target.value.trim();
-            currentPage = 1;
-            fetchUsers();
-        }
-    });
-
-    document.getElementById("prev-page").addEventListener("click", function () {
-        if (currentPage > 1) {
-            currentPage--;
-            fetchUsers();
-        }
-    });
-
-    document.getElementById("next-page").addEventListener("click", function () {
-        if (currentPage < totalPages) {
-            currentPage++;
-            fetchUsers();
-        }
-    });
+    }
 
     async function fetchUsers() {
         const tableBody = document.getElementById("users-table-body");
@@ -329,43 +314,35 @@ document.addEventListener("DOMContentLoaded", function () {
         loadingOverlay.style.display = "flex";
 
         try {
-            const url = `/src/api/get_users.php?page=${currentPage}&limit=10${searchTerm ? '&search=' + encodeURIComponent(searchTerm) : ''}`;
-
+            const url = `/src/api/get_users.php${searchTerm ? "?search=" + encodeURIComponent(searchTerm) : ""}`;
+            
             const response = await fetch(url, {
                 method: "GET",
                 headers: {
                     "JavaScript-Fetch-Request": "get-users"
                 }
             });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
             const data = await response.json();
 
             if (!data.success) {
                 throw new Error(data.message || "Failed to fetch users");
             }
 
-            const pagination = {};
-            pagination.currentPage = parseInt(data.pagination.currentPage) || 1;
-            pagination.totalPages = parseInt(data.pagination.totalPages) || 1;
-            pagination.totalCount = parseInt(data.pagination.totalCount) || 0;
-            pagination.limit = parseInt(data.pagination.limit) || 10;
-
-            if (pagination.totalPages < 1) pagination.totalPages = 1;
-            if (pagination.currentPage < 1) pagination.currentPage = 1;
-            if (pagination.currentPage > pagination.totalPages) pagination.currentPage = pagination.totalPages;
-
-            currentPage = pagination.currentPage;
-            totalPages = pagination.totalPages;
+            if (!data.users || !Array.isArray(data.users)) {
+                throw new Error("Invalid data format: users array is missing");
+            }
 
             displayUsers(data.users);
-            renderPagination(pagination);
-
-        }
-        catch (error) {
+        } catch (error) {
             console.error("Error fetching users:", error);
             showToast("Hiba történt a felhasználók betöltésekor: " + error.message, true);
-            tableBody.innerHTML = "<tr><td colspan=\"7\" class=\"table-loading\">Hiba történt a betöltés során.</td></tr>";
-        }
-        finally {
+            tableBody.innerHTML = '<tr><td colspan="7" class="table-loading">Hiba történt a betöltés során.</td></tr>';
+        } finally {
             setTimeout(() => {
                 loadingOverlay.style.opacity = "0";
                 setTimeout(() => {
@@ -376,61 +353,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function renderPagination(pagination) {
-        const pageNumbers = document.getElementById("page-numbers");
-        const prevButton = document.getElementById("prev-page");
-        const nextButton = document.getElementById("next-page");
-
-        pageNumbers.innerHTML = '';
-
-        const totalPages = Math.max(1, pagination.totalPages);
-        const currentPage = Math.min(totalPages, Math.max(1, pagination.currentPage));
-
-        let startPage = Math.max(1, currentPage - 2);
-        let endPage = Math.min(totalPages, currentPage + 2);
-
-        if (endPage - startPage < 4 && totalPages > 5) {
-            if (currentPage < 3) {
-                endPage = Math.min(5, totalPages);
-            }
-            else if (currentPage > totalPages - 2) {
-                startPage = Math.max(1, totalPages - 4);
-            }
-        }
-
-        for (let i = startPage; i <= endPage; i++) {
-            const pageBtn = document.createElement("span");
-            pageBtn.className = "page-number" + (i === currentPage ? " active" : "");
-            pageBtn.textContent = i;
-
-            pageBtn.addEventListener("click", function () {
-                window.currentPage = i;
-                fetchUsers();
-            });
-
-            pageNumbers.appendChild(pageBtn);
-        }
-
-        prevButton.disabled = currentPage <= 1;
-        nextButton.disabled = currentPage >= totalPages;
-
-        if (prevButton.disabled) {
-            prevButton.classList.add("disabled");
-        }
-        else {
-            prevButton.classList.remove("disabled");
-        }
-
-        if (nextButton.disabled) {
-            nextButton.classList.add("disabled");
-        }
-        else {
-            nextButton.classList.remove("disabled");
-        }
-    }
-
     function displayUsers(usersList) {
         const tableBody = document.getElementById("users-table-body");
+        const currentUserId = parseInt(
+            document.body.getAttribute("data-current-userid")
+        );
 
         gsap.to(tableBody, {
             opacity: 0,
@@ -439,11 +366,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 tableBody.innerHTML = "";
 
                 if (usersList.length === 0) {
-                    tableBody.innerHTML = "<tr><td colspan=\"7\" class=\"table-loading\">Nincs találat</td></tr>";
-                }
-                else {
-                    usersList.forEach(user => {
+                    tableBody.innerHTML =
+                        '<tr><td colspan="7" class="table-loading">Nincs találat</td></tr>';
+                } else {
+                    usersList.forEach((user) => {
                         const row = document.createElement("tr");
+                        const isCurrentUser = parseInt(user.id) === currentUserId;
+
+                        if (isCurrentUser) {
+                            row.classList.add("current-user-row");
+                        }
 
                         let roleText = "";
                         if (user.role === "admin") {
@@ -454,36 +386,45 @@ document.addEventListener("DOMContentLoaded", function () {
                             roleText = "Felhasználó";
                         }
 
+                        const actionButtons = isCurrentUser
+                            ? '<span class="disabled-actions">Saját fiók</span>'
+                            : `<button class="edit-btn" data-id="${user.id}">Szerkesztés</button>
+                             <button class="delete-btn" data-id="${user.id}">Törlés</button>`;
+
                         row.innerHTML = `
                             <td>${user.id}</td>
-                            <td>${user.username}</td>
+                            <td>${user.username}${isCurrentUser ? " (Te)" : ""
+                            }</td>
                             <td>${user.email}</td>
                             <td>${roleText}</td>
                             <td>${user.points}</td>
                             <td>${user.registrationDate}</td>
                             <td class="table-actions">
-                                <button class="edit-btn" data-id="${user.id}">Szerkesztés</button>
-                                <button class="delete-btn" data-id="${user.id}">Törlés</button>
+                                ${actionButtons}
                             </td>
                         `;
 
                         tableBody.appendChild(row);
                     });
 
-                    document.querySelectorAll(".edit-btn").forEach(btn => {
-                        btn.addEventListener("click", () => openEditModal(btn.getAttribute("data-id")));
+                    document.querySelectorAll(".edit-btn").forEach((btn) => {
+                        btn.addEventListener("click", () =>
+                            openEditModal(btn.getAttribute("data-id"))
+                        );
                     });
 
-                    document.querySelectorAll(".delete-btn").forEach(btn => {
-                        btn.addEventListener("click", () => openDeleteModal(btn.getAttribute("data-id")));
+                    document.querySelectorAll(".delete-btn").forEach((btn) => {
+                        btn.addEventListener("click", () =>
+                            openDeleteModal(btn.getAttribute("data-id"))
+                        );
                     });
                 }
 
                 gsap.to(tableBody, {
                     opacity: 1,
-                    duration: 0.2
+                    duration: 0.2,
                 });
-            }
+            },
         });
     }
 
@@ -499,16 +440,17 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         `;
 
-        document.getElementById("modal-title").textContent = "Felhasználó szerkesztése";
+        document.getElementById("modal-title").textContent =
+            "Felhasználó szerkesztése";
         document.getElementById("user-modal").style.display = "flex";
 
         fetch(`/src/api/get_user.php?id=${userId}`, {
             headers: {
-                "JavaScript-Fetch-Request": "get-user"
-            }
+                "JavaScript-Fetch-Request": "get-user",
+            },
         })
-            .then(response => response.json())
-            .then(data => {
+            .then((response) => response.json())
+            .then((data) => {
                 modalBody.innerHTML = originalContent;
 
                 if (data.success) {
@@ -520,13 +462,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.getElementById("password").value = "";
 
                     setupFormSubmitHandler();
-                }
-                else {
+                } else {
                     closeModalWithAnimation("user-modal");
                     showToast("Hiba a felhasználó betöltésekor: " + data.message, true);
                 }
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error("Error fetching user:", error);
                 closeModalWithAnimation("user-modal");
                 showToast("Hiba a felhasználó betöltésekor.", true);
@@ -572,7 +513,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
-                        "JavaScript-Fetch-Request": "update-user"
+                        "JavaScript-Fetch-Request": "update-user",
                     },
                     body: JSON.stringify({
                         id: userId,
@@ -580,8 +521,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         email,
                         role,
                         points: parseInt(points),
-                        password: password || null
-                    })
+                        password: password || null,
+                    }),
                 });
 
                 const data = await response.json();
@@ -608,9 +549,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "JavaScript-Fetch-Request": "delete-user"
+                    "JavaScript-Fetch-Request": "delete-user",
                 },
-                body: JSON.stringify({ id: userId })
+                body: JSON.stringify({ id: userId }),
             });
 
             const data = await response.json();
@@ -620,12 +561,10 @@ document.addEventListener("DOMContentLoaded", function () {
             if (data.success) {
                 showToast("Felhasználó sikeresen törölve.");
                 fetchUsers();
-            }
-            else {
+            } else {
                 showToast("Hiba a felhasználó törlésekor: " + data.message, true);
             }
-        }
-        catch (error) {
+        } catch (error) {
             console.error("Error deleting user:", error);
             closeModalWithAnimation("confirm-modal");
             showToast("Hiba a felhasználó törlésekor.", true);
@@ -636,10 +575,11 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
     });
 
-    document.getElementById("confirm-delete-btn").addEventListener("click", function () {
-    });
+    document
+        .getElementById("confirm-delete-btn")
+        .addEventListener("click", function () { });
 
-    document.querySelectorAll(".modal").forEach(modal => {
+    document.querySelectorAll(".modal").forEach((modal) => {
         modal.addEventListener("click", function (event) {
             if (event.target === this) {
                 closeModalWithAnimation(this.id);
@@ -675,6 +615,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     fetchUsers();
-
 });
-

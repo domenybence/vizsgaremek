@@ -1,1 +1,0 @@
-CREATE TABLE expenses (id INT PRIMARY KEY, amount DECIMAL, category TEXT);

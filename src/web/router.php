@@ -4,7 +4,14 @@ include_once "../php_functions/php_functions.php";
 if (isset($_GET["codeid"])) {
     startSession();
     $codeid = explode("/", $_GET["codeid"])[0];
-    if (preparedGetData("SELECT * FROM kod WHERE kod.id = ? AND kod.jovahagyott = true;", "i", [$codeid]) != false) {
+    
+    $isStaff = isset($_SESSION["role"]) && ($_SESSION["role"] == "admin" || $_SESSION["role"] == "moderator");
+    
+    $query = $isStaff ? 
+        "SELECT * FROM kod WHERE kod.id = ?;" :
+        "SELECT * FROM kod WHERE kod.id = ? AND kod.jovahagyott = true;";
+        
+    if (preparedGetData($query, "i", [$codeid]) != false) {
         $currentUrl = $_SERVER["REQUEST_URI"];
         $redirectUrl = "/kod/$codeid";
         if (str_ends_with($currentUrl, "/fetch")) {

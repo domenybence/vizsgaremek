@@ -40,7 +40,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 function registration($username, $email, $hashedPassword) {
     try {
-        insertData("INSERT INTO felhasznalo (`nev`, `email`, `jelszo`, `pontok`, `letrehozasi_ido`, `utolso_valt_ido`) VALUES (?, ?, ?, NULL, current_timestamp(), current_timestamp());", "sss", [$username, $email, $hashedPassword]);
+        insertData("INSERT INTO felhasznalo (nev, email, jelszo, letrehozasi_ido, utolso_valt_ido) VALUES (?, ?, ?, current_timestamp(), current_timestamp());", "sss", [$username, $email, $hashedPassword]);
         http_response_code(200);
         echo json_encode(["result" => "success"], JSON_UNESCAPED_UNICODE);
     }

@@ -1,1 +1,0 @@
-public class Blog { static void Main() { System.Console.WriteLine("Blog Template"); } }

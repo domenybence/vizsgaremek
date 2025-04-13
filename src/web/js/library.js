@@ -60,12 +60,20 @@ function displaySoftware() {
             </p>
           </div>
           <div class="card-footer">
-            <a href="./kod/${item.id}" class="btn btn-dark">Megtekintés</a>
+            <a href="./kod/${item.id}" data-href="./kod/${item.id}" class="btn btn-dark view-link">Megtekintés</a>
           </div>
         </div>
       </div>
     </div>`;
     softwareContainer.innerHTML += card;
+  });
+
+  const viewLinks = document.querySelectorAll(".view-link");
+  viewLinks.forEach(link => {
+    link.addEventListener("click", function(e) {
+      e.preventDefault();
+      translateOut(this.getAttribute("data-href"));
+    });
   });
 
   setupPagination();

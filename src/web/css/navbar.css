@@ -6,7 +6,7 @@ nav {
     width: 100%;
     height: 7vh;
     font-size: 18px;
-    background-color: #1E1E1E;
+    background-color: #1e1e1e;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -15,21 +15,26 @@ nav {
     z-index: 100;
     user-select: none;
 }
+
 .nav-group:first-of-type {
     margin-left: 2%;
 }
+
 .nav-group {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     gap: 40px;
 }
+
 .nav-group:last-of-type {
     margin-right: 5vw;
 }
+
 .nav-dropdown-item:not(.visible) {
     display: none;
 }
+
 .nav-dropdown-item.visible {
     display: block;
     margin: 5px 0;
@@ -37,6 +42,7 @@ nav {
     opacity: 1;
     visibility: visible;
 }
+
 .nav-dropdown-item a {
     display: block;
     padding: 6px 20px;
@@ -46,10 +52,12 @@ nav {
     font-size: 16px;
     position: relative;
 }
+
 .nav-dropdown-item a:hover {
     background-color: #333;
     padding-left: 25px;
 }
+
 .nav-dropdown-item a:hover::before {
     content: "";
     position: absolute;
@@ -60,37 +68,44 @@ nav {
     background-color: rgb(121, 178, 199);
     opacity: 1;
 }
+
 .nav-link {
     display: flex;
     all: unset;
     cursor: pointer;
     width: 8vw;
 }
+
 .nav-link:hover {
     color: rgb(121, 178, 199);
 }
+
 .nav-dropdown-button {
     position: relative;
     width: 7vw;
     text-align: center;
 }
+
 .nav-dropdown-item {
     min-width: calc(fit-content + 10px);
     text-align: left;
     position: absolute;
     left: -2vw;
-    background-color: #1E1E1E;
+    background-color: #1e1e1e;
     padding: 10px 5px;
     width: 100%;
     z-index: 1000;
     top: calc(100% + 5px);
 }
+
 .nav-dropdown-item.visible {
     display: block;
 }
+
 .active {
     color: rgb(121, 178, 199);
 }
+
 .nav-menu-button {
     display: none;
     position: absolute;
@@ -102,6 +117,33 @@ nav {
     cursor: pointer;
     z-index: 101;
 }
+
+.nav-group {
+    display: flex;
+}
+
+#points {
+    white-space: nowrap;
+}
+
+.points-display {
+    font-size: 16px;
+    color: white;
+    cursor: default;
+    padding: 6px 20px;
+    display: block;
+}
+
+.points-display:hover {
+    color: white;
+    background-color: transparent;
+    padding: 6px 20px;
+}
+
+.points-display:hover::before {
+    display: none;
+}
+
 @media screen and (max-width: 950px) {
     .nav-menu-button {
         display: flex;
@@ -110,6 +152,7 @@ nav {
         left: 10px;
         z-index: 1000;
     }
+
     nav {
         position: fixed;
         top: 0;
@@ -121,6 +164,7 @@ nav {
         padding: 20px;
         transform: translateX(-100%);
     }
+
     .nav-group {
         flex-direction: column;
         width: 100%;
@@ -129,11 +173,13 @@ nav {
         font-size: 30px;
         margin-left: 3%;
     }
+
     .nav-dropdown-button {
         width: 100%;
         text-align: left;
         display: block;
     }
+
     .nav-dropdown-item {
         position: relative;
         top: 0;
@@ -145,42 +191,50 @@ nav {
         box-sizing: border-box;
         min-width: 100%;
     }
+
     .nav-link {
         width: 100%;
         box-sizing: border-box;
         display: block;
     }
+
     .nav-item.nav-link {
         padding: 10px 0;
         width: 100%;
         box-sizing: border-box;
     }
+
     .nav-dropdown-item a {
         padding: 10px 25px;
         width: 100%;
         box-sizing: border-box;
         display: block;
     }
+
     .nav-dropdown-item .nav-item {
         width: 100%;
         box-sizing: border-box;
     }
-    .nav-dropdown-item > * {
+
+    .nav-dropdown-item>* {
         width: 100%;
         box-sizing: border-box;
     }
+
     .nav-home {
         margin-top: 15%;
     }
+
     .nav-group:last-of-type {
-        margin-bottom: 15%; 
+        margin-bottom: 15%;
     }
 }
+
 @media screen and (max-width: 750px) {
     nav {
         width: 100%;
     }
-    /* Ensure dropdown elements take full width on small screens */
+
     .nav-dropdown-item,
     .nav-item.nav-link,
     .nav-link,
@@ -190,15 +244,4 @@ nav {
         display: block;
         box-sizing: border-box;
     }
-}
-
-
-.nav-group {
-    display: flex;
-    
-}
-
-#points {
-    white-space: nowrap;
-   
 }
