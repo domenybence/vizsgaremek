@@ -45,11 +45,8 @@ else if($_SESSION["username"] != "Vendég") {
     <script>
         const codeId = <?php echo json_encode($codeid) ?? 0 ?>;
         <?php if ($_SESSION["username"] != "Vendég"): ?>
-          
                 const userId = <?php echo json_encode($_SESSION["userid"]); ?>;
-            </script>
         <?php endif; ?>
-
         const uploaderId = <?php echo json_encode($uploaderid); ?>;
         const isOwned = <?php echo json_encode($isOwned); ?>;
     </script>

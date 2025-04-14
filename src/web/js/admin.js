@@ -11,7 +11,7 @@ function fetchCategories() {
                     <td>${category.id}</td>
                     <td>${category.nev}</td>
                     <td>${category.compiler_azonosito}</td>
-                     <td>${category.kep}</td>
+                    <td>${category.kep}</td>
                     <td>
                         <button class="edit-category-btn" onclick="openCategoryEditModal(${category.id})">Szerkesztés</button>
                         <button class="delete-category-btn" onclick="openCategoryDeleteModal(${category.id})">Törlés</button>
@@ -269,25 +269,30 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    if (document.querySelector('.page-cover').style.display === 'none') {
-        initializeAdmin();
-    }
-    else {
-        document.addEventListener('pageTransitionComplete', initializeAdmin);
-    }
+    initializeAdmin();
     
     function initializeAdmin() {
-        document.getElementById("search-button").addEventListener("click", () => {
-            searchTerm = document.getElementById("user-search").value.trim();
-            fetchUsers();
-        });
-
-        document.getElementById("user-search").addEventListener("keypress", (e) => {
-            if (e.key === "Enter") {
-                searchTerm = e.target.value.trim();
+        if (window.adminInitialized) return;
+        window.adminInitialized = true;
+        
+        const searchButton = document.getElementById("search-button");
+        const searchInput = document.getElementById("user-search");
+        
+        if (searchButton) {
+            searchButton.addEventListener("click", function() {
+                searchTerm = searchInput ? searchInput.value.trim() : "";
                 fetchUsers();
-            }
-        });
+            });
+        }
+
+        if (searchInput) {
+            searchInput.addEventListener("keypress", function(e) {
+                if (e.key === "Enter") {
+                    searchTerm = this.value.trim();
+                    fetchUsers();
+                }
+            });
+        }
         
         fetchUsers();
     }
@@ -314,7 +319,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         try {
             const url = `/src/api/get_users.php${searchTerm ? "?search=" + encodeURIComponent(searchTerm) : ""}`;
-            
             const response = await fetch(url, {
                 method: "GET",
                 headers: {
