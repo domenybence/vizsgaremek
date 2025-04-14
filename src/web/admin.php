@@ -236,7 +236,7 @@ $currentUserId = $_SESSION["userid"];
         <div class="modal-content">      
             <div class="modal-header">
                 <h3 id="modal-title">Új kategória</h2>
-                <span class="close" onclick="closeModalWithAnimation('category-modal')">&times;</span>
+                <span class="close" onclick="closeModalWithAnimation('new-category-modal')">&times;</span>
             </div>
             <div class="modal-body">
             <form id="new-category-form">
