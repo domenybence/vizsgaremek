@@ -191,7 +191,6 @@ function openCategoryEditModal(categoryId) {
 
             setupCategoryFormSubmitHandler();
 
-            console.log(json);
         } catch (error) {
             console.error(error.message);
         }
