@@ -35,14 +35,14 @@ async function testAdminPanelAccess() {
         console.log("Felhasználói tábla betöltve!");
 
         const editButton = await driver.wait(
-            until.elementLocated(By.css("button[data-id='8']")),
+            until.elementLocated(By.css("button[data-id='2']")),
             5000
         );
         await driver.wait(until.elementIsVisible(editButton), 5000);
         
       
         await editButton.click();
-        console.log("Szerkesztés gomb (ID: 8) sikeresen megnyomva!");
+        console.log("Szerkesztés gomb (ID: 2) sikeresen megnyomva!");
 
         const modalUsername = await driver.wait(until.elementLocated(By.id('username')), 5000);
         await modalUsername.clear();

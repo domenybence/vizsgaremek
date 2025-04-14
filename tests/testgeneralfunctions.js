@@ -1,5 +1,5 @@
 let webdriver = require("selenium-webdriver");
-const { Builder, By, until } = require('selenium-webdriver');
+const { Builder, By, Key, until } = require('selenium-webdriver');
 const assert = require("assert")
 require("chromedriver");
 
@@ -23,7 +23,7 @@ async function HomeAlap() {
         await driver.findElement(By.id("3")).click();
 
         var el = await driver.wait(
-            until.elementLocated(By.id('kod21')),
+            until.elementLocated(By.id('kod10')),
             10000
         );
 
@@ -115,7 +115,9 @@ async function HomeAlap() {
 
         await driver.wait(until.elementIsVisible(el), 5000);
 
-        await driver.findElement(By.id('kodgomb12')).click();
+        await driver.executeScript('window.scrollBy(0, 700);');
+        await driver.sleep(1000);
+        await driver.findElement(By.id('kodgomb1')).click();
 
         var el = await driver.wait(
             until.elementLocated(By.id('container')),
@@ -129,7 +131,7 @@ async function HomeAlap() {
         console.log('Az oldal címe:', title);
 
 
-        console.log("12-es id-jű kód oldala megnyílik!")
+        console.log("1-es id-jű kód oldala megnyílik!")
 
         
         await driver.findElement(By.linkText('CodeOverflow')).click();

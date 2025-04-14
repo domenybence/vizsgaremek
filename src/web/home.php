@@ -50,13 +50,13 @@ if (session_status() === PHP_SESSION_NONE) {
           </div>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="./src/web/img/carousel1.jpg" class="d-block w-100" alt="Kép 1">
+              <img src="./src/web/img/carousel1.jpg" class="d-block w-100" alt="CodeOverFlow">
             </div>
             <div class="carousel-item">
-              <img src="./src/web/img/carousel2.jpg" class="d-block w-100" alt="Kép 2">
+              <img src="./src/web/img/carousel2.jpg" class="d-block w-100" alt="CodeOverFlow">
             </div>
             <div class="carousel-item">
-              <img src="./src/web/img/carousel3.jpg" class="d-block w-100" alt="Kép 3">
+              <img src="./src/web/img/carousel3.jpg" class="d-block w-100" alt="CodeOverFlow">
             </div>
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carousel-fokepek" data-bs-slide="prev">
@@ -71,7 +71,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <h2 class="text-center mb-4">Rólunk</h2>
             <div class="row">
               <div class="col-md-4">
-                <div class="card shadow-sm border-0 mb-2">
+                <div class="card shadow-sm border-0 mb-2 h-100">
                   <img src="./src/web/img/carousel1.jpg" class="card-img-top" alt="Our Mission">
                   <div class="card-body">
                     <h5 class="card-title">Mi a célunk?</h5>
@@ -80,7 +80,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 </div>
               </div>
               <div class="col-md-4">
-                <div class="card shadow-sm border-0 mb-2">
+                <div class="card shadow-sm border-0 mb-2 h-100">
                   <img src="./src/web/img/carousel2.jpg" class="card-img-top" alt="Our Vision">
                   <div class="card-body">
                     <h5 class="card-title">Jövőképünk</h5>
@@ -89,7 +89,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 </div>
               </div>
               <div class="col-md-4">
-                <div class="card shadow-sm border-0 mb-2">
+                <div class="card shadow-sm border-0 mb-2 h-100">
                   <img src="./src/web/img/carousel3.jpg" class="card-img-top" alt="Our Team">
                   <div class="card-body">
                     <h5 class="card-title">Csapatunk</h5>

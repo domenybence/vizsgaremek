@@ -33,8 +33,10 @@ include_once "../php_functions/php_functions.php";
             echo '
                 <div id="id" hidden>'.$_SESSION["userid"].'</div>
                 <div class="nav-dropdown-button nav-link" id="navusername">'.$_SESSION["username"].'
-                    <div class="nav-dropdown-item">
-                        <div class="nav-link points-display">Egyenleg: '.$points[0]["pontok"].' pont</div>';
+                    <div class="nav-dropdown-item">';
+                    if($_SESSION["role"] != "moderator" && $_SESSION["role"] != "admin") {
+                        echo ' <div class="nav-link points-display">Egyenleg: '.$points[0]["pontok"].' pont</div>';
+                    }
                         echo '
                         <a class="nav-link" href="http://localhost/pontfeltoltes">Pontok feltöltése</a>
                         <a class="nav-link" href="http://localhost/konyvtar">Könyvtár</a>';
