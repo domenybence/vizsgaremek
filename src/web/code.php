@@ -1,7 +1,9 @@
 <?php
 include_once "../php_functions/php_functions.php";
 include_once "./upload_likes.php";
-
+if(session_status() === PHP_SESSION_NONE) {
+    startSession();
+}
 $data = preparedGetData("SELECT felhasznalo.nev AS username, felhasznalo.id AS userid, kategoria.nev AS category, kategoria.compiler_azonosito AS category_altname, kod.feltoltesi_ido AS uploadtime, kod.nev AS codename, kod.eleresi_ut AS url, kod.ar AS price FROM felhasznalo INNER JOIN kod ON kod.felhasznalo_id = felhasznalo.id INNER JOIN kategoria ON kod.kategoria_id = kategoria.id WHERE kod.id = ?;", "i", [$codeid]);
 $uploaderid = $data[0]["userid"];
 $username = $data[0]["username"];
@@ -11,7 +13,7 @@ $uploadtime = $data[0]["uploadtime"];
 $codename = $data[0]["codename"];
 $fileurl = $data[0]["url"];
 $price = $data[0]["price"];
-$likeState = returnLikeState($_SESSION["userid"], $codeid);
+if($_SESSION["username"] != "Vendég") $likeState = returnLikeState($_SESSION["userid"], $codeid);
 
 $isOwned = false;
 if($_SESSION["role"] == "admin") {
@@ -20,7 +22,7 @@ if($_SESSION["role"] == "admin") {
 if($price === 0) {
     $isOwned = true;
 }
-else {
+else if($_SESSION["username"] != "Vendég") {
     if(preparedGetData("SELECT * FROM felhasznalo_megvett WHERE felhasznalo_id = ? AND kod_id = ?;", "ii", [$_SESSION["userid"], $codeid]) != false) {
         $isOwned = true;
     }
@@ -42,7 +44,12 @@ else {
     <link rel="stylesheet" href="/src/web/css/code.css">
     <script>
         const codeId = <?php echo json_encode($codeid) ?? 0 ?>;
-        const userId = <?php echo json_encode($_SESSION["userid"]); ?>;
+        <?php if ($_SESSION["username"] != "Vendég"): ?>
+            <script>
+                const userId = <?php echo json_encode($_SESSION["userid"]); ?>;
+            </script>
+        <?php endif; ?>
+
         const uploaderId = <?php echo json_encode($uploaderid); ?>;
         const isOwned = <?php echo json_encode($isOwned); ?>;
     </script>
