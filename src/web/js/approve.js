@@ -210,9 +210,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    // Event listeners for approval and disapproval
+    // Event listenerek
     softwareContainer.addEventListener('click', async (event) => {
-        // Handle approval button clicks
+        // Elfogadás gomb megnyomás kezelése
         if (event.target.classList.contains("jovahagyas-btn")) {
             const itemId = event.target.dataset.id;
             if (!itemId) return;
@@ -231,9 +231,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 const data = await response.json();
                 if (data === "Sikeres művelet!") {
                     showSuccessMessage("Kód sikeresen jóváhagyva!");
-                    // Remove the item from the display
+                    // Item eltüntetése
                     event.target.closest('li').remove();
-                    // Update the softwareData array
+                    // softwareData array frissítése
                     softwareData = softwareData.filter(item => item.id != itemId);
                     displaySoftware();
                 } else {
@@ -245,7 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
         
-        // Handle disapproval button clicks
+        // Elutasítás gomb megnyomás kezelése
         if (event.target.classList.contains("disapprove-btn")) {
             const itemId = event.target.dataset.id;
             if (!itemId) return;
@@ -265,9 +265,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     const data = await response.json();
                     if (data === "Sikeres művelet!") {
                         showSuccessMessage("Kód sikeresen elutasítva és törölve!");
-                        // Remove the item from the display
+                        // Item eltüntetése
                         event.target.closest('li').remove();
-                        // Update the softwareData array
+                        // softwareData array frissítése
                         softwareData = softwareData.filter(item => item.id != itemId);
                         displaySoftware();
                     } else {
@@ -281,7 +281,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Helper functions for messages
     function showSuccessMessage(message) {
         const alertDiv = document.createElement('div');
         alertDiv.className = 'alert alert-success alert-dismissible fade show';
@@ -291,7 +290,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         document.querySelector('.container').prepend(alertDiv);
         
-        // Auto-dismiss after 3 seconds
+       
         setTimeout(() => {
             alertDiv.classList.remove('show');
             setTimeout(() => alertDiv.remove(), 300);
@@ -307,7 +306,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         document.querySelector('.container').prepend(alertDiv);
         
-        // Auto-dismiss after 3 seconds
+        
         setTimeout(() => {
             alertDiv.classList.remove('show');
             setTimeout(() => alertDiv.remove(), 300);

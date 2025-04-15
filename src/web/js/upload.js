@@ -83,5 +83,5 @@ async function kodFeltoltes(){
     }
 }
 
-// Only fetch categories on page load, let the form handle the submission
+
 window.addEventListener('load', fetchCategories);
