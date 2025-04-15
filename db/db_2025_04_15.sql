@@ -4,6 +4,12 @@
 -- ------------------------------------------------------
 -- Server version	8.4.3
 
+-- Create database if it doesn't exist
+CREATE DATABASE IF NOT EXISTS vizsgaremek DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+-- Select database for following commands
+USE vizsgaremek;
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -19,10 +25,10 @@
 -- Table structure for table `felhasznalo`
 --
 
-DROP TABLE IF EXISTS `felhasznalo`;
+-- DROP TABLE IF EXISTS `felhasznalo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `felhasznalo` (
+CREATE TABLE IF NOT EXISTS `felhasznalo` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nev` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `email` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
@@ -51,16 +57,18 @@ UNLOCK TABLES;
 -- Table structure for table `felhasznalo_megvett`
 --
 
-DROP TABLE IF EXISTS `felhasznalo_megvett`;
+-- DROP TABLE IF EXISTS `felhasznalo_megvett`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `felhasznalo_megvett` (
+CREATE TABLE IF NOT EXISTS `felhasznalo_megvett` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `felhasznalo_id` int unsigned NOT NULL,
   `kod_id` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `felhasznalo_id` (`felhasznalo_id`),
-  KEY `kod_id` (`kod_id`)
+  KEY `kod_id` (`kod_id`),
+  CONSTRAINT `felhasznalo_megvett_ibfk_1` FOREIGN KEY (`felhasznalo_id`) REFERENCES `felhasznalo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `felhasznalo_megvett_ibfk_2` FOREIGN KEY (`kod_id`) REFERENCES `kod` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -78,17 +86,18 @@ UNLOCK TABLES;
 -- Table structure for table `felhasznalo_token`
 --
 
-DROP TABLE IF EXISTS `felhasznalo_token`;
+-- DROP TABLE IF EXISTS `felhasznalo_token`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `felhasznalo_token` (
+CREATE TABLE IF NOT EXISTS `felhasznalo_token` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `felhasznalo_id` int unsigned NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `lejarat` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `token` (`token`),
-  KEY `felhasznalo_id` (`felhasznalo_id`)
+  KEY `felhasznalo_id` (`felhasznalo_id`),
+  CONSTRAINT `felhasznalo_token_ibfk_1` FOREIGN KEY (`felhasznalo_id`) REFERENCES `felhasznalo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -121,10 +130,10 @@ DELIMITER ;
 -- Table structure for table `felkeres`
 --
 
-DROP TABLE IF EXISTS `felkeres`;
+-- DROP TABLE IF EXISTS `felkeres`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `felkeres` (
+CREATE TABLE IF NOT EXISTS `felkeres` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nev` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `leiras` text COLLATE utf8mb4_general_ci,
@@ -144,7 +153,11 @@ CREATE TABLE `felkeres` (
   KEY `felhasznalo_id` (`felhasznalo_id`),
   KEY `kod_id` (`kod_id`),
   KEY `elvallalo_felhasznalo_id` (`elvallalo_felhasznalo_id`),
-  KEY `felkeres_ibfk_4` (`kategoria_id`)
+  KEY `felkeres_ibfk_4` (`kategoria_id`),
+  CONSTRAINT `felkeres_ibfk_1` FOREIGN KEY (`felhasznalo_id`) REFERENCES `felhasznalo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `felkeres_ibfk_2` FOREIGN KEY (`kod_id`) REFERENCES `kod` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `felkeres_ibfk_3` FOREIGN KEY (`elvallalo_felhasznalo_id`) REFERENCES `felhasznalo` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `felkeres_ibfk_4` FOREIGN KEY (`kategoria_id`) REFERENCES `kategoria` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -161,10 +174,10 @@ UNLOCK TABLES;
 -- Table structure for table `kategoria`
 --
 
-DROP TABLE IF EXISTS `kategoria`;
+-- DROP TABLE IF EXISTS `kategoria`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `kategoria` (
+CREATE TABLE IF NOT EXISTS `kategoria` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nev` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `compiler_azonosito` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
@@ -187,10 +200,10 @@ UNLOCK TABLES;
 -- Table structure for table `kod`
 --
 
-DROP TABLE IF EXISTS `kod`;
+-- DROP TABLE IF EXISTS `kod`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `kod` (
+CREATE TABLE IF NOT EXISTS `kod` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `felhasznalo_id` int unsigned NOT NULL,
   `kategoria_id` int unsigned NOT NULL,
@@ -201,7 +214,9 @@ CREATE TABLE `kod` (
   `jovahagyott` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `kategoria_id` (`kategoria_id`),
-  KEY `felhasznalo_id` (`felhasznalo_id`)
+  KEY `felhasznalo_id` (`felhasznalo_id`),
+  CONSTRAINT `kod_ibfk_1` FOREIGN KEY (`felhasznalo_id`) REFERENCES `felhasznalo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `kod_ibfk_2` FOREIGN KEY (`kategoria_id`) REFERENCES `kategoria` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -219,17 +234,19 @@ UNLOCK TABLES;
 -- Table structure for table `kod_komment`
 --
 
-DROP TABLE IF EXISTS `kod_komment`;
+-- DROP TABLE IF EXISTS `kod_komment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `kod_komment` (
+CREATE TABLE IF NOT EXISTS `kod_komment` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `kod_id` int unsigned NOT NULL,
   `felhasznalo_id` int unsigned NOT NULL,
   `szoveg` text COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `felhasznalo_id` (`felhasznalo_id`),
-  KEY `kod_id` (`kod_id`)
+  KEY `kod_id` (`kod_id`),
+  CONSTRAINT `kod_komment_ibfk_1` FOREIGN KEY (`felhasznalo_id`) REFERENCES `felhasznalo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `kod_komment_ibfk_2` FOREIGN KEY (`kod_id`) REFERENCES `kod` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -246,10 +263,10 @@ UNLOCK TABLES;
 -- Table structure for table `kod_like`
 --
 
-DROP TABLE IF EXISTS `kod_like`;
+-- DROP TABLE IF EXISTS `kod_like`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `kod_like` (
+CREATE TABLE IF NOT EXISTS `kod_like` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `felhasznalo_id` int unsigned NOT NULL,
   `kod_id` int unsigned NOT NULL,
@@ -258,7 +275,9 @@ CREATE TABLE `kod_like` (
   `aktiv` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `felhasznalo_id` (`felhasznalo_id`),
-  KEY `kod_id` (`kod_id`)
+  KEY `kod_id` (`kod_id`),
+  CONSTRAINT `kod_like_ibfk_1` FOREIGN KEY (`felhasznalo_id`) REFERENCES `felhasznalo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `kod_like_ibfk_2` FOREIGN KEY (`kod_id`) REFERENCES `kod` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -276,10 +295,10 @@ UNLOCK TABLES;
 -- Table structure for table `kodellenorzes`
 --
 
-DROP TABLE IF EXISTS `kodellenorzes`;
+-- DROP TABLE IF EXISTS `kodellenorzes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `kodellenorzes` (
+CREATE TABLE IF NOT EXISTS `kodellenorzes` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `felhasznalo_id` int unsigned NOT NULL,
   `kod_id` int unsigned NOT NULL,
@@ -287,7 +306,9 @@ CREATE TABLE `kodellenorzes` (
   `folyamatban` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `felhasznalo_id` (`felhasznalo_id`),
-  KEY `kod_id` (`kod_id`)
+  KEY `kod_id` (`kod_id`),
+  CONSTRAINT `kodellenorzes_ibfk_1` FOREIGN KEY (`felhasznalo_id`) REFERENCES `felhasznalo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `kodellenorzes_ibfk_2` FOREIGN KEY (`kod_id`) REFERENCES `kod` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -304,10 +325,10 @@ UNLOCK TABLES;
 -- Table structure for table `moderator_ellenorzes`
 --
 
-DROP TABLE IF EXISTS `moderator_ellenorzes`;
+-- DROP TABLE IF EXISTS `moderator_ellenorzes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `moderator_ellenorzes` (
+CREATE TABLE IF NOT EXISTS `moderator_ellenorzes` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `felhasznalo_id` int unsigned NOT NULL,
   `ugyfelszolgalat_id` int unsigned NOT NULL,
@@ -315,7 +336,10 @@ CREATE TABLE `moderator_ellenorzes` (
   PRIMARY KEY (`id`),
   KEY `moderator_id` (`felhasznalo_id`),
   KEY `ugyfelszolgalat_id` (`ugyfelszolgalat_id`),
-  KEY `felkeres_id` (`felkeres_id`)
+  KEY `felkeres_id` (`felkeres_id`),
+  CONSTRAINT `moderator_ellenorzes_ibfk_1` FOREIGN KEY (`felhasznalo_id`) REFERENCES `felhasznalo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `moderator_ellenorzes_ibfk_2` FOREIGN KEY (`ugyfelszolgalat_id`) REFERENCES `ugyfelszolgalat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `moderator_ellenorzes_ibfk_3` FOREIGN KEY (`felkeres_id`) REFERENCES `felkeres` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -332,10 +356,10 @@ UNLOCK TABLES;
 -- Table structure for table `pont_ar`
 --
 
-DROP TABLE IF EXISTS `pont_ar`;
+-- DROP TABLE IF EXISTS `pont_ar`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `pont_ar` (
+CREATE TABLE IF NOT EXISTS `pont_ar` (
   `ar` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -354,17 +378,18 @@ UNLOCK TABLES;
 -- Table structure for table `ugyfelszolgalat`
 --
 
-DROP TABLE IF EXISTS `ugyfelszolgalat`;
+-- DROP TABLE IF EXISTS `ugyfelszolgalat`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ugyfelszolgalat` (
+CREATE TABLE IF NOT EXISTS `ugyfelszolgalat` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `felhasznalo_id` int unsigned NOT NULL,
   `uzenet` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `feltoltesi_ido` timestamp NULL DEFAULT NULL,
   `folyamatban` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `felhasznalo_id` (`felhasznalo_id`)
+  KEY `felhasznalo_id` (`felhasznalo_id`),
+  CONSTRAINT `ugyfelszolgalat_ibfk_1` FOREIGN KEY (`felhasznalo_id`) REFERENCES `felhasznalo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
