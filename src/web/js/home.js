@@ -187,7 +187,10 @@ document.addEventListener("DOMContentLoaded", () => {
   
   $("keresobtn").addEventListener("click", async () => {
     const query = document.getElementById("kereso").value.trim().toLowerCase();
-    if (!query) return;
+    if (!query)
+    {
+      fetchSoftware("/src/web/index.php/osszesszoftver");
+    }
 
     let response = await fetch("/src/web/index.php/osszesszoftver");
     let data = await response.json();

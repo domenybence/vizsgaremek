@@ -72,7 +72,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <div class="row">
               <div class="col-md-4">
                 <div class="card shadow-sm border-0 mb-2 h-100">
-                  <img src="./src/web/img/carousel1.jpg" class="card-img-top" alt="Our Mission">
+                  <img src="./src/web/img/card1.jpg" class="card-img-top" alt="Our Mission">
                   <div class="card-body">
                     <h5 class="card-title">Mi a célunk?</h5>
                     <p class="card-text">A CodeOverflow célja, hogy egyszerűsítsük és megkönnyítsük a programozás világába való belépést, miközben erőforrásokat és eszközöket biztosítunk a fejlesztők számára minden szinten.</p>
@@ -81,7 +81,7 @@ if (session_status() === PHP_SESSION_NONE) {
               </div>
               <div class="col-md-4">
                 <div class="card shadow-sm border-0 mb-2 h-100">
-                  <img src="./src/web/img/carousel2.jpg" class="card-img-top" alt="Our Vision">
+                  <img src="./src/web/img/card2.jpg" class="card-img-top" alt="Our Vision">
                   <div class="card-body">
                     <h5 class="card-title">Jövőképünk</h5>
                     <p class="card-text">Célunk, hogy egy folyamatosan fejlődő közösséget építsünk, ahol a programozók együtt dolgozhatnak, tanulhatnak és megoszthatják tudásukat.</p>
@@ -90,7 +90,7 @@ if (session_status() === PHP_SESSION_NONE) {
               </div>
               <div class="col-md-4">
                 <div class="card shadow-sm border-0 mb-2 h-100">
-                  <img src="./src/web/img/carousel3.jpg" class="card-img-top" alt="Our Team">
+                  <img src="./src/web/img/card3.jpg" class="card-img-top" alt="Our Team">
                   <div class="card-body">
                     <h5 class="card-title">Csapatunk</h5>
                     <p class="card-text">A csapatunk szenvedélyes és elkötelezett programozók, akik együtt dolgoznak a platform fejlesztésén, hogy minden felhasználónk a legjobb élményt kapja.</p>
