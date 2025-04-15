@@ -173,6 +173,23 @@ else if($_SESSION["username"] != "Vendég") {
                             </div>
                         </div>
                     </div>
+                    <?php if ($price > 0): ?>
+                    <div class="preview-message" style="text-align: center; margin: 30px 0; padding: 15px;">
+                        <p style="font-size: 18px; color:white">Jelentkezz be a kód megvásárlásához.</p>
+                    </div>
+                    <?php else: ?>
+                    <div id="container"></div>
+                    <script src="/src/web/js/compiler.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs/loader.js"></script>
+                    <?php $file_content = file_get_contents("./codes/$fileurl"); ?>
+                    <script>
+                        const fileExtension = "<?php echo $categoryaltname; ?>";
+                        const fileContent = <?php echo json_encode($file_content); ?>;
+                        document.addEventListener("DOMContentLoaded", function() {
+                            createCompiler("container");
+                        });
+                    </script>
+                    <?php endif; ?>
                 </div>
             </div>
         <?php endif; ?>
@@ -274,7 +291,9 @@ else if($_SESSION["username"] != "Vendég") {
                 <script>
                     const fileExtension = "<?php echo $categoryaltname; ?>";
                     const fileContent = <?php echo json_encode($file_content); ?>;
-                    createCompiler("container");
+                    document.addEventListener("DOMContentLoaded", function() {
+                        createCompiler("container");
+                    });
                 </script>
             </div>
         <?php else: ?>
@@ -325,15 +344,24 @@ else if($_SESSION["username"] != "Vendég") {
                         </div>
                     </div>
                 </div>
+                <!-- Only show preview message for non-free codes -->
+                <?php if ($price > 0): ?>
+                <div class="preview-message" style="text-align: center; margin: 30px 0; padding: 15px; background-color: rgba(0, 0, 0, 0.1); border-radius: 5px;">
+                    <p style="font-size: 18px; color: #333;">Jelentkezz be a kód megvásárlásához.</p>
+                </div>
+                <?php else: ?>
                 <div id="container"></div>
                 <script src="/src/web/js/compiler.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs/loader.js"></script>
                 <?php $file_content = file_get_contents("./codes/$fileurl"); ?>
                 <script>
-                    const fileExtension = "<?php echo $category; ?>";
+                    const fileExtension = "<?php echo $categoryaltname; ?>";
                     const fileContent = <?php echo json_encode($file_content); ?>;
-                    createCompiler("container");
+                    document.addEventListener("DOMContentLoaded", function() {
+                        createCompiler("container");
+                    });
                 </script>
+                <?php endif; ?>
             </div>
         <?php endif; ?>
     <?php endif; ?>
