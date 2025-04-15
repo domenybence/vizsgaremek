@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     paginatedItems.forEach((item) => {
       let card = `
       <div class="col-12 col-md-6 col-lg-4">
-        <div class="card-group">
+        <div class="card-group h-100">
           <div class="card" id=kod${item.id}>
             <img src="./src/web/img/${item.kep}" class="card-img-top" alt="${item.nev}"/>
             <div class="card-body">
