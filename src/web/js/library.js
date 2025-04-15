@@ -26,6 +26,10 @@ async function fetchSoftware(endpoint, bodyData = null) {
     
     if (response.ok) {
       softwareData = data;
+      if(softwareData != null)
+      {
+        document.getElementById('nocodes').innerHTML = "";
+      }
       currentPage = 1;
       displaySoftware();
     } else {
