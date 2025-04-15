@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <div>
                 <a href="./kod/${item.id}" class="btn btn-dark">Megtekintés</a>
                 <button class="btn jovahagyas-btn" type="button" data-id="${item.id}">Jóváhagyás</button>
-                <button class="btn disapprove-btn" type="button" data-id="${item.id}">Elutasítás</button>
+                <button class="btn disapprove-btn mx-2" type="button" data-id="${item.id}">Elutasítás</button>
               </div>
             </li>`;
           softwareContainer.innerHTML += listItem;
