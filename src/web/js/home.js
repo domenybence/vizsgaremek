@@ -43,10 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let paginatedItems = softwareData.slice(start, end);
 
     paginatedItems.forEach((item) => {
-      if(item.katnev == "C#")
-      {
-        item.katnev = "CS";
-      }
       let card = `
       <div class="col-12 col-md-6 col-lg-4">
         <div class="card-group">
