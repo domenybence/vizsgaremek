@@ -13,6 +13,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             if($successful) {
                 $successful2 = insertData("INSERT INTO felhasznalo_megvett(felhasznalo_id, kod_id) VALUES (?,?);", "ii", [$userid, $codeid]);
                 if($successful2) {
+                    $uploaderData = preparedGetData("SELECT felhasznalo_id FROM kod WHERE id = ?;", "i", [$codeid]);
+                    if($uploaderData) {
+                        $uploaderId = $uploaderData[0]["felhasznalo_id"];
+                        insertData("UPDATE felhasznalo SET pontok = pontok + ? WHERE id = ?;", "ii", [$codeprice[0]["ar"], $uploaderId]);
+                    }
                     echo json_encode(["result" => "success"], JSON_UNESCAPED_UNICODE);
                 }
                 else {
